@@ -15,7 +15,11 @@
   </p>
 
   <p class="field">
-    <%=f.hidden_field :reffered_by, :value => session[:referred_by] %>
+    <% if session[:referred_by] %>
+      <%=f.hidden_field :reffered_by, :value => session[:referred_by] %>
+    <% else %>
+      <%=f.hidden_field :reffered_by, :value => User.first %>
+    <% end %>
   </p>
 
   <p class="field">
