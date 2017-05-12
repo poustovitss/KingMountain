@@ -1,0 +1,36 @@
+<div class="container">
+<div class="col-lg-12 col-sm-8">
+   <div class="card hovercard">
+      <div class="card-background">
+         <img class="card-bkimg" alt="" src="/img/unnamed.png">
+         <!-- http://lorempixel.com/850/280/people/9/ -->
+      </div>
+      <div class="useravatar">
+         <img alt="" src="/img/ava.png">
+      </div>
+      <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
+      </div>
+   </div>
+   <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+         <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <div class="hidden-xs">
+               <h4>Ваш уровень: <b style="color: green;"><%= current_user.user_level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %></b></h4>
+            </div>
+         </button>
+         <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+
+      </div>
+   </div>
+</div>
+
+<%= link_to new_user_registration_url(referred_by: current_user.id)  %>
+
+
+
+<style type="text/css">
+  body {
+    background: url(http://www.allfons.ru/pic/201201/1440x900/allfons.ru-4922.jpg) right top repeat;
+  }
+</style>

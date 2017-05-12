@@ -1,0 +1,28 @@
+class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  validates :name, presence: true, length: {maximum: 50}
+  
+  belongs_to :refferer, :class_name => 'User', foreign_key: 'reffered_by'
+  has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by'
+
+  # def number_of_referred_users
+  #   User.where(reffered_by: self.id).count
+  # end
+
+  def user_level
+  	u = self.refferences.count
+
+  	if u < 10 
+  		1
+  	elsif u > 9 && u < 20
+  		2
+  	elsif u > 100 
+  		10
+  	else
+  		(u / 10).to_i
+  	end
+  end
+end
