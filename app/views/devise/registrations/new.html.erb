@@ -19,6 +19,7 @@
       <%=f.hidden_field :reffered_by, :value => session[:referred_by] %>
     <% else %>
       <%=f.hidden_field :reffered_by, :value => User.first.id %>
+      
     <% end %>
   </p>
 
