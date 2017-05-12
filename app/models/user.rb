@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates :name, presence: true, length: {maximum: 50}
   
-  belongs_to :refferer, :class_name => 'User', foreign_key: 'reffered_by'
-  has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by'
+  # belongs_to :refferer, :class_name => 'User', foreign_key: 'reffered_by'
+  # has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by'
 
   # def number_of_referred_users
   #   User.where(reffered_by: self.id).count
