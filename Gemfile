@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
+
+gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'paperclip', '~> 4.3'
 gem 'devise'
 gem 'bootstrap-sass'
