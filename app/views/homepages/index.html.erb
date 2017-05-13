@@ -1,5 +1,21 @@
 <img src="/img/head.png" width="100%">
 
+<hr>
+
+  <h4>Сколько человек вступило в игру : <b  style="color: red"><%= User.all.size %></h4></b>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<%= User.all.size %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= User.all.size %>%">
+  </div>
+</div>
+
+<h4>Сколько человек вступило в игру сегодня: <b  style="color: red">
+  <%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %>
+</h4></b>
+<div class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<%= User.all.size %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= User.all.size %>%">
+  </div>
+</div>
+
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">

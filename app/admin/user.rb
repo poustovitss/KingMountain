@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
 
-permit_params :name, :email, :password
+permit_params :name, :email, :password, :reffered_by
 
 controller do
 	  def destroy
@@ -21,6 +21,7 @@ controller do
 	  	f.input :name
 	  	f.input :email
 	  	f.input :admin
+	  	f.input :reffered_by
 	  	f.input :password
 	  	f.input :password_confirmation
 	  end
@@ -33,6 +34,7 @@ controller do
 		id_column
 		column :name
 		column :email
+		column :reffered_by
 		column :admin
 		# column :encrypted_password => Токен
 	 	 actions
