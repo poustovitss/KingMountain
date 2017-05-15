@@ -22,8 +22,6 @@ controller do
 	  	f.input :email
 	  	f.input :admin
 	  	f.input :reffered_by
-	  	f.input :password
-	  	f.input :password_confirmation
 	  	f.input :balance
 	  end
 	  f.actions
