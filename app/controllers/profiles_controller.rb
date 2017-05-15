@@ -18,6 +18,13 @@ class ProfilesController < ApplicationController
         a.balance = a.balance - 50
         a.save
 
+        reffered = a.reffered
+        reffered.balance += 50*0.05
+        reffered.save
+
+        # a = current_user
+        # a.reffered.balance += 50 * 0.05
+        # current_user.update_attribute(reffered: {balance: })
         redirect_to :back
       else
         flash[:balance] = 'Не достаточно баланса'
