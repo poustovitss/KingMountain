@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
 
   def update 
  	randombot = rand(1...1000000000)
+  # name = "donate_#{current_user.id}_#{Time.now}"
  
     if current_user.balance > 50
       a = current_user  
