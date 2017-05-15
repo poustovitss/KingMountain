@@ -12,7 +12,7 @@
   <%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %>
 </h4></b>
 <div class="progress">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<%= User.all.size %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= User.all.size %>%">
+  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %>%">
   </div>
 </div>
 

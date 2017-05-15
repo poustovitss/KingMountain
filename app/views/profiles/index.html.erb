@@ -16,14 +16,23 @@
          <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             <div class="hidden-xs">
-               <h4>Ваш уровень: <b style="color: green;"><%= current_user.user_level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %></b></h4>
+               <h4>Ваш уровень: <b style="color: green;"><%= current_user.user_level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %></b> |  Ваш баланс: <b style="color: green;"><%= current_user.balance %></b></h4>
             </div>
+
          </button>
          <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
 
+            <% if flash[:balance] %>
+              <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
+            <% end %>
       </div>
    </div>
-   
+   <p>
+    <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
+          <%= f.submit "Купить 1 провианта", class: "btn btn-success", data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+    <% end %>
+    </p>
+
    <center>
    <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
      <div class="form-inline" >
