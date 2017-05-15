@@ -16,7 +16,13 @@
          <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
             <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             <div class="hidden-xs">
-               <h4>Ваш уровень: <b style="color: green;"><%= current_user.user_level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %></b> |  Ваш баланс: <b style="color: green;"><%= current_user.balance %></b></h4>
+               <h4>Ваш уровень: <b style="color: green;"><%= current_user.user_level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %></b> |  Ваш баланс: <b style="color: green;">
+                <% if current_user.balance.nil? %>
+                 0 
+                <% else %>
+                 <%= current_user.balance %>
+                <% end %>
+                 </b></h4>
             </div>
 
          </button>
