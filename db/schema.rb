@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170514192814) do
     t.string   "last_sign_in_ip"
     t.integer  "reffered_by"
     t.boolean  "admin",                  default: false
-    t.float    "balance"
+    t.float    "balance",                default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
