@@ -14,6 +14,8 @@ class User < ApplicationRecord
   #   User.where(reffered_by: self.id).count
   # end
 
+  scope :all_except, ->(user) { where.not(id: user) }
+
   def user_level
   	u = self.refferences.count
 
