@@ -15,7 +15,8 @@
       <div class="btn-group" role="group">
          <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
             <div class="hidden-xs">
-               <h4>Ваш уровень: <b style="color: green;"><%= current_user.user_level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %></b> |  Ваш баланс: <b style="color: green;">
+               <h4>Ваш уровень: <b style="color: green;">
+               <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %></b> |  Ваш баланс: <b style="color: green;">
                 <% if current_user.balance.nil? %>
                  0 
                 <% else %>
@@ -33,6 +34,11 @@
       </div>
    </div>
    <p>
+
+    <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+          <%= f.submit @button, class: "btn btn-success", data: { confirm: 'Вы уверены? ' } %>
+    <% end %>
+
     <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
           <%= f.submit "Купить 1 провианта", class: "btn btn-success", data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
     <% end %>

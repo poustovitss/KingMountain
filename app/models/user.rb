@@ -16,17 +16,17 @@ class User < ApplicationRecord
 
   scope :all_except, ->(user) { where.not(id: user) }
 
-  def user_level
-  	u = self.refferences.count
+  # def user_level
+  # 	u = self.refferences.count
 
-  	if u < 10 
-  		1
-  	elsif u > 9 && u < 20
-  		2
-  	elsif u > 100 
-  		10
-  	else
-  		(u / 10).to_i
-  	end
-  end
+  # 	if u < 10 
+  # 		1
+  # 	elsif u > 9 && u < 20
+  # 		2
+  # 	elsif u > 100 
+  # 		10
+  # 	else
+  # 		(u / 10).to_i
+  # 	end
+  # end
 end
