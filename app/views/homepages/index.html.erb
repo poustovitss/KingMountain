@@ -1,52 +1,24 @@
-<img src="/img/head.png" width="100%">
 
-<hr>
+<div >
+  <div class="well" style="width: 60%; margin: 30px; margin-left: auto; background-color: rgba(245, 245, 245, 0); border: 2px solid rgba(0, 0, 0, 0.25);">
+    <h4>
+      <p>Сколько человек в игре: <b class="post-meta" style="font-size: 20px; color: green;"><%= User.all.size %></b></p>
+      <hr>
+      <p>Сколько вступило сегодня: <b class="post-meta" style="color: green; font-size: 20px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %></b></p>
+    </h4>
+  <hr>
+   <% if user_signed_in? %>
+    <%= link_to 'Начать играть', profiles_path, class: 'btn btn-success' %>
+   <% else %>
+    <%= link_to 'Вступить в игру', new_user_registration_path, class: 'btn btn-success' %>
+   <% end %>
 
-  <h4>Сколько человек вступило в игру : <b  style="color: red"><%= User.all.size %></h4></b>
-<div class="progress">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<%= User.all.size %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= User.all.size %>%">
   </div>
 </div>
 
-<h4>Сколько человек вступило в игру сегодня: <b  style="color: red">
-  <%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %>
-</h4></b>
-<div class="progress">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="<%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %>%">
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="/img/phone.gif">
-      <div class="caption">
-        <h3>Большие шансы на победу</h3>
-        <p>...</p>
-          <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Пока не работает :(">Подробнее</button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="/img/sms.gif">
-      <div class="caption">
-        <h3>Большие выплаты</h3>
-        <p>
-        ...
-        </p>
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Пока не работает :(">Подробнее</button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="/img/ip.gif">
-      <div class="caption">
-        <h3>Как это работает?</h3>
-        <p>...</p>
-        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Пока не работает :(">Подробнее</button>
-      </div>
-    </div>
-  </div>
-</div>
+<style type="text/css">
+  body {
+    background: url(img/m.jpg) center top repeat;
+  }
+  
+</style>
