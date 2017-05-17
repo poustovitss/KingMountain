@@ -3,10 +3,10 @@
   <div class="well" style="width: 60%; margin: 30px; margin-left: auto; background-color: rgba(245, 245, 245, 0); border: 2px solid rgba(0, 0, 0, 0.25);">
     <h4>
       <p>Сколько человек в игре: <b class="post-meta" style="font-size: 20px; color: green;"><%= User.all.size %></b></p>
-      <hr>
+      <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
       <p>Сколько вступило сегодня: <b class="post-meta" style="color: green; font-size: 20px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %></b></p>
     </h4>
-  <hr>
+  <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
    <% if user_signed_in? %>
     <%= link_to 'Начать играть', profiles_path, class: 'btn btn-success' %>
    <% else %>
