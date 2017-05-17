@@ -33,17 +33,18 @@
             <% end %>
       </div>
    </div>
+   <center>
+    <p>
+      <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+            <%= f.submit @button, class: "btn btn-primary", data: { confirm: 'Вы уверены? ' } %>
+      <% end %>
+    </p>
    <p>
-
-    <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-          <%= f.submit @button, class: "btn btn-success", data: { confirm: 'Вы уверены? ' } %>
-    <% end %>
-
     <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
-          <%= f.submit "Купить 1 провианта", class: "btn btn-success", data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+          <%= f.submit "Купить 1 провианта", class: "btn btn-primary", data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
     <% end %>
     </p>
-
+  </center>
    <center>
    <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
      <div class="form-inline" >
@@ -63,7 +64,7 @@ end
 
 <style type="text/css">
   body {
-    background: url(http://www.allfons.ru/pic/201201/1440x900/allfons.ru-4922.jpg) right top repeat;
+    background: url(img/m.jpg) center top repeat;
   }
   
 </style>
