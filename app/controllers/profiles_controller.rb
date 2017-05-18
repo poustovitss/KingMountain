@@ -10,48 +10,45 @@ class ProfilesController < ApplicationController
   end
 
   def create 
-    u = current_user.refferences.count 
-    b = current_user
-    #============================================
-      if u >= 10 && b.level == 1 && b.balance >= 187.50
-        unless current_user.reffered.nil?
-            reffered = current_user.reffered
-            reffered.balance += 187.50*0.80
-            reffered.save
-        end
-        b.balance = current_user.balance - 187.50
-        b.level += 1
-        b.save
-    #============================================
-      elsif u >= 20 && b.level == 2 && b.balance >= 1312.50
-         unless current_user.reffered.nil?
-            reffered = current_user.reffered
-            reffered.balance += 1312.50*0.80
-            reffered.save
-        end
-        b.balance = current_user.balance - 1312.50
-        b.level += 1
-        b.save
-    #============================================
+    user = current_user
 
-    #============================================
+  
 
-    #============================================
+    refferences_count = current_user.refferences.count 
+    
 
-    #============================================      
-      elsif b.level == 0 && b.balance >= 25
-        unless current_user.reffered.nil?
-            reffered = current_user.reffered
-            reffered.balance += 25*0.80
-            reffered.save
-        end
-        b.balance = current_user.balance - 25
-        b.level += 1
-        b.save
+    start_pay = 25
+    start_coefficient = 7.5
 
-      else
-        flash[:balance] = 'У вас не достаточно приглашенных или баланса'
+    pay = 0
+
+    if user.level == 0
+      pay = start_pay
+    else
+      current_user.level.times do 
+        pay += start_pay * start_coefficient
+        start_pay = pay
+        start_coefficient -= 0.5
       end
+    end
+
+    if user.balance >= pay
+      if user.refferences.count >= user.level * 10 
+        unless current_user.reffered.nil?
+            reffered = current_user.reffered
+            reffered.balance += pay*0.80
+            reffered.save
+        end
+        user.balance = current_user.balance - pay
+        user.level += 1
+        user.save
+        flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
+      else
+        flash[:balance] = "у вас мало провиантов!"
+      end
+    else
+      flash[:balance] = "У вас не достаточно баланса"
+    end
     redirect_to :back
   end
 
@@ -81,7 +78,7 @@ class ProfilesController < ApplicationController
         redirect_to :back
         
       else
-        flash[:balance] = 'Не достаточно баланса'
+        flash[:balance] = 'У вас не достаточно баланса'
         redirect_to :back
       end
     end
