@@ -5,6 +5,8 @@
       <p>Сколько человек в игре: <b class="post-meta" style="font-size: 20px; color: green;"><%= User.all.size %></b></p>
       <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
       <p>Сколько вступило сегодня: <b class="post-meta" style="color: green; font-size: 20px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %></b></p>
+      <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
+      <p>Главный приз : <b class="post-meta" style="color: green; font-size: 20px;"><%= Transfer.sum(:summa) %></b></p>
     </h4>
   <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
    <% if user_signed_in? %>

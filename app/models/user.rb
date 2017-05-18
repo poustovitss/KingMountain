@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: {maximum: 50}
   
 
-
+  has_many :transfers
   belongs_to :reffered, :class_name => 'User', foreign_key: 'reffered_by'
   has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by'
 

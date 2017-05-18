@@ -39,6 +39,17 @@ class ProfilesController < ApplicationController
             reffered.balance += pay*0.80
             reffered.save
         end
+        
+        transfer = Transfer.new
+
+        transfer.user_id = current_user.id
+        transfer.bank_id = Bank.first.id
+
+        p transfer
+
+        transfer.summa = pay*0.20
+        transfer.save            
+
         user.balance = current_user.balance - pay
         user.level += 1
         user.save
