@@ -25,6 +25,8 @@
                  </b></h4>
             </div>
 
+          <h4>Ваш банк: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b></h4>
+
          </button>
          <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
 

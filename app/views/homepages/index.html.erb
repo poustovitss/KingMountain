@@ -1,26 +1,52 @@
-
-<div >
-  <div class="well" style="width: 60%; margin: 30px; margin-left: auto; background-color: rgba(245, 245, 245, 0); border: 2px solid rgba(0, 0, 0, 0.25);">
-    <h4>
-      <p>Сколько человек в игре: <b class="post-meta" style="font-size: 20px; color: green;"><%= User.all.size %></b></p>
-      <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-      <p>Сколько вступило сегодня: <b class="post-meta" style="color: green; font-size: 20px;"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %></b></p>
-      <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-      <p>Главный приз : <b class="post-meta" style="color: green; font-size: 20px;"><%= Transfer.sum(:summa) %></b></p>
-    </h4>
-  <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-   <% if user_signed_in? %>
-    <%= link_to 'Начать играть', profiles_path, class: 'btn btn-success' %>
-   <% else %>
-    <%= link_to 'Вступить в игру', new_user_registration_path, class: 'btn btn-success' %>
-   <% end %>
-
-  </div>
+<img src="img/head.png" width="100%">
+<p></p>
+<div class="row">
+   <div class="col-lg-4">
+      <div class="panel panel-primary">
+         <div class="panel-heading" style="background-color: #306999; padding: 20px 23px;">
+            <center>
+               <h3 class="panel-title" style="font-size: 20px;">
+                  <p style="font-size: 20px;" class="glyphicon glyphicon-th-large"></p>
+                  Игра "Царь Игры"
+               </h3>
+            </center>
+         </div>
+         <div class="panel-body">
+            <center>
+               <h3 style="color: rgb(48, 93, 153);">Всего за 25 ₽ они твои!</h3>
+               <p><a class="post-meta" style="color: black; font-size: 40px; color: rgb(48, 93, 153);"><%= Transfer.sum(:summa) %></a></p>
+               <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
+               <% if user_signed_in? %>
+               <%= link_to 'Начать играть', profiles_path, class: 'btn btn-success', style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %>
+               <% else %>
+               <%= link_to 'Вступить в игру', new_user_registration_path, class: 'btn btn-success' %>
+               <% end %>
+            </center>
+         </div>
+      </div>
+   </div>
+   <div class="col-lg-6 col-lg-8">
+      <div class="panel panel-primary" style="margin-right: 200px;">
+         <div class="panel-heading" style="background-color: #306999; padding: 20px 15px;">
+            <center>
+               <h3 class="panel-title">
+                  <p style="font-size: 20px;" class="glyphicon glyphicon-info-sign"></p>
+                  Информация
+               </h3>
+            </center>
+         </div>
+         <div class="panel-body">
+            <p style="color: rgb(78, 83, 88);">Сколько человек в игре: <b class="post-meta" style="font-size: 20px; color: rgb(48, 93, 153);"><%= User.all.size %></b></p>
+            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
+            <p style="color: rgb(78, 83, 88);">Сколько вступило сегодня: <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %></b></p>
+            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
+            <p style="color: rgb(78, 83, 88);">Общий банк : <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= Transfer.sum(:summa) %></b></p>
+         </div>
+      </div>
+   </div>
 </div>
-
 <style type="text/css">
-  body {
-    background: url(img/m.jpg) center top repeat;
-  }
-  
+   body {
+   background: url(img/m.jpg) center top repeat;
+   }
 </style>

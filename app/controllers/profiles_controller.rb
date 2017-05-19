@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
        @button = 'Начать игру'
      else
       @button = 'Перейти на следущий уровень'
-     end 
+  end 
 
   end
 
