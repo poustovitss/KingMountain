@@ -101,6 +101,7 @@ GEM
       has_scope (~> 0.6)
       railties (>= 3.2, < 5.2.x)
       responders
+    interkassa (0.0.5)
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2)
@@ -240,6 +241,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise
+  interkassa (~> 0.0.5)
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

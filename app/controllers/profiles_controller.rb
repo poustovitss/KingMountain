@@ -43,10 +43,7 @@ class ProfilesController < ApplicationController
         transfer = Transfer.new
 
         transfer.user_id = current_user.id
-        transfer.bank_id = Bank.first.id
-
-        p transfer
-
+        transfer.bank_id = Bank.last.id
         transfer.summa = pay*0.20
         transfer.save            
 
