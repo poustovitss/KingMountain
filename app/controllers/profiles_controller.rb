@@ -36,16 +36,24 @@ class ProfilesController < ApplicationController
       if user.refferences.count >= user.level * 10 
         unless current_user.reffered.nil?
             reffered = current_user.reffered
-            reffered.balance += pay*0.80
+            reffered.balance += pay*0.75
             reffered.save
         end
         
+
         transfer = Transfer.new
 
         transfer.user_id = current_user.id
         transfer.bank_id = Bank.last.id
         transfer.summa = pay*0.20
         transfer.save            
+
+        transfer = Transfer.new
+        transfer.user_id = current_user.reffered.id
+        transfer.bank_id = Bank.last.id
+        transfer.summa = pay*0.05
+        transfer.save
+
 
         user.balance = current_user.balance - pay
         user.level += 1
@@ -76,13 +84,25 @@ class ProfilesController < ApplicationController
           b = current_user
           b.balance = current_user.balance - 50
           b.save
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 50*0.20
+          transfer.save 
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.reffered.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 50*0.05
+          transfer.save
           
           unless current_user.reffered.nil?
             reffered = current_user.reffered
-            reffered.balance += 50*0.80
+            reffered.balance += 50*0.75
             reffered.save
+            end
           end
-        end
         redirect_to :back
         
       else
