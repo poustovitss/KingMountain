@@ -22,7 +22,7 @@ class ImprovesController < ApplicationController
           transfer.summa = 25*0.20
           transfer.save            
 
-          unless current_user.reffered.id.nil?
+          unless current_user.reffered.nil?
             transfer = Transfer.new
             transfer.user_id = current_user.reffered.id
             transfer.bank_id = Bank.last.id
