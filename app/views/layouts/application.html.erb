@@ -36,34 +36,9 @@
         <li><a href="<%= new_user_registration_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Регистрация</h6></a></li>
       <% else %>
       <li><a href="<%= profiles_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Вы вошли как, <%= current_user.name %></h6></a></li>
-      <li><a><h6 type="button" data-toggle="modal" data-target="#myModal" class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Ваши улучшение</h6></a></li>
       <% if current_user.admin? %>
         <li><a href="<%= admin_root_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Админиская панель</h6></a></li> 
       <% end %>
-
-      <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <center>
-          <% if current_user.carrier == true %>
-            <h3>У вас есть улучшение <b style="color: green;">"Носильщик"</b></h3>
-          <% else %>
-            <h3>У вас нету улучшений</h3>
-          <% end %>
-        </center>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-        <a type="button">
-          <%= link_to 'Купить улучшение', profiles_path, class: "btn btn-primary" %>
-        </a>
-      </div>
     </div>
   </div>
 </div>
