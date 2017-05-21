@@ -53,11 +53,9 @@
         <% end %>
       </div>
     <div class="right">
-      <% unless current_user.carrier == true %>
-        <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
-              <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
-        <% end %>
-      <% end %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
+        Купить улучшения
+      </button>
     </div>
 
     </center>
@@ -67,13 +65,6 @@
         <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
       </div>
 
-      <h4 class="well">
-       <% if current_user.carrier == true %>
-          У вас есть улучшение <b style="color: green;">"Носильщик"</b>
-        <% else %>
-          У вас нету улучшений
-        <% end %>
-      </h4>
 
       <h4 class="well">
       Ваши рефералы :
@@ -98,6 +89,55 @@
 </div>
 </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+      <p>
+        <% unless current_user.carrier == true %>
+        <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
+              <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+          <% end %>
+        <% end %>
+      </p>
+      <p>
+        <% unless current_user.conductor == true %>
+          <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
+                <%= f.submit 'Купить улучшение проводник', class: "btn btn-primary", style: 'border-radius: 0px; background-color: green; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
+          <% end %>
+         <% end %>
+      </p>
+        <h4 class="well">
+        <p>
+        <% if current_user.conductor == false && current_user.carrier == false %>
+          У вас нету улучшений
+        <% else %>
+          У вас есть улучшение
+        <% end %> 
+        <% if current_user.carrier == true  %>
+           <b style="color: green;">"Носильщик"</b> |
+        <% end %>
+        <% if current_user.conductor == true %>
+           <b style="color: green;">"Проводник"</b> |
+        <% end %>
+      </p>     
+      </h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <a type="button"><%= link_to 'Вернуться в профиль', profiles_path, class: "btn btn-default" %></a>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <style type="text/css">
   body {
