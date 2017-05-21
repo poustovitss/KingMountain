@@ -1,12 +1,15 @@
 class ProfilesController < ApplicationController
 	
   def index
-     if current_user.level <= 0 
-       @button = 'Начать игру'
-     else
-      @button = 'Перейти на следущий уровень'
-  end 
-
+    if user_signed_in?
+       if current_user.level <= 0 
+         @button = 'Начать игру'
+       else
+        @button = 'Перейти на следущий уровень'
+       end
+    else
+     redirect_to new_user_session_path 
+    end
   end
 
   def create 

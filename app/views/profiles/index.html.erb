@@ -1,143 +1,146 @@
-<div class="container">
-<div class="col-lg-12 col-sm-8">
-   <div class="card hovercard">
-      <div class="card-background">
-         <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
-         <!-- http://lorempixel.com/850/280/people/9/ -->
-      </div>
-      <div class="useravatar">
-         <img alt="" src="/img/ava.png">
-      </div>
-      <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
-      </div>
-   </div>
-   <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-      <div class="btn-group" role="group">
-         <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
-            <div class="hidden-xs">
-               <h4>Ваш уровень: <b style="color: green;">
-               <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %>/<%= levelinfo %></b> |  Ваш баланс: <b style="color: green;">
-                <% if current_user.balance.nil? %>
-                 0 
-                <% else %>
-                 <%= current_user.balance %>
-                <% end %>
-                 </b></h4>
-            </div>
+<% if current_user.admin? %>
+<% else %>
 
-          <h4>Ваш банк: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b> | 
-          Свободных провиантов: <b style="color: green;"><%= User.where(reffered_by: 0).count %></b></h4>
+  <div class="container">
+  <div class="col-lg-12 col-sm-8">
+     <div class="card hovercard">
+        <div class="card-background">
+           <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
+           <!-- http://lorempixel.com/850/280/people/9/ -->
+        </div>
+        <div class="useravatar">
+           <img alt="" src="/img/ava.png">
+        </div>
+        <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
+        </div>
+     </div>
+     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+           <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
+              <div class="hidden-xs">
+                 <h4>Ваш уровень: <b style="color: green;">
+                 <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.count %>/<%= levelinfo %></b> |  Ваш баланс: <b style="color: green;">
+                  <% if current_user.balance.nil? %>
+                   0 
+                  <% else %>
+                   <%= current_user.balance %>
+                  <% end %>
+                   </b></h4>
+              </div>
 
-         </button>
-         <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
+            <h4>Ваш банк: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b> | 
+            Свободных провиантов: <b style="color: green;"><%= User.where(reffered_by: 0).count %></b></h4>
 
-            <% if flash[:balance] %>
-              <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
-            <% end %>
-      </div>
-   </div>
-<div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
-   <center>
-      
-  <div class="panel-body">
+           </button>
+           <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
 
- <div class="alert alert" style="width: 100%">
-    <div class="left">
-      <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-            <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены? ' } %>
-      <% end %>
-    </div>
-      <div class="hr">
-        <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
-            <%= f.submit "Купить 1 провианта", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+              <% if flash[:balance] %>
+                <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
+              <% end %>
+        </div>
+     </div>
+  <div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
+     <center>
+        
+    <div class="panel-body">
+
+   <div class="alert alert" style="width: 100%">
+      <div class="left">
+        <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены? ' } %>
         <% end %>
       </div>
-    <div class="right">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
-        Купить улучшения
-      </button>
-    </div>
-
-    </center>
-    <center>
-     <div class="form-inline" >
-        <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"> 
-        <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
-      </div>
-
-
-      <h4 class="well">
-      Ваши рефералы :
-        <% if current_user.refferences.nil? %>
-          У вас нету рефералов
-        <% else %>
-          <% current_user.refferences.each do |ref| %>
-             <b><%= ref.name %></b> |
+        <div class="hr">
+          <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
+              <%= f.submit "Купить 1 провианта", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
           <% end %>
-        <% end %>
-      </h4>
-      <h4 class="well">
-      Вы пришли от :
-        <% if current_user.reffered.nil? %>
-          ---
-        <% else %>
-          <%= current_user.reffered.name %>
-        <% end %>
-      </h4>
-    </center>
-</div>
-</div>
-</div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+      <div class="right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
+          Купить улучшения
+        </button>
       </div>
-      <div class="modal-body">
-      <p>
-        <% unless current_user.carrier == true %>
-        <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
-              <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-          <% end %>
-        <% end %>
-      </p>
-      <p>
-        <% unless current_user.conductor == true %>
-          <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
-                <%= f.submit 'Купить улучшение проводник', class: "btn btn-primary", style: 'border-radius: 0px; background-color: green; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
-          <% end %>
-         <% end %>
-      </p>
+
+      </center>
+      <center>
+       <div class="form-inline" >
+          <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"> 
+          <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
+        </div>
+
+
         <h4 class="well">
+        Ваши рефералы :
+          <% if current_user.refferences.nil? %>
+            У вас нету рефералов
+          <% else %>
+            <% current_user.refferences.each do |ref| %>
+               <b><%= ref.name %></b> |
+            <% end %>
+          <% end %>
+        </h4>
+        <h4 class="well">
+        Вы пришли от :
+          <% if current_user.reffered.nil? %>
+            ---
+          <% else %>
+            <%= current_user.reffered.name %>
+          <% end %>
+        </h4>
+      </center>
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
         <p>
-        <% if current_user.conductor == false && current_user.carrier == false %>
-          У вас нету улучшений
-        <% else %>
-          У вас есть улучшение
-        <% end %> 
-        <% if current_user.carrier == true  %>
-           <b style="color: green;">"Носильщик"</b> |
-        <% end %>
-        <% if current_user.conductor == true %>
-           <b style="color: green;">"Проводник"</b> |
-        <% end %>
-      </p>     
-      </h4>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-        <a type="button"><%= link_to 'Вернуться в профиль', profiles_path, class: "btn btn-default" %></a>
+          <% unless current_user.carrier == true %>
+          <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
+                <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+            <% end %>
+          <% end %>
+        </p>
+        <p>
+          <% unless current_user.conductor == true %>
+            <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
+                  <%= f.submit 'Купить улучшение проводник', class: "btn btn-primary", style: 'border-radius: 0px; background-color: green; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
+            <% end %>
+           <% end %>
+        </p>
+          <h4 class="well">
+          <p>
+          <% if current_user.conductor == false && current_user.carrier == false %>
+            У вас нету улучшений
+          <% else %>
+            У вас есть улучшение
+          <% end %> 
+          <% if current_user.carrier == true  %>
+             <b style="color: green;">"Носильщик"</b> |
+          <% end %>
+          <% if current_user.conductor == true %>
+             <b style="color: green;">"Проводник"</b> |
+          <% end %>
+        </p>     
+        </h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+          <a type="button"><%= link_to 'Вернуться в профиль', profiles_path, class: "btn btn-default" %></a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
+<% end %>
 
 <style type="text/css">
   body {
