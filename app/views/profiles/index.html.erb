@@ -42,18 +42,18 @@
  <div class="alert alert" style="width: 100%">
     <div class="left">
       <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-            <%= f.submit @button, class: "btn btn-primary", data: { confirm: 'Вы уверены? ' } %>
+            <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены? ' } %>
       <% end %>
     </div>
       <div class="hr">
         <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
-            <%= f.submit "Купить 1 провианта", class: "btn btn-primary", data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+            <%= f.submit "Купить 1 провианта", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
         <% end %>
       </div>
     <div class="right">
       <% unless current_user.carrier == true %>
         <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
-              <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary", data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+              <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
         <% end %>
       <% end %>
     </div>
@@ -62,7 +62,7 @@
     <center>
      <div class="form-inline" >
         <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"> 
-        <button id="copyButton" class="btn btn-primary">Копировать реферальную ссылку</button>
+        <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
       </div>
     </center>
 </div>
