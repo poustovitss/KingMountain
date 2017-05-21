@@ -42,18 +42,18 @@ class ProfilesController < ApplicationController
         
 
         transfer = Transfer.new
-
         transfer.user_id = current_user.id
         transfer.bank_id = Bank.last.id
         transfer.summa = pay*0.20
         transfer.save            
 
-        transfer = Transfer.new
-        transfer.user_id = current_user.reffered.id
-        transfer.bank_id = Bank.last.id
-        transfer.summa = pay*0.05
-        transfer.save
-
+        unless current_user.reffered.id.nil?
+          transfer = Transfer.new
+          transfer.user_id = current_user.reffered.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = pay*0.05
+          transfer.save
+        end
 
         user.balance = current_user.balance - pay
         user.level += 1

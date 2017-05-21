@@ -8,8 +8,35 @@ class ImprovesController < ApplicationController
       current_user.update_attribute(:carrier, false)
       flash[:balance] = 'Вы деактивировали улучшение "Носильщик"'
     else
-      current_user.update_attribute(:carrier, true)
-      flash[:balance] = 'Вы купили улучшение "Носильщик"'
+      if current_user.balance >= 25
+        unless current_user.reffered.nil?
+              reffered = current_user.reffered
+              reffered.balance += 25*0.75
+              reffered.save
+          end
+          
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 25*0.20
+          transfer.save            
+
+          unless current_user.reffered.id.nil?
+            transfer = Transfer.new
+            transfer.user_id = current_user.reffered.id
+            transfer.bank_id = Bank.last.id
+            transfer.summa = 25*0.05
+            transfer.save
+          end
+          user.balance = current_user.balance - pay
+          user.level += 1
+          user.save
+        current_user.update_attribute(:carrier, true)
+        flash[:balance] = 'Вы купили улучшение "Носильщик"'
+      else
+        flash[:balance] = 'У вас не достаточно баланса'
+      end
     end
     redirect_to :back
   end
