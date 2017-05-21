@@ -25,7 +25,8 @@
                  </b></h4>
             </div>
 
-          <h4>Ваш банк: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b></h4>
+          <h4>Ваш банк: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b> | 
+          Свободных провиантов: <b style="color: green;"><%= User.where(reffered_by: 0).count %></b></h4>
 
          </button>
          <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
@@ -37,13 +38,7 @@
    </div>
 <div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
    <center>
-      <h4>
-       <% if current_user.carrier == true %>
-          <h4 class="well">У вас есть улучшение <b style="color: green;">"Носильщик"</b></h4>
-        <% else %>
-          <h4 class="well">У вас нету улучшений</h4>
-        <% end %>
-      </h4>
+      
   <div class="panel-body">
 
  <div class="alert alert" style="width: 100%">
@@ -71,6 +66,33 @@
         <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"> 
         <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
       </div>
+
+      <h4 class="well">
+       <% if current_user.carrier == true %>
+          У вас есть улучшение <b style="color: green;">"Носильщик"</b>
+        <% else %>
+          У вас нету улучшений
+        <% end %>
+      </h4>
+
+      <h4 class="well">
+      Ваши рефералы :
+        <% if current_user.refferences.nil? %>
+          У вас нету рефералов
+        <% else %>
+          <% current_user.refferences.each do |ref| %>
+             <b><%= ref.name %></b> |
+          <% end %>
+        <% end %>
+      </h4>
+      <h4 class="well">
+      Вы пришли от :
+        <% if current_user.reffered.nil? %>
+          ---
+        <% else %>
+          <%= current_user.reffered.name %>
+        <% end %>
+      </h4>
     </center>
 </div>
 </div>
