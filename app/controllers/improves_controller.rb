@@ -22,16 +22,18 @@ class ImprovesController < ApplicationController
           transfer.summa = 25*0.20
           transfer.save            
 
-          unless current_user.reffered.nil?
+          unless current_user.reffered.id.nil?
             transfer = Transfer.new
             transfer.user_id = current_user.reffered.id
             transfer.bank_id = Bank.last.id
             transfer.summa = 25*0.05
             transfer.save
           end
-          user.balance = current_user.balance - pay
-          user.level += 1
+          
+          user = current_user
+          user.balance = current_user.balance - 25
           user.save
+
         current_user.update_attribute(:carrier, true)
         flash[:balance] = 'Вы купили улучшение "Носильщик"'
       else
