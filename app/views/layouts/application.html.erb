@@ -40,12 +40,8 @@
       <% if current_user.admin? %>
         <li><a href="<%= admin_root_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Админиская панель</h6></a></li> 
       <% end %>
-        <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<!-- Modal -->
+
+      <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -63,7 +59,7 @@
         </center>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
         <a type="button">
           <%= link_to 'Купить улучшение', profiles_path, class: "btn btn-primary" %>
         </a>
@@ -72,6 +68,11 @@
   </div>
 </div>
 
+    <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
     <%= yield %>
   </body>
 </html>
