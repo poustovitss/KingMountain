@@ -68,6 +68,31 @@ class ProfilesController < ApplicationController
     redirect_to :back
   end
 
+  def levelinfo
+    if current_user.level == 0
+      10
+    elsif current_user.level == 1
+      20
+    elsif current_user.level == 2
+      30
+    elsif current_user.level == 3
+      40
+    elsif current_user.level == 4
+      50
+    elsif current_user.level == 5
+      60
+    elsif current_user.level == 6
+      70
+    elsif current_user.level == 7
+      80
+    elsif current_user.level == 8
+      90
+    elsif current_user.level == 9
+      100
+    end
+  end
+
+  helper_method :levelinfo
 
   def update 
       if current_user.balance >= 50 && current_user.balance > 0  
