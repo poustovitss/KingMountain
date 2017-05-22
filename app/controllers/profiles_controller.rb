@@ -44,11 +44,11 @@ class ProfilesController < ApplicationController
         end
         
 
-        transfer = Transfer.new
-        transfer.user_id = current_user.id
-        transfer.bank_id = Bank.last.id
-        transfer.summa = pay*0.20
-        transfer.save            
+        # transfer = Transfer.new
+        # transfer.user_id = current_user.id
+        # transfer.bank_id = Bank.last.id
+        # transfer.summa = pay*0.20
+        # transfer.save            
 
         unless current_user.reffered.nil?
           transfer = Transfer.new
@@ -98,11 +98,11 @@ def update
       b.balance = current_user.balance - pay
       b.save
 
-      transfer = Transfer.new
-      transfer.user_id = current_user.id
-      transfer.bank_id = Bank.last.id
-      transfer.summa = pay*0.20
-      transfer.save 
+      # transfer = Transfer.new
+      # transfer.user_id = current_user.id
+      # transfer.bank_id = Bank.last.id
+      # transfer.summa = pay*0.20
+      # transfer.save 
 
       unless current_user.reffered.nil?
         transfer = Transfer.new
