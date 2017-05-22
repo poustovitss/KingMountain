@@ -82,46 +82,49 @@ class ProfilesController < ApplicationController
 
   helper_method :levelinfo
 
-  def update 
-      if current_user.balance >= 50 && current_user.balance > 0  
-        b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
+def update 
+  if current_user.balance >= 50 && current_user.balance > 0  
+  b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
 
 
-        if b.first.nil?
-          flash[:balance] = 'Нет свободных провиантов'
-        else
-          b = b.first
-          b.reffered_by=current_user.id
-          b.save
-            
-          b = current_user
-          b.balance = current_user.balance - 50
-          b.save
+    if b.first.nil?
+      flash[:balance] = 'Нет свободных провиантов'
+    else
+      b = b.first
+      b.reffered_by=current_user.id
+      b.save
 
-          transfer = Transfer.new
-          transfer.user_id = current_user.id
-          transfer.bank_id = Bank.last.id
-          transfer.summa = 50*0.20
-          transfer.save 
+      b = current_user
+      b.balance = current_user.balance - 50
+      b.save
 
-          unless current_user.reffered.nil?
-            transfer = Transfer.new
-            transfer.user_id = current_user.reffered.id
-            transfer.bank_id = Bank.last.id
-            transfer.summa = 50*0.05
-            transfer.save
-          end
-                    
-          unless current_user.reffered.nil?
-            reffered = current_user.reffered
-            reffered.balance += 50*0.75
-            reffered.save
-          end
-        redirect_to :back
-        
-      else
-        flash[:balance] = 'У вас не достаточно баланса'
-        redirect_to :back
+      transfer = Transfer.new
+      transfer.user_id = current_user.id
+      transfer.bank_id = Bank.last.id
+      transfer.summa = 50*0.20
+      transfer.save 
+
+      unless current_user.reffered.nil?
+        transfer = Transfer.new
+        transfer.user_id = current_user.reffered.id
+        transfer.bank_id = Bank.last.id
+        transfer.summa = 50*0.05
+        transfer.save
       end
+    
+      unless current_user.reffered.nil?
+        reffered = current_user.reffered
+        reffered.balance += 50*0.75
+        reffered.save
+      end
+     redirect_to :back
+
     end
+  else
+    flash[:balance] = 'У вас не достаточно баланса'
+    redirect_to :back
+  end
+end
+
+
 end
