@@ -36,7 +36,7 @@ class ProfilesController < ApplicationController
     end
 
     if user.balance >= pay
-      if user.refferences.count >= user.level * 10 
+      if user.refferences.where(level: user.level - 1).count >= user.level * 10 
         unless current_user.reffered.nil?
             reffered = current_user.reffered
             reffered.balance += pay*0.75
@@ -72,27 +72,7 @@ class ProfilesController < ApplicationController
   end
 
   def levelinfo
-    if current_user.level == 0
-      '10'
-    elsif current_user.level == 1
-      '10'
-    elsif current_user.level == 2
-      '20'
-    elsif current_user.level == 3
-      '30'
-    elsif current_user.level == 4
-      '40'
-    elsif current_user.level == 5
-      '50'
-    elsif current_user.level == 6
-      '60'
-    elsif current_user.level == 7
-      '70'
-    elsif current_user.level == 8
-      '80'
-    elsif current_user.level == 9
-      '90'
-    end
+    '10'
   end
 
   helper_method :levelinfo
