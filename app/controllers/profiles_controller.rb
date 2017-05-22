@@ -95,26 +95,26 @@ def update
       b.save
 
       b = current_user
-      b.balance = current_user.balance - 50
+      b.balance = current_user.balance - pay
       b.save
 
       transfer = Transfer.new
       transfer.user_id = current_user.id
       transfer.bank_id = Bank.last.id
-      transfer.summa = 50*0.20
+      transfer.summa = pay*0.20
       transfer.save 
 
       unless current_user.reffered.nil?
         transfer = Transfer.new
         transfer.user_id = current_user.reffered.id
         transfer.bank_id = Bank.last.id
-        transfer.summa = 50*0.05
+        transfer.summa = pay*0.05
         transfer.save
       end
     
       unless current_user.reffered.nil?
         reffered = current_user.reffered
-        reffered.balance += 50*0.75
+        reffered.balance += pay*0.75
         reffered.save
       end
      redirect_to :back

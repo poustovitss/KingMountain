@@ -97,7 +97,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title" id="myModalLabel">Улучшения</h4>
         </div>
         <div class="modal-body">
         <div style="position: relative;">
@@ -116,7 +116,7 @@
             <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
                   <%= f.submit 'Купить улучшение проводник', class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: green; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
              <div class="description">
-            Проводник - -5% от цены уровня
+            Проводник: -5% от цены уровня
           </div>
             <% end %>
            <% end %>
