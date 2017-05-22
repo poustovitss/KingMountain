@@ -2,19 +2,19 @@ ActiveAdmin.register User do
 
 permit_params :name, :email, :password, :reffered_by, :reffered, :balance, :level, :carrier, :conductor
 
-	controller do
-	  def destroy
-	    @user = User.find(params[:id])
-	    if @user == current_user
-    	 flash[:notice] = "Вы не можете удалить самого себя"
-	      redirect_to admin_dashboard_path
-	 	else
-	 	 @user.destroy
-	 	 flash[:notice] = "Вы успешно удалили пользователя"
-	 	 redirect_to admin_dashboard_path
-	 	end
-	  end 
-	end 
+	# controller do
+	#   def destroy
+	#     @user = User.find(params[:id])
+	#     if @user == current_user
+ #    	 flash[:notice] = "Вы не можете удалить самого себя"
+	#       redirect_to admin_dashboard_path
+	#  	else
+	#  	 @user.destroy
+	#  	 flash[:notice] = "Вы успешно удалили пользователя"
+	#  	 redirect_to admin_dashboard_path
+	#  	end
+	#   end 
+	# end 
 
 	form do |f|
 	  f.inputs do 
@@ -22,6 +22,8 @@ permit_params :name, :email, :password, :reffered_by, :reffered, :balance, :leve
 	  	f.input :email
 	  	f.input :admin
 	  	f.input :level
+	  	f.input :carrier
+	  	f.input :conductor
 	  	f.input :reffered_by
 	  	f.input :balance
 	  end
