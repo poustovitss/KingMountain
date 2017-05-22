@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'interkassa', '~> 0.0.5'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'paperclip', '~> 4.3'
 gem 'devise'

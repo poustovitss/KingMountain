@@ -16,7 +16,7 @@
            <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
               <div class="hidden-xs">
                  <h4>Ваш уровень: <b style="color: green;">
-                 <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.where(level: current_user.level - 1).count %>/<%= levelinfo %></b> |  Реф. баланс: <b style="color: green;">
+                 <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.where(level: current_user.level - 1).count %>/<%= levelinfo %></b> |  Ваш баланс: <b style="color: green;">
                   <% if current_user.balance.nil? %>
                    0 
                   <% else %>
@@ -25,8 +25,8 @@
                    </b></h4>
               </div>
 
-            <h4>Ваш банк: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b> | 
-            Свободных провиантов: <b style="color: green;"><%= User.where(reffered_by: 0).count %></b></h4>
+            <h4>Реф. баланс: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b> | 
+            Свободных провиантов: <b style="color: green;"><%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b></h4>
 
            </button>
            <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>

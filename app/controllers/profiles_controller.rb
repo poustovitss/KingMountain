@@ -60,6 +60,11 @@ class ProfilesController < ApplicationController
 
         user.balance = current_user.balance - pay
         user.level += 1
+        unless current_user.reffered.nil?
+          if user.reffered.level <= user.level
+            user.reffered_by = 0
+          end
+        end
         user.save
         flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
       else
@@ -79,7 +84,7 @@ class ProfilesController < ApplicationController
 
   def update 
       if current_user.balance >= 50 && current_user.balance > 0  
-        b = User.where(reffered_by: 0).all_except(current_user)
+        b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
 
 
         if b.first.nil?
@@ -99,12 +104,14 @@ class ProfilesController < ApplicationController
           transfer.summa = 50*0.20
           transfer.save 
 
-          transfer = Transfer.new
-          transfer.user_id = current_user.reffered.id
-          transfer.bank_id = Bank.last.id
-          transfer.summa = 50*0.05
-          transfer.save
-          
+          unless current_user.reffered.nil?
+            transfer = Transfer.new
+            transfer.user_id = current_user.reffered.id
+            transfer.bank_id = Bank.last.id
+            transfer.summa = 50*0.05
+            transfer.save
+          end
+                    
           unless current_user.reffered.nil?
             reffered = current_user.reffered
             reffered.balance += 50*0.75
