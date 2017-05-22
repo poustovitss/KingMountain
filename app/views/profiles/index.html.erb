@@ -16,7 +16,7 @@
            <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
               <div class="hidden-xs">
                  <h4>Ваш уровень: <b style="color: green;">
-                 <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.where(level: current_user.level - 1).count %>/<%= levelinfo %></b> |  Ваш баланс: <b style="color: green;">
+                 <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.where(level: current_user.level - 1).count %>/<%= levelinfo %></b> |  Реф. баланс: <b style="color: green;">
                   <% if current_user.balance.nil? %>
                    0 
                   <% else %>
