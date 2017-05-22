@@ -26,7 +26,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Пользователи сайта" do
           table_for User.order('id desc').limit(10).each do |customer|
-            column(:email)    {|customer| link_to(customer.email, admin_root_path(customer)) }
+            column(:email)    {|customer| link_to(customer.email, admin_user_path(customer)) }
             column :name
             column :level
             column :reffered
