@@ -100,20 +100,27 @@
           <h4 class="modal-title" id="myModalLabel">Modal title</h4>
         </div>
         <div class="modal-body">
-        <p>
+        <div style="position: relative;">
           <% unless current_user.carrier == true %>
           <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
-                <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                <%= f.submit "Купить улучшение носильщик", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+          <div class="description">
+            Носильщики: -5% к цене провианта
+          </div>
             <% end %>
           <% end %>
-        </p>
-        <p>
+        </div>
+        <p></p>
+        <div style="position: relative;">
           <% unless current_user.conductor == true %>
             <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
-                  <%= f.submit 'Купить улучшение проводник', class: "btn btn-primary", style: 'border-radius: 0px; background-color: green; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
+                  <%= f.submit 'Купить улучшение проводник', class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: green; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
+             <div class="description">
+            Проводник - -5% от цены уровня
+          </div>
             <% end %>
            <% end %>
-        </p>
+        </div>
           <h4 class="well">
           <p>
           <% if current_user.conductor == false && current_user.carrier == false %>
@@ -143,6 +150,15 @@
     background: url(img/m.jpg) center top repeat;
   }
 
+  .description {
+    display: none;
+    position: absolute;
+    right: 40px;
+    top: 0;
+  }
+  .button1:hover + .description {
+    display: block;
+  }
   .left {
   float: left;
   width: 48%;
