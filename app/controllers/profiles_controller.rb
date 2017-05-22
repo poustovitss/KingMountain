@@ -116,7 +116,6 @@ class ProfilesController < ApplicationController
             reffered = current_user.reffered
             reffered.balance += 50*0.75
             reffered.save
-            end
           end
         redirect_to :back
         
