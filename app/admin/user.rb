@@ -2,7 +2,7 @@ ActiveAdmin.register User do
 
 permit_params :name, :email, :password, :reffered_by, :reffered, :balance, :level
 
-controller do
+	controller do
 	  def destroy
 	    @user = User.find(params[:id])
 	    if @user == current_user
