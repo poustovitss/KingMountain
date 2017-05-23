@@ -17,22 +17,9 @@ class OrdersController < ApplicationController
 
   def success
     @order = Order.last
-<<<<<<< HEAD
-<<<<<<< HEAD
     @user = current_user
-<<<<<<< HEAD
-     
-=======
-    @user = User.find(params[:id])
->>>>>>> b57d38dec35f145b2c491f1ee593364e7aff1b8b
-=======
-    @user = current_user
->>>>>>> c2a0db00bb50328c0cf81081929b32e03fbcbb0d
-=======
 
-    puts @user
-    puts '============================'
->>>>>>> 12b6e11f8f3e220cbdbd99f51992d7c89abc541c
+  
     if @user.id == @order.user.id
 
       @order.user.balance += @order.total
