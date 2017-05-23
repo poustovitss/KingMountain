@@ -17,8 +17,9 @@ class OrdersController < ApplicationController
 
   def success
     @order = Order.last
-    @user = current_user
+    @user = User.find(params[:id])
     if @user.id == @order.user.id
+
       @order.user.balance += @order.total
       @order.user.save
       flash[:balance] = 'Оплата прошла заебись'
