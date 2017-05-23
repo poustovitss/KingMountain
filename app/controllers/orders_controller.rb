@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def success
-    @order = Order.last
+    @order = Order.find(params[:id])
     @user = current_user
 
   
