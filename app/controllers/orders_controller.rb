@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:ik_pm_no])
     @user = current_user
     
+    if (params[:ik_inv_st] ="success" and params[:ik_ps_price]==@order.total )
       @order.user.balance += @order.total
       @order.user.save
       flash[:balance] = 'Оплата прошла заебись'
