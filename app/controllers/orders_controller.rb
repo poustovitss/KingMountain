@@ -16,9 +16,17 @@ class OrdersController < ApplicationController
   end
 
   def success
-    @order = Order.find(params[:id])
-    @order.user.balance += @order.total
-    @order.user.save
+    @order = Order.last
+    if current_user.id == @order.user.id
+      @order.user.balance += @order.total
+      @order.user.save
+      flash[:balance] = 'Оплата прошла заебись'
+      
+      redirect_to profiles_path
+    else
+      flash[:balance] = 'Оплата не прошла :('
+      redirect_to profiles_path
+    end
   end
   
   def update
