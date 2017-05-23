@@ -1,0 +1,31 @@
+<center>
+ <%= form_for @order do |f| %>
+      <hr></hr>
+	<div class="field">
+	<%= f.hidden_field :ik_co_id, :value => ENV['IK_CO_ID'] %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+	</div>
+	<div class="field">
+		<%= f.label :Валюта %><br />
+		<%= f.collection_select :currency, ['RUB'], :to_s, :to_s, include_blank: false %>
+	</div>
+	<hr>
+
+	<div class="field">
+		<%= f.label :Описание %></br>
+		<%= f.text_area :description %>
+	</div>
+	
+	<div class="field">   
+		<%= f.label :Сумма %></br>
+		<%= f.number_field :total %>
+	</div>
+	<p></p>
+	<div class="actions">
+        <%= f.submit "Оплатить", class: 'btn btn-default' %>
+    </div>
+	<hr></hr>
+
+    --->  <%= link_to 'Отменить', root_path %>
+ <% end %>
+</center>

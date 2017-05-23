@@ -36,8 +36,9 @@
         <li><a href="<%= new_user_registration_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Регистрация</h6></a></li>
       <% else %>
       <li><a href="<%= profiles_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Вы вошли как, <%= current_user.name %></h6></a></li>
+      <li><a href="<%= new_order_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Пополнить</h6></a></li>
       <% if current_user.admin? %>
-        <li><a href="<%= admin_root_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Админиская панель</h6></a></li> 
+        <li><a href="<%= admin_root_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Админиская панель</h6></a></li>
       <% end %>
     </div>
   </div>
