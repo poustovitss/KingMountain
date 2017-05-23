@@ -18,8 +18,9 @@ class OrdersController < ApplicationController
   def success
     @order = Order.find(params[:id])
     @user = current_user
-
-  
+    puts 'goooooooooooooooooooood'
+    puts @order
+    puts 'goooooooooooooooooooood'
     if @user.id == @order.user.id
 
       @order.user.balance += @order.total
