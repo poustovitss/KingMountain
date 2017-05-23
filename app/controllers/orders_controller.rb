@@ -18,6 +18,9 @@ class OrdersController < ApplicationController
   def success
     @order = Order.last
     @user = current_user
+
+    puts @user
+    puts '============================'
     if @user.id == @order.user.id
 
       @order.user.balance += @order.total
