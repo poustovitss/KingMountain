@@ -18,11 +18,11 @@ class OrdersController < ApplicationController
   def success
     @order = Order.find(params[:ik_pm_no])
     @user = current_user
-    
-    if (params[:ik_inv_st] ="success" and params[:ik_ps_price]==@order.total )
+
+    if if (params[:ik_inv_st] ="success" and (params[:ik_ps_price]||0)==(@order.total||0) )
       @order.user.balance += @order.total
       @order.user.save
-      flash[:balance] = 'Оплата прошла заебись'
+      flash[:balance] = "Оплата прошла, сумма #{order.total}"
       
       redirect_to profiles_path
     else
