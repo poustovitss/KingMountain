@@ -18,11 +18,15 @@ class OrdersController < ApplicationController
   def success
     @order = Order.last
 <<<<<<< HEAD
+<<<<<<< HEAD
     @user = current_user
      
 =======
     @user = User.find(params[:id])
 >>>>>>> b57d38dec35f145b2c491f1ee593364e7aff1b8b
+=======
+    @user = current_user
+>>>>>>> c2a0db00bb50328c0cf81081929b32e03fbcbb0d
     if @user.id == @order.user.id
 
       @order.user.balance += @order.total
