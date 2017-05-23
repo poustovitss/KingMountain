@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/alexkravets/interkassa-rails.git
-  revision: 148333662f129f8a1d1112e883267e1de759df7b
-  specs:
-    interkassa-rails (0.1.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -251,7 +245,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
-  interkassa-rails!
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
