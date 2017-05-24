@@ -36,10 +36,10 @@ class OrdersController < ApplicationController
   def fail
    @order = Order.find(params[:ik_pm_no])
 
-    if (params["ik_inv_st"] =="fail")
+    if (params["ik_inv_st"] =="canceled")
       flash[:balance] = 'Оплата не прошла :('
-      redirect_to profiles_path
     end
+      redirect_to profiles_path
   end
 
   private 
@@ -48,3 +48,6 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:description, :currency, :total, :user_id)
   end 
 end
+
+# /?ik_co_id=5923fdb33d1eaf86458b456e&
+# ik_inv_id=73141437&ik_inv_st=canceled&ik_pm_no=72
