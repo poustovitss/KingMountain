@@ -39,7 +39,8 @@ class OrdersController < ApplicationController
     if (params["ik_inv_st"] =="fail")
       flash[:balance] = 'Оплата не прошла :('
       redirect_to profiles_path
-      end
+    end
+  end
 
   private 
 
