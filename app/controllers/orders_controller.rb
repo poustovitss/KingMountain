@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
     if (params["ik_inv_st"] =="success") #and (params["ik_ps_price"]||0)==(@order$
       @order.user.balance += @order.total
       @order.user.save
-      flash[:balance] = "Оплата прошла, сумма #{@order.total}"
+      flash[:balance] = "Вы пополнили счет на сумму #{@order.total}"
       
       redirect_to profiles_path
     else
