@@ -61,7 +61,7 @@ class ProfilesController < ApplicationController
         user.balance = current_user.balance - pay
         user.level += 1
         unless current_user.reffered.nil?
-          if user.reffered.level <= user.level
+          if user.reffered.level <= user.level && user.level > 1 && user.level > 0
             user.reffered_by = 0
           end
         end
