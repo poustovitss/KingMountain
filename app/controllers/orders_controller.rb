@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
 
   def success
     @order = Order.find(params[:ik_pm_no])
-    @user = current_user
 
     if (params["ik_inv_st"] =="success") #and (params["ik_ps_price"]||0)==(@order$
       @order.user.balance += @order.total
@@ -35,9 +34,12 @@ class OrdersController < ApplicationController
   end
 
   def fail
-    flash[:balance] = 'Оплата не прошла :( Повторите попытку.'
-    redirect_to profiles_path
-  end
+   @order = Order.find(params[:ik_pm_no])
+
+    if (params["ik_inv_st"] =="fail")
+      flash[:balance] = 'Оплата не прошла :('
+      redirect_to profiles_path
+      end
 
   private 
 
