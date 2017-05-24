@@ -24,10 +24,10 @@ class OrdersController < ApplicationController
       @order.user.save
       flash[:balance] = "Вы пополнили счет на сумму #{@order.total}"
       
-      redirect_to "/profiles"
+      redirect_to profiles_path
     else
       flash[:balance] = 'Оплата не прошла :('
-      redirect_to "/profiles"
+      redirect_to profiles_path
     end
   end
   
