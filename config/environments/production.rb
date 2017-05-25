@@ -85,15 +85,24 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
    #SMTP
-  config.action_mailer.default_url_options = { :host => 'king-mountain.pro' }  
-  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'king-mountain.pro' }
   ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => "king-mountain.pro",
-  :user_name            => ENV['SENDMAIL_USERNAME'],
-  :password             => ENV['SENDMAIL_PASSWORD'],
-  :authentication       => 'plain',
-  :openssl_verify_mode  => 'none',
-  :enable_starttls_auto => true  }
+
+  :address        => "smtp.gmail.com",
+  :port           => 587,
+  :authentication => :plain,
+  :user_name      => ENV['SENDMAIL_USERNAME'],
+  :password       => ENV['SENDMAIL_PASSWORD'],
+  :openssl_verify_mode  => 'none'
+  }
+
+  # :address              => "smtp.gmail.com",
+  # :port                 => 587,
+  # :domain               => "king-mountain.pro",
+  # :user_name            => ENV['SENDMAIL_USERNAME'],
+  # :password             => ENV['SENDMAIL_PASSWORD'],
+  # :authentication       => 'plain',
+  # :openssl_verify_mode  => 'none',
+  # :enable_starttls_auto => true  }
 end
