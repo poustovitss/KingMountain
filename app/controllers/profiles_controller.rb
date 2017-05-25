@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
 	
   def index
+    # FirstJobJob.perform_later 1,2,3 
     if user_signed_in?
        if current_user.level <= 0 
          @button = 'Начать игру'
@@ -74,6 +75,7 @@ class ProfilesController < ApplicationController
       flash[:balance] = "У вас не достаточно баланса"
     end
     redirect_to :back
+    FirstJobJob.set(wait: 40.seconds).perform_later(current_user)
   end
 
   def levelinfo

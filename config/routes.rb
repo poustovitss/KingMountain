@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
  resources :homepages, :profiles, :improves, :orders
 
+  post 'buyall/:id' => 'improves#buyall', as: 'buyall'
   match '/success' => 'orders#success', via: :get
   match '/fail' => 'orders#fail', via: :get
 

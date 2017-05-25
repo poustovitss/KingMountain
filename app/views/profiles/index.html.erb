@@ -121,6 +121,18 @@
             <% end %>
            <% end %>
         </div>
+        <p></p>
+          <div style="position: relative;">
+          <% unless current_user.conductor == true && current_user.carrier == true %>
+            <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
+                  <%= f.submit 'Купить все улучшения', class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
+             <div class="description">
+              <p>Проводник: -5% от цены уровня</p>
+              <p>Носильщики: -5% к цене провианта</p>
+          </div>
+            <% end %>
+           <% end %>
+        </div>
           <h4 class="well">
           <p>
           <% if current_user.conductor == false && current_user.carrier == false %>
