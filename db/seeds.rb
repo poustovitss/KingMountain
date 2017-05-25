@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# admin = User.create!(name: 'Hard', email: 'admin@m.r', admin: true, balance: 0, level: 0, reffered_by: 0,  password: '123456')
+admin = User.create!(name: 'Hard', email: 'admin@m.r', admin: true, balance: 0, level: 0, reffered_by: 0,  password: '123456')
 user = User.create!(name: 'Test1', email: 'Test1@m.r', balance: 0, level: 0, reffered_by: 0,  password: '123456')
 user = User.create!(name: 'Test2', email: 'Test2@m.r', balance: 0, level: 0, reffered_by: 0,  password: '123456')
 user = User.create!(name: 'Test3', email: 'Test3@m.r', balance: 0, level: 0, reffered_by: 0,  password: '123456')
@@ -27,3 +27,4 @@ user = User.create!(name: 'Test17', email: 'Test17@m.r', balance: 0, level: 0, r
 user = User.create!(name: 'Test18', email: 'Test18@m.r', balance: 0, level: 0, reffered_by: 0,  password: '123456')
 user = User.create!(name: 'Test19', email: 'Test19@m.r', balance: 0, level: 0, reffered_by: 0,  password: '123456')
 user = User.create!(name: 'Test20', email: 'Test20@m.r', balance: 0,  reffered_by: 0, level: 0, password: '123456')
+bank = Bank.create!(name: 'FirstGame', desc: 'GoodLuck', active: true)

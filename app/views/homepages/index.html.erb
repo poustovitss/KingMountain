@@ -18,6 +18,10 @@
                <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
                <% if user_signed_in? %>
                <%= link_to 'Начать играть', profiles_path, class: 'btn btn-success', style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %>
+               <p></p>
+               <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
+                  <%= f.submit 'Купить все улучшения', class: 'btn btn-success', style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
+                  <% end %>
                <% else %>
                <%= link_to 'Вступить в игру', new_user_registration_path, class: 'btn btn-success', style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %>
                <% end %>
@@ -39,6 +43,8 @@
             <p style="color: rgb(78, 83, 88);">Сколько человек в игре: <b class="post-meta" style="font-size: 20px; color: rgb(48, 93, 153);"><%= User.all.size %></b></p>
             <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
             <p style="color: rgb(78, 83, 88);">Сколько вступило сегодня: <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %></b></p>
+            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
+            <p style="color: rgb(78, 83, 88);">Сколько человек близки к победе: <b class="post-meta" style="font-size: 20px; color: rgb(48, 93, 153);"><%= User.where(level: 9).count %></b></p>
             <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
             <p style="color: rgb(78, 83, 88);">Общий банк : <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= Transfer.sum(:summa) %></b></p>
          </div>
