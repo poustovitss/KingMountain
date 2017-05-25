@@ -35,12 +35,15 @@ class ImprovesController < ApplicationController
         user = current_user
         user.conductor = true
         user.save
-      end
         flash[:balance] = 'Вы купили улучшение "Проводник" и "Носильщик"'
+      else
+        flash[:balance] = 'Вы уже купили улучшения'
+      end
+
     else
         flash[:balance] = 'У вас не достаточно баланса'
     end
-    redirect_to :back
+    redirect_to profiles_path
   end
 
   def update 
