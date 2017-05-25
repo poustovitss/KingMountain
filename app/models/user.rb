@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
   validates :name, presence: true, length: {maximum: 50}
   
 
@@ -16,6 +17,11 @@ class User < ApplicationRecord
   # end
 
   scope :all_except, ->(user) { where.not(id: user) }
+
+  protected
+  def confirmation_required?
+    false
+  end
 
   # def user_level
   # 	u = self.refferences.count

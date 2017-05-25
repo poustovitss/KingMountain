@@ -1,3 +1,4 @@
+<% if current_user.confirmed? %>
   <div class="container">
   <div class="col-lg-12 col-sm-8">
      <div class="card hovercard">
@@ -156,6 +157,41 @@
       </div>
     </div>
   </div>
+
+<% else %>
+  <div class="container">
+    <div class="col-lg-12 col-sm-8">
+      <div class="card hovercard">
+        <div class="card-background">
+          <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
+        </div>
+        <div class="useravatar">
+        <img alt="" src="/img/ava.png">
+        </div>
+        <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
+        </div>
+        </div>
+        <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+        <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
+        <div class="hidden-xs">
+        <h4>Подтвердите почту что-бы начать игру</h4>
+        </div>
+      </div>
+    </div>
+        <div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
+        </div>
+  <center>
+      <% if flash[:balance] %>
+        <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
+      <% end %>
+      
+    <div class="well">
+           
+        <%= link_to "Подтвердить", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
+     </div>
+    </center>
+<% end %>
 
 <style type="text/css">
   body {
