@@ -75,7 +75,7 @@ class ProfilesController < ApplicationController
       flash[:balance] = "У вас не достаточно баланса"
     end
     redirect_to :back
-    FirstJobJob.set(wait: 40.seconds).perform_later(current_user)
+    FirstJobJob.set(wait: 24.hourse).perform_later(current_user)
   end
 
   def levelinfo
