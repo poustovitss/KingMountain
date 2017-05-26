@@ -3,6 +3,13 @@
 @import "profiles.scss";
 @import url(https://fonts.googleapis.com/css?family=Lora:400,700&subset=latin,cyrillic);
 
+.copyright {
+    height: 100%; 
+    background-color: rgba(245, 245, 245, 0.45);
+    border-radius: 10px;
+    margin-left: 1050px;
+}
+
 a.button7 {
   font-weight: 700;
   color: white;
@@ -35,9 +42,3 @@ a.button24 {
 } 
 a.button24:hover { background: linear-gradient(#f5ae00, #f59500) #f5ae00; }
 a.button24:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
-.copyright {
-    height: 100%; 
-    background-color: rgba(245, 245, 245, 0.45);
-    border-radius: 10px;
-    margin-left: 1050px;
-  }
