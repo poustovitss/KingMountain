@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
 
-permit_params :name, :email, :password, :reffered_by, :reffered, :balance, :level, :carrier, :conductor
+permit_params :name, :email, :password, :reffered_by, :reffered, :confirmed, :balance, :level, :carrier, :conductor
 
 	controller do
 	  def destroy

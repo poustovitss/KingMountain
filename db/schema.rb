@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525094401) do
+ActiveRecord::Schema.define(version: 20170526075826) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20170525094401) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.boolean  "active",     default: true
+  end
+
+  create_table "getmoneys", force: :cascade do |t|
+    t.float    "total"
+    t.text     "desc"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "wallet"
+    t.string   "walletfirm"
+    t.string   "status"
+    t.index ["user_id"], name: "index_getmoneys_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|

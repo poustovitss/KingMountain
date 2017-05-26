@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
-  resources :homepages, :profiles, :improves, :orders
+  resources :homepages, :profiles, :improves, :orders, :getmoneys
 
   post 'buyall/:id' => 'improves#buyall', as: 'buyall'
   match '/success' => 'orders#success', via: :get

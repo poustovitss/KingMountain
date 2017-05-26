@@ -11,6 +11,22 @@ ActiveAdmin.register_page "Dashboard" do
     # end
     columns do
       column do
+        panel "Запросы на вывод денег" do
+          table_for Getmoney.order('id desc').limit(10).each do |customer|
+            column :user
+            column :created_at
+            column :desc
+            column :total
+            column :wallet
+            column :walletfirm
+            column :status
+          end
+        end
+      end
+    end
+
+    columns do
+      column do
         panel "Реферальные балансы пользователей" do
           table_for Transfer.order('id desc').limit(10).each do |customer|
             # column(:email)    {|customer| link_to(customer.email, admin_root_path(customer)) }
