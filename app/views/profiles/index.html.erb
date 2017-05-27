@@ -50,13 +50,11 @@
         <% end %>
       <% end %>
       </div>
-        <div class="hr" style="position: relative;">
+        <div class="hr">
           <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
               <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
-            <div class="description" style="position: initial;">
-              <a class="alert alert-success" role="alert" style="padding: 0px;">Свободных провиантов: <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></a>
-            </div>
           <% end %>
+          <b>Свободных провиантов <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b>
         </div>
       <div class="right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
