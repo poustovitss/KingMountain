@@ -52,11 +52,13 @@ class ProfilesController < ApplicationController
         # transfer.save            
 
         unless current_user.reffered.nil?
-          transfer = Transfer.new
-          transfer.user_id = current_user.reffered.id
-          transfer.bank_id = Bank.last.id
-          transfer.summa = pay*0.05
-          transfer.save
+          unless current_user.proviant == true
+            transfer = Transfer.new
+            transfer.user_id = current_user.reffered.id
+            transfer.bank_id = Bank.last.id
+            transfer.summa = pay*0.05
+            transfer.save
+          end
         end
 
         user.balance = current_user.balance - pay
@@ -122,11 +124,13 @@ class ProfilesController < ApplicationController
         # transfer.save 
 
         unless current_user.reffered.nil?
-          transfer = Transfer.new
-          transfer.user_id = current_user.reffered.id
-          transfer.bank_id = Bank.last.id
-          transfer.summa = pay*0.05
-          transfer.save
+          unless current_user.proviant == true
+            transfer = Transfer.new
+            transfer.user_id = current_user.reffered.id
+            transfer.bank_id = Bank.last.id
+            transfer.summa = pay*0.05
+            transfer.save
+          end
         end
       
         unless current_user.reffered.nil?
