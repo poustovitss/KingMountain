@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  walletfirm: MyString
+  status: MyString
+  wallet: MyString
+  desc: MyText
+  total: 1.5
+
+two:
+  walletfirm: MyString
+  status: MyString
+  wallet: MyString
+  desc: MyText
+  total: 1.5

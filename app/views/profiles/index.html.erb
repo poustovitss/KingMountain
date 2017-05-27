@@ -26,8 +26,8 @@
                    </b></h4>
               </div>
 
-            <h4>Реф. баланс: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b> | 
-            Свободных провиантов: <b style="color: green;"><%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b></h4>
+            <h4>Реф. баланс: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b>
+           </h4>
 
            </button>
            <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
@@ -50,16 +50,19 @@
         <% end %>
       <% end %>
       </div>
-        <div class="hr">
+        <div class="hr" style="position: relative;">
           <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
-              <%= f.submit "Купить 1 провианта", class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+              <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+            <div class="description" style="position: initial;">
+              <a class="alert alert-success" role="alert" style="padding: 0px;">Свободных провиантов: <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></a>
+            </div>
           <% end %>
         </div>
       <div class="right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
           Купить улучшения
         </button>
-        <%= link_to 'Вывести средства', new_getmoney_path, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %>
+        
       </div>
 
       </center>

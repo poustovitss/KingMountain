@@ -1,8 +1,8 @@
 <center>
- <%= form_for @getmoney do |f| %>
+ <%= form_for @getbalance do |f| %>
       <hr></hr>
-      	Ваш реферальный баланс <%= current_user.transfers.sum(:summa) %>
-      <hr>
+		<h4>Ваш баланс : <%= current_user.balance %></h4>
+	  <hr></hr>
     <div class="field">
 		<%= f.label :Кошелек %><br />
 		<%= f.collection_select :walletfirm, ['Webmoney', 'Qiwi', 'VISA'], :to_s, :to_s, include_blank: false %>
@@ -25,7 +25,8 @@
 	
 	<div class="field">   
 		<%= f.label :Сумма %></br>
-		<%= f.number_field :total %>
+		<%= f.number_field :total %></br>
+		<b> За вывод денег вы получаете штраф 50% </b>
 	</div>
 	<p></p>
 	<div class="actions">

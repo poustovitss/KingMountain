@@ -9,9 +9,26 @@ ActiveAdmin.register_page "Dashboard" do
     #     small I18n.t("active_admin.dashboard_welcome.call_to_action")
     #   end
     # end
+
     columns do
       column do
-        panel "Запросы на вывод денег" do
+        panel "Запросы на вывод рабочего баланса" do
+          table_for Getbalance.order('id desc').limit(10).each do |customer|
+            column :user
+            column :created_at
+            column :desc
+            column :total
+            column :wallet
+            column :walletfirm
+            column :status
+          end
+        end
+      end
+    end
+
+    columns do
+      column do
+        panel "Запросы на вывод реферальных денег" do
           table_for Getmoney.order('id desc').limit(10).each do |customer|
             column :user
             column :created_at
