@@ -57,7 +57,7 @@
           <b>Свободных провиантов <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b>
         </div>
       <div class="right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
           Купить улучшения
         </button>
         
@@ -97,7 +97,7 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
