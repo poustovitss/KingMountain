@@ -9,7 +9,12 @@ class GetbalancesController < ApplicationController
       @getbalance.save
 
       user = current_user
-      percent = @getbalance.total * 50 / 100
+      if current_user.aerodrome == false
+        percent = @getbalance.total * 50 / 100
+      else
+        percent = @getbalance.total * 30 / 100
+      end
+      
       user.balance = user.balance - (@getbalance.total + percent)
       user.save
       flash[:balance] = 'Ваш запрос на вывод средств скоро будет обработан!'

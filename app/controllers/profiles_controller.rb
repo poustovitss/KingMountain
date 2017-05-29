@@ -145,6 +145,4 @@ class ProfilesController < ApplicationController
       redirect_to :back
     end
   end
-
-
 end

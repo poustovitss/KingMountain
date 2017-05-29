@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :homepages, :profiles, :improves, :orders, :getmoneys, :getbalances
 
   post 'buyall/:id' => 'improves#buyall', as: 'buyall'
+
+  put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'
+
   match '/success' => 'orders#success', via: :get
   match '/fail' => 'orders#fail', via: :get
 

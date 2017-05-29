@@ -138,9 +138,20 @@
             <% end %>
            <% end %>
         </div>
+        <p></p>
+         <div style="position: relative;">
+          <% unless current_user.aerodrome == true %>
+          <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
+                <%= f.submit "Купить улучшение запасной аэродром", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+          <div class="description">
+            -30% уменьшается штраф
+          </div>
+            <% end %>
+          <% end %>
+        </div> 
           <h4 class="well">
           <p>
-          <% if current_user.conductor == false && current_user.carrier == false %>
+          <% if current_user.conductor == false && current_user.carrier == false && current_user.aerodrome == false %>
             У вас нету улучшений
           <% else %>
             У вас есть улучшение
@@ -150,6 +161,9 @@
           <% end %>
           <% if current_user.conductor == true %>
              <b style="color: green;">"Проводник"</b> |
+          <% end %>
+          <% if current_user.aerodrome == true %>
+             <b style="color: green;">"Запасной аэродром"</b> |
           <% end %>
         </p>     
         </h4>
