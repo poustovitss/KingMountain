@@ -12,6 +12,17 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
+        panel "Ваш зароботок" do
+          table_for Systemfinance.order('id desc').limit(1).each do |customer|
+            column :name
+            column :summa
+          end
+        end
+      end
+    end
+
+    columns do
+      column do
         panel "Запросы на вывод рабочего баланса" do
           table_for Getbalance.order('id desc').limit(10).each do |customer|
             column :user

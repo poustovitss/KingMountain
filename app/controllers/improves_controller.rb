@@ -4,11 +4,15 @@ class ImprovesController < ApplicationController
   end
 
   def create
+    @system = Systemfinance.last
     if current_user.balance >= 150
       unless current_user.conductor == true
         user = current_user
         user.balance = current_user.balance - 150
         user.save
+
+        @system.summa += 150
+        @system.save
         
         user = current_user
         user.conductor = true
@@ -22,11 +26,14 @@ class ImprovesController < ApplicationController
   end
 
   def buyaerodrome
+    @system = Systemfinance.last
     if current_user.balance >= 100  
       unless current_user.aerodrome == true
         user = current_user
         user.balance = current_user.balance - 100
         user.save
+        @system.summa += 100
+        @system.save
         current_user.update_attribute(:aerodrome, true)
       end
 
@@ -38,11 +45,14 @@ class ImprovesController < ApplicationController
   end
 
   def buyradist
+    @system = Systemfinance.last
     if current_user.balance >= 100  
       unless current_user.radist == true
         user = current_user
         user.balance = current_user.balance - 100
         user.save
+        @system.summa += 100
+        @system.save
         current_user.update_attribute(:radist, true)
       end
       flash[:balance] = 'Вы купили улучшение "Радист"'
@@ -53,6 +63,7 @@ class ImprovesController < ApplicationController
   end
 
   def buyall
+    @system = Systemfinance.last
     if current_user.balance >= 450
       unless current_user.conductor == true && current_user.carrier == true
         user = current_user
@@ -75,7 +86,10 @@ class ImprovesController < ApplicationController
         user = current_user
         user.conductor = true
         user.save
-        flash[:balance] = 'Вы купили улучшение "Проводник" и "Носильщик"'
+
+        @system.summa += 450
+        @system.save
+        flash[:balance] = 'Вы купили все улучшения'
       else
         flash[:balance] = 'Вы уже купили улучшения'
       end
@@ -87,11 +101,14 @@ class ImprovesController < ApplicationController
   end
 
   def update 
+    @system = Systemfinance.last
     if current_user.balance >= 100  
       unless current_user.carrier == true
         user = current_user
         user.balance = current_user.balance - 100
         user.save
+        @system.summa += 100
+        @system.save
         current_user.update_attribute(:carrier, true)
       end
       

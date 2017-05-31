@@ -28,3 +28,4 @@ user = User.create!(name: 'Test18', email: 'Test18@m.r', balance: 0, level: 0, r
 user = User.create!(name: 'Test19', email: 'Test19@m.r', balance: 0, level: 0, reffered_by: 0,  password: '123456')
 user = User.create!(name: 'Test20', email: 'Test20@m.r', balance: 0,  reffered_by: 0, level: 0, password: '123456')
 bank = Bank.create!(name: 'FirstGame', desc: 'GoodLuck', active: true)
+systemfinance = Systemfinance.create!(name: 'Ваш зароботок', summa: 0)

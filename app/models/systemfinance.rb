@@ -1,0 +1,2 @@
+class Systemfinance < ApplicationRecord
+end

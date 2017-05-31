@@ -43,13 +43,6 @@ class ProfilesController < ApplicationController
             reffered.balance += pay*0.75
             reffered.save
         end
-        
-
-        # transfer = Transfer.new
-        # transfer.user_id = current_user.id
-        # transfer.bank_id = Bank.last.id
-        # transfer.summa = pay*0.20
-        # transfer.save            
 
         unless current_user.reffered.nil?
           unless current_user.proviant == true
@@ -63,6 +56,11 @@ class ProfilesController < ApplicationController
 
         user.balance = current_user.balance - pay
         user.level += 1      # Level +1 ==============================
+
+        @system = Systemfinance.last
+        @system.summa += pay * 0.20
+        @system.save
+        
         unless current_user.reffered.nil?
           if user.reffered.level <= user.level && user.level > 1 && user.level > 0
             user.reffered_by = 0
@@ -133,6 +131,10 @@ class ProfilesController < ApplicationController
         b = current_user
         b.balance = current_user.balance - pay
         b.save
+
+        @system = Systemfinance.last
+        @system.summa += pay * 0.20
+        @system.save
 
         # transfer = Transfer.new
         # transfer.user_id = current_user.id
