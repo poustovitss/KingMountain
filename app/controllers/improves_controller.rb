@@ -37,15 +37,34 @@ class ImprovesController < ApplicationController
       redirect_to :back
   end
 
+  def buyradist
+    if current_user.balance >= 100  
+      unless current_user.radist == true
+        user = current_user
+        user.balance = current_user.balance - 100
+        user.save
+        current_user.update_attribute(:radist, true)
+      end
+      flash[:balance] = 'Вы купили улучшение "Радист"'
+    else
+      flash[:balance] = 'У вас не достаточно баланса'
+    end
+      redirect_to :back
+  end
+
   def buyall
-    if current_user.balance >= 350
+    if current_user.balance >= 450
       unless current_user.conductor == true && current_user.carrier == true
         user = current_user
-        user.balance = current_user.balance - 350
+        user.balance = current_user.balance - 450
         user.save
 
         user = current_user
         user.carrier = true
+        user.save
+
+        user = current_user
+        user.radist = true
         user.save
         
 

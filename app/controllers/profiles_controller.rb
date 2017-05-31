@@ -62,7 +62,7 @@ class ProfilesController < ApplicationController
         end
 
         user.balance = current_user.balance - pay
-        user.level += 1
+        user.level += 1      # Level +1 ==============================
         unless current_user.reffered.nil?
           if user.reffered.level <= user.level && user.level > 1 && user.level > 0
             user.reffered_by = 0
@@ -78,6 +78,16 @@ class ProfilesController < ApplicationController
     end
     redirect_to :back
     FirstJobJob.set(wait: 24.hours).perform_later(current_user)
+
+    if current_user.level == 10
+      bank = Bank.last
+      bank.active = false
+      bank.save
+    end
+    users = User.where(radist: true)
+    users.each do |u|
+      RadistMailer.welcome_email(u).deliver_later
+    end
   end
 
   def levelinfo
@@ -103,13 +113,20 @@ class ProfilesController < ApplicationController
     if current_user.balance >= pay && current_user.balance > 0  
     b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
 
+    array_proviants = []
+    b.each do |proviant|
+      if proviant.level != 0
+        array_proviants << proviant
+      end
+    end
 
-      if b.first.nil?
+
+      if array_proviants.first.nil?
         flash[:balance] = 'Нет свободных провиантов'
       else
 
 
-        b = b.first
+        b = array_proviants.first
         b.reffered_by=current_user.id
         b.save
 

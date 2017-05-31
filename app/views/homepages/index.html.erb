@@ -47,6 +47,11 @@
             <p style="color: rgb(78, 83, 88);">Сколько человек близки к победе: <b class="post-meta" style="font-size: 20px; color: rgb(48, 93, 153);"><%= User.where(level: 9).count %></b></p>
             <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
             <p style="color: rgb(78, 83, 88);">Общий банк : <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= Transfer.sum(:summa) %></b></p>
+            <% winner = User.where(level: 10) %>
+            <% unless winner.first.nil? %>
+            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
+               <p style="color: rgb(78, 83, 88);">Победитель игры : <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= winner.first.name %></b></p>
+            <% end %>
          </div>
       </div>
    </div>

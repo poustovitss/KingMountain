@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'buyall/:id' => 'improves#buyall', as: 'buyall'
 
   put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'
+  put 'buyradist/:id' => 'improves#buyradist', as: 'buyradist'
 
   match '/success' => 'orders#success', via: :get
   match '/fail' => 'orders#fail', via: :get

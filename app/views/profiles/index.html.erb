@@ -1,4 +1,4 @@
-<% if current_user.confirmed? %>
+  <% if current_user.confirmed? %>
   <div class="container">
   <div class="col-lg-12 col-sm-8">
      <div class="card hovercard">
@@ -54,7 +54,11 @@
           <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
               <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
           <% end %>
-          <b>Свободных провиантов <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b>
+          <% if current_user.level == 1 %>
+             <b>Свободных провиантов 0</b>
+          <% else %>
+            <b>Свободных провиантов <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b>
+          <% end %>
         </div>
       <div class="right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
@@ -127,7 +131,29 @@
            <% end %>
         </div>
         <p></p>
-          <div style="position: relative;">
+         <div style="position: relative;">
+          <% unless current_user.aerodrome == true %>
+          <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
+                <%= f.submit "Купить улучшение запасной аэродром", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+          <div class="description">
+            -30% уменьшается штраф
+          </div>
+            <% end %>
+          <% end %>
+        </div> 
+        <p></p>
+        <div style="position: relative;">
+          <% unless current_user.radist == true %>
+          <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
+                <%= f.submit "Купить улучшение 'Радист'", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+          <div class="description">
+            Оповещение о новых провиантов
+          </div>
+            <% end %>
+          <% end %>
+        </div> 
+        <p></p>
+        <div style="position: relative;">
           <% unless current_user.conductor == true && current_user.carrier == true %>
             <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
                   <%= f.submit 'Купить все улучшения', class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
@@ -139,19 +165,9 @@
            <% end %>
         </div>
         <p></p>
-         <div style="position: relative;">
-          <% unless current_user.aerodrome == true %>
-          <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
-                <%= f.submit "Купить улучшение запасной аэродром", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-          <div class="description">
-            -30% уменьшается штраф
-          </div>
-            <% end %>
-          <% end %>
-        </div> 
           <h4 class="well">
           <p>
-          <% if current_user.conductor == false && current_user.carrier == false && current_user.aerodrome == false %>
+          <% if current_user.conductor == false && current_user.carrier == false && current_user.aerodrome == false && current_user.radist == false %>
             У вас нету улучшений
           <% else %>
             У вас есть улучшение
@@ -164,6 +180,9 @@
           <% end %>
           <% if current_user.aerodrome == true %>
              <b style="color: green;">"Запасной аэродром"</b> |
+          <% end %>
+          <% if current_user.radist == true %>
+             <b style="color: green;">"Радист"</b> |
           <% end %>
         </p>     
         </h4>

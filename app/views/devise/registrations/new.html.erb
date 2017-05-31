@@ -1,46 +1,52 @@
-<center>
-<h2>Регистрация</h2>
-<hr>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<% bank = Bank.last %>
+<% if bank.active == false %>
+  <center>
+    <p><img src="/img/winner.gif" width="289" height="289"></p>
+    <p><h4>Ожидайте создается новая игра...</h4></p>
+  </center>
+<% else %>
+  <center>
+  <h2>Регистрация</h2>
+  <hr>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-  <p class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, class: "well" %>
-  </p>
+    <p class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, class: "well" %>
+    </p>
 
-  <p class="field">
-    <%= f.label :Email %><br />
-    <%= f.email_field :email, class: "well" %>
-  </p>
+    <p class="field">
+      <%= f.label :Email %><br />
+      <%= f.email_field :email, class: "well" %>
+    </p>
 
-  <p class="field">
-    <% if session[:referred_by] %>
-      <%=f.hidden_field :reffered_by, :value => session[:referred_by] %>
-      <%= f.hidden_field :proviant, :value => false %>
-    <% else %>
-      <%= f.hidden_field :reffered_by, :value => 0 %>
-      <%= f.hidden_field :proviant, :value => true %>
-    <% end %>
-  </p>
+    <p class="field">
+      <% if session[:referred_by] %>
+        <%=f.hidden_field :reffered_by, :value => session[:referred_by] %>
+        <%= f.hidden_field :proviant, :value => false %>
+      <% else %>
+        <%= f.hidden_field :reffered_by, :value => 0 %>
+        <%= f.hidden_field :proviant, :value => true %>
+      <% end %>
+    </p>
 
-  <p class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: "well" %>
-  </p>
-  <p class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "well" %>
-  </p>
-  <p class="actions">
-    <%= f.submit "Sign up", class: "btn btn-success" %>
-  </p>
+    <p class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off", class: "well" %>
+    </p>
+    <p class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "well" %>
+    </p>
+    <p class="actions">
+      <%= f.submit "Sign up", class: "btn btn-success" %>
+    </p>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+  </center>
 <% end %>
-
-<%= render "devise/shared/links" %>
-</center>
-
-  
