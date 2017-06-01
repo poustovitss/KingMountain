@@ -6,7 +6,11 @@
 
 	  <div class="field">
 	    <%= f.label :Почта %><br />
-	    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+	    <% if current_user %>
+	   	 <%= f.hidden_field :email, :value => current_user.email %>
+	   <% else %>
+	   	 <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+	   <% end %>
 	  </div>
 	  <p></p>
 	  <div class="actions">

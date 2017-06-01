@@ -219,7 +219,8 @@
       <% end %>
       
     <div class="well">
-           
+        <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>     
+
         <%= link_to "Подтвердить", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
      </div>
     </center>
