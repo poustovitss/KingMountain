@@ -29,16 +29,13 @@ class UsersController < ApplicationController
   def finish_signup
     # authorize! :update, @user 
     if request.patch? && params[:user][:email] #&& params[:user][:email]
-      # @user =  User.find_by(email: params[:user][:email])
-      @user.skip_reconfirmation!
-      sign_in(@user, :bypass => true)
-      redirect_to @user, notice: 'Your profile was successfully updated.'
+      @user =  User.find_by(email: params[:user][:email])
       # if @user.update(user_params)
-      #   @user.skip_reconfirmation!
-      #   sign_in(@user, :bypass => true)
-      #   redirect_to @user, notice: 'Your profile was successfully updated.'
+        @user.skip_reconfirmation!
+        sign_in(@user, :bypass => true)
+        redirect_to @user, notice: 'Your profile was successfully updated.'
       # else
-      #   @show_errors = true
+        # @show_errors = true
       # end
     end
   end
