@@ -81,7 +81,9 @@
             У вас нету рефералов
           <% else %>
             <% current_user.refferences.each do |ref| %>
+              <% unless ref.proviant == true %>
                <b><%= ref.name %></b> |
+              <% end %>
             <% end %>
           <% end %>
         </h4>
