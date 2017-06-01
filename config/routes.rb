@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   match '/success' => 'orders#success', via: :get
   match '/fail' => 'orders#fail', via: :get
 
-  devise_for :users, controllers: { confirmations: 'confirmations' }
+  devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
+
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'homepages#index'
 
