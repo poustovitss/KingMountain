@@ -6,6 +6,7 @@
 
 	  <div class="field">
 	    <%= f.label :Почта %><br />
+	    Ваша почта: <%= current_user.email %>
 	    <% if current_user %>
 	   	 <%= f.hidden_field :email, :value => current_user.email %>
 	   <% else %>

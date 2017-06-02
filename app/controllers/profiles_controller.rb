@@ -15,12 +15,8 @@ class ProfilesController < ApplicationController
 
   def create 
     user = current_user
-
-  
-
     refferences_count = current_user.refferences.count 
     
-
     start_pay = 25
     start_coefficient = 7.5
 
@@ -58,9 +54,14 @@ class ProfilesController < ApplicationController
         user.level += 1      # Level +1 ==============================
 
         @system = Systemfinance.last
-        @system.summa += pay * 0.20
-        @system.save
-        
+        if user.reffered.nil?
+          @system.summa += pay * 0.25
+          @system.save
+        else 
+          @system.summa += pay * 0.20
+          @system.save
+        end
+
         unless current_user.reffered.nil?
           if user.reffered.level <= user.level && user.level > 1 && user.level > 0
             user.reffered_by = 0
@@ -133,8 +134,13 @@ class ProfilesController < ApplicationController
         b.save
 
         @system = Systemfinance.last
-        @system.summa += pay * 0.20
-        @system.save
+        if user.reffered.nil?
+          @system.summa += pay * 0.25
+          @system.save
+        else 
+          @system.summa += pay * 0.20
+          @system.save
+        end
 
         # transfer = Transfer.new
         # transfer.user_id = current_user.id
