@@ -77,7 +77,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
   has_many :transfers
   has_many :orders
   belongs_to :reffered, :class_name => 'User', foreign_key: 'reffered_by'
-  has_many :refferences, :class_name => 'User', dependent: :destroy, foreign_key: 'reffered_by'
+  has_many :refferences, dependent: :destroy, :class_name => 'User', foreign_key: 'reffered_by'
 
   # def number_of_referred_users
   #   User.where(reffered_by: self.id).count
