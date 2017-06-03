@@ -207,7 +207,7 @@
         <div class="btn-group" role="group">
         <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
         <div class="hidden-xs">
-        <h4>Подтвердите почту что-бы начать игру</h4>
+        <h4>На ваш email отправлено письмо подтвердите, что-бы вступить в игру.</h4>
         </div>
       </div>
     </div>
@@ -221,7 +221,7 @@
     <div class="well">
         <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>     
 
-        <%= link_to "Подтвердить", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
+        <%= link_to "Отправить письмо повторно", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
      </div>
     </center>
 <% end %>

@@ -9,6 +9,17 @@ TEMP_EMAIL_PREFIX = 'change@me'
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
+   after_create :send_admin_mail
+  def send_admin_mail
+
+    self.send_confirmation_instructions
+  end
+  # after_create :send_admin_mail  
+
+  # def send_admin_mail    
+  #   Devise::Mailer.send_new_user_message(self).deliver  
+  # end
+
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
     # Get the identity and user if they exist
