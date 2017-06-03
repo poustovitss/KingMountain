@@ -12,6 +12,15 @@
       <%= f.label :email %>
       <div class="controls">
         <%= f.text_field :email, :autofocus => true, :value => '', class: 'form-control input-lg', placeholder: 'Example: email@me.com' %>
+        <p class="field">
+          <% if session[:referred_by] %>
+            <%=f.hidden_field :reffered_by, :value => session[:referred_by] %>
+            <%= f.hidden_field :proviant, :value => false %>
+          <% else %>
+            <%= f.hidden_field :reffered_by, :value => 0 %>
+            <%= f.hidden_field :proviant, :value => true %>
+          <% end %>
+        </p>
         <p class="help-block">Please confirm your email address. No spam.</p>
       </div>
     </div>
