@@ -134,7 +134,7 @@ class ProfilesController < ApplicationController
         b.save
 
         @system = Systemfinance.last
-        if user.reffered.nil?
+        if current_user.reffered.nil?
           @system.summa += pay * 0.25
           @system.save
         else 

@@ -11,9 +11,22 @@ class ImprovesController < ApplicationController
         user.balance = current_user.balance - 150
         user.save
 
-        @system.summa += 150
+         @system = Systemfinance.last
+        if current_user.reffered.nil?
+          @system.summa += 100
+          @system.save
+        else 
+          @system.summa += (100 - (100 * 0.05))
+          @system.save
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.reffered.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 100*0.05
+          transfer.save
+        end
         @system.save
-        
+
         user = current_user
         user.conductor = true
         user.save
@@ -32,7 +45,21 @@ class ImprovesController < ApplicationController
         user = current_user
         user.balance = current_user.balance - 100
         user.save
-        @system.summa += 100
+
+        @system = Systemfinance.last
+        if current_user.reffered.nil?
+          @system.summa += 100
+          @system.save
+        else 
+          @system.summa += (100 - (100 * 0.05))
+          @system.save
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.reffered.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 100*0.05
+          transfer.save
+        end
         @system.save
         current_user.update_attribute(:aerodrome, true)
       end
@@ -51,8 +78,23 @@ class ImprovesController < ApplicationController
         user = current_user
         user.balance = current_user.balance - 100
         user.save
-        @system.summa += 100
+
+        @system = Systemfinance.last
+        if current_user.reffered.nil?
+          @system.summa += 100
+          @system.save
+        else 
+          @system.summa += (100 - (100 * 0.05))
+          @system.save
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.reffered.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 100*0.05
+          transfer.save
+        end
         @system.save
+
         current_user.update_attribute(:radist, true)
       end
       flash[:balance] = 'Вы купили улучшение "Радист"'
@@ -87,8 +129,22 @@ class ImprovesController < ApplicationController
         user.conductor = true
         user.save
 
-        @system.summa += 450
+       @system = Systemfinance.last
+        if current_user.reffered.nil?
+          @system.summa += 450
+          @system.save
+        else 
+          @system.summa += (450 - (450 * 0.05))
+          @system.save
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.reffered.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 450*0.05
+          transfer.save
+        end
         @system.save
+
         flash[:balance] = 'Вы купили все улучшения'
       else
         flash[:balance] = 'Вы уже купили улучшения'
@@ -107,8 +163,23 @@ class ImprovesController < ApplicationController
         user = current_user
         user.balance = current_user.balance - 100
         user.save
-        @system.summa += 100
+        
+         @system = Systemfinance.last
+        if current_user.reffered.nil?
+          @system.summa += 100
+          @system.save
+        else 
+          @system.summa += (100 - (100 * 0.05))
+          @system.save
+
+          transfer = Transfer.new
+          transfer.user_id = current_user.reffered.id
+          transfer.bank_id = Bank.last.id
+          transfer.summa = 100*0.05
+          transfer.save
+        end
         @system.save
+
         current_user.update_attribute(:carrier, true)
       end
       
