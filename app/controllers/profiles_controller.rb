@@ -96,78 +96,82 @@ class ProfilesController < ApplicationController
   helper_method :levelinfo
 
   def update 
-      start_pay = 25
-      start_coefficient = 7.5
-      pay = 0
-    if current_user.level == 0
-      pay = start_pay
+    if current_user.refferences.count == 10
+      flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
+      redirect_to :back
     else
-      (current_user.level - 1).times do
-        pay = start_pay * start_coefficient
-        start_pay = pay
-        start_coefficient -= 0.5
-      end
-    end
-
-    if current_user.balance >= pay && current_user.balance > 0  
-    b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
-
-    array_proviants = []
-    b.each do |proviant|
-      if proviant.level != 0
-        array_proviants << proviant
-      end
-    end
-
-
-      if array_proviants.first.nil?
-        flash[:balance] = 'Нет свободных провиантов'
+        start_pay = 25
+        start_coefficient = 7.5
+        pay = 0
+      if current_user.level == 0
+        pay = start_pay
       else
-
-
-        b = array_proviants.first
-        b.reffered_by=current_user.id
-        b.save
-
-        b = current_user
-        b.balance = current_user.balance - pay
-        b.save
-
-        @system = Systemfinance.last
-        if current_user.reffered.nil?
-          @system.summa += pay * 0.25
-          @system.save
-        else 
-          @system.summa += pay * 0.20
-          @system.save
+        (current_user.level - 1).times do
+          pay = start_pay * start_coefficient
+          start_pay = pay
+          start_coefficient -= 0.5
         end
+      end
 
-        # transfer = Transfer.new
-        # transfer.user_id = current_user.id
-        # transfer.bank_id = Bank.last.id
-        # transfer.summa = pay*0.20
-        # transfer.save 
+      if current_user.balance >= pay && current_user.balance > 0  
+      b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
 
-        unless current_user.reffered.nil?
-          unless current_user.proviant == true
-            transfer = Transfer.new
-            transfer.user_id = current_user.reffered.id
-            transfer.bank_id = Bank.last.id
-            transfer.summa = pay*0.05
-            transfer.save
+      array_proviants = []
+      b.each do |proviant|
+        if proviant.level != 0
+          array_proviants << proviant
+        end
+      end
+
+
+        if array_proviants.first.nil?
+          flash[:balance] = 'Нет свободных провиантов'
+        else
+
+          b = array_proviants.first
+          b.reffered_by=current_user.id
+          b.save
+          
+          b = current_user
+          b.balance = current_user.balance - pay
+          b.save
+
+          @system = Systemfinance.last
+          if current_user.reffered.nil?
+            @system.summa += pay * 0.25
+            @system.save
+          else 
+            @system.summa += pay * 0.20
+            @system.save
+          end
+
+          # transfer = Transfer.new
+          # transfer.user_id = current_user.id
+          # transfer.bank_id = Bank.last.id
+          # transfer.summa = pay*0.20
+          # transfer.save 
+
+          unless current_user.reffered.nil?
+            unless current_user.proviant == true
+              transfer = Transfer.new
+              transfer.user_id = current_user.reffered.id
+              transfer.bank_id = Bank.last.id
+              transfer.summa = pay*0.05
+              transfer.save
+            end
+          end
+        
+          unless current_user.reffered.nil?
+            reffered = current_user.reffered
+            reffered.balance += pay*0.75
+            reffered.save
           end
         end
-      
-        unless current_user.reffered.nil?
-          reffered = current_user.reffered
-          reffered.balance += pay*0.75
-          reffered.save
-        end
+         redirect_to :back
+      else
+        flash[:balance] = 'У вас не достаточно баланса'
+        redirect_to :back
       end
-       redirect_to :back
-    else
-      flash[:balance] = 'У вас не достаточно баланса'
-      redirect_to :back
     end
   end
 end

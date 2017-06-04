@@ -25,7 +25,6 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Запросы на вывод рабочего баланса" do
           table_for Getbalance.order('id desc').limit(10).each do |customer|
-            column :user
             column :created_at
             column :desc
             column :total
