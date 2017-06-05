@@ -51,7 +51,7 @@ class ProfilesController < ApplicationController
         end
 
         user.balance = current_user.balance - pay
-        user.level += 1      # Level +1 ==============================
+        user.level += 1 
 
         @system = Systemfinance.last
         if user.reffered.nil?
