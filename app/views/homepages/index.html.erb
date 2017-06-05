@@ -1,64 +1,90 @@
-<img src="img/head.png" width="100%">
-<p></p>
-<div class="row" style="margin: 0px;">
-   <div class="col-lg-4">
-      <div class="panel panel-primary">
-         <div class="panel-heading" style="background-color: #306999; padding: 20px 23px;">
-            <center>
-               <h3 class="panel-title" style="font-size: 20px;">
-                  <p style="font-size: 20px;" class="glyphicon glyphicon-th-large"></p>
-                  Игра "Царь Игры"
-               </h3>
-            </center>
-         </div>
-         <div class="panel-body">
-            <center>
-               <h3 style="color: rgb(48, 93, 153);">Всего за 25 ₽ они твои!</h3>
-               <p><a class="post-meta" style="color: black; font-size: 40px; color: rgb(48, 93, 153);"><%= Transfer.sum(:summa) %></a></p>
-               <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-               <% if user_signed_in? %>
-               <%= link_to 'Начать играть', profiles_path, class: 'btn btn-success', style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %>
-               <p></p>
-               <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
-                  <%= f.submit 'Купить все улучшения', class: 'btn btn-success', style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 450₽? ' } %>
-                  <% end %>
-               <% else %>
-               <%= link_to 'Вступить в игру', new_user_registration_path, class: 'btn btn-success', style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %>
-               <% end %>
-            </center>
-         </div>
+   <meta charset="UTF-8">
+   <link rel="stylesheet" href="fonts/gothamPro/stylesheet.css">
+   <div class="main_banner">
+      <div class="container">
+         <h1 class="main_banner_title">
+            <span>Игра -</span>
+            Царь горы
+         </h1>
+         <div class="main_banner_arr_down"></div>
       </div>
    </div>
-   <div class="col-lg-6 col-lg-8">
-      <div class="panel panel-primary" style="margin-right: 200px;">
-         <div class="panel-heading" style="background-color: #306999; padding: 20px 15px;">
-            <center>
-               <h3 class="panel-title">
-                  <p style="font-size: 20px;" class="glyphicon glyphicon-info-sign"></p>
-                  Информация
-               </h3>
-            </center>
-         </div>
-         <div class="panel-body">
-            <p style="color: rgb(78, 83, 88);">Сколько человек в игре: <b class="post-meta" style="font-size: 20px; color: rgb(48, 93, 153);"><%= User.all.size %></b></p>
-            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-            <p style="color: rgb(78, 83, 88);">Сколько вступило сегодня: <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %></b></p>
-            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-            <p style="color: rgb(78, 83, 88);">Сколько человек близки к победе: <b class="post-meta" style="font-size: 20px; color: rgb(48, 93, 153);"><%= User.where(level: 9).count %></b></p>
-            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-            <p style="color: rgb(78, 83, 88);">Общий банк : <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= Transfer.sum(:summa) %></b></p>
-            <% winner = User.where(level: 10) %>
-            <% unless winner.first.nil? %>
-            <hr style="border-top: 1px solid rgba(238, 238, 238, 0.02);">
-               <p style="color: rgb(78, 83, 88);">Победитель игры : <b class="post-meta" style="color: black; font-size: 20px; color: rgb(48, 93, 153);"><%= winner.first.name %></b></p>
-            <% end %>
-         </div>
+   <div class="container">
+      <div class="start_block">
+         <p>Всего за <span>25 рублей</span> и они твои!</p>
+         <strong><%= Transfer.sum(:summa) %> рублей</strong>
+      </div>
+      <div class="start_price">
+         <h2 class="start_price_title">
+            Стоимость старта <span>25 рублей</span>
+         </h2>
+         <form action="#">
+            <div class="start_price_block">
+               <div class="start_price_extensions">
+                  <strong>Дополнения</strong>
+                  <div class="start_price_extensions_item radio">
+                     <div class="icon">Радист</div>
+                     <div class="start_price_extensions_item_price">
+                        50 руб
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <div class="start_price_extensions_item_checkbox">
+                           <label for="radio"></label><input type="checkbox" id="radio">
+                        </div>
+                        <i class="start_price_extensions_item_help"></i>
+                     </div>
+                  </div>
+                  <div class="start_price_extensions_item guide">
+                     <div class="icon">Проводник</div>
+                     <div class="start_price_extensions_item_price">
+                        150 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <div class="start_price_extensions_item_checkbox">
+                           <label for="guide"></label><input type="checkbox" id="guide">
+                        </div>
+                        <i class="start_price_extensions_item_help"></i>
+                     </div>
+                  </div>
+                  <div class="start_price_extensions_item porter">
+                     <div class="icon">Носильщик</div>
+                     <div class="start_price_extensions_item_price">
+                        100 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <div class="start_price_extensions_item_checkbox">
+                           <label for="porter"></label><input type="checkbox" id="porter">
+                        </div>
+                        <i class="start_price_extensions_item_help"></i>
+                     </div>
+                  </div>
+                  <div class="start_price_extensions_item helicopter">
+                     <div class="icon">Увакуационный вертолёт</div>
+                     <div class="start_price_extensions_item_price">
+                        200 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <div class="start_price_extensions_item_checkbox">
+                           <label for="helicopter"></label><input type="checkbox" id="helicopter">
+                        </div>
+                        <i class="start_price_extensions_item_help"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="start_price_quantity">
+               <div class="left_side">
+                  <h3>Количество провианта</h3>
+                  <em>Провиант помогает быстрее добраться к вершине!</em>
+               </div>
+               <div class="right_side">
+                  <div class="start_price_quantity_counter">
+                     <b class="price_count_left"></b>
+                     <input type="text" id="">
+                     <b class="price_count_right"></b>
+                  </div>
+               </div>
+            </div>
+         </form>
       </div>
    </div>
-</div>
-
-<style type="text/css">
-   body {
-    background: url(img/m.jpg) center top repeat;
-  }
-</style>

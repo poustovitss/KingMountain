@@ -1,0 +1,26 @@
+$icons_list: radio guide porter helicopter
+
+=clear
+	&:after
+		content: ''
+		display: block
+		clear: both
+=transition($time)
+	-webkit-transition: $time
+	-moz-transition: $time
+	-ms-transition: $time
+	-o-transition: $time
+	transition: $time
+=bdrs($radius)
+	-webkit-border-radius: $radius
+	-moz-border-radius: $radius
+	-ms-border-radius: $radius
+	-o-border-radius: $radius
+	border-radius: $radius
+=triangleTop($width, $height, $color)
+	width: 0
+	height: 0
+	border:
+		style: solid
+		width: 0 $width/2 $height $width/2
+		color: transparent transparent $color transparent

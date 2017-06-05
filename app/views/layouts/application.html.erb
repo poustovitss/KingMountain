@@ -12,70 +12,32 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
       <body>
-  <nav class="navbar navbar-inverse" style="margin-bottom: 0px; background-color: #306999; border-color: #306999;">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" style="line-height: 50px;" href="<%= root_path %>"><b>KING</b></a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="<%= root_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Главная</h6> <span class="sr-only">(current)</span></a></li>
-        <li><a href="#"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Контакты</h6></a></li>
-        <li><a href="#"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>О нас</h6></a></li>
-        <li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-    <% unless user_signed_in? %>
-
-        <li><a href="<%= new_user_session_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Вход</h6></a></li>
-        <li><a href="<%= new_user_registration_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Регистрация</h6></a></li>
-        
-      <% else %>
-      <li><a href="<%= profiles_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Вы вошли как, <%= current_user.name %></h6></a></li>
-      <li><a href="<%= new_order_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Пополнить</h6></a></li>
-      <li><h6 class='btn btn-default' type="button" data-toggle="modal" data-target="#myModal" style='background-color: rgba(0, 0, 0, 0); color: #fff; margin-top: 25px;'>Вывести деньги</h6></li>
-
-      <% if current_user.admin? %>
-        <li><a href="<%= admin_root_path %>"><h6 class='btn btn-default', style='background-color: rgba(0, 0, 0, 0); color: #fff;'>Админиская панель</h6></a></li>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Вывод денег</h4>
+<div class="header">
+      <div class="container">
+         <div class="logo">
+            <a href="<%= root_path %>"><%= image_tag "/images/logo.png" %></a>
+         </div>
+         <nav class="header_menu">
+            <ul>
+               <li><a href="<%= root_path %>">Главная</a></li>
+               <li><a href="#">о сервисе</a></li>
+               <li><a href="#">контакты</a></li>
+               <% if user_signed_in? && current_user.admin? %>
+                <li><a href="<%= admin_root_path %>">Админ панель</a></li>
+               <% end %>
+               <% if user_signed_in? %>
+                <li><a href="<%= profiles_path %>">Вы вошли как, <%= current_user.name %></a></li>
+              <% end %>
+            </ul>
+         </nav>
+         <% unless user_signed_in? %>
+         <div class="header_sign">
+            <a href="<%= new_user_registration_path %>" class="sign_up">Регистрация</a>
+            <a href="<%= new_user_session_path %>" class="sign_in">Вход</a>
+          <% end %>
+         </div>
       </div>
-      <div class="modal-body">
-        <p><%= link_to 'Вывести реф.баланс', new_getmoney_path, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %>
-        </p>
-
-        <p><%= link_to 'Вывести рабочий баланс', new_getbalance_path, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;' %></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+   </div>
 
     <%= yield %>
   </body>
