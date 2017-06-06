@@ -27,7 +27,15 @@
                         50 руб
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <button class="start_price_btn">Кнопка</button>
+                        <a>
+                        <% if user_signed_in? %>
+                           <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
+                              <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                           <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                        <% end %>
+                        </a>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -46,6 +54,8 @@
                            <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
                               <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
                            <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
@@ -65,6 +75,8 @@
                            <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
                                  <%= f.submit "Купить", :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
                            <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
@@ -80,7 +92,15 @@
                         200 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <button class="start_price_btn">Кнопка</button>
+                        <a >
+                        <% if user_signed_in? %>
+                           <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
+                              <%= f.submit "Купить", class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                           <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                        <% end %>
+                        </a>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
