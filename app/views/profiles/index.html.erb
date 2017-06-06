@@ -17,7 +17,13 @@
            <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
               <div class="hidden-xs">
                  <h4>Ваш уровень: <b style="color: green;">
-                 <%= current_user.level %></b> | Приглашено <b style="color: green;"><%= current_user.refferences.where(level: current_user.level - 1).count %>/<%= levelinfo %></b> |  Ваш баланс: <b style="color: green;">
+                 <%= current_user.level %></b> | Приглашено <b style="color: green;">
+                 <% if current_user.level == 1 %>
+                  <%= current_user.refferences.where(level: 1).count %>
+                 <% else %>
+                  <%= current_user.refferences.where(level: current_user.level - 1).count %>
+                 <% end %>
+                  /<%= levelinfo %></b> |  Ваш баланс: <b style="color: green;">
                   <% if current_user.balance.nil? %>
                    0 
                   <% else %>
@@ -55,7 +61,7 @@
               <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
           <% end %>
           <% if current_user.level == 1 %>
-             <b>Свободных провиантов <%= User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b>
+             <b>Свободных провиантов <%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b>
           <% else %>
             <b>Свободных провиантов <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b>
           <% end %>
