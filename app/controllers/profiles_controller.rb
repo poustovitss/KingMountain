@@ -105,6 +105,8 @@ class ProfilesController < ApplicationController
         pay = 0
       if current_user.level == 0
         pay = start_pay
+      elsif current_user.level == 1
+        pay = 187.50
       else
         (current_user.level - 1).times do
           pay = start_pay * start_coefficient
@@ -114,24 +116,34 @@ class ProfilesController < ApplicationController
       end
 
       if current_user.balance >= pay && current_user.balance > 0  
-      b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
 
-      array_proviants = []
-      b.each do |proviant|
-        if proviant.level != 0
-          array_proviants << proviant
+        array_proviants = []
+        if current_user.level == 1
+          b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at)
+          b.each do |proviant|
+            if proviant.level == 1
+              array_proviants << proviant
+            end
+          end
+        else
+          b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
+
+          b.each do |proviant|
+            if proviant.level != 0
+              array_proviants << proviant
+            end
+          end
         end
-      end
 
 
         if array_proviants.first.nil?
           flash[:balance] = 'Нет свободных провиантов'
         else
-
           b = array_proviants.first
           b.reffered_by=current_user.id
           b.save
-          
+          p '*********'
+          p b.reffered_by 
           b = current_user
           b.balance = current_user.balance - pay
           b.save
@@ -144,12 +156,6 @@ class ProfilesController < ApplicationController
             @system.summa += pay * 0.20
             @system.save
           end
-
-          # transfer = Transfer.new
-          # transfer.user_id = current_user.id
-          # transfer.bank_id = Bank.last.id
-          # transfer.summa = pay*0.20
-          # transfer.save 
 
           unless current_user.reffered.nil?
             unless current_user.proviant == true

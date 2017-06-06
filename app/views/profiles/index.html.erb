@@ -55,7 +55,7 @@
               <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
           <% end %>
           <% if current_user.level == 1 %>
-             <b>Свободных провиантов 0</b>
+             <b>Свободных провиантов <%= User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b>
           <% else %>
             <b>Свободных провиантов <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b>
           <% end %>

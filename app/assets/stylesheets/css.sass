@@ -74,15 +74,15 @@ body
 	&_title
 		max-width: 560px
 		padding: 150px 0
-		font-size: 100px
-		line-height: 104px
+		font-size: 80px
+		line-height: 84px
 		color: #fff
 		font-weight: 900
 		span
 			display: block
 			font-weight: 400
 .start_block
-	padding: 80px 100px
+	padding: 10px 100px 40px
 	margin-bottom: 100px
 	text-align: center
 	font-family: 'Gotham Pro'
@@ -90,20 +90,53 @@ body
 	p
 		display: inline-block
 		padding: 0 15px
-		font-size: 40px
-		line-height: 44px
+		font-size: 34px
+		line-height: 38px
 		color: #353535
 		font-weight: 900
 		background: #fff
-		transform: translateY(-100px)
+		transform: translateY(-30px)
 		span
 			color: #30ccf3
 	strong
 		display: inline-block
-		font-size: 90px
+		font-size: 75px
 		line-height: 94px
 		font-weight: 900
 		color: #30ccf3
+	&_submit
+		text-align: center
+		input
+			display: inline-block
+			padding: 15px 80px
+			margin-bottom: 15px
+			font-size: 30px
+			line-height: 34px
+			color: #fff
+			font-weight: 900
+			background: #49d793
+			text-transform: uppercase
+			border: none
+			cursor: pointer
+			+bdrs(30px)
+			+transition(0.2s)
+			&:hover
+				background: darken(#49d793, 10%)
+		span
+			display: block
+			font-size: 22px
+			line-height: 26px
+			color: #49d793
+			text-transform: uppercase
+			a
+				display: inline-block
+				margin-top: 7px
+				text-transform: lowercase
+				color: #49d793
+				font-weight: 900
+				text-decoration: none
+				&:hover
+					color: darken(#49d793, 10%)
 .start_price
 	max-width: 860px
 	margin: 0px auto
@@ -119,6 +152,7 @@ body
 			color: #49d793
 			font-weight: 900
 	&_extensions
+		padding-bottom: 60px
 		strong
 			display: block
 			padding-bottom: 5px
@@ -131,7 +165,7 @@ body
 		+clear
 		.icon
 			float: left
-			width: 410px
+			width: 400px
 			padding: 20px 0 20px 50px
 			font-size: 22px
 			line-height: 26px
@@ -143,11 +177,229 @@ body
 				background: url(../images/#{$icon}.png) 0 50% no-repeat
 	&_extensions_item_price
 		float: left
-		width: 390px
+		width: 350px
 		padding: 20px 0
 		font-weight: 900
 		font-size: 22px
 		line-height: 26px
 		color: #373737
-	&_extensions_item_checkbox
+	&_extensions_item_check
+		padding: 15px 0
+	&_btn
 		display: inline-block
+		padding: 6px 12px
+		margin-bottom: 0
+		font-size: 14px
+		font-weight: 400
+		line-height: 1.42857143
+		color: #333
+		text-align: center
+		white-space: nowrap
+		vertical-align: middle
+		cursor: pointer
+		background-image: none
+		background-color: #fff
+		border: 1px solid #ccc
+		border-radius: 4px
+		+transition(0.2s)
+		&:hover
+			background-color: #d4d4d4
+			border-color: #8c8c8c
+	&_extensions_item_help
+		position: relative
+		display: inline-block
+		width: 20px
+		height: 20px
+		font-size: 13px
+		line-height: 23px
+		color: #13555f
+		font-style: normal
+		text-align: center
+		background: #3ad1e7
+		cursor: pointer
+		+bdrs(50%)
+		.tooltip
+			position: absolute
+			top: 90%
+			left: 50%
+			display: inline-block
+			padding: 5px 10px
+			width: 210px
+			margin-left: -105px
+			font-size: 12px
+			line-height: 16px
+			color: #727272
+			text-align: left
+			visibility: hidden
+			opacity: 0
+			background: #fff
+			border: 1px solid #3ad1e7
+			z-index: 10
+			+bdrs(3px)
+			+transition(0.2s)
+			&:before, &:after
+				content: ''
+				position: absolute
+				top: -7px
+				left: 50%
+				margin-left: -6px
+				+triangleTop(12px, 7px, #3ad1e7)
+			&:after
+				top: -6px
+				+triangleTop(12px, 7px, #fff)
+		&:hover
+			.tooltip
+				top: 155%
+				visibility: visible
+				opacity: 1
+	&_quantity
+		padding: 20px 40px
+		margin-bottom: 30px
+		background: #e4f9ef
+		+bdrs(4px)
+		+clear
+		h3
+			padding-bottom: 10px
+			font-size: 30px
+			line-height: 34px
+			font-weight: 300
+			color: #353535
+		em
+			display: block
+			font-size: 14px
+			line-height: 18px
+			color: #353535
+			font-style: normal
+			font-weight: 400
+			font-family: 'PT Sans', sans-serif
+			&:before
+				content: '!'
+				display: inline-block
+				width: 20px
+				height: 20px
+				margin-right: 10px
+				line-height: 21px
+				color: #fff
+				text-align: center
+				background: #3ad1e7
+				+bdrs(50%)
+
+		&_counter
+			display: block
+			margin-top: 8px
+			input
+				display: inline-block
+				width: 60px
+				padding: 12px 3px
+				font-size: 22px
+				line-height: 26px
+				color: #353535
+				text-align: center
+				font-weight: 900
+				vertical-align: middle
+				border: none
+				+bdrs(4px)
+			b
+				display: inline-block
+				width: 50px
+				height: 50px
+				font-size: 41px
+				line-height: 50px
+				color: #fff
+				text-align: center
+				font-weight: 500
+				background: #39b87b
+				vertical-align: middle
+				cursor: pointer
+				+transition(0.2s)
+				+bdrs(4px)
+				&:hover
+					background: darken(#39b87b, 20%)
+	.left_side
+		float: left
+	.right_side
+		float: right
+	&_total
+		padding-bottom: 70px
+		+clear
+		h4
+			font-size: 30px
+			line-height: 34px
+			color: #414141
+			font-weight: 300
+		.right_side
+			text-align: right
+		b
+			display: block
+			padding-bottom: 15px
+			font-size: 30px
+			line-height: 34px
+			color: #414141
+			font-weight: 900
+	&_autoplay_check
+		label
+			font-size: 14px
+			line-height: 18px
+			font-weight: 900
+			cursor: pointer
+			span
+				display: inline-block
+				width: 21px
+				height: 21px
+				margin: 0 5px 0 10px
+				vertical-align: middle
+				background: url(../images/checkbox.png) 0 -79px no-repeat
+		input
+			display: none
+			&:checked+label span
+				background: url(../images/checkbox.png) 0 0 no-repeat
+.partner_block_wrap
+	padding: 50px 0
+	overflow: hidden
+.partner_block
+	width: 110%
+	margin-left: -40px
+	+rotate(-2deg)
+	&_inner
+		max-width: 550px
+		+rotate(2deg)
+.partner_left
+	float: left
+	width: 45%
+	height: 410px
+	font-family: 'Gotham Pro'
+	text-align: right
+	background: #2fcaf1
+	.partner_block_inner
+		display: inline-block
+		padding: 90px 70px 30px 0
+	.partner_discount
+		font-size: 150px
+		line-height: 154px
+		color: #fff
+		font-weight: 900
+		span
+			display: block
+			font-size: 32px
+			line-height: 36px
+			font-weight: 300
+
+.partner_right
+	float: right
+	width: 55%
+	height: 410px
+	background: #48d592
+	.partner_block_inner
+		padding: 107px 0 80px 70px
+	h5
+		margin-bottom: 25px
+		font-size: 35px
+		line-height: 39px
+		color: #225e41
+		font-weight: 700
+	p
+		margin-bottom: 20px
+		font-size: 16px
+		line-height: 20px
+		font-weight: 400
+			

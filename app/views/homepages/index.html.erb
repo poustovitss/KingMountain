@@ -1,5 +1,4 @@
-   <meta charset="UTF-8">
-   <link rel="stylesheet" href="fonts/gothamPro/stylesheet.css">
+<link rel="stylesheet" href="fonts/gothamPro/stylesheet.css">
    <div class="main_banner">
       <div class="container">
          <h1 class="main_banner_title">
@@ -28,10 +27,13 @@
                         50 руб
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <div class="start_price_extensions_item_checkbox">
-                           <label for="radio"></label><input type="checkbox" id="radio">
-                        </div>
-                        <i class="start_price_extensions_item_help"></i>
+                        <button class="start_price_btn">Кнопка</button>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
                      </div>
                   </div>
                   <div class="start_price_extensions_item guide">
@@ -40,10 +42,17 @@
                         150 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <div class="start_price_extensions_item_checkbox">
-                           <label for="guide"></label><input type="checkbox" id="guide">
-                        </div>
-                        <i class="start_price_extensions_item_help"></i>
+                        <% if user_signed_in? %>
+                           <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
+                              <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
+                           <% end %>
+                        <% end %>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
                      </div>
                   </div>
                   <div class="start_price_extensions_item porter">
@@ -52,22 +61,32 @@
                         100 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <div class="start_price_extensions_item_checkbox">
-                           <label for="porter"></label><input type="checkbox" id="porter">
-                        </div>
-                        <i class="start_price_extensions_item_help"></i>
+                        <% if user_signed_in? %>
+                           <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
+                                 <%= f.submit "Купить", :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                           <% end %>
+                        <% end %>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
                      </div>
                   </div>
                   <div class="start_price_extensions_item helicopter">
-                     <div class="icon">Увакуационный вертолёт</div>
+                     <div class="icon">Эвакуационный вертолёт</div>
                      <div class="start_price_extensions_item_price">
                         200 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <div class="start_price_extensions_item_checkbox">
-                           <label for="helicopter"></label><input type="checkbox" id="helicopter">
-                        </div>
-                        <i class="start_price_extensions_item_help"></i>
+                        <button class="start_price_btn">Кнопка</button>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
                      </div>
                   </div>
                </div>
@@ -79,12 +98,89 @@
                </div>
                <div class="right_side">
                   <div class="start_price_quantity_counter">
-                     <b class="price_count_left"></b>
-                     <input type="text" id="">
-                     <b class="price_count_right"></b>
+                     <b class="price_count_left">‹</b>
+                     <input type="text" value="1" id="food_counter">
+                     <b class="price_count_right">›</b>
                   </div>
                </div>
             </div>
+            <div class="start_price_total">
+               <div class="left_side">
+                  <h4>Сумма к оплате:</h4>
+               </div>
+               <div class="right_side">
+                  <b class="start_price_total_price">
+                     100 рублей
+                  </b>
+               </div>
+            </div>
+            <div class="start_block_submit">
+               <a href="<%= new_user_registration_path %>" class="start_block_submit_btn">Старт</a>
+               <span>
+                  или <br>
+                  <a href="<%= new_user_registration_path %>">Зарегестрируйтесь</a>
+               </span>
+            </div>
          </form>
+      </div>
+   </div>
+   <div class="partner_block_wrap"> 
+      <div class="partner_block">
+         <div class="partner_left">
+            <div class="partner_block_inner">
+               <div class="partner_discount">
+                  5%
+                  <span>
+                     с каждой покупки <br>
+                     реферала
+                  </span>
+               </div>
+            </div>
+         </div>
+         <div class="partner_right">
+            <div class="partner_block_inner">
+               <h5>Как партнёр</h5>
+               <p>Зарегестрируйтесь сегодня и получите 25 баллов в подарок!</p>
+               <p>Всё что нужно сделать - зарегестрироваться на сайте через социальные сети или с помощью рабочего email адреса  и подтвердить его, пройдя по ссылке в письме.</p>
+               <p>Бонусные баллы после выполнения первых 50 заданий.</p>
+            </div>
+         </div>
+      </div>
+   </div>
+      <div class="container">
+      <div class="pluses_block">
+         <div class="pluses_block_item">
+            <span>1</span>
+            <img src="image_url('free.png')" height="156" width="155" alt="Free">
+            <h5>Бесплатно</h5>
+         </div>
+         <div class="pluses_block_item">
+            <span>2</span>
+            <img src="image_url('fast.png')" height="157" width="155" alt="Fast">
+            <h5>Быстро</h5>
+         </div>
+         <div class="pluses_block_item">
+            <span>3</span>
+            <img src="image_url('reliably.png')" height="156" width="155" alt="Reliably">
+            <h5>Качественно</h5>
+         </div>
+      </div>
+   </div>
+   <div class="partner_block_wrap"> 
+      <div class="partner_block">
+         <div class="rotate_left">
+            <div class="partner_block_inner">
+               <div class="partner_discount">
+                  <img src="image_url('friends.png')" height="283" width="248" alt="Friends">
+               </div>
+            </div>
+         </div>
+         <div class="rotate_right">
+            <div class="partner_block_inner">
+               <h5>Активность</h5>
+               <p>Вам совершенно ничего не надо делать, игра подберёт для вас людей в уровень и вы получаете свой заработок!</p>
+               <p>Но чем вы активней, тем больше ваш шанс получить главный приз</p>
+            </div>
+         </div>
       </div>
    </div>
