@@ -144,9 +144,9 @@
          </form>
       </div>
    </div>
-   <div class="partner_block_wrap"> 
+  <div class="partner_block_wrap">  
       <div class="partner_block">
-         <div class="partner_left">
+         <div class="rotate_left">
             <div class="partner_block_inner">
                <div class="partner_discount">
                   5%
@@ -157,7 +157,7 @@
                </div>
             </div>
          </div>
-         <div class="partner_right">
+         <div class="rotate_right">
             <div class="partner_block_inner">
                <h5>Как партнёр</h5>
                <p>Зарегестрируйтесь сегодня и получите 25 баллов в подарок!</p>
@@ -201,6 +201,185 @@
                <p>Вам совершенно ничего не надо делать, игра подберёт для вас людей в уровень и вы получаете свой заработок!</p>
                <p>Но чем вы активней, тем больше ваш шанс получить главный приз</p>
             </div>
+         </div>
+      </div>
+   </div>
+      <div class="top_block">
+      <div class="container">
+         <h2 class="top_block_title">Топ-10 партнеров</h2>
+         <div class="top_block_items">
+            <div class="top_block_item">
+               <b>1</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <span>
+                  <% user_first = User.order("level DESC").first %>
+                  <%= user_first.name %> <br>
+                  <%= user_first.refferences.count %> рефералов <br>
+                  <%= user_first.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>2</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_second = User.order("level DESC").second %>
+               <span>
+                  <%= user_second.name %> <br>
+                  <%= user_second.refferences.count %> рефералов <br>
+                  <%= user_second.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>3</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_third = User.order("level DESC").third %>
+               <span>
+                  <%= user_third.name %> <br>
+                  <%= user_third.refferences.count %> рефералов <br>
+                  <%= user_third.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>4</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_fourth = User.order("level DESC").fourth %>
+               <span>
+                  <%= user_fourth.name %> <br>
+                  <%= user_fourth.refferences.count %> рефералов <br>
+                  <%= user_fourth.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>5</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_fifth = User.order("level DESC").fifth %>
+               <span>
+                  <%= user_fifth.name %> <br>
+                  <%= user_fifth.refferences.count %> рефералов <br>
+                  <%= user_fifth.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>6</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_sixth = User.order("level DESC")[6] %>
+               <span>
+                  <%= user_sixth.name %> <br>
+                  <%= user_sixth.refferences.count %> рефералов <br>
+                  <%= user_sixth.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>7</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_seventh = User.order("level DESC")[7] %>
+               <span>
+                  <%= user_seventh.name %> <br>
+                  <%= user_seventh.refferences.count %> рефералов <br>
+                  <%= user_seventh.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>8</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_eighth = User.order("level DESC")[8] %>
+               <span>
+                  <%= user_eighth.name %> <br>
+                  <%= user_eighth.refferences.count %> рефералов <br>
+                  <%= user_eighth.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>9</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_nine = User.order("level DESC")[9] %>
+               <span>
+                  <%= user_nine.name %> <br>
+                  <%= user_nine.refferences.count %> рефералов <br>
+                  <%= user_nine.balance %> руб.
+               </span>
+            </div>
+            <div class="top_block_item">
+               <b>10</b>
+               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% user_ten = User.order("level DESC")[10] %>
+               <span>
+                  <%= user_ten.name %> <br>
+                  <%= user_ten.refferences.count %> рефералов <br>
+                  <%= user_ten.balance %> руб.
+               </span>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="stats_block">
+      <div class="container">
+         <div class="stats_block_item users">
+            <div class="stats_block_quantity">
+               <%= User.all.count %>
+               <span>Пользователей</span>
+            </div>
+            <b class="stats_block_today">
+               +<%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %> сегодня
+            </b>
+         </div>
+         <div class="stats_block_item online">
+            <div class="stats_block_quantity">
+               100
+               <span>Онлайн</span>
+            </div>
+         </div>
+         <div class="stats_block_item tasks">
+            <div class="stats_block_quantity">
+               280 522
+               <span>пользователей близки к победе</span>
+            </div>
+         </div>
+         <div class="stats_block_item compl">
+            <div class="stats_block_quantity">
+               <%= Transfer.sum(:summa) %> руб
+               <span>Общий банк</span>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="contact_block">
+      <div class="container">
+         <div class="contact_block_inner">
+            <h2 class="contact_block_title">Связаться с нами</h2>
+            <form action="">
+               <div class="contact_block_form_field">
+                  <input type="text" name="" id="" placeholder="Ваше имя">
+               </div>
+               <div class="contact_block_form_field">
+                  <input type="email" name="" id="" placeholder="Ваш электронный адрес">
+               </div>
+               <div class="contact_block_form_field contact_block_form_field_comment">
+                  <textarea placeholder="Комментарий"></textarea>
+               </div>
+               <div class="contact_block_form_submit">
+                  <input type="submit" value="Отправить">
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   <div class="footer">
+      <div class="container">
+         <span class="arrow_up">⌃</span>
+         <div class="footer_title">Нравится наш сервис? Поделитесь в социальных сетях:</div>
+         <div class="footer_social">
+            <a href="#" class="footer_social_item"><img src="images/ic-ok.png" height="39" width="39" alt="OK"></a>
+            <a href="#" class="footer_social_item"><img src="images/ic-fb.png" height="26" width="12" alt="Facebook"></a>
+            <a href="#" class="footer_social_item"><img src="images/ic-inst.png" height="24" width="24" alt="Instagram"></a>
+            <a href="#" class="footer_social_item"><img src="images/ic-vk.png" height="18" width="30" alt="VK"></a>
+            <a href="#" class="footer_social_item"><img src="images/ic-tw.png" height="20" width="24" alt="Twitter"></a>
+            <a href="#" class="footer_social_item"><img src="images/ic-telegram.png" height="22" width="23" alt="Telegram"></a>
+         </div>
+         <div class="footer_logo">
+            <img src="images/footer_logo.png" height="45" width="109" alt="Царь горы">
+         </div>
+         <div class="footer_copyright">
+            ООО Игра - “Царь горы” 2017 Все права защищены.
          </div>
       </div>
    </div>

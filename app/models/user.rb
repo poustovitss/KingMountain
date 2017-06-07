@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  def online
+    @online = User.where('last_seen > ?', 5.minutes.ago)
+  end
+
 TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 

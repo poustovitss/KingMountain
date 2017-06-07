@@ -20,6 +20,8 @@
                  <%= current_user.level %></b> | Приглашено <b style="color: green;">
                  <% if current_user.level == 1 %>
                   <%= current_user.refferences.where(level: 1).count %>
+                 <% elsif current_user.level == 2 %>
+                   <%= current_user.refferences.where(level: 1).count - 10 %>
                  <% else %>
                   <%= current_user.refferences.where(level: current_user.level - 1).count %>
                  <% end %>
@@ -32,7 +34,7 @@
                    </b></h4>
               </div>
 
-            <h4>Реф. баланс: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b>
+            <h4>Своб. баланс: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b>
            </h4>
 
            </button>
@@ -50,7 +52,7 @@
 
    <div class="alert alert" style="width: 100%">
       <div class="left">
-      <% if current_user.refferences.count >= 10 || current_user.level == 0 %>
+      <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
         <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
               <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены? ' } %>
         <% end %>

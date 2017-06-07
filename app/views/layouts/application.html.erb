@@ -27,6 +27,8 @@
                <% end %>
                <% if user_signed_in? %>
                 <li><a href="<%= profiles_path %>">Вы вошли как, <%= current_user.name %></a></li>
+                <li><a href="<%= new_getbalance_path %>">Вывод раб.баланса</a></li>
+                <li><a href="<%= new_getmoney_path %>">Вывод своб. баланса</a></li>
               <% end %>
             </ul>
          </nav>

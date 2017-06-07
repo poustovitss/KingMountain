@@ -94,4 +94,8 @@ $(document).ready(function() {
 	    fieldToWork.val(newValue).trigger('change');
 	    return false;
 	});
+
+	$('.arrow_up').click(function() {
+		$('html, body').animate({scrollTop: 0})
+	});
 });

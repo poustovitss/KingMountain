@@ -1,9 +1,14 @@
 class ProfilesController < ApplicationController
 	
   def index
-    # FirstJobJob.perform_later 1,2,3 
+    if current_user.level == 1 
+      @check_button = current_user.refferences.where(level: 1).count
+    else
+      @check_button = current_user.refferences.where(level: current_user.level - 1).count
+    end
+    
     if user_signed_in?
-       if current_user.level <= 0 
+       if current_user.level == 0 || current_user.level.nil?
          @button = 'Начать игру'
        else
         @button = 'Перейти на следущий уровень'
@@ -32,8 +37,14 @@ class ProfilesController < ApplicationController
       end
     end
 
+    if current_user.level == 1 
+      check = current_user.refferences.where(level: 1).count
+    else
+      check = user.refferences.where(level: user.level - 1).count
+    end
+    
     if user.balance >= pay
-      if user.refferences.where(level: user.level - 1).count >= user.level * 10 
+      if check >= user.level * 10 
         unless current_user.reffered.nil?
             reffered = current_user.reffered
             reffered.balance += pay*0.75
@@ -96,7 +107,13 @@ class ProfilesController < ApplicationController
   helper_method :levelinfo
 
   def update 
-    if current_user.refferences.count == 10
+    if current_user.level == 1
+      check_proviant = current_user.refferences.where(level: 1).count
+    else 
+      check_proviant = current_user.refferences.where(level: current_user.level - 1).count
+    end
+
+    if check_proviant >= current_user.level * 10
       flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
       redirect_to :back
     else
@@ -142,11 +159,11 @@ class ProfilesController < ApplicationController
           b = array_proviants.first
           b.reffered_by=current_user.id
           b.save
-          p '*********'
-          p b.reffered_by 
-          b = current_user
-          b.balance = current_user.balance - pay
-          b.save
+
+
+          user_onl = current_user
+          user_onl.balance = current_user.balance - pay
+          user_onl.save
 
           @system = Systemfinance.last
           if current_user.reffered.nil?

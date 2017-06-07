@@ -1,7 +1,7 @@
 <center>
  <%= form_for @getmoney do |f| %>
       <hr></hr>
-      	<h4>Ваш реферальный баланс <%= current_user.transfers.sum(:summa) %></h4>
+      	<h4>Ваш рабочий баланс <%= current_user.transfers.sum(:summa) %></h4>
       <hr>
     <div class="field">
 		<%= f.label :Кошелек %><br />
