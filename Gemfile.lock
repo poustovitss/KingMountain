@@ -84,6 +84,9 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise_lastseenable (0.0.6)
+      devise
+      rails (>= 3.0.4)
     dotenv (2.2.1)
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
@@ -273,6 +276,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise
+  devise_lastseenable
   dotenv-rails
   jbuilder (~> 2.5)
   jquery-rails

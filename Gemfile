@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+
+gem 'devise_lastseenable'
 gem 'dotenv-rails', groups: [:development, :test, :production]
 # gem 'interkassa-rails', github: 'alexkravets/interkassa-rails'
 gem 'activeadmin', '~> 1.0.0.pre2'

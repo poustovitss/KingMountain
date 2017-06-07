@@ -324,7 +324,7 @@
          </div>
          <div class="stats_block_item online">
             <div class="stats_block_quantity">
-               100
+               <%= User.where('last_seen > ?', 5.minutes.ago).count %>
                <span>Онлайн</span>
             </div>
          </div>
