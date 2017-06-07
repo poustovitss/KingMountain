@@ -1,14 +1,23 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Войти", new_session_path(resource_name) %><br />
-<% end -%>
+<center>
+	<%- if controller_name != 'sessions' %>
+	  <%= link_to "Войти", new_session_path(resource_name) %><br />
+	<% end -%>
+	<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+	  <%= link_to "Регистрация", new_registration_path(resource_name) %><br />
+	<% end -%>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Регистрация", new_registration_path(resource_name) %><br />
-<% end -%>
+	<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+	  <%= link_to "Забыли пароль?", new_password_path(resource_name) %><br />
+	<% end -%>
+</center>
 
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Забыли пароль?", new_password_path(resource_name) %><br />
-<% end -%>
+<div class="register_form_social">
+  <div class="register_form_social_title">Регистрация через соц. сети</div>
+  <a href="<%= user_facebook_omniauth_authorize_path %>" class="register_form_social_item"><img src="<%= image_url('ic-fb.png')%>" height="26" width="12" alt="Facebook"></a>
+  <a href="<%= user_twitter_omniauth_authorize_path %>" class="register_form_social_item"><img src="<%= image_url('ic-tw.png')%>" height="20" width="24" alt="Twitter"></a>
+  </div>
+</div>
+
 
 <!--  if devise_mapping.confirmable? && controller_name != 'confirmations'
    link_to "Подтвердить свой аккаунт", new_confirmation_path(resource_name) <br />
@@ -20,7 +29,9 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Войти через #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+	<!--  link_to "Войти через #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider)  -->
   <% end -%>
 <% end -%>
-<hr>
+
+
+

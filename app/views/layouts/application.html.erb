@@ -26,9 +26,9 @@
                 <li><a href="<%= admin_root_path %>">Админ панель</a></li>
                <% end %>
                <% if user_signed_in? %>
-                <li><a href="<%= profiles_path %>">Вы вошли как, <%= current_user.name %></a></li>
-                <li><a href="<%= new_getbalance_path %>">Вывод раб.баланса</a></li>
-                <li><a href="<%= new_getmoney_path %>">Вывод своб. баланса</a></li>
+                <li><a href="<%= profiles_path %>">Профиль</a></li>
+                <li><a href="<%= new_order_path %>" class="sign_in">Пополнить</a></li>
+                <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li>
               <% end %>
             </ul>
          </nav>
@@ -40,6 +40,18 @@
          </div>
       </div>
    </div>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <hr>
+      <li><%= link_to 'Вывод рабочего баланса', new_getbalance_path, class: 'btn btn-default' %></li>
+      <p></p>
+      <li><%= link_to 'Вывод свободного баланса', new_getmoney_path, class: 'btn btn-default' %></li>
+      <hr>
+    </div>
+  </div>
+</div>
 
     <%= yield %>
   </body>
