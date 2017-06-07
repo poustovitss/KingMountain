@@ -324,13 +324,13 @@
          </div>
          <div class="stats_block_item online">
             <div class="stats_block_quantity">
-               <%= User.where('last_seen > ?', 5.minutes.ago).count %>
+               <%= User.where('last_seen > ?', 15.minutes.ago).count %>
                <span>Онлайн</span>
             </div>
          </div>
          <div class="stats_block_item tasks">
             <div class="stats_block_quantity">
-               280 522
+               <%= User.where(level: 9).count %>
                <span>пользователей близки к победе</span>
             </div>
          </div>
