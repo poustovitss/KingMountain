@@ -8,7 +8,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   # devise :lastseenable
   
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  # validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
    after_create :send_admin_mail
   def send_admin_mail
@@ -63,9 +63,9 @@ TEMP_EMAIL_PREFIX = 'change@me'
     user
   end
 
-  def email_verified?
-    self.email && self.email !~ TEMP_EMAIL_REGEX
-  end
+  # def email_verified?
+  #   self.email && self.email !~ TEMP_EMAIL_REGEX
+  # end
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
