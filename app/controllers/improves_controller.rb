@@ -5,11 +5,11 @@ class ImprovesController < ApplicationController
 
   def create
     @system = Systemfinance.last
-    if current_user.balance >= 150
+    ref_balance = Transfer.find_by_user_id(current_user.id)
+    if ref_balance.summa >= 150
       unless current_user.conductor == true
-        user = current_user
-        user.balance = current_user.balance - 150
-        user.save
+        ref_balance.summa = ref_balance.summa - 150
+        ref_balance.save
 
          @system = Systemfinance.last
         if current_user.reffered.nil?
@@ -40,11 +40,11 @@ class ImprovesController < ApplicationController
 
   def buyaerodrome
     @system = Systemfinance.last
-    if current_user.balance >= 100  
+    ref_balance = Transfer.find_by_user_id(current_user.id)
+    if ref_balance.summa >= 100  
       unless current_user.aerodrome == true
-        user = current_user
-        user.balance = current_user.balance - 100
-        user.save
+        ref_balance.summa = ref_balance.summa - 150
+        ref_balance.save
 
         @system = Systemfinance.last
         if current_user.reffered.nil?
@@ -73,11 +73,11 @@ class ImprovesController < ApplicationController
 
   def buyradist
     @system = Systemfinance.last
-    if current_user.balance >= 100  
+    ref_balance = Transfer.find_by_user_id(current_user.id)
+    if ref_balance.summa >= 100  
       unless current_user.radist == true
-        user = current_user
-        user.balance = current_user.balance - 100
-        user.save
+        ref_balance.summa = ref_balance.summa - 100
+        ref_balance.save
 
         @system = Systemfinance.last
         if current_user.reffered.nil?
@@ -106,11 +106,11 @@ class ImprovesController < ApplicationController
 
   def buyall
     @system = Systemfinance.last
-    if current_user.balance >= 450
+    ref_balance = Transfer.find_by_user_id(current_user.id)
+    if ref_balance.summa >= 450
       unless current_user.conductor == true && current_user.carrier == true
-        user = current_user
-        user.balance = current_user.balance - 450
-        user.save
+        ref_balance.summa = ref_balance.summa - 450
+        ref_balance.save
 
         user = current_user
         user.carrier = true
@@ -158,11 +158,11 @@ class ImprovesController < ApplicationController
 
   def update 
     @system = Systemfinance.last
-    if current_user.balance >= 100  
+     ref_balance = Transfer.find_by_user_id(current_user.id)
+    if ref_balance.summa >= 100  
       unless current_user.carrier == true
-        user = current_user
-        user.balance = current_user.balance - 100
-        user.save
+        ref_balance.summa = ref_balance.summa - 100
+        ref_balance.save
         
          @system = Systemfinance.last
         if current_user.reffered.nil?

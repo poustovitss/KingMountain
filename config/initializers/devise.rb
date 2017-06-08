@@ -253,7 +253,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook, "2088994584660833", "c4b4016e93e3057753c2b4b9eae5aa4e"
   config.omniauth :twitter, "7sqjrFZjsN8hLzWi7j2j", "4eda0b9d4eda0b9d4eda0b9d1a4e867fc144eda4eda0b9d17e893c29e82d5cf56c1e4ae"
-  config.omniauth :twitter, "2tkm5CEC7r7ZBlvN2tw9tar8n", "Yz8BiGZ4uM3ZC8ImQCpuMWUjpLaxke9VQIXiZdH7o74MXa2uOb"
+  # config.omniauth :twitter, "2tkm5CEC7r7ZBlvN2tw9tar8n", "Yz8BiGZ4uM3ZC8ImQCpuMWUjpLaxke9VQIXiZdH7o74MXa2uOb"
   # config.omniauth :linked_in, "KEY", "SECRET"
 
   # ==> Warden configuration

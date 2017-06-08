@@ -18,9 +18,11 @@ class OrdersController < ApplicationController
   def success
     @order = Order.find(params[:ik_pm_no])
 
+    ref_balance = Transfer.find_by_user_id(@order.user.id)
+
     if (params["ik_inv_st"] =="success") #and (params["ik_ps_price"]||0)==(@order$
-      @order.user.balance += @order.total
-      @order.user.save
+      ref_balance.summa += @order.total
+      ref_balance.save
       flash[:balance] = "Вы пополнили счет на сумму #{@order.total}"
       
       redirect_to profiles_path
