@@ -79,6 +79,16 @@ return!0}function Q(a,b,d,e){if(m.acceptData(a)){var f,g,h=m.expando,i=a.nodeTyp
 
 
 $(document).ready(function() {
+
+	$('.mobile_btn').click(function() {
+		$('.header_menu_wrap').slideToggle();
+	});
+	$(window).resize(function() {
+		if ($(window).width() > 768) {
+			$('.header_menu_wrap').attr('style', '');
+		}
+	});
+
 	jQuery('.price_count_left').click(function() {
 	    var fieldToWork = jQuery(this).parent().find('#food_counter');
 	    var newValue = parseInt(fieldToWork.val()) - 1;

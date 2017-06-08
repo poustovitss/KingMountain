@@ -10,19 +10,48 @@ body
 .container
 	width: 1140px
 	margin: 0 auto
+	+md
+		width: 900px
+	+sm
+		width: 760px
+	+xs
+		width: 100%
+		padding: 0 15px
 .header
 	+clear
+	position: relative
 	background: #30ccf3
 	.logo
 		margin-top: 10px
 		float: left
 		padding-right: 55px
+		+sm
+			padding-right: 10px
+			margin-top: 8px
+		img
+			+sm
+				width: 150px
+				height: auto
 	&_menu
 		float: left
+		+xs
+			float: none
+		&_wrap
+			+xs
+				display: none
+				position: absolute
+				top: 100%
+				width: 100%
+				left: 0
+				text-align: center
+				background: #30ccf3
+
 		ul
 			list-style-type: none
 		li
 			float: left
+			+xs
+				float: none
 			a
 				position: relative
 				padding: 25px
@@ -33,6 +62,8 @@ body
 				color: #fff
 				text-transform: uppercase
 				text-decoration: none
+				+sm
+					padding: 15px
 				&:hover
 					&:after
 						content: ''
@@ -41,12 +72,20 @@ body
 						left: 50%
 						margin-left: -7px
 						+triangleTop(14px, 7px, #fff)
+						+xs
+							content: none
 	&_sign
 		float: right
 		margin-top: 15px
+		+sm
+			margin-top: 8px
+		+xs
+			float: none
 		a
 			float: right
 			font-family: 'Segoe UI Semilight'
+			+xs
+				float: none
 		.sign_in
 			margin-top: 8px
 			margin-right: 25px
@@ -55,6 +94,13 @@ body
 			font-weight: 300
 			color: #fff
 			text-decoration: none
+			+sm
+				margin-top: 7px
+				font-size: 14px
+				line-height: 18px
+			+xs
+				display: block
+				margin: 0 0 10px
 		.sign_up
 			@extend .sign_in
 			padding: 8px 30px
@@ -62,8 +108,31 @@ body
 			color: #343434
 			background: rgba(255, 255, 255, 0.5)
 			+bdrs(30px)
+			+sm
+				padding: 6px 30px
+			+xs
+				padding: 6px 12px
+				margin: 0 0 10px
+				+bdrs(0)
 			&:hover
 				background: #fff
+	.mobile_btn
+		display: none
+		width: 41px
+		padding: 3px 0
+		border: 1px solid #fff
+		cursor: pointer
+		+bdrs(4px)
+		+xs
+			float: right
+			display: inline-block
+			margin-top: 7px
+		span
+			display: block
+			width: 75%
+			height: 2px
+			margin: 4px auto
+			background: #fff
 .main_banner
 	margin-bottom: 130px
 	font-family: 'Gotham Pro'
@@ -71,6 +140,11 @@ body
 	-webkit-background-size: cover
 	-moz-background-size: cover
 	background-size: cover
+	+sm
+		margin-bottom: 80px
+	+xs
+		margin-bottom: 30px
+		text-align: center
 	&_title
 		max-width: 560px
 		padding: 150px 0
@@ -78,6 +152,14 @@ body
 		line-height: 84px
 		color: #fff
 		font-weight: 900
+		+sm
+			padding: 80px 0
+			font-size: 50px
+			line-height: 54px
+		+xs
+			padding: 50px 0
+			font-size: 35px
+			line-height: 40px
 		span
 			display: block
 			font-weight: 400
@@ -87,6 +169,13 @@ body
 	text-align: center
 	font-family: 'Gotham Pro'
 	border: 1px solid #49d793
+	+clear
+	+sm
+		margin-bottom: 50px
+	+xs
+		padding: 10px 0px 20px
+		margin-bottom: 35px
+		border: none
 	p
 		display: inline-block
 		padding: 0 15px
@@ -96,6 +185,15 @@ body
 		font-weight: 900
 		background: #fff
 		transform: translateY(-30px)
+		+sm
+			font-size: 26px
+			line-height: 30px
+		+xs
+			padding: 0
+			margin: 0 0 15px
+			font-size: 18px
+			line-height: 22px
+			transform: none
 		span
 			color: #30ccf3
 	strong
@@ -104,6 +202,12 @@ body
 		line-height: 94px
 		font-weight: 900
 		color: #30ccf3
+		+sm
+			font-size: 35px
+			line-height: 39px
+		+xs
+			font-size: 23px
+			line-height: 27px
 	&_submit
 		text-align: center
 		&_btn
@@ -121,6 +225,10 @@ body
 			text-decoration: none
 			+bdrs(30px)
 			+transition(0.2s)
+			+xs
+				margin-bottom: 8px
+				font-size: 16px
+				line-height: 20px
 			&:hover
 				background: darken(#49d793, 10%)
 		span
@@ -129,6 +237,9 @@ body
 			line-height: 22px
 			color: #49d793
 			text-transform: uppercase
+			+xs
+				font-size: 15px
+				line-height: 19px
 			a
 				display: inline-block
 				margin-top: 7px
@@ -136,6 +247,10 @@ body
 				color: #49d793
 				font-weight: 900
 				text-decoration: none
+				+xs
+					margin-top: 5px
+					font-size: 17px
+					line-height: 21px
 				&:hover
 					color: darken(#49d793, 10%)
 .start_price
@@ -149,6 +264,13 @@ body
 		text-align: center
 		font-weight: 300
 		color: #5c5c5c
+		+sm
+			padding-bottom: 20px
+			font-size: 23px
+			line-height: 27px
+		+xs
+			font-size: 18px
+			line-height: 22px
 		span
 			color: #49d793
 			font-weight: 900
@@ -164,8 +286,15 @@ body
 			color: #373737
 			border-bottom: 1px solid #ededed
 			font-weight: 300
+			+xs
+				font-size: 15px
+				text-align: center
 	&_extensions_item
 		+clear
+		+xs
+			padding-bottom: 10px
+			margin-bottom: 10px
+			border-bottom: 1px solid #d2cdcd
 		.icon
 			float: left
 			width: 400px
@@ -174,6 +303,9 @@ body
 			line-height: 22px
 			color: #373737
 			font-weight: 300
+			+xs
+				float: none
+				width: 100%
 	@each $icon in $icons_list
 		&_extensions_item.#{$icon}
 			.icon
@@ -186,11 +318,19 @@ body
 		font-size: 18px
 		line-height: 22px
 		color: #373737
+		+xs
+			float: none
+			width: 100%
+			text-align: center
 	&_extensions_item_check
 		position: absolute
 		top: 0
 		right: 0
 		padding: 7px 0
+		+xs
+			position: static
+			width: 100%
+			text-align: center
 	&_btn
 		display: inline-block
 		padding: 6px 12px
@@ -225,6 +365,10 @@ body
 		background: #3ad1e7
 		cursor: pointer
 		+bdrs(50%)
+		+sm
+			display: none
+		+xs
+			display: none
 		.tooltip
 			position: absolute
 			top: 90%
@@ -265,12 +409,18 @@ body
 		background: #e4f9ef
 		+bdrs(4px)
 		+clear
+		+xs
+			padding: 10px
+			text-align: center
 		h3
 			padding-bottom: 10px
 			font-size: 30px
 			line-height: 34px
 			font-weight: 300
 			color: #353535
+			+sm
+				font-size: 24px
+				line-height: 28px
 		em
 			display: block
 			font-size: 14px
@@ -279,6 +429,8 @@ body
 			font-style: normal
 			font-weight: 400
 			font-family: 'PT Sans', sans-serif
+			+xs
+				margin-bottom: 15px
 			&:before
 				content: '!'
 				display: inline-block
@@ -309,6 +461,11 @@ body
 				vertical-align: middle
 				border: none
 				+bdrs(4px)
+				+sm
+					width: 50px
+					padding: 10px 3px
+					font-size: 17px
+					line-height: 21px
 			b
 				display: inline-block
 				width: 50px
@@ -323,22 +480,40 @@ body
 				cursor: pointer
 				+transition(0.2s)
 				+bdrs(4px)
+				+sm
+					width: 44px
+					height: 40px
+					font-size: 36px
+					line-height: 40px
 				&:hover
 					background: darken(#39b87b, 20%)
 	.left_side
 		float: left
+		+xs
+			float: none
+			text-align: center
 	.right_side
 		float: right
+		+xs
+			float: none
+			text-align: center
 	&_total
 		padding-bottom: 30px
+		+sm
+			padding-bottom: 20px
 		+clear
 		h4
 			font-size: 30px
 			line-height: 34px
 			color: #414141
 			font-weight: 300
+			+xs
+				font-size: 22px
+				line-height: 26px
 		.right_side
 			text-align: right
+			+xs
+				text-align: center
 		b
 			display: block
 			padding-bottom: 15px
@@ -346,6 +521,9 @@ body
 			line-height: 34px
 			color: #414141
 			font-weight: 900
+			+xs
+				font-size: 22px
+				line-height: 26px
 	&_autoplay_check
 		label
 			font-size: 14px
@@ -366,13 +544,25 @@ body
 .partner_block_wrap
 	padding: 50px 0
 	overflow: hidden
+	+xs
+		padding: 0
+		overflow: visible
 .partner_block
 	width: 110%
 	margin-left: -40px
 	+rotate(-2deg)
+	+xs
+		width: 100%
+		margin: 0
+		+rotate(0)
 	&_inner
 		max-width: 550px
 		+rotate(2deg)
+		+sm
+			max-width: 460px
+		+xs
+			max-width: 100%
+			+rotate(0)
 .rotate_left
 	float: left
 	width: 45%
@@ -380,38 +570,81 @@ body
 	font-family: 'Gotham Pro'
 	text-align: right
 	background: #2fcaf1
+	+sm
+		height: 350px
+	+xs
+		float: none
+		width: 100%
+		height: auto
 	.partner_block_inner
 		display: inline-block
 		padding: 75px 70px 30px 0
+		+xs
+			display: block
+			padding: 15px
+			text-align: center
 	.partner_discount
 		font-size: 150px
 		line-height: 154px
 		color: #fff
 		font-weight: 900
+		+sm
+			font-size: 80px
+			line-height: 104px
+		+xs
+			font-size: 40px
+			line-height: 50px
 		span
 			display: block
 			font-size: 32px
 			line-height: 36px
 			font-weight: 300
-
+			+sm
+				font-size: 26px
+				line-height: 30px
+			+xs
+				font-size: 22px
+				line-height: 26px
+		img
+			+sm
+				width: 175px
+				height: auto
 .rotate_right
 	float: right
 	width: 55%
 	height: 410px
-	background: #48d592
+	background: #48d590
+	+sm
+		height: 350px
+	+xs
+		float: none
+		width: 100%
+		height: auto
 	.partner_block_inner
 		padding: 107px 0 80px 70px
+		+sm
+			padding: 67px 0 0px 40px
+		+xs
+			padding: 15px
 	h5
 		margin-bottom: 25px
 		font-size: 35px
 		line-height: 39px
 		color: #225e41
 		font-weight: 700
+		+xs
+			margin-bottom: 10px
+			font-size: 22px
+			line-height: 26px
 	p
 		margin-bottom: 20px
 		font-size: 16px
 		line-height: 20px
 		font-weight: 400
+		+xs
+			margin-bottom: 5px
+			font-size: 15px
+			line-height: 19px
 .pluses_block
 	+clear
 	max-width: 980px
@@ -423,6 +656,9 @@ body
 		margin-top: 150px
 		margin-right: 20%
 		text-align: center
+		+xs
+			width: 100%
+			margin-top: 100px
 		h5
 			font-size: 22px
 			line-height: 26px
@@ -438,14 +674,24 @@ body
 			text-align: center
 			color: #fff
 			background: url(../images/plus_circle.png) 50% 50% no-repeat
+			+xs
+				top: -80px
+				right: 0
 		&:first-child
 			margin-top: 200px
+			+xs
+				margin-top: 100px
 		&:last-child
 			margin-top: 115px
 			margin-right: 0
+			+xs
+				margin-top: 100px
 .top_block
 	padding-top: 100px
 	padding-bottom: 100px
+	+md
+		padding-top: 20px
+		padding-bottom: 50px
 	&_title
 		padding-bottom: 70px
 		font-size: 50px
@@ -454,6 +700,10 @@ body
 		text-align: center
 		font-weight: 900
 		font-family: 'Gotham Pro'
+		+xs
+			padding-bottom: 30px
+			font-size: 25px
+			line-height: 29px
 	&_items
 		max-width: 940px
 		margin: 0 auto
@@ -464,10 +714,15 @@ body
 		display: flex
 		justify-content: space-around
 		flex-wrap: wrap
+		+xs
+			display: block
 	&_item
 		width: 33%
 		margin-bottom: 45px
 		text-align: center
+		+xs
+			width: 100%
+			margin-bottom: 20px
 		*
 			display: inline-block
 			vertical-align: middle
@@ -486,6 +741,10 @@ body
 .stats_block
 	padding-bottom: 150px
 	+clear
+	+md
+		text-align: center
+	+xs
+		padding-bottom: 50px
 	&_item
 		float: left
 		padding-top: 70px
@@ -495,6 +754,20 @@ body
 		text-align: center
 		background: #e0f7fd
 		+bdrs(50%)
+		+md
+			float: none
+			display: inline-block
+			width: 150px
+			height: 150px
+			padding-top: 20px
+			vertical-align: middle
+		+xs
+			display: block
+			width: 100%
+			height: auto
+			padding-bottom: 15px
+			margin-right: 0
+			+bdrs(0)
 		&:last-child
 			margin-right: 0
 	&_quantity
@@ -504,6 +777,10 @@ body
 		color: #30ccf4
 		font-weight: 900
 		font-family: 'Gotham Pro'
+		+md
+			padding-top: 40px
+			font-size: 20px
+			line-height: 24px
 		span
 			display: block
 			margin-top: 5px
@@ -512,15 +789,23 @@ body
 			color: #2a2a2a
 			font-family: 'PT Sans', sans-serif
 			font-weight: 400
+			+md
+				font-size: 13px
+				line-height: 17px
 	&_today
 		display: inline-block
 		margin-top: 5px
+		+md
+			font-size: 11px
+			line-height: 15px
 	@each $item in $stats_list
 		&_item.#{$item}
 			.stats_block_quantity
 				background: url(../images/ic-#{$item}.png) 50% 0 no-repeat
 .contact_block
 	padding-bottom: 150px
+	+xs
+		padding-bottom: 80px
 	&_title
 		max-width: 500px
 		padding: 0 15px
@@ -532,14 +817,25 @@ body
 		text-align: center
 		font-family: 'Gotham Pro'
 		background: #fff
+		+xs
+			padding: 0
+			margin: 0 0 15px
+			font-size: 20px
+			line-height: 24px
 	&_inner
 		position: relative
 		padding: 60px 50px 50px
 		border: 1px solid #49d793
 		+bdrs(4px)
+		+xs
+			padding: 0
+			border: none
 	&_form_field
 		width: 49%
 		float: left
+		+xs
+			float: none
+			width: 100%
 		input, textarea
 			width: 100%
 			padding: 16px 30px
@@ -550,6 +846,8 @@ body
 			background: #e0f7fd
 			border: none
 			+bdrs(4px)
+			+xs
+				padding: 10px
 		input
 			margin-bottom: 10px
 		textarea
@@ -559,12 +857,18 @@ body
 			width: 100%
 	&_form_field+&_form_field
 		float: right
+		+xs
+			float: none
+			width: 100%
 	&_form_submit
 		text-align: center
 		position: absolute
 		width: 100%
 		left: 0
 		bottom: -23px
+		+xs
+			position: static
+			margin-top: 10px
 		input
 			padding: 15px 50px
 			font-size: 14px
@@ -578,6 +882,8 @@ body
 			outline: 15px solid #fff
 			+bdrs(30px)
 			+transition(0.2s)
+			+xs
+				outline: none
 			&:hover
 				background: darken(#49d793, 15%)
 .footer
@@ -604,6 +910,13 @@ body
 		box-shadow:         0px 0px 30px 11px rgba(73, 215, 147, 0.4)
 		+bdrs(50%)
 		+transition(0.2s)
+		+xs
+			top: -25px
+			width: 50px
+			height: 50px
+			margin-left: -25px
+			font-size: 43px
+			line-height: 69px
 		&:hover
 			background: darken(#49d793, 15%)
 	&_title
@@ -612,8 +925,14 @@ body
 		line-height: 26px
 		color: #fff
 		font-weight: 700
+		+xs
+			padding-bottom: 15px
+			font-size: 18px
+			line-height: 22px
 	&_social
 		padding-bottom: 50px
+		+xs
+			padding-bottom: 20px
 		&_item
 			margin: 0 25px
 			display: inline-block
@@ -623,6 +942,9 @@ body
 				opacity: 1
 	&_logo
 		padding-bottom: 40px
+		+xs
+			padding-bottom: 20px
 	&_copyright
 		font-size: 14px
 		color: #5b5b5b
+@import 'login'

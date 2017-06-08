@@ -1,0 +1,68 @@
+.register_form
+	max-width: 500px
+	padding: 100px 0
+	margin: 0 auto
+	&_title
+		padding-bottom: 20px
+		font-size: 30px
+		line-height: 34px
+		color: #343434
+		font-weight: 900
+		text-align: center
+	&_field
+		padding-bottom: 15px
+		label
+			display: block
+			padding-bottom: 5px
+			font-size: 16px
+			line-height: 20px
+			color: #484848
+			cursor: pointer
+			+transition(0.2s)
+			&:hover
+				color: #4ad793
+		input
+			display: block
+			width: 100%
+			padding: 12px 19px
+			font-size: 15px
+			color: #747474
+			background: #ededed
+			border: 1px solid transparent
+			+bdrs(4px)
+	&_submit
+		text-align: center
+		input
+			display: inline-block
+			padding: 13px 60px
+			margin-bottom: 15px
+			font-size: 22px
+			line-height: 26px
+			color: #fff
+			font-weight: 900
+			background: #49d793
+			text-transform: uppercase
+			border: none
+			cursor: pointer
+			text-decoration: none
+			+bdrs(30px)
+			+transition(0.2s)
+			&:hover
+				background: darken(#49d793, 10%)
+	&_social
+		margin-top: 25px
+		text-align: center
+		&_title
+			margin-bottom: 15px
+			font-size: 14px
+			line-height: 18px
+			color: #404040
+			font-weight: 700
+		&_item
+			display: inline-block
+			margin: 0 25px
+			vertical-align: middle
+			-webkit-filter: grayscale(100%)
+			filter: grayscale(100%)
+			&:hover
+				filter: grayscale(0)

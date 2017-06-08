@@ -6,6 +6,7 @@ class FeedbacksController < ApplicationController
 	def create
 		@feedback = Feedback.new(feedback_params)
 		@feedback.save
+		flash[:feedback] = "Ваша заявка принята, мы свяжемся с вами как можно быстрее"
 		redirect_to root_path
 	end
 
