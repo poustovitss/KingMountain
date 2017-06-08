@@ -1,107 +1,94 @@
-  <% if current_user.confirmed? %>
+<% if current_user.confirmed? %>
+<p></p>
   <div class="container">
   <div class="col-lg-12 col-sm-8">
-     <div class="card hovercard">
-        <div class="card-background">
-           <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
-           <!-- http://lorempixel.com/850/280/people/9/ -->
-        </div>
-        <div class="useravatar">
-           <img alt="" src="/img/ava.png">
-        </div>
-        <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
-        </div>
-     </div>
-     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-        <div class="btn-group" role="group">
-           <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
-              <div class="hidden-xs">
-                 <h4>Ваш уровень: <b style="color: green;">
-                 <%= current_user.level %></b> | Приглашено <b style="color: green;">
-                 <% if current_user.level == 1 %>
-                  <%= current_user.refferences.where(level: 1).count %>
-                 <% elsif current_user.level == 2 %>
-                   <%= current_user.refferences.where(level: 1).count - 10 %>
-                 <% else %>
-                  <%= current_user.refferences.where(level: current_user.level - 1).count %>
-                 <% end %>
-                  /<%= levelinfo %></b> |  Ваш баланс: <b style="color: green;">
-                  <% if current_user.balance.nil? %>
-                   0 
-                  <% else %>
-                   <%= current_user.balance %>
-                  <% end %>
-                   </b></h4>
-              </div>
-
-            <h4>Своб. баланс: <b style="color: green;"> <%= current_user.transfers.sum(:summa) %></b>
-           </h4>
-
-           </button>
-           <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
-
-              <% if flash[:balance] %>
-                <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
-              <% end %>
-        </div>
-     </div>
-  <div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
-     <center>
-        
-    <div class="panel-body">
-
-   <div class="alert alert" style="width: 100%">
-      <div class="left">
-      <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-        <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-              <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены? ' } %>
-        <% end %>
-      <% end %>
+    <% if flash[:balance] %>
+      <div class="alert alert-danger" role="alert">
+        <center><%= flash[:balance] %></center>
       </div>
-        <div class="hr">
+    <% end %>
+
+    <div class="col-md-11 toppad">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= current_user.name %></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center">
+              <img alt="User Pic" src="images/andrew.png" class="img-circle img-responsive">
+            </div>
+            <div class=" col-md-9 col-lg-9 ">
+              <table class="table table-user-information">
+                <tbody>
+                <tr>
+                  <td>Уровень</td>
+                  <td><%= current_user.level %></td>
+                </tr>
+                <tr>
+                  <td>Статус</td>
+                  <td>Приглашено <b style="color: green;">
+                     <% if current_user.level == 1 %>
+                      <%= current_user.refferences.where(level: 1).count %>
+                     <% elsif current_user.level == 2 %>
+                       <%= current_user.refferences.where(level: 1).count - 10 %>
+                     <% else %>
+                      <%= current_user.refferences.where(level: current_user.level - 1).count %>
+                     <% end %>
+                     </b>
+                     / <%= levelinfo %>
+                  </td>
+                </tr>
+                <tr>
+                  <td><b>Ваш свободный баланс</b></td>
+                  <td><b><%= current_user.transfers.sum(:summa) %></b></td>
+                </tr>
+                <tr>
+                  <td><b>Ваш рабочий баланс</b></td>
+                  <td><b>
+                    <% if current_user.balance.nil? %>
+                       0 
+                    <% else %>
+                     <%= current_user.balance %>
+                    <% end %>
+                  </b></td>
+                </tr>
+                <tr>
+                  <td>Электронная почта</td>
+                  <td><%= current_user.email %></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+          <div class="panel-footer">
           <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
-              <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
-          <% end %>
-          <% if current_user.level == 1 %>
-             <b>Свободных провиантов <%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b>
-          <% else %>
-            <b>Свободных провиантов <%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b>
-          <% end %>
-        </div>
-      <div class="right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" style='border-radius: 0px; background-color: #306999; border-color: #306999;'>
-          Купить улучшения
-        </button>
-        
-      </div>
-
-      </center>
-      <center>
-       <div class="form-inline" >
-          <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"> 
-          <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
-        </div>
-
-
-        <h4 class="well">
-        Ваши рефералы :
-          <% if current_user.refferences.nil? %>
-            У вас нету рефералов
-          <% else %>
-            <% current_user.refferences.each do |ref| %>
-              <% unless ref.proviant == true %>
-               <b><%= ref.name %></b> |
+                  <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999; margin-left: 391px;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+                 <% if current_user.level == 1 %>
+                   <div style="margin-left: 391px;"> Свободных провиантов <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></div>
+                <% else %>
+                <p></p>
+                  <div style="margin-left: 391px;">Свободных провиантов <b><%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b></div>
+                <% end %>
               <% end %>
-            <% end %>
-          <% end %>
-        </h4>
-        
-      </center>
-  </div>
-  </div>
-  </div>
-  </div>
+            <p></p>
 
+            <p></p>
+
+            <div class="form-inline" >
+            <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-right: 30px;' %>
+              
+              <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>" style="margin-left: 90px;"> 
+              <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" style='border-radius: 0px; background-color: #306999; border-color: #306999; margin-left: 110px;'>
+              Купить улучшения
+            </button>
+            </div>
+          </div>
+      </div>
+    </div>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -233,36 +220,3 @@
      </div>
     </center>
 <% end %>
-
-
-<style type="text/css">
-  body {
-    background: url(img/m.jpg) center top repeat;
-  }
-
-  .description {
-    display: none;
-    position: absolute;
-    right: 40px;
-    top: 0;
-  }
-  .button1:hover + .description {
-    display: block;
-  }
-  .left {
-  float: left;
-  width: 48%;
-  width: 37%;
-}
-.right {
-  float: right;
-  width: 48%;
-}
-.hr {
-  float: left;
-  width: 1px;
-  height: 100px;
-  margin-left: 2%;
-}
-  
-</style>
