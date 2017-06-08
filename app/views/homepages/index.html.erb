@@ -44,9 +44,13 @@
                      <div class="start_price_extensions_item_check">
                         <a>
                         <% if user_signed_in? %>
-                           <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
-                              <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-                           <% end %>
+                             <% unless current_user.radist == true %>
+                                 <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
+                                    <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                                 <% end %>
+                              <% else %>
+                                 У вас уже есть это улучшение
+                              <% end %>
                         <% else %>
                            <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
@@ -66,9 +70,13 @@
                      </div>
                      <div class="start_price_extensions_item_check">
                         <% if user_signed_in? %>
+                         <% unless current_user.conductor == true %>
                            <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
                               <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
                            <% end %>
+                         <% else %>
+                           <a>У вас уже есть это улучшение</a>
+                         <% end %>
                         <% else %>
                            <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
@@ -87,9 +95,13 @@
                      </div>
                      <div class="start_price_extensions_item_check">
                         <% if user_signed_in? %>
+                         <% unless current_user.carrier == true %>
                            <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
                                  <%= f.submit "Купить", :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
                            <% end %>
+                         <% else %>
+                           <a>У вас уже есть это улучшение</a>
+                         <% end %>   
                         <% else %>
                            <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
@@ -109,9 +121,13 @@
                      <div class="start_price_extensions_item_check">
                         <a >
                         <% if user_signed_in? %>
+                         <% unless current_user.aerodrome == true %>
                            <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
                               <%= f.submit "Купить", class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
                            <% end %>
+                         <% else %>
+                           У вас уже есть это улучшение
+                         <% end %>
                         <% else %>
                            <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>

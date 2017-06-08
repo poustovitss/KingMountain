@@ -74,23 +74,23 @@ class ImprovesController < ApplicationController
   def buyradist
     @system = Systemfinance.last
     ref_balance = Transfer.find_by_user_id(current_user.id)
-    if ref_balance.summa >= 100  
+    if ref_balance.summa >= 50  
       unless current_user.radist == true
-        ref_balance.summa = ref_balance.summa - 100
+        ref_balance.summa = ref_balance.summa - 50
         ref_balance.save
 
         @system = Systemfinance.last
         if current_user.reffered.nil?
-          @system.summa += 100
+          @system.summa += 50
           @system.save
         else 
-          @system.summa += (100 - (100 * 0.05))
+          @system.summa += (50 - (50 * 0.05))
           @system.save
 
           transfer = Transfer.new
           transfer.user_id = current_user.reffered.id
           transfer.bank_id = Bank.last.id
-          transfer.summa = 100*0.05
+          transfer.summa = 50*0.05
           transfer.save
         end
         @system.save
