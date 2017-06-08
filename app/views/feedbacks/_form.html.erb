@@ -1,0 +1,25 @@
+ <%= form_for Feedback.new do |f| %>
+ 
+    <div class="contact_block">
+      <div class="container">
+         <div class="contact_block_inner">
+            <h2 class="contact_block_title">Связаться с нами</h2>
+            <form action="">
+               <div class="contact_block_form_field">
+                  <%= f.text_field :name, placeholder: 'Ваше имя' %>
+               </div>
+               <div class="contact_block_form_field">
+                  <%= f.email_field :email, placeholder: 'Ваш электронный адрес' %>
+               </div>
+               <div class="contact_block_form_field contact_block_form_field_comment">
+                  <%= f.text_area :comment, placeholder: 'Комментарий' %>
+               </div>
+               <div class="contact_block_form_submit">
+                  <%= f.submit "Отправить" %>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+
+ <% end %>

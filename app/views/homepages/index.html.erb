@@ -1,3 +1,18 @@
+<script type="text/javascript">
+   function sum100() {
+      // var a = document.getElementById("sum").value;
+      var b = document.getElementById("food_counter").value 
+      document.getElementById("sum").innerHTML = 100
+      document.getElementById("sum").innerHTML = 100 + (b * 100);
+   }
+
+   function sum200() {
+      var a = document.getElementById("food_counter").value
+      var d = document.getElementById("sum").innerHTML;
+      document.getElementById("sum").innerHTML = d - 100;
+   }
+</script>
+
 <link rel="stylesheet" href="fonts/gothamPro/stylesheet.css">
    <div class="main_banner">
       <div class="container">
@@ -118,9 +133,9 @@
                </div>
                <div class="right_side">
                   <div class="start_price_quantity_counter">
-                     <b class="price_count_left">‹</b>
+                     <b class="price_count_left" onclick="sum200()">‹</b>
                      <input type="text" value="1" id="food_counter">
-                     <b class="price_count_right">›</b>
+                     <b class="price_count_right" onclick="sum100()">›</b>
                   </div>
                </div>
             </div>
@@ -129,8 +144,9 @@
                   <h4>Сумма к оплате:</h4>
                </div>
                <div class="right_side">
-                  <b class="start_price_total_price">
-                     100 рублей
+                  <b class="start_price_total_price" id="sum">
+                     
+                     <%= @a %>
                   </b>
                </div>
             </div>
@@ -342,27 +358,12 @@
          </div>
       </div>
    </div>
-   <div class="contact_block">
-      <div class="container">
-         <div class="contact_block_inner">
-            <h2 class="contact_block_title">Связаться с нами</h2>
-            <form action="">
-               <div class="contact_block_form_field">
-                  <input type="text" name="" id="" placeholder="Ваше имя">
-               </div>
-               <div class="contact_block_form_field">
-                  <input type="email" name="" id="" placeholder="Ваш электронный адрес">
-               </div>
-               <div class="contact_block_form_field contact_block_form_field_comment">
-                  <textarea placeholder="Комментарий"></textarea>
-               </div>
-               <div class="contact_block_form_submit">
-                  <input type="submit" value="Отправить">
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
+   
+
+   <%= render '/feedbacks/form' %>
+
+
+
    <div class="footer">
       <div class="container">
          <span class="arrow_up">⌃</span>
