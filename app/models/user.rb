@@ -5,8 +5,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable, :confirmable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
-    :lastseenable
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
@@ -93,16 +92,16 @@ TEMP_EMAIL_PREFIX = 'change@me'
   end
 
   # def user_level
-  # 	u = self.refferences.count
+  #   u = self.refferences.count
 
-  # 	if u < 10 
-  # 		1
-  # 	elsif u > 9 && u < 20
-  # 		2
-  # 	elsif u > 100 
-  # 		10
-  # 	else
-  # 		(u / 10).to_i
-  # 	end
+  #   if u < 10 
+  #     1
+  #   elsif u > 9 && u < 20
+  #     2
+  #   elsif u > 100 
+  #     10
+  #   else
+  #     (u / 10).to_i
+  #   end
   # end
 end
