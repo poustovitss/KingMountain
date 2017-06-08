@@ -35,7 +35,7 @@ class ImprovesController < ApplicationController
     else
         flash[:balance] = 'У вас не достаточно баланса'
     end
-    redirect_to :back
+    redirect_to profiles_path
   end
 
   def buyaerodrome
@@ -68,7 +68,7 @@ class ImprovesController < ApplicationController
     else
       flash[:balance] = 'У вас не достаточно баланса'
     end
-      redirect_to :back
+      redirect_to profiles_path
   end
 
   def buyradist
@@ -101,7 +101,7 @@ class ImprovesController < ApplicationController
     else
       flash[:balance] = 'У вас не достаточно баланса'
     end
-      redirect_to :back
+      redirect_to profiles_path
   end
 
   def buyall
@@ -187,7 +187,7 @@ class ImprovesController < ApplicationController
     else
       flash[:balance] = 'У вас не достаточно баланса'
     end
-    redirect_to :back
+    redirect_to profiles_path
   end
 
   def show
