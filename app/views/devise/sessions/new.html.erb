@@ -21,7 +21,7 @@
           <% if devise_mapping.rememberable? -%>
             <p class="field">
               <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
+              <%= f.label :Запомнить_меня %>
             </p>
           <% end -%>
         </center>
@@ -29,6 +29,7 @@
           <input type="submit" value="Войти">
         </div>
       </form>
+      <center><div class="register_form_social_title">Войти через соц. сети</div></center>
     <%= render "devise/shared/links" %>
     <div class="footer">
     <div class="container">

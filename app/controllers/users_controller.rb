@@ -33,6 +33,9 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
+
+        @user.reffered_by = 0
+        @user.save
         flash[:balance] = "Вы зарегистрировались"
         redirect_to profiles_path
       else
