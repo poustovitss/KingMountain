@@ -40,10 +40,10 @@ class ProfilesController < ApplicationController
     if current_user.level == 1 
       check = current_user.refferences.where(level: 1).count
     else
-      check = user.refferences.where(level: user.level - 1).count
+      check = current_user.refferences.where(level: current_user.level - 1).count
     end
     
-    if user.balance >= pay
+    if current_user.balance >= pay
       if check >= user.level * 10 
         unless current_user.reffered.nil?
             reffered = current_user.reffered

@@ -63,6 +63,14 @@
           </div>
         </div>
           <div class="panel-footer">
+           <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+           <center> 
+            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                  <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены? ' } %>
+            <% end %>
+           </center>
+           <p></p>
+          <% end %>
           <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
                   <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999; margin-left: 391px;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
                  <% if current_user.level == 1 %>
