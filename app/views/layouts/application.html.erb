@@ -28,7 +28,7 @@
          <nav class="header_menu">
             <ul>
                <li><a href="<%= root_path %>">Главная</a></li>
-               <li><a href="#">о сервисе</a></li>
+               <li><a href="<%= service_path %>">о сервисе</a></li>
                <li><a href="#">контакты</a></li>
                <% if user_signed_in? && current_user.admin? %>
                 <li><a href="<%= admin_root_path %>">Админ панель</a></li>

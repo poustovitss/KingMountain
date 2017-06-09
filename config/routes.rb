@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'
   put 'buyradist/:id' => 'improves#buyradist', as: 'buyradist'
 
+  get 'service' => 'homepages#service', as: 'service'
+
   match '/success' => 'orders#success', via: :get
   match '/fail' => 'orders#fail', via: :get
 

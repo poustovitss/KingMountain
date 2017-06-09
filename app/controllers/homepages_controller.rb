@@ -4,4 +4,8 @@ class HomepagesController < ApplicationController
 
   def show
   end
+
+  def service
+
+  end
 end
