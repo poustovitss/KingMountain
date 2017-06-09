@@ -269,9 +269,14 @@
          <div class="top_block_items">
             <div class="top_block_item">
                <b>1</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
-               <span>
                   <% user_first = User.order("level DESC").first %>
+                  <% ava = user_first.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
+               <span>
                   <%= user_first.name %> <br>
                   <%= user_first.refferences.count %> рефералов <br>
                   <%= user_first.balance %> руб.
@@ -279,8 +284,13 @@
             </div>
             <div class="top_block_item">
                <b>2</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_second = User.order("level DESC").second %>
+                  <% ava = user_second.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_second.name %> <br>
                   <%= user_second.refferences.count %> рефералов <br>
@@ -289,8 +299,13 @@
             </div>
             <div class="top_block_item">
                <b>3</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_third = User.order("level DESC").third %>
+                  <% ava = user_third.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_third.name %> <br>
                   <%= user_third.refferences.count %> рефералов <br>
@@ -299,8 +314,13 @@
             </div>
             <div class="top_block_item">
                <b>4</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_fourth = User.order("level DESC").fourth %>
+                  <% ava = user_fourth.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_fourth.name %> <br>
                   <%= user_fourth.refferences.count %> рефералов <br>
@@ -309,8 +329,13 @@
             </div>
             <div class="top_block_item">
                <b>5</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_fifth = User.order("level DESC").fifth %>
+                  <% ava = user_fifth.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_fifth.name %> <br>
                   <%= user_fifth.refferences.count %> рефералов <br>
@@ -329,8 +354,13 @@
             </div>
             <div class="top_block_item">
                <b>7</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_seventh = User.order("level DESC")[7] %>
+                  <% ava = user_seventh.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_seventh.name %> <br>
                   <%= user_seventh.refferences.count %> рефералов <br>
@@ -339,8 +369,13 @@
             </div>
             <div class="top_block_item">
                <b>8</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_eighth = User.order("level DESC")[8] %>
+                  <% ava = user_eighth.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_eighth.name %> <br>
                   <%= user_eighth.refferences.count %> рефералов <br>
@@ -349,8 +384,13 @@
             </div>
             <div class="top_block_item">
                <b>9</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_nine = User.order("level DESC")[9] %>
+                  <% ava = user_nine.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_nine.name %> <br>
                   <%= user_nine.refferences.count %> рефералов <br>
@@ -359,8 +399,13 @@
             </div>
             <div class="top_block_item">
                <b>10</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
                <% user_ten = User.order("level DESC")[10] %>
+                  <% ava = user_ten.avatars.last %>
+               <% if ava.nil? %>
+                <img src="images/top-photo.png" height="62" width="62" alt="">
+               <% else %>
+                <%= image_tag ava.image.url(:medium), height: "62", width: "62" %>
+               <% end %>
                <span>
                   <%= user_ten.name %> <br>
                   <%= user_ten.refferences.count %> рефералов <br>
