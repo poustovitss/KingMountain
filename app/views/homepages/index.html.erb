@@ -269,7 +269,7 @@
          <div class="top_block_items">
             <div class="top_block_item">
                <b>1</b>
-                  <% user_first = User.order("level DESC")[1] %>
+                  <% user_first = User.order("balance DESC")[0] %>
                   <% ava = user_first.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -284,7 +284,7 @@
             </div>
             <div class="top_block_item">
                <b>2</b>
-               <% user_second = User.order("level DESC")[2] %>
+               <% user_second = User.order("balance DESC")[1] %>
                   <% ava = user_second.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -299,7 +299,7 @@
             </div>
             <div class="top_block_item">
                <b>3</b>
-               <% user_third = User.order("level DESC")[3] %>
+               <% user_third = User.order("balance DESC")[2] %>
                   <% ava = user_third.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -314,7 +314,7 @@
             </div>
             <div class="top_block_item">
                <b>4</b>
-               <% user_fourth = User.order("level DESC")[4] %>
+               <% user_fourth = User.order("balance DESC")[3] %>
                   <% ava = user_fourth.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -329,7 +329,7 @@
             </div>
             <div class="top_block_item">
                <b>5</b>
-               <% user_fifth = User.order("level DESC")[5] %>
+               <% user_fifth = User.order("balance DESC")[4] %>
                   <% ava = user_fifth.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -345,7 +345,7 @@
             <div class="top_block_item">
                <b>6</b>
                <img src="images/top-photo.png" height="62" width="62" alt="">
-               <% user_sixth = User.order("level DESC")[6] %>
+               <% user_sixth = User.order("balance DESC")[5] %>
                <span>
                   <%= user_sixth.name %> <br>
                   <%= user_sixth.refferences.count %> рефералов <br>
@@ -354,7 +354,7 @@
             </div>
             <div class="top_block_item">
                <b>7</b>
-               <% user_seventh = User.order("level DESC")[7] %>
+               <% user_seventh = User.order("balance DESC")[6] %>
                   <% ava = user_seventh.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -369,7 +369,7 @@
             </div>
             <div class="top_block_item">
                <b>8</b>
-               <% user_eighth = User.order("level DESC")[8] %>
+               <% user_eighth = User.order("balance DESC")[7] %>
                   <% ava = user_eighth.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -384,7 +384,7 @@
             </div>
             <div class="top_block_item">
                <b>9</b>
-               <% user_nine = User.order("level DESC")[9] %>
+               <% user_nine = User.order("balance DESC")[8] %>
                   <% ava = user_nine.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -399,7 +399,7 @@
             </div>
             <div class="top_block_item">
                <b>10</b>
-               <% user_ten = User.order("level DESC")[10] %>
+               <% user_ten = User.order("balance DESC")[9] %>
                   <% ava = user_ten.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
