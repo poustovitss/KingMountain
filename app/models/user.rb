@@ -77,6 +77,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
 
   has_many :transfers
   has_many :orders
+  has_many :avatars
   belongs_to :reffered, :class_name => 'User', foreign_key: 'reffered_by'
   has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by'
   has_many :identities, dependent: :destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608072622) do
+ActiveRecord::Schema.define(version: 20170609182359) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -26,12 +26,32 @@ ActiveRecord::Schema.define(version: 20170608072622) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "avatars", force: :cascade do |t|
+    t.string   "image"
+    t.integer  "user_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["user_id"], name: "index_avatars_on_user_id"
+  end
+
   create_table "banks", force: :cascade do |t|
     t.string   "name"
     t.string   "desc"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.boolean  "active",     default: true
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.float    "quantity"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "feedbacks", force: :cascade do |t|
@@ -131,6 +151,12 @@ ActiveRecord::Schema.define(version: 20170608072622) do
     t.string   "provider"
     t.string   "uid"
     t.datetime "last_seen"
+    t.datetime "last_seen_at"
+    t.string   "image"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
