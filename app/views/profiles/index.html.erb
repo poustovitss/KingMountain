@@ -395,7 +395,7 @@
                </div> -->
             </div>
             <% calc =  User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %>
-            <% calc_summ = calc * 100 %>
+            <% calc_summ = calc * balanceinfo %>
             <div class="start_price_total">
                <div class="left_side">
                   <h4>Сумма за всех свободных провиантов:</h4>
@@ -409,7 +409,10 @@
             </div>
             <div class="start_block_submit">
               <% if user_signed_in? %>
-               <a href="<%= new_user_registration_path %>" class="start_block_submit_btn">Купить свободных провиантов</a>
+              <%= form_for current_user, :url => buyallproviant_path(current_user), method: :put  do |f| %>
+                <%= f.submit 'Купить свободных провиантов', class: "start_block_submit_btn" %>
+              <% end %>
+               
               <% else %>
                <a href="<%= new_user_registration_path %>" class="start_block_submit_btn">Старт</a>
               <% end %>

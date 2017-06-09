@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   post 'buyall/:id' => 'improves#buyall', as: 'buyall'
 
+  put 'buyallproviant/:id' => 'profiles#buyallproviant', as: 'buyallproviant'
+
   put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'
   put 'buyradist/:id' => 'improves#buyradist', as: 'buyradist'
 
