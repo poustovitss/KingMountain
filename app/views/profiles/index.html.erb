@@ -401,8 +401,7 @@
                   <h4>Сумма за всех свободных провиантов:</h4>
                </div>
                <div class="right_side">
-                  <b class="start_price_total_price" id="sum">
-                     
+                  <b class="start_price_total_price" id="sum" style="margin-top: -40px;">
                      <%= calc_summ %>
                   </b>
                </div>
@@ -412,10 +411,5 @@
               <%= form_for current_user, :url => buyallproviant_path(current_user), method: :put  do |f| %>
                 <%= f.submit 'Купить свободных провиантов', class: "start_block_submit_btn" %>
               <% end %>
-               
-              <% else %>
-               <a href="<%= new_user_registration_path %>" class="start_block_submit_btn">Старт</a>
               <% end %>
-               <span>
-               </span>
             </div>
