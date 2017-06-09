@@ -9,6 +9,7 @@
     <% end %>
 
     <div class="col-md-11 toppad">
+    <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 816px;' %>
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title"><%= current_user.name %></h3>
@@ -41,7 +42,9 @@
                 </tr>
                 <tr>
                   <td><b>Ваш свободный баланс</b></td>
-                  <td><b><%= current_user.transfers.sum(:summa) %></b></td>
+                  <td><b><%= current_user.transfers.sum(:summa) %>
+                    <%= link_to 'Вывод свободного баланса', new_getmoney_path, style: 'margin-left: 7px;' %>
+                  </b></td>
                 </tr>
                 <tr>
                   <td><b>Ваш рабочий баланс</b></td>
@@ -49,13 +52,24 @@
                     <% if current_user.balance.nil? %>
                        0 
                     <% else %>
-                     <%= current_user.balance %>
+                     <%= current_user.balance %>  
                     <% end %>
+                    <%= link_to 'Вывод рабочего баланса', new_getbalance_path,  style: 'margin-left: 10px;' %>
                   </b></td>
                 </tr>
                 <tr>
                   <td>Электронная почта</td>
                   <td><%= current_user.email %></td>
+                </tr>
+                <tr>
+                  <td>Вы пришли от</td>
+                  <td>
+                  <% if current_user.reffered.nil? %>
+                   ---
+                  <% else %>
+                    <%= current_user.reffered.name %>
+                  <% end %>    
+                  </td>
                 </tr>
                 </tbody>
               </table>
@@ -85,7 +99,7 @@
             <p></p>
 
             <div class="form-inline" >
-            <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-right: 30px;' %>
+            
               
               <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>" style="margin-left: 90px;"> 
               <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
@@ -228,3 +242,113 @@
      </div>
     </center>
 <% end %>
+
+<div class="start_price_block">
+               <div class="start_price_extensions">
+                  <strong>Дополнения</strong>
+                  <div class="start_price_extensions_item radio">
+                     <div class="icon">Радист</div>
+                     <div class="start_price_extensions_item_price">
+                        50 руб
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <a>
+                        <% if user_signed_in? %>
+                             <% unless current_user.radist == true %>
+                                 <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
+                                    <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                                 <% end %>
+                              <% else %>
+                                 У вас уже есть это улучшение
+                              <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                        <% end %>
+                        </a>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
+                     </div>
+                  </div>
+                  <div class="start_price_extensions_item guide">
+                     <div class="icon">Проводник</div>
+                     <div class="start_price_extensions_item_price">
+                        150 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <% if user_signed_in? %>
+                         <% unless current_user.conductor == true %>
+                           <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
+                              <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           <a>У вас уже есть это улучшение</a>
+                         <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                        <% end %>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
+                     </div>
+                  </div>
+                  <div class="start_price_extensions_item porter">
+                     <div class="icon">Носильщик</div>
+                     <div class="start_price_extensions_item_price">
+                        100 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <% if user_signed_in? %>
+                         <% unless current_user.carrier == true %>
+                           <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
+                                 <%= f.submit "Купить", :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           <a>У вас уже есть это улучшение</a>
+                         <% end %>   
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                        <% end %>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
+                     </div>
+                  </div>
+                  <div class="start_price_extensions_item helicopter">
+                     <div class="icon">Эвакуационный вертолёт</div>
+                     <div class="start_price_extensions_item_price">
+                        200 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <a >
+                        <% if user_signed_in? %>
+                         <% unless current_user.aerodrome == true %>
+                           <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
+                              <%= f.submit "Купить", class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           У вас уже есть это улучшение
+                         <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                        <% end %>
+                        </a>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
+                     </div>
+                  </div>
+               </div>
+            </div>

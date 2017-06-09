@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+  <meta property="og:locale" content="ru_RU"/>  
+  <meta property="og:type" content="article"/>  
+  <meta property="og:title" content="Игра - Царь Горы"/> 
+  <meta property="og:description" content="Игра - Царь Горы"/>  
+  <meta property="og:image" content="images/logo.png"/> 
+  <meta property="og:site_name" content="Игра - Царь Горы"/>
+
   <%= favicon_link_tag 'favicon.ico' %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -29,7 +37,7 @@
                <% if user_signed_in? %>
                 <li><a href="<%= profiles_path %>">Профиль</a></li>
                 <li><a href="<%= new_order_path %>" class="sign_in">Пополнить</a></li>
-                <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li>
+                <!-- <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li> -->
               <% end %>
             </ul>
          </nav>

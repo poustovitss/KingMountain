@@ -32,7 +32,7 @@
    <div class="container">
       <div class="start_block">
          <p>Всего за <span>25 рублей</span> и они твои!</p>
-         <strong><%= Transfer.sum(:summa) %> рублей</strong>
+         <strong>50.000 рублей</strong>
       </div>
       <div class="start_price">
          <h2 class="start_price_title">
@@ -362,8 +362,11 @@
          </div>
          <div class="stats_block_item online">
             <div class="stats_block_quantity">
-               <%= User.where('last_seen > ?', 15.minutes.ago).count %>
-               <span>Онлайн</span>
+               <% getbalance = Getbalance.sum("total") %>
+               <% getmoney = Getmoney.sum("total") %>
+               <% obsh = getbalance + getmoney %>
+               <%= obsh %>
+               <span>Вывели денег</span>
             </div>
          </div>
          <div class="stats_block_item tasks">
@@ -374,7 +377,7 @@
          </div>
          <div class="stats_block_item compl">
             <div class="stats_block_quantity">
-               <%= User.sum(:balance) %> руб
+               50.000 руб
                <span>Общий банк</span>
             </div>
          </div>

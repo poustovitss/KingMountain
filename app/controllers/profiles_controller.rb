@@ -132,7 +132,9 @@ class ProfilesController < ApplicationController
         end
       end
 
-      if current_user.balance >= pay && current_user.balance > 0  
+    ref_balance = Transfer.find_by_user_id(current_user.id)
+    
+      if ref_balance.summa >= pay && ref_balance.summa > 0  
 
         array_proviants = []
         if current_user.level == 1
@@ -160,10 +162,12 @@ class ProfilesController < ApplicationController
           b.reffered_by=current_user.id
           b.save
 
+          ref_balance.summa = ref_balance.summa - pay
+          ref_balance.save
 
-          user_onl = current_user
-          user_onl.balance = current_user.balance - pay
-          user_onl.save
+          # user_onl = current_user
+          # user_onl.balance = current_user.balance - pay
+          # user_onl.save
 
           @system = Systemfinance.last
           if current_user.reffered.nil?
