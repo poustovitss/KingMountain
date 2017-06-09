@@ -269,7 +269,7 @@
          <div class="top_block_items">
             <div class="top_block_item">
                <b>1</b>
-                  <% user_first = User.order("level DESC").first %>
+                  <% user_first = User.order("level DESC")[1] %>
                   <% ava = user_first.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -284,7 +284,7 @@
             </div>
             <div class="top_block_item">
                <b>2</b>
-               <% user_second = User.order("level DESC").second %>
+               <% user_second = User.order("level DESC")[2] %>
                   <% ava = user_second.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -299,7 +299,7 @@
             </div>
             <div class="top_block_item">
                <b>3</b>
-               <% user_third = User.order("level DESC").third %>
+               <% user_third = User.order("level DESC")[3] %>
                   <% ava = user_third.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -314,7 +314,7 @@
             </div>
             <div class="top_block_item">
                <b>4</b>
-               <% user_fourth = User.order("level DESC").fourth %>
+               <% user_fourth = User.order("level DESC")[4] %>
                   <% ava = user_fourth.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
@@ -329,7 +329,7 @@
             </div>
             <div class="top_block_item">
                <b>5</b>
-               <% user_fifth = User.order("level DESC").fifth %>
+               <% user_fifth = User.order("level DESC")[5] %>
                   <% ava = user_fifth.avatars.last %>
                <% if ava.nil? %>
                 <img src="images/top-photo.png" height="62" width="62" alt="">
