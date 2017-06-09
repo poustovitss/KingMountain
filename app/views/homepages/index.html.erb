@@ -146,34 +146,71 @@
                         </i>
                      </div>
                   </div>
+                  <div class="start_price_extensions_item all">
+                     <div class="icon">Купить все улучшения</div>
+                     <div class="start_price_extensions_item_price">
+                        500 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <a >
+                        <% if user_signed_in? %>
+                         <% unless current_user.radist == true || current_user.carrier == true || current_user.conductor == true || current_user.aerodrome == true %>
+                           <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
+                              <%= f.submit 'Купить', class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           У вас уже есть это улучшение
+                         <% end %>
+                        <% else %>
+                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                        <% end %>
+                        </a>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
+                     </div>
+                  </div>
                </div>
             </div>
+            <% if user_signed_in? %>
             <div class="start_price_quantity">
                <div class="left_side">
-                  <h3>Количество провианта</h3>
+                  <h3>Купить провианта</h3>
                   <em>Провиант помогает быстрее добраться к вершине!</em>
+                  <p></p>
+                     <em>Свободных провиантов <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></em>
                </div>
-               <div class="right_side">
+               <!-- <div class="right_side">
                   <div class="start_price_quantity_counter">
                      <b class="price_count_left" onclick="sum200()">‹</b>
                      <input type="text" value="1" id="food_counter">
                      <b class="price_count_right" onclick="sum100()">›</b>
                   </div>
-               </div>
+               </div> -->
             </div>
+            <% calc =  User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %>
+            <% calc_summ = calc * 100 %>
             <div class="start_price_total">
                <div class="left_side">
-                  <h4>Сумма к оплате:</h4>
+                  <h4>Сумма за всех свободных провиантов:</h4>
                </div>
                <div class="right_side">
                   <b class="start_price_total_price" id="sum">
                      
-                     <%= @a %>
+                     <%= calc_summ %>
                   </b>
                </div>
             </div>
+               <% end %>
             <div class="start_block_submit">
+              <% if user_signed_in? %>
+               <a href="<%= new_user_registration_path %>" class="start_block_submit_btn">Купить свободных провиантов</a>
+              <% else %>
                <a href="<%= new_user_registration_path %>" class="start_block_submit_btn">Старт</a>
+              <% end %>
                <span>
                   или <br>
                   <a href="<%= new_user_registration_path %>">Зарегестрируйтесь</a>
