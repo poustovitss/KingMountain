@@ -7,7 +7,10 @@
 	</div>
 	<div class="field">
 		<%= f.label :Валюта %><br />
-		<%= f.collection_select :currency, ['RUB'], :to_s, :to_s, include_blank: false %>
+		<%= f.collection_select :currency, ['RUB'], :to_s, :to_s, include_blank: false %><br />
+		<p></p>
+		<%= f.label :Баланс %><br />
+		<%= f.collection_select :which, ['Рабочий баланс', 'Свободный'], :to_s, :to_s, include_blank: false %>
 	</div>
 	<hr>
 
