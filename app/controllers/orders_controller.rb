@@ -21,10 +21,6 @@ class OrdersController < ApplicationController
     ref_balance = Transfer.find_by_user_id(@order.user.id)
 
     if (params["ik_inv_st"] =="success") #and (params["ik_ps_price"]||0)==(@order$
-      if @order.which == 'Рабочий баланс'
-        current_user.balance += @order.total
-        current_user.save
-      elsif @order.which == 'Свободный баланс'
         ref_balance.summa += @order.total
         ref_balance.save
       end
