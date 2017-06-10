@@ -83,6 +83,10 @@
                   <% end %>    
                   </td>
                 </tr>
+                <tr>
+                  <td>Ваша реферальная ссылка</td>
+                  <td><input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"></td>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -98,7 +102,7 @@
            <p></p>
           <% end %>
           <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
-                  <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999; margin-left: 391px;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+                  <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #49d793; border-color: #49d793; margin-left: 391px; border-radius: 13px;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
                  <% if current_user.level == 1 %>
                    <div style="margin-left: 391px;"> Свободных провиантов <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></div>
                 <% else %>
@@ -112,10 +116,6 @@
 
             <div class="form-inline" >
             
-              
-              <input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>" style="margin-left: 90px;"> 
-              <button id="copyButton" class="btn btn-primary" style= 'border-radius: 0px; background-color: #306999; border-color: #306999;'>Копировать реферальную ссылку</button>
-
             <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" style='border-radius: 0px; background-color: #306999; border-color: #306999; margin-left: 110px;'>
               Купить улучшения
             </button> -->
