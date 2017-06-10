@@ -87,6 +87,12 @@
                   <td>Ваша реферальная ссылка</td>
                   <td><input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"></td>
                 </tr>
+                <tr>
+                  <td>Купить провиантов</td>
+                  <td>
+                    
+                  </td>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -101,8 +107,9 @@
            </center>
            <p></p>
           <% end %>
-          <%= form_for current_user, :url => profile_path(current_user), method: :put  do |f| %>
-                  <%= f.submit "Купить 1 провианта", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #49d793; border-color: #49d793; margin-left: 391px; border-radius: 13px;', data: { confirm: 'Стоимость 50руб вы уверены ? ' } %>
+          <%= form_for :counts, url: buynumb_path(current_user.id), method: :post do |f| %>
+                      <%= f.number_field :size_to_buy, style: 'margin-left: 371px' %>
+                      <%= f.submit 'Купить', class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; ' %>
                  <% if current_user.level == 1 %>
                    <div style="margin-left: 391px;"> Свободных провиантов <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></div>
                 <% else %>
@@ -613,3 +620,5 @@
     </div>
   </div>
 </center>
+
+
