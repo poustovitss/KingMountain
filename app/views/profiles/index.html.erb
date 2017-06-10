@@ -425,3 +425,191 @@
               <% end %>
               <% end %>
             </div>
+
+            <center>
+   <div class="progress_block">
+    <div class="progress_block_title">Прогресс</div>
+    <div class="progress_block_content">
+      <div class="progress_block_subtitle">Баланс <%= current_user.balance %> балла</div>
+      <div class="progress_block_content_items">
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">10 Уровень "Царь Горы"</div>
+            <% if current_user.level == 10 %>
+             <span class="progress_block_content_item_level">
+             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">9 Уровень "Царь Горы"</div>
+            <% if current_user.level == 9 %>
+             <span class="progress_block_content_item_level">
+             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 9 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">8 Уровень "Царь Горы"</div>
+            <% if current_user.level == 8 %>
+             <span class="progress_block_content_item_level">
+             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 8 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">7 Уровень "Царь Горы"</div>
+            <% if current_user.level == 7 %>
+             <span class="progress_block_content_item_level">
+             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 7 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">6 Уровень "Царь Горы"</div>
+            <% if current_user.level == 6 %>
+             <span class="progress_block_content_item_level"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 6 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">5 Уровень "Царь Горы"</div>
+            <% if current_user.level == 5 %>
+             <span class="progress_block_content_item_level">
+             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 5 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">4 Уровень "Царь Горы"</div>
+            <% if current_user.level == 4 %>
+             <span class="progress_block_content_item_level"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 4 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">3 Уровень "Царь Горы"</div>
+            <% if current_user.level == 3 %>
+             <span class="progress_block_content_item_level">
+               <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 3 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">2 Уровень "Царь Горы"</div>
+            <% if current_user.level == 2 %>
+                <span class="progress_block_content_item_level">
+                <%= current_user.refferences.where(level: 1).count - 10 %>/10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 2 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="progress_block_content_item">
+          <div class="progress_block_content_item_inner">
+            <div class="progress_block_content_item_text">1 Уровень "Царь Горы"</div>
+            <% if current_user.level == 1 %>
+             <span class="progress_block_content_item_level">
+                <%= current_user.refferences.where(level: 1).count %>
+                   /10</span>
+                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
+                  <% end %>
+                <% end %>
+            <% elsif current_user.level > 1 %>
+             <span class="progress_block_content_item_level">10/10</span>
+            <% else %>
+             <span class="progress_block_content_item_level">0/10</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</center>
