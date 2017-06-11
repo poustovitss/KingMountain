@@ -76,7 +76,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
   validates :name, presence: true, length: {maximum: 50}
   
 
-  has_many :transfers
+  has_many :transfers, dependent: :destroy
   has_many :orders
   has_many :avatars
   belongs_to :reffered, :class_name => 'User', foreign_key: 'reffered_by'
