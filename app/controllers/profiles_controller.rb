@@ -399,6 +399,7 @@ class ProfilesController < ApplicationController
             array_proviants = []
             if current_user.level == 1
               limiter = params[:counts][:size_to_buy]
+              limiter = limiter.to_i
               b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter)
               b.each do |proviant|
                 if proviant.level == 1
@@ -408,8 +409,7 @@ class ProfilesController < ApplicationController
             else
 
               limiter = params[:counts][:size_to_buy]
-
-
+              limiter = limiter.to_i
               b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user).limit(limiter)
 
               b.each do |proviant|
@@ -431,6 +431,7 @@ class ProfilesController < ApplicationController
               #   end
               # end
 
+            Rails.logger.info '==================='
             Rails.logger.info array_proviants
               
             size_for = params[:counts][:size_to_buy]
