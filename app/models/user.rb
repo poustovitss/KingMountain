@@ -5,8 +5,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable, :confirmable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
-    omniauth_providers: [:facebook, :twitter, :vkontakte]
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
     # :lastseenable
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
