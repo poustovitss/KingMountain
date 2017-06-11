@@ -418,7 +418,7 @@ class ProfilesController < ApplicationController
           if array_proviants.first.nil? 
             flash[:balance] = 'Нет свободных провиантов'
           elsif size_for >= prov.count || size_for < 0
-            flash[:balance] = 'На данный момент нет столько свободных провиантов'
+            flash[:balance] = 'Нет свободных провиантов'
           else
             array_proviants.each do |b|
               b.reffered_by=current_user.id
@@ -457,7 +457,7 @@ class ProfilesController < ApplicationController
               reffered.save
             end
           end
-           flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
+           # flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
            redirect_to profiles_path
         else
           flash[:balance] = 'У вас не достаточно баланса'
