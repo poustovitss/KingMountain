@@ -1,13 +1,13 @@
 class ProfilesController < ApplicationController
 	
   def index
-    if current_user.level == 1 
-      @check_button = current_user.refferences.where(level: 1).count
-    else
-      @check_button = current_user.refferences.where(level: current_user.level - 1).count
-    end
-    
     if user_signed_in?
+      if current_user.level == 1 
+        @check_button = current_user.refferences.where(level: 1).count
+      else
+        @check_button = current_user.refferences.where(level: current_user.level - 1).count
+      end
+    
        if current_user.level == 0 || current_user.level.nil?
          @button = 'Начать игру'
        else
@@ -44,8 +44,19 @@ class ProfilesController < ApplicationController
     end
     ref_balance = Transfer.find_by_user_id(current_user.id)
     
-    if current_user.level <= 0 && ref_balance.summa == 25
-      flash[:balance] = 'У вас не достаточно баланса'
+    if current_user.level <= 0 
+      if ref_balance.nil?
+        flash[:balance] = 'У вас не достаточно баланса'
+      elsif ref_balance.summa >= 50 
+        ref_balance.summa = ref_balance.summa - 50
+        ref_balance.save
+
+        current_user.level += 1
+        current_user.save
+        flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
+      else
+        flash[:balance] = 'У вас не достаточно баланса'
+      end
     else
       if current_user.balance >= pay
         if check >= user.level * 10 
@@ -65,7 +76,7 @@ class ProfilesController < ApplicationController
             end
           end
 
-          if current_user.level == 0
+          if current_user.level <= 0
             ref_balance = Transfer.find_by_user_id(current_user.id)
             ref_balance.summa = ref_balance.summa - pay
             ref_balance.save
@@ -255,8 +266,10 @@ class ProfilesController < ApplicationController
       total_proviant = User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count
 
         total_proviant = total_proviant * pay
-        if ref_balance.summa >= total_proviant && ref_balance.summa > 0  
-
+        if ref_balance.nil?  
+          flash[:balance] = 'У вас не достаточно баланса'
+          redirect_to profiles_path
+        elsif ref_balance.summa >= total_proviant && ref_balance.summa > 0
           array_proviants = []
           if current_user.level == 1
             b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at)
@@ -360,7 +373,10 @@ class ProfilesController < ApplicationController
       puts pay
 
         total_proviant = summa_for_prov.to_i * pay
-        if ref_balance.summa >= total_proviant && ref_balance.summa > 0  
+        if ref_balance.nil?  
+          flash[:balance] = 'У вас не достаточно баланса'
+          redirect_to profiles_path
+        elsif ref_balance.summa >= total_proviant && ref_balance.summa > 0
 
           array_proviants = []
           if current_user.level == 1

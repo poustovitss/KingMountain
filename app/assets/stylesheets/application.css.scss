@@ -492,18 +492,34 @@ body { font-family: "PT Sans", sans-serif; }
 .register_form_social_item { display: inline-block; margin: 0 25px; vertical-align: middle; -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 .register_form_social_item:hover { filter: grayscale(0); }
 
-.progress_block { padding: 40px 0; max-width: 700px; border: 1px solid #346e97; }
-.progress_block_title { padding: 25px 0; margin-bottom: 20px; font-size: 30px; line-height: 32px; background: #49d793; color: #fff; text-align: center; }
+.progress_block { padding: 40px 0; margin-bottom: 100px; max-width: 700px; border: 1px solid #346e97; }
+.progress_block_title { padding: 25px 0; margin-bottom: 20px; font-size: 30px; line-height: 32px; background: #346e97; color: #fff; text-align: center; }
 .progress_block_subtitle { margin-bottom: 30px; font-size: 24px; line-height: 28px; color: #5d5d5d; text-align: center; }
 .progress_block_content_items { padding-bottom: 35px; }
-.progress_block_content_item { padding: 9px 0; font-size: 16px; line-height: 20px; color: #747474; position: relative; }
+.progress_block_content_item { position: relative; padding: 9px 0; font-size: 16px; line-height: 20px; color: #747474; }
 .progress_block_content_item:after { content: ""; display: block; clear: both; }
 .progress_block_content_item_inner { padding: 0 40px; }
 .progress_block_content_item_text { float: left; }
 .progress_block_content_item_level { float: right; }
 .progress_block_content_item_levelup { position: absolute; top: 50%; right: 100px; display: none; margin-top: -14px; padding: 0 5px; line-height: 30px; color: #fff; font-style: normal; text-decoration: none; border-left: 1px solid #fff; border-right: 1px solid #fff; }
-.progress_block_content_item:hover { color: #fff; background: #49d793; }
+.progress_block_content_item:hover { color: #fff; background: #346e97; }
 .progress_block_content_item:hover .progress_block_content_item_levelup { display: block; }
+.progress_block_content_item.complete { background: #e3eaf0; }
+.progress_block_content_item.complete:hover { color: #747474; }
+.progress_block_content_item.complete:hover .progress_block_content_item_levelup { display: none; }
 .progress_block_content_total { padding: 15px 40px 0; border-top: 1px solid #346e97; }
 .progress_block_content_total .left_side { float: left; font-size: 16px; line-height: 20px; color: #686868; }
 .progress_block_content_total .right_side { float: right; font-size: 20px; line-height: 24px; color: #000; }
+.progress_block_btn { padding-top: 50px; text-align: center; }
+.progress_block_btn a { display: inline-block; padding: 10px 50px; font-size: 18px; line-height: 22px; color: #fff; text-decoration: none; background: #346e97; }
+.progress_block_btn a:hover { background: #20455e; }
+
+.activity_block { position: relative; padding: 30px 15px 10px; border: 1px solid #00aa66; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; }
+.activity_block_title { position: absolute; top: -20px; left: 0; width: 100%; font-size: 30px; line-height: 34px; color: #0a6; text-align: center; }
+.activity_block_title span { display: inline-block; padding: 0 15px; background: #fff; }
+.activity_block table { width: 100%; margin-bottom: 15px; font-size: 22px; line-height: 26px; color: #444; border-collapse: collapse; border-spacing: 0; }
+.activity_block th { font-weight: 400; }
+.activity_block td { padding: 30px 0 10px; border-bottom: 1px solid #444; }
+.activity_block td:nth-child(2) { width: 50%; text-align: center; }
+.activity_block td:nth-child(3), .activity_block td:nth-child(4) { width: 1%; padding: 30px 50px 10px; text-align: center; }
+.activity_block .show_all { display: block; text-align: center; font-size: 22px; line-height: 26px; color: #444; text-transform: uppercase; text-decoration: none; }

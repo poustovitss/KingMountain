@@ -46,14 +46,6 @@ ActiveRecord::Schema.define(version: 20170610131418) do
     t.boolean  "active",     default: true
   end
 
-  create_table "carts", force: :cascade do |t|
-    t.float    "quantity"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_carts_on_user_id"
-  end
-
   create_table "feedbacks", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -149,15 +141,7 @@ ActiveRecord::Schema.define(version: 20170610131418) do
     t.boolean  "proviant"
     t.boolean  "aerodrome",              default: false
     t.boolean  "radist",                 default: false
-    t.string   "provider"
-    t.string   "uid"
     t.datetime "last_seen"
-    t.datetime "last_seen_at"
-    t.string   "image"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -617,21 +617,22 @@
     <div class="activity_block">
       <div class="activity_block_title"><span>Партнерская активность</span></div>
       <table>
-      <% current_user.refferences.each do |ref| %>
         <thead>
           <tr>
             <th>Рефералы</th>
             <th>Уровень</th>
             <th>Доход</th>
           </tr>
-          <tr>
-            <td><%= ref.name %></td>
-            <td><%= ref.level %></td>
-            <td><%= ref.balance %></td>
-          </tr>
+          <% current_user.refferences.each do |ref| %>
+            <tr>
+              <td><%= ref.name %></td>
+              <td><%= ref.level %></td>
+              <td><%= ref.balance %></td>
+            </tr>
+          <% end %>
         </thead>
       </table>
-      <a href="#" class="show_all">Показать всех</a>
+      <!-- <a href="#" class="show_all">Показать всех</a> -->
     </div>
   </div>
 
