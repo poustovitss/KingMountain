@@ -396,8 +396,8 @@ class ProfilesController < ApplicationController
             flash[:balance] = 'Не верный набор'
             redirect_to :back
           else
-            array_proviants = []
             if current_user.level == 1
+            array_proviants = []
               limiter = params[:counts][:size_to_buy]
               limiter = limiter.to_i
               b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter)
@@ -412,7 +412,7 @@ class ProfilesController < ApplicationController
               Rails.logger.info '==================='
               Rails.logger.info array_proviants
             else
-
+              array_proviants = []
               limiter = params[:counts][:size_to_buy]
               limiter = limiter.to_i
               b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user).limit(limiter)              
