@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   match '/success' => 'orders#success', via: :get
   match '/fail' => 'orders#fail', via: :get
 
-  devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
+  devise_for :users, 
+  controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  #controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
