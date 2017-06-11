@@ -258,7 +258,7 @@ class ProfilesController < ApplicationController
         if current_user.level == 0
           pay = start_pay
         elsif current_user.level == 1
-          pay = 150
+          pay = 50
         else
           (current_user.level - 1).times do
             pay = start_pay + start_coefficient
@@ -365,7 +365,7 @@ class ProfilesController < ApplicationController
         if current_user.level == 0
           pay = start_pay
         elsif current_user.level == 1
-          pay = 150
+          pay = 50
         else
           (current_user.level - 1).times do
             pay = start_pay + start_coefficient
