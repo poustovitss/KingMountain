@@ -5,7 +5,8 @@ TEMP_EMAIL_PREFIX = 'change@me'
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable, :confirmable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+    omniauth_providers: [:facebook, :twitter, :vkontakte]
     # :lastseenable
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
@@ -82,28 +83,10 @@ TEMP_EMAIL_PREFIX = 'change@me'
   has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by'
   has_many :identities, dependent: :destroy
 
-  # def number_of_referred_users
-  #   User.where(reffered_by: self.id).count
-  # end
-
   scope :all_except, ->(user) { where.not(id: user) }
 
   protected
   def confirmation_required?
     false
   end
-
-  # def user_level
-  #   u = self.refferences.count
-
-  #   if u < 10 
-  #     1
-  #   elsif u > 9 && u < 20
-  #     2
-  #   elsif u > 100 
-  #     10
-  #   else
-  #     (u / 10).to_i
-  #   end
-  # end
 end
