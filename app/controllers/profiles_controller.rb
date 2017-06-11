@@ -393,6 +393,8 @@ class ProfilesController < ApplicationController
 
             b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user).limit(size_for_proviant)
 
+            Rails.logger.info "@@@@@@@@@@@@@@@@@@@@"
+            Rails.logger.info b
 
             b.each do |proviant|
               if proviant.level != 0
@@ -400,6 +402,10 @@ class ProfilesController < ApplicationController
               end
             end
           end
+
+            Rails.logger.info "******************"
+            Rails.logger.info b
+
           size_for_proviant = params[:counts][:size_to_buy]
           if current_user.level == 1
             prov = User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at)
