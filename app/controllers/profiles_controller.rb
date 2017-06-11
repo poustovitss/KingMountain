@@ -412,13 +412,17 @@ class ProfilesController < ApplicationController
             #   end
             # end
 
+
           size_for = params[:counts][:size_to_buy]
           size_for = size_for.to_i
           circle = array_proviants.count 
+
           if array_proviants.first.nil? 
             flash[:balance] = 'Нет свободных провиантов'
-          elsif size_for > prov.count || size_for < 0 || size_for.nil?
-            flash[:balance] = 'Нет свободных провиантов'
+          elsif size_for > prov.count
+            flash[:balance] = 'На данный момент такого такого кол-ва провиантов'
+          elsif size_for < 0
+            flash[:balance] = 'Не правильный набор'
           else
             array_proviants.each do |b|
               b.reffered_by=current_user.id
