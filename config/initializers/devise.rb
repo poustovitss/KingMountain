@@ -256,7 +256,8 @@ Devise.setup do |config|
   config.omniauth :vkontakte, "6059100", "306ff445306ff445306ff44525303380193306f306ff4456952e02abcad83fb2f79eea5"
     {      
       :scope => 'friends,audio,photos,email',      
-      :display => 'popup',      :lang => 'en',      
+      :display => 'popup',      
+      :lang => 'en',      
       :image_size => 'original'    
     }
   # config.omniauth :linked_in, "KEY", "SECRET"
