@@ -80,7 +80,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
   has_many :orders
   has_many :avatars
   belongs_to :reffered, :class_name => 'User', foreign_key: 'reffered_by'
-  has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by'
+  has_many :refferences, :class_name => 'User', foreign_key: 'reffered_by', dependent: :destroy
   has_many :identities, dependent: :destroy
 
   scope :all_except, ->(user) { where.not(id: user) }
