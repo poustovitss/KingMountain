@@ -417,10 +417,13 @@ class ProfilesController < ApplicationController
           size_for = size_for.to_i
           # circle = array_proviants.count 
 
+          Rails.logger.info "================"
+          Rails.logger.info array_proviants
+
           if array_proviants.first.nil? 
             flash[:balance] = 'Нет свободных провиантов'
           elsif size_for > prov.count
-            flash[:balance] = 'На данный момент такого такого кол-ва провиантов'
+            flash[:balance] = 'На данный момент нет такого кол-ва провиантов'
           elsif size_for < 0
             flash[:balance] = 'Не правильный набор'
           else
