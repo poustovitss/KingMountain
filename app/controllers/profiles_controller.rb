@@ -375,7 +375,6 @@ class ProfilesController < ApplicationController
 
       ref_balance = Transfer.find_by_user_id(current_user.id)
       summa_for_prov = params[:counts][:size_to_buy]  
-      puts pay
 
         total_proviant = summa_for_prov.to_i * pay
         if ref_balance.nil?  
@@ -383,90 +382,105 @@ class ProfilesController < ApplicationController
           redirect_to profiles_path
         elsif ref_balance.summa >= total_proviant && ref_balance.summa > 0
 
-          array_proviants = []
-          if current_user.level == 1
-            limiter = params[:counts][:size_to_buy]
-            b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter)
-            b.each do |proviant|
-              if proviant.level == 1
-                array_proviants << proviant
-              end
-            end
-          else
-
-          limiter = params[:counts][:size_to_buy]
-
-            b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user).limit(limiter)
-
-            b.each do |proviant|
-              if proviant.level != 0
-                array_proviants << proviant
-              end
-            end
-          end
-
-          size_for_proviant = params[:counts][:size_to_buy]
-          if current_user.level == 1
-            prov = User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at)
-          else
-            prov = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
-          end
-            # prov.each do |pr|
-            #   if pr.level != 0
-            #     size_for_pr << pr
-            #   end
-            # end
-
-
-          size_for = params[:counts][:size_to_buy]
-          size_for = size_for.to_i
-          # circle = array_proviants.count 
-          if array_proviants.first.nil? 
-            flash[:balance] = 'Нет свободных провиантов'
-          elsif size_for > prov.count
-            flash[:balance] = 'На данный момент нет такого кол-ва провиантов'
-          elsif size_for < 0
-            flash[:balance] = 'Не правильный набор'
-          else
-            array_proviants.each do |b|
-              b.reffered_by=current_user.id
-              b.save
-
-              ref_balance.summa = ref_balance.summa - pay
-              ref_balance.save
-            end
-
-            # user_onl = current_user
-            # user_onl.balance = current_user.balance - pay
-            # user_onl.save
-
-            @system = Systemfinance.last
-            if current_user.reffered.nil?
-              @system.summa += pay * 0.25
-              @system.save
-            else 
-              @system.summa += pay * 0.20
-              @system.save
-            end
-
-            unless current_user.reffered.nil?
-              unless current_user.proviant == true
-                transfer = Transfer.new
-                transfer.user_id = current_user.reffered.id
-                transfer.bank_id = Bank.last.id
-                transfer.summa = pay*0.05
-                transfer.save
-              end
-            end
+          check_the_nil = params[:counts][:size_to_buy]
           
-            unless current_user.reffered.nil?
-              reffered = current_user.reffered
-              reffered.balance += pay*0.75
-              reffered.save
+          check_the_prov = check_the_nil.to_i + current_user.refferences.count
+          check_the_provs = current_user.level * 10
+
+          if check_the_nil.to_i <= 0 || check_the_nil.nil? 
+            flash[:balance] = 'Не верный набор'
+            redirect_to :back
+          elsif check_the_prov > check_the_provs
+            flash[:balance] = 'Не верный набор'
+            redirect_to :back
+          else
+            array_proviants = []
+            if current_user.level == 1
+              limiter = params[:counts][:size_to_buy]
+              b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter)
+              b.each do |proviant|
+                if proviant.level == 1
+                  array_proviants << proviant
+                end
+              end
+            else
+
+            limiter = params[:counts][:size_to_buy]
+
+
+              b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user).limit(limiter)
+
+              b.each do |proviant|
+                if proviant.level != 0
+                  array_proviants << proviant
+                end
+              end
             end
+
+            size_for_proviant = params[:counts][:size_to_buy]
+            if current_user.level == 1
+              prov = User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at)
+            else
+              prov = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
+            end
+              # prov.each do |pr|
+              #   if pr.level != 0
+              #     size_for_pr << pr
+              #   end
+              # end
+
+
+            size_for = params[:counts][:size_to_buy]
+            size_for = size_for.to_i
+            # circle = array_proviants.count 
+            if array_proviants.first.nil? 
+              flash[:balance] = 'Нет свободных провиантов'
+            elsif size_for > prov.count
+              flash[:balance] = 'На данный момент нет такого кол-ва провиантов'
+            elsif size_for < 0
+              flash[:balance] = 'Не правильный набор'
+            else
+              array_proviants.each do |b|
+                b.reffered_by=current_user.id
+                b.save
+
+                ref_balance.summa = ref_balance.summa - pay
+                ref_balance.save
+              end
+
+              # user_onl = current_user
+              # user_onl.balance = current_user.balance - pay
+              # user_onl.save
+
+              @system = Systemfinance.last
+              if current_user.reffered.nil?
+                @system.summa += pay * 0.25
+                @system.save
+              else 
+                @system.summa += pay * 0.20
+                @system.save
+              end
+
+              unless current_user.reffered.nil?
+                unless current_user.proviant == true
+                  transfer = Transfer.new
+                  transfer.user_id = current_user.reffered.id
+                  transfer.bank_id = Bank.last.id
+                  transfer.summa = pay*0.05
+                  transfer.save
+                end
+              end
+            
+              unless current_user.reffered.nil?
+                reffered = current_user.reffered
+                reffered.balance += pay*0.75
+                reffered.save
+                
+                flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
+              end
+            end
+             redirect_to profiles_path
           end
-           flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
-           redirect_to profiles_path
         else
           flash[:balance] = 'У вас не достаточно баланса'
           redirect_to profiles_path
