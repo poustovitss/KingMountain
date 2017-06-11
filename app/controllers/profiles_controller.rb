@@ -417,7 +417,7 @@ class ProfilesController < ApplicationController
           circle = array_proviants.count 
           if array_proviants.first.nil? 
             flash[:balance] = 'Нет свободных провиантов'
-          elsif size_for >= prov.count || size_for < 0
+          elsif size_for > prov.count || size_for < 0 || size_for.nil?
             flash[:balance] = 'Нет свободных провиантов'
           else
             array_proviants.each do |b|
