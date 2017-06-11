@@ -1,6 +1,20 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  
+
+  def vkontakte
+    # request.env["omniauth.auth"]
+    binding.pry
+  end
+
   def self.provides_callback_for(provider)
+    
+    config.omniauth :vkontakte, "345435", "fgfgdfgfdgdfgdfgdg",    
+    {      
+      :scope => 'friends,audio,photos,email',      
+      :display => 'popup',      
+      :lang => 'en',      
+      :image_size => 'original'    
+    }
+
     class_eval %Q{
       def #{provider}
         @user = User.find_for_oauth(env["omniauth.auth"], current_user)
