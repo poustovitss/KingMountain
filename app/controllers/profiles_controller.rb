@@ -399,7 +399,7 @@ class ProfilesController < ApplicationController
             array_proviants = []
             if current_user.level == 1
               limiter = params[:counts][:size_to_buy]
-              b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter)
+              b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter).count
               b.each do |proviant|
                 if proviant.level == 1
                   array_proviants << proviant
