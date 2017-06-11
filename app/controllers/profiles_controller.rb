@@ -415,7 +415,7 @@ class ProfilesController < ApplicationController
 
           size_for = params[:counts][:size_to_buy]
           size_for = size_for.to_i
-          circle = array_proviants.count 
+          # circle = array_proviants.count 
 
           if array_proviants.first.nil? 
             flash[:balance] = 'Нет свободных провиантов'
@@ -460,11 +460,11 @@ class ProfilesController < ApplicationController
               reffered.balance += pay*0.75
               reffered.save
             end
+            flash[:balance] = 'У вас не достаточно баланса'
           end
            # flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
            redirect_to profiles_path
         else
-          flash[:balance] = 'У вас не достаточно баланса'
           redirect_to profiles_path
         end
       end
