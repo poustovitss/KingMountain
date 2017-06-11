@@ -252,18 +252,19 @@ class ProfilesController < ApplicationController
         flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
         redirect_to profiles_path
       else
-          start_pay = 25
-          start_coefficient = 7.5
+          start_pay = 50
+          start_coefficient = 100
           pay = 0
         if current_user.level == 0
           pay = start_pay
         elsif current_user.level == 1
-          pay = 187.50
+          pay = 150
         else
           (current_user.level - 1).times do
-            pay = start_pay * start_coefficient
+            pay = start_pay + start_coefficient
             start_pay = pay
-            start_coefficient -= 0.5
+
+            puts start_pay
           end
         end
 
@@ -358,18 +359,19 @@ class ProfilesController < ApplicationController
         flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
         redirect_to profiles_path
       else
-          start_pay = 25
-          start_coefficient = 7.5
+          start_pay = 50
+          start_coefficient = 100
           pay = 0
         if current_user.level == 0
           pay = start_pay
         elsif current_user.level == 1
-          pay = 187.50
+          pay = 150
         else
           (current_user.level - 1).times do
-            pay = start_pay * start_coefficient
+            pay = start_pay + start_coefficient
             start_pay = pay
-            start_coefficient -= 0.5
+
+            puts start_pay
           end
         end
 
