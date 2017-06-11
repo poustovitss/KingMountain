@@ -1,13 +1,8 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def vkontakte
-    config.omniauth :vkontakte, "345435", "fgfgdfgfdgdfgdfgdg",    
-    {      
-      :scope => 'friends,audio,photos,email',      
-      :display => 'popup',      
-      :lang => 'en',      
-      :image_size => 'original'    
-    }
+    # request.env["omniauth.auth"]
+    binding.pry
   end
 
   def self.provides_callback_for(provider)
