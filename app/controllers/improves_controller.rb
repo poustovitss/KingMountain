@@ -6,23 +6,23 @@ class ImprovesController < ApplicationController
   def create
     @system = Systemfinance.last
     ref_balance = Transfer.find_by_user_id(current_user.id)
-    if ref_balance.summa >= 150
+    if ref_balance.summa >= 500
       unless current_user.conductor == true
-        ref_balance.summa = ref_balance.summa - 150
+        ref_balance.summa = ref_balance.summa - 500
         ref_balance.save
 
          @system = Systemfinance.last
         if current_user.reffered.nil?
-          @system.summa += 100
+          @system.summa += 500
           @system.save
         else 
-          @system.summa += (100 - (100 * 0.05))
+          @system.summa += (500 - (500 * 0.05))
           @system.save
 
           transfer = Transfer.new
           transfer.user_id = current_user.reffered.id
           transfer.bank_id = Bank.last.id
-          transfer.summa = 100*0.05
+          transfer.summa = 500*0.05
           transfer.save
         end
         @system.save
@@ -41,23 +41,23 @@ class ImprovesController < ApplicationController
   def buyaerodrome
     @system = Systemfinance.last
     ref_balance = Transfer.find_by_user_id(current_user.id)
-    if ref_balance.summa >= 100  
+    if ref_balance.summa >= 2000  
       unless current_user.aerodrome == true
-        ref_balance.summa = ref_balance.summa - 150
+        ref_balance.summa = ref_balance.summa - 2000
         ref_balance.save
 
         @system = Systemfinance.last
         if current_user.reffered.nil?
-          @system.summa += 100
+          @system.summa += 2000
           @system.save
         else 
-          @system.summa += (100 - (100 * 0.05))
+          @system.summa += (2000 - (2000 * 0.05))
           @system.save
 
           transfer = Transfer.new
           transfer.user_id = current_user.reffered.id
           transfer.bank_id = Bank.last.id
-          transfer.summa = 100*0.05
+          transfer.summa = 2000*0.05
           transfer.save
         end
         @system.save
@@ -107,9 +107,9 @@ class ImprovesController < ApplicationController
   def buyall
     @system = Systemfinance.last
     ref_balance = Transfer.find_by_user_id(current_user.id)
-    if ref_balance.summa >= 450
+    if ref_balance.summa >= 3150
       unless current_user.conductor == true && current_user.carrier == true
-        ref_balance.summa = ref_balance.summa - 450
+        ref_balance.summa = ref_balance.summa - 3150
         ref_balance.save
 
         user = current_user
@@ -131,16 +131,16 @@ class ImprovesController < ApplicationController
 
        @system = Systemfinance.last
         if current_user.reffered.nil?
-          @system.summa += 450
+          @system.summa += 3150
           @system.save
         else 
-          @system.summa += (450 - (450 * 0.05))
+          @system.summa += (3150 - (3150 * 0.05))
           @system.save
 
           transfer = Transfer.new
           transfer.user_id = current_user.reffered.id
           transfer.bank_id = Bank.last.id
-          transfer.summa = 450*0.05
+          transfer.summa = 3150*0.05
           transfer.save
         end
         @system.save
@@ -159,17 +159,17 @@ class ImprovesController < ApplicationController
   def update 
     @system = Systemfinance.last
      ref_balance = Transfer.find_by_user_id(current_user.id)
-    if ref_balance.summa >= 100  
+    if ref_balance.summa >= 200  
       unless current_user.carrier == true
-        ref_balance.summa = ref_balance.summa - 100
+        ref_balance.summa = ref_balance.summa - 200
         ref_balance.save
         
          @system = Systemfinance.last
         if current_user.reffered.nil?
-          @system.summa += 100
+          @system.summa += 200
           @system.save
         else 
-          @system.summa += (100 - (100 * 0.05))
+          @system.summa += (200 - (200 * 0.05))
           @system.save
 
           transfer = Transfer.new

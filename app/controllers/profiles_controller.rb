@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
     user = current_user
     refferences_count = current_user.refferences.count 
     
-    start_pay = 25
+    start_pay = 50
     start_coefficient = 7.5
 
     pay = 0
@@ -111,10 +111,15 @@ class ProfilesController < ApplicationController
     redirect_to :back
     FirstJobJob.set(wait: 24.hours).perform_later(current_user)
 
-    if current_user.level == 10
-      bank = Bank.last
-      bank.active = false
-      bank.save
+    if current_user.level == 7
+      current_user.balance = 10000
+      current_user.level = 0
+      current_user.save
+
+      current_user.refferences.each do |winner|
+        winner.reffered_by = 0
+        winner.save
+      end
     end
     users = User.where(radist: true)
     users.each do |u|

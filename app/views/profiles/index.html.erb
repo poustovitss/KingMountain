@@ -170,7 +170,7 @@
         <div style="position: relative;">
           <% unless current_user.radist == true %>
           <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
-                <%= f.submit "Купить улучшение 'Радист'", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                <%= f.submit "Купить улучшение 'Радист'", class: "btn btn-primary button1", style: 'border-radius: 0px; background-color: #306999; border-color: #306999;', data: { confirm: 'Вы уверены cтоимость 50₽? ' } %>
           <div class="description">
             Оповещение о новых провиантов
           </div>
@@ -269,7 +269,7 @@
                         <% if user_signed_in? %>
                              <% unless current_user.radist == true %>
                                  <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
-                                    <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                                    <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 50₽? ' } %>
                                  <% end %>
                               <% else %>
                                  У вас уже есть это улучшение
@@ -289,13 +289,13 @@
                   <div class="start_price_extensions_item guide">
                      <div class="icon">Проводник</div>
                      <div class="start_price_extensions_item_price">
-                        150 руб.
+                        500 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
                         <% if user_signed_in? %>
                          <% unless current_user.conductor == true %>
                            <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
-                              <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
+                              <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 500₽? ' } %>
                            <% end %>
                          <% else %>
                            <a>У вас уже есть это улучшение</a>
@@ -314,7 +314,7 @@
                   <div class="start_price_extensions_item porter">
                      <div class="icon">Носильщик</div>
                      <div class="start_price_extensions_item_price">
-                        100 руб.
+                        200 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
                         <% if user_signed_in? %>
@@ -339,7 +339,7 @@
                   <div class="start_price_extensions_item helicopter">
                      <div class="icon">Эвакуационный вертолёт</div>
                      <div class="start_price_extensions_item_price">
-                        200 руб.
+                        2000 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
                         <a >
@@ -433,58 +433,6 @@
     <div class="progress_block_content">
       <div class="progress_block_subtitle">Баланс <%= current_user.balance %> руб.</div>
       <div class="progress_block_content_items">
-        <div class="progress_block_content_item">
-          <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">10 Уровень "Царь Горы"</div>
-            <% if current_user.level == 10 %>
-             <span class="progress_block_content_item_level">
-             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
-                  <% end %>
-                <% end %>
-            <% else %>
-             <span class="progress_block_content_item_level">0/10</span>
-            <% end %>
-          </div>
-        </div>
-        <div class="progress_block_content_item">
-          <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">9 Уровень "Царь Горы"</div>
-            <% if current_user.level == 9 %>
-             <span class="progress_block_content_item_level">
-             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
-                  <% end %>
-                <% end %>
-            <% elsif current_user.level > 9 %>
-             <span class="progress_block_content_item_level">10/10</span>
-            <% else %>
-             <span class="progress_block_content_item_level">0/10</span>
-            <% end %>
-          </div>
-        </div>
-        <div class="progress_block_content_item">
-          <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">8 Уровень "Царь Горы"</div>
-            <% if current_user.level == 8 %>
-             <span class="progress_block_content_item_level">
-             <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-                <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-                  <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-                   <%= f.submit @button, style: 'border: none; background: none; text-decoration: underline; color: #337ab7;', class: "progress_block_content_item_levelup" %>
-                  <% end %>
-                <% end %>
-            <% elsif current_user.level > 8 %>
-             <span class="progress_block_content_item_level">10/10</span>
-            <% else %>
-             <span class="progress_block_content_item_level">0/10</span>
-            <% end %>
-          </div>
-        </div>
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
             <div class="progress_block_content_item_text">7 Уровень "Царь Горы"</div>
