@@ -401,14 +401,10 @@ class ProfilesController < ApplicationController
               limiter = params[:counts][:size_to_buy]
               limiter = limiter.to_i
               b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter)
-              Rails.logger.info '==================='
-              Rails.logger.info b
-
+              
               b.each do |proviant|
                 array_proviants << proviant
               end
-              Rails.logger.info '==================='
-              Rails.logger.info array_proviants
             else
 
               limiter = params[:counts][:size_to_buy]
@@ -480,8 +476,8 @@ class ProfilesController < ApplicationController
                 reffered.balance += pay*0.75
                 reffered.save
                 
-                flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
               end
+              flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
             end
              redirect_to profiles_path
           end
