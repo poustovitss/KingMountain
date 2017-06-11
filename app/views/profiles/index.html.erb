@@ -397,7 +397,13 @@
                   <h3>Купить провианта</h3>
                   <em>Провиант помогает быстрее добраться к вершине!</em>
                   <p></p>
-                     <em>Свободных провиантов <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></em>
+                     <em>Свободных провиантов <b>
+                     <% if current_user.level == 1 %>
+                      <%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b>
+                     <% else %>
+                      <%= User.where(reffered_by: 0, level: current_user.level - 1).count %>
+                     <% end %>
+                     </em>
                </div>
                <!-- <div class="right_side">
                   <div class="start_price_quantity_counter">
@@ -407,7 +413,11 @@
                   </div>
                </div> -->
             </div>
-            <% calc =  User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %>
+            <% if current_user.level == 1 %>
+              <% calc = User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b>
+             <% else %>
+              <% calc = User.where(reffered_by: 0, level: current_user.level - 1).count %>
+             <% end %>
             <% calc_summ = calc * balanceinfo %>
             <div class="start_price_total">
                <div class="left_side">

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   put 'buyradist/:id' => 'improves#buyradist', as: 'buyradist'
 
   get 'service' => 'homepages#service', as: 'service'
+  get 'contact' => 'homepages#contact', as: 'contact'
 
   match '/success' => 'orders#success', via: :get
   match '/fail' => 'orders#fail', via: :get

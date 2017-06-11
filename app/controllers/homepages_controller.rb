@@ -8,4 +8,8 @@ class HomepagesController < ApplicationController
   def service
 
   end
+
+  def contact
+
+  end
 end

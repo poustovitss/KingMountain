@@ -37,7 +37,7 @@
             <ul>
                <li><a href="<%= root_path %>">Главная</a></li>
                <li><a href="<%= service_path %>">о сервисе</a></li>
-               <li><a href="#">контакты</a></li>
+               <li><a href="<%= contact_path %>">Контакты</a></li>
                <% if user_signed_in? && current_user.admin? %>
                 <li><a href="<%= admin_root_path %>">Админ панель</a></li>
                <% end %>
