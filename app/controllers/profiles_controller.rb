@@ -412,11 +412,18 @@ class ProfilesController < ApplicationController
               limiter = limiter.to_i
               b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user).limit(limiter)
 
+              Rails.logger.info '==================='
+              Rails.logger.info b
+              
+
               b.each do |proviant|
                 if proviant.level != 0
                   array_proviants << proviant
                 end
               end
+              Rails.logger.info '==================='
+              Rails.logger.info array_proviants
+
             end
 
             size_for_proviant = params[:counts][:size_to_buy]
@@ -431,9 +438,6 @@ class ProfilesController < ApplicationController
               #   end
               # end
 
-            Rails.logger.info '==================='
-            Rails.logger.info array_proviants
-              
             size_for = params[:counts][:size_to_buy]
             size_for = size_for.to_i
             # circle = array_proviants.count 
