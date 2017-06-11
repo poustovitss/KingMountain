@@ -146,33 +146,6 @@
                         </i>
                      </div>
                   </div>
-                  <div class="start_price_extensions_item all">
-                     <div class="icon">Купить все улучшения</div>
-                     <div class="start_price_extensions_item_price">
-                        500 руб.
-                     </div>
-                     <div class="start_price_extensions_item_check">
-                        <a >
-                        <% if user_signed_in? %>
-                         <% unless current_user.radist == true || current_user.carrier == true || current_user.conductor == true || current_user.aerodrome == true %>
-                           <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
-                              <%= f.submit 'Купить', class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           У вас уже есть это улучшение
-                         <% end %>
-                        <% else %>
-                             
-                        <% end %>
-                        </a>
-                        <i class="start_price_extensions_item_help">
-                           ?
-                           <span class="tooltip">
-                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
-                           </span>
-                        </i>
-                     </div>
-                  </div>
                </div>
             </div>
             <% if user_signed_in? %>

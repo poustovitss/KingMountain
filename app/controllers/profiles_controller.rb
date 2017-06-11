@@ -405,9 +405,6 @@ class ProfilesController < ApplicationController
             end
           end
 
-            Rails.logger.info "******************"
-            Rails.logger.info array_proviants
-
           size_for_proviant = params[:counts][:size_to_buy]
           if current_user.level == 1
             prov = User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at)
@@ -424,10 +421,6 @@ class ProfilesController < ApplicationController
           size_for = params[:counts][:size_to_buy]
           size_for = size_for.to_i
           # circle = array_proviants.count 
-
-          Rails.logger.info "================"
-          Rails.logger.info array_proviants
-
           if array_proviants.first.nil? 
             flash[:balance] = 'Нет свободных провиантов'
           elsif size_for > prov.count
@@ -471,11 +464,11 @@ class ProfilesController < ApplicationController
               reffered.balance += pay*0.75
               reffered.save
             end
-            flash[:balance] = 'У вас не достаточно баланса'
           end
-           # flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
+           flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
            redirect_to profiles_path
         else
+          flash[:balance] = 'У вас не достаточно баланса'
           redirect_to profiles_path
         end
       end
