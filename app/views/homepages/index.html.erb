@@ -16,30 +16,37 @@
 
 <link rel="stylesheet" href="fonts/gothamPro/stylesheet.css">
    <div class="main_banner">
-      <% if flash[:feedback] %>
-         <div class="alert alert-success" role="alert">
-           <center><%= flash[:feedback] %></center>
-         </div>
-      <% end %>
-      <div class="container">
+      <div class="main_banner_content_wrap">
          <h1 class="main_banner_title">
-            <span>Игра -</span>
+            <span>Онлайн-игра</span>
             Царь горы
          </h1>
-         <div class="main_banner_arr_down"></div>
+         <div class="main_banner_content">
+            Стань Царем Горы и выиграй 88 млн рублей, заплатив всего 25 рублей за вступительный взнос
+            <span>
+               Игра не на удачу или везение. Твой выигрыш зависит только от твоих усилий. Играй и получай за это деньги
+            </span>
+         </div>
+         <a href="<%= profiles_path %>" class="main_banner_play_btn">Играть</a>
+         <a href="<%= service_path %>" class="main_banner_more_btn">Подробнее</a>
+      </div>
+      <div class="main_banner_arr_down"></div>
+   </div>
+   <div class="gist_block">
+      <div class="container">
+         <h2>Суть игры</h2>
+         <p>Царь горы - новая перспективная игра, выиграть в которой может любой желающий. Для вступления в игру достаточно сделать шаг! Купив вступление за 25рублей, вы становитесь полноценным её участником, которому открываются все дополнения. После этого вы можете начать играть и зарабатывать.</p>
+         <p>Продвижение к вершине осуществляется заполнением уровней. Система автоматически подбирает вам участников, заполняя ваш уровень. Вы поднимаетесь все выше и все ближе к цели.</p>
+         <p>Логика игры построенна так, что вы всегда можете обогнать своих соперников, как бы далеко впереди они не находились. Таким образом, каждый участник имеет абсолютно равные шансы на победу.</p>
+         <p>Система не требует от вас совершения дополнительных покупок или приглашения рефералов. Вы можете играть, как вам угодно.</p>
+         <p>Вы можете увеличить шансы на победу, докупить провиант или сформировать свою команду для восхождения, которая состоит из медика, проводника, радиста, запасного аэродрома.</p>
+         <p>Победителем игры становится тот, кто первый достигнет вершины и станет Царем горы. Ему достается весь банк игры в размере 88.000.000 рублей</p>
       </div>
    </div>
    <div class="container">
-      <div class="start_block">
-         <p>Всего за <span>25 рублей</span> и они твои!</p>
-         <strong>50.000 рублей</strong>
-      </div>
       <div class="start_price">
-         <h2 class="start_price_title">
-            Стоимость старта <span>25 рублей</span>
-         </h2>
-         <form action="#">
-            <div class="start_price_block">
+         <form action="<%= profiles_path %>">
+                     <div class="start_price_block">
                <div class="start_price_extensions">
                   <strong>Дополнения</strong>
                   <div class="start_price_extensions_item radio">
@@ -148,35 +155,68 @@
                   </div>
                </div>
             </div>
-            <% if user_signed_in? %>
-            <div class="start_price_quantity">
-               <div class="left_side">
-                  <h3>Купить провианта</h3>
-                  <em>Провиант помогает быстрее добраться к вершине!</em>
-                  <p></p>
-                     <em>Свободных провиантов <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></em>
-               </div>
-               <!-- <div class="right_side">
-                  <div class="start_price_quantity_counter">
-                     <b class="price_count_left" onclick="sum200()">‹</b>
-                     <input type="text" value="1" id="food_counter">
-                     <b class="price_count_right" onclick="sum100()">›</b>
-                  </div>
-               </div> -->
-            </div>
-            
-               <% end %>
             <div class="start_block_submit">
-               <a href="<%= new_user_registration_path %>" class="start_block_submit_btn">Старт</a>
+               <a href="#" class="start_block_submit_btn">Старт</a>
                <span>
                   или <br>
-                  <a href="<%= new_user_registration_path %>">Зарегестрируйтесь</a>
+                  <a href="#">Зарегестрируйтесь</a>
                </span>
             </div>
          </form>
       </div>
    </div>
-  <div class="partner_block_wrap">  
+   <div class="compare_block">
+      <div class="container">
+         <h3>Перспективная игра</h3>
+         <p>Сравним с другими</p>
+    <div class="compare_block">
+      <div class="container">
+         <div class="col compare_block_no">
+            <div class="compare_block_col_title">Рулетка</div>
+            <ul>
+               <li>Выигрыш зависит только от случая</li>
+               <li>Вы можете опираться только на удачу и интуицию</li>
+               <li>Азартная игра</li>
+               <li>Высокая вероятность остаться ни с чем</li>
+               <li>Казино всегда в <<плюсе>> и заинтересовано в том, чтобы вы проигрывали</li>
+               <li>Качество игры</li>
+               <li>Большие коммиссии</li>
+            </ul>
+            <a href="<%= new_user_session_path %>">Упустить возможность</a>
+         </div>
+         <div class="col compare_block_yes">
+            <div class="compare_block_col_title">Царь горы</div>
+            <ul>
+               <li>Вы сами контролируете игру</li>
+               <li>Вы можете пользоваться провиантом, дополнениями и реферальной системой, увеличивая свой шанс на выигрыш</li>
+               <li>Игра, зароботок в которой зависит только от вас</li>
+               <li>Максимум, что вы можете потерять - 50 рублей, но и это только в случае, если покинете игру</li>
+               <li>Сайт зарабатывает исключительно на комиссиях при оплате вступления и покупке дополнения, поэтому мы заинтересованы, чтобы вы выигрывали</li>
+            </ul>
+            <a href="<%= new_user_session_path %>">Сделать правильный выбор</a>
+         </div>
+      </div>
+   </div>
+   <hr>
+   </div>
+   <div class="game_advantages">
+      <div class="container">
+         <h2>Преимущества игры</h2>
+         <div class="game_advantages_item">
+            <div class="game_advantages_item_title">Автоматическая сис. заработка.</div>
+            <span>Можно зарабатывать, даже не играя</span>
+         </div>
+         <div class="game_advantages_item">
+            <div class="game_advantages_item_title">Дешевое участие</div>
+            <span>Потратив 25 рублей можно выиграть 88.000.000 рублей.</span>
+         </div>
+         <div class="game_advantages_item">
+            <div class="game_advantages_item_title">Реферальная система</div>
+            <span>Приглашая друзей, вы получаете 5% от всех их покупок и увеличиваете шанс на выигрыш главного приза</span>
+         </div>   
+      </div>
+   </div>
+   <div class="partner_block_wrap"> 
       <div class="partner_block">
          <div class="rotate_left">
             <div class="partner_block_inner">
@@ -199,21 +239,21 @@
          </div>
       </div>
    </div>
-      <div class="container">
+   <div class="container">
       <div class="pluses_block">
          <div class="pluses_block_item">
             <span>1</span>
-            <img src="<%= image_url('free.png') %>" height="156" width="155" alt="Free">
+            <img src="images/free.png" height="156" width="155" alt="Free">
             <h5>Бесплатно</h5>
          </div>
          <div class="pluses_block_item">
             <span>2</span>
-            <img src="<%= image_url('fast.png') %>" height="157" width="155" alt="Fast">
+            <img src="images/fast.png" height="157" width="155" alt="Fast">
             <h5>Быстро</h5>
          </div>
          <div class="pluses_block_item">
             <span>3</span>
-            <img src="<%= image_url('reliably.png') %>" height="156" width="155" alt="Reliably">
+            <img src="images/reliably.png" height="156" width="155" alt="Reliably">
             <h5>Качественно</h5>
          </div>
       </div>
@@ -223,7 +263,7 @@
          <div class="rotate_left">
             <div class="partner_block_inner">
                <div class="partner_discount">
-                  <img src="<%= image_url('friends.png') %>" height="283" width="248" alt="Friends">
+                  <img src="images/friends.png" height="283" width="248" alt="Friends">
                </div>
             </div>
          </div>
@@ -236,7 +276,7 @@
          </div>
       </div>
    </div>
-      <div class="top_block">
+   <div class="top_block">
       <div class="container">
          <h2 class="top_block_title">Топ-10 партнеров</h2>
          <div class="top_block_items">
@@ -422,15 +462,23 @@
          </div>
       </div>
    </div>
-
-   
-
+   <div class="doubt_block">
+      <div class="container">
+        <center>
+         <h2>Все еще сомневаешся?</h2>
+         <p>Скорей решайся и не теряй возможности заработать миллионы.</p>
+         <p>Старт игры начался относительно недавно, а это значит, что у тебя есть высокий шанс выигрыша.</p>
+         <p>Поспеши, пока не подтянулись конкуренты</p>
+         <p>Эта игра скоро будет в каждом компьютере!</p>
+        </center>
+      </div>
+   </div>
 
    <%= render '/feedbacks/form' %>
 
    <div class="footer">
       <div class="container">
-         <span class="arrow_up">⌃</span>
+      <span class="arrow_up">⌃</span>
          <div class="footer_title">Нравится наш сервис? Поделитесь в социальных сетях:</div>
          <div class="footer_social">
             <a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=https://king-mountain.pro/&st.comments=ЦарьГоры" target="_blank" class="footer_social_item"><img src="images/ic-ok.png" height="39" width="39" alt="OK"></a>

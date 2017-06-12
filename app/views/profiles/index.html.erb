@@ -429,14 +429,6 @@
                   </b>
                </div>
             </div>
-            <div class="start_block_submit">
-              <% if user_signed_in? %>
-              <%= form_for current_user, :url => buyallproviant_path(current_user), method: :put  do |f| %>
-                <%= f.submit 'Купить свободных провиантов', class: "start_block_submit_btn" %>
-              <% end %>
-              <% end %>
-            </div>
-
             <center>
    <div class="progress_block">
     <div class="progress_block_title" style="background: #49d793;">Прогресс</div>

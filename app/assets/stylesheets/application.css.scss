@@ -277,10 +277,24 @@ body { font-family: "PT Sans", sans-serif; }
 .main_banner { margin-bottom: 130px; font-family: "Gotham Pro"; background: url(../images/main_banner.jpg) 50% 50% no-repeat; -webkit-background-size: cover; -moz-background-size: cover; background-size: cover; }
 @media screen and (max-width: 992px) { .main_banner { margin-bottom: 80px; } }
 @media screen and (max-width: 768px) { .main_banner { margin-bottom: 30px; text-align: center; } }
-.main_banner_title { max-width: 560px; padding: 150px 0; font-size: 80px; line-height: 84px; color: #fff; font-weight: 900; }
+.main_banner_content { font-style: 17px; line-height: 21px; color: #343434; }
+.main_banner_content span { display: block; padding-top: 20px; padding-bottom: 30px; color: #2878e4; }
+.main_banner_content_wrap { width: 35%; padding: 30px; text-align: center; background: rgba(255, 255, 255, 0.7); }
+.main_banner_play_btn, .main_banner_more_btn { display: inline-block; padding: 6px 12px; margin: 0 5px; font-size: 14px; font-weight: 400; line-height: 1.42857; color: #333; text-decoration: none; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; }
+.main_banner_play_btn { background: #2878e4; border: none; color: #fff; }
+.main_banner_title { max-width: 560px; padding-bottom: 30px; font-size: 50px; line-height: 54px; color: #2878e4; font-weight: 700; }
 @media screen and (max-width: 992px) { .main_banner_title { padding: 80px 0; font-size: 50px; line-height: 54px; } }
 @media screen and (max-width: 768px) { .main_banner_title { padding: 50px 0; font-size: 35px; line-height: 40px; } }
-.main_banner_title span { display: block; font-weight: 400; }
+.main_banner_title span { display: block; font-size: 35px; line-height: 39px; font-weight: 400; }
+
+.promo_block { padding-bottom: 60px; text-align: center; }
+.promo_block h2 { padding-bottom: 40px; font-size: 30px; line-height: 34px; color: #2878e4; }
+.promo_block p { font-size: 16px; line-height: 20px; color: #343434; }
+.promo_block img { margin: 30px 0; }
+
+.gist_block { padding-bottom: 60px; }
+.gist_block h2 { padding-bottom: 20px; font-size: 40px; line-height: 44px; color: #2878e4; text-align: center; }
+.gist_block p { padding-bottom: 15px; font-size: 16px; line-height: 20px; color: #343434; }
 
 .start_block { padding: 10px 100px 40px; margin-bottom: 100px; text-align: center; font-family: "Gotham Pro"; border: 1px solid #49d793; }
 .start_block:after { content: ""; display: block; clear: both; }
@@ -365,6 +379,27 @@ body { font-family: "PT Sans", sans-serif; }
 .start_price_autoplay_check input { display: none; }
 .start_price_autoplay_check input:checked + label span { background: url(../images/checkbox.png) 0 0 no-repeat; }
 
+.compare_block { padding: none; }
+.compare_block:after { content: ""; display: block; clear: both; }
+.compare_block a { display: inline-block; padding: 6px 12px; margin-left: 25px; font-size: 14px; font-weight: 400; line-height: 1.42857; color: #333; text-decoration: none; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none; background-color: #rgba(255, 255, 255, 0); border: 1px solid #rgba(255, 255, 255, 0); border-radius: 4px; }
+.compare_block .compare_block_col_title { font-size: 26px; line-height: 30px; padding: 13px 0 30px 60px; }
+.compare_block .col { width: 48%; }
+.compare_block .col ul { padding-bottom: 20px; list-style-type: none; }
+.compare_block .col.compare_block_no li, .compare_block .col.compare_block_yes li { padding: 10px 0 10px 25px; font-size: 16px; line-height: 20px; color: #343434; }
+.compare_block .col.compare_block_no { float: left; }
+.compare_block .col.compare_block_no .compare_block_col_title { background: url(../images/cross.png) 0 10px no-repeat; -webkit-background-size: auto 40px; -moz-background-size: auto 40px; background-size: auto 40px; }
+.compare_block .col.compare_block_no li { background: url(../images/cross.png) 0 10px no-repeat; -webkit-background-size: auto 20px; -moz-background-size: auto 20px; background-size: auto 20px; }
+.compare_block .col.compare_block_yes { float: right; }
+.compare_block .col.compare_block_yes a { color: #fff; background: #2878e4; border: none; }
+.compare_block .col.compare_block_yes .compare_block_col_title { background: url(../images/done.png) 0 10px no-repeat; -webkit-background-size: auto 40px; -moz-background-size: auto 40px; background-size: auto 40px; }
+.compare_block .col.compare_block_yes li { background: url(../images/done.png) 0 10px no-repeat; -webkit-background-size: auto 20px; -moz-background-size: auto 20px; background-size: auto 20px; }
+
+.game_advantages { text-align: center; }
+.game_advantages h2 { padding-bottom: 30px; font-size: 46px; line-height: 50px; text-align: center; color: #458ee9; }
+.game_advantages_item { display: inline-block; width: 15%; margin: 0 40px; vertical-align: top; }
+.game_advantages_item_title { font-size: 22px; line-height: 26px; color: #458ee9; }
+.game_advantages_item_title:before { content: ""; display: block; width: 35px; height: 35px; margin: 0 auto 5px; border: 3px solid #000; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; }
+
 .partner_block_wrap { padding: 50px 0; overflow: hidden; }
 @media screen and (max-width: 768px) { .partner_block_wrap { padding: 0; overflow: visible; } }
 
@@ -442,6 +477,10 @@ body { font-family: "PT Sans", sans-serif; }
 .stats_block_item.online .stats_block_quantity { background: url(../images/ic-online.png) 50% 0 no-repeat; }
 .stats_block_item.tasks .stats_block_quantity { background: url(../images/ic-tasks.png) 50% 0 no-repeat; }
 .stats_block_item.compl .stats_block_quantity { background: url(../images/ic-compl.png) 50% 0 no-repeat; }
+
+.doubt_block { padding-bottom: 80px; }
+.doubt_block h2 { padding-bottom: 40px; font-size: 50px; line-height: 54px; color: #2a78e4; text-align: center; }
+.doubt_block p { padding-bottom: 15px; font-size: 16px; line-height: 20px; color: #343434; }
 
 .contact_block { padding-bottom: 150px; }
 @media screen and (max-width: 768px) { .contact_block { padding-bottom: 80px; } }
@@ -523,3 +562,4 @@ body { font-family: "PT Sans", sans-serif; }
 .activity_block td:nth-child(2) { width: 50%; text-align: center; }
 .activity_block td:nth-child(3), .activity_block td:nth-child(4) { width: 1%; padding: 30px 50px 10px; text-align: center; }
 .activity_block .show_all { display: block; text-align: center; font-size: 22px; line-height: 26px; color: #444; text-transform: uppercase; text-decoration: none; }
+

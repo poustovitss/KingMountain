@@ -1,16 +1,45 @@
-<h2>Forgot your password?</h2>
+<% bank = Bank.last %>
+<% if bank.active == false %>
+  <center>
+    <p><img src="/img/winner.gif"></p>
+    <p><h4>Ожидайте создается новая игра...</h4></p>
+  </center>
+<% else %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <center><%= devise_error_messages! %></center>
+    <div class="register_form">
+      <h1 class="register_form_title">Восстановить пароль</h1>
+      <form action="">
+        <div class="register_form_field">
+          <label for="name">Ваша почта</label>
+          <%= f.email_field :email, autofocus: true %>
+        </div>
+        <div class="register_form_submit">
+          <input type="submit" value="Отправить">
+        </div>
+      </form>
+      <center><div class="register_form_social_title">Войти через соц. сети</div></center>
+    <%= render "devise/shared/links" %>
+   <div class="footer">
+      <div class="container">
+      <span class="arrow_up">⌃</span>
+         <div class="footer_title">Нравится наш сервис? Поделитесь в социальных сетях:</div>
+         <div class="footer_social">
+            <a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=https://king-mountain.pro/&st.comments=ЦарьГоры" target="_blank" class="footer_social_item"><img src="<%= image_url("/images/ic-ok.png") %>" height="39" width="39" alt="OK"></a>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
+            <a href="https://www.facebook.com/sharer.php?u=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="<%= image_url("/images/ic-fb.png") %>" height="26" width="12" alt="Facebook"></a>
+            
+            <a href="https://vk.com/share.php?url=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="/images/ic-vk.png" height="18" width="30" alt="VK"></a>
+            
+            <a href="https://twitter.com/share?url=https://king-mountain.pro/&text=Царь Горы" target="_blank" class="footer_social_item"><img src="<%= image_url("/images/ic-tw.png") %>" height="20" width="24" alt="Twitter"></a>
+         </div>
+         <div class="footer_logo">
+            <img src="<%= image_url("/images/footer_logo.png") %>" height="45" width="109" alt="Царь горы">
+         </div>
+         <div class="footer_copyright">
+            ООО Игра - “Царь горы” 2017 Все права защищены.
+         </div>
+      </div>
+   </div>
+  <% end %>
 <% end %>
-
-<%= render "devise/shared/links" %>
