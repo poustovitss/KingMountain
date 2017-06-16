@@ -9,7 +9,8 @@ TEMP_EMAIL_PREFIX = 'change@me'
     omniauth_providers: [:facebook, :twitter, :vkontakte]
     # :lastseenable
 
-  validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
+  # validates :name, presence: true, length: {maximum: 50}
+  # validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
    after_create :send_admin_mail
   def send_admin_mail
@@ -78,10 +79,6 @@ TEMP_EMAIL_PREFIX = 'change@me'
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
-  validates :name, presence: true, length: {maximum: 50}
   
 
   has_many :transfers, dependent: :destroy
