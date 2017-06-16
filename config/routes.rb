@@ -3,21 +3,25 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :homepages, :profiles, :avatars, :improves, :orders, :getmoneys, :getbalances, :feedbacks
 
-  post 'buyall/:id' => 'improves#buyall', as: 'buyall'
+  scope ":locale", locale: /en|ru/ do
+    post 'buyall/:id' => 'improves#buyall', as: 'buyall'
 
-  put 'buyallproviant/:id' => 'profiles#buyallproviant', as: 'buyallproviant'
+    put 'buyallproviant/:id' => 'profiles#buyallproviant', as: 'buyallproviant'
 
-  post 'buynumb/:id' => 'profiles#buynumb', as: 'buynumb'
+    post 'buynumb/:id' => 'profiles#buynumb', as: 'buynumb'
 
 
-  put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'
-  put 'buyradist/:id' => 'improves#buyradist', as: 'buyradist'
+    put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'
+    put 'buyradist/:id' => 'improves#buyradist', as: 'buyradist'
 
-  get 'service' => 'homepages#service', as: 'service'
-  get 'contact' => 'homepages#contact', as: 'contact'
+    get 'service' => 'homepages#service', as: 'service'
+    get 'contact' => 'homepages#contact', as: 'contact'
 
-  match '/success' => 'orders#success', via: :get
-  match '/fail' => 'orders#fail', via: :get
+    match '/success' => 'orders#success', via: :get
+    match '/fail' => 'orders#fail', via: :get
+
+    root 'homepages#index'
+  end
 
   devise_for :users, 
   # controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
@@ -25,8 +29,9 @@ Rails.application.routes.draw do
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
+  match "*path", to: redirect("/#{I18n.default_locale}/%{path}"), via: :all 
+  match "", to: redirect("/#{I18n.default_locale}/"), via: :all
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'homepages#index'
 
   # get 'profiles/:id/adduser' => 'profiles#adduser', :as => 'adduser'
 end

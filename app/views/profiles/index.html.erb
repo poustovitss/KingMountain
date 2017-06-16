@@ -9,7 +9,7 @@
     <% end %>
 
     <div class="col-md-13 toppad">
-    <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 816px;' %>
+    <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 816px;' %>
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title"><%= current_user.name %></h3>
@@ -24,23 +24,23 @@
                 <%= image_tag ava.image.url(:thumb), class: "img-circle img-responsive" %>
               <% end %>
                 <%= form_for Avatar.new do |f| %>
-                  <%= f.label :image, "Обновить автарку" %>
+                  <%= f.label :image, I18n.t('profile.image') %>
                   <%= f.file_field :image %>
                   <%= f.hidden_field :user_id, :value => current_user.id %>
                   <p></p>
-                  <%= f.submit 'Обновить автарку', class: 'btn btn-default' %>
+                  <%= f.submit I18n.t('profile.image'), class: 'btn btn-default' %>
                 <% end %>
             </div>
             <div class=" col-md-9 col-lg-9 ">
               <table class="table table-user-information">
                 <tbody>
                 <tr>
-                  <td>Уровень</td>
+                  <td><%= t 'profile.level' %></td>
                   <td><%= current_user.level %></td>
                 </tr>
                 <tr>
-                  <td>Статус</td>
-                  <td>Приглашено <b style="color: green;">
+                  <td><%= t 'profile.status' %></td>
+                  <td><%= t 'profile.invited' %> <b style="color: green;">
                      <% if current_user.level == 1 %>
                       <%= current_user.refferences.where(level: 1).count %>
                      <% elsif current_user.level == 2 %>
@@ -53,28 +53,28 @@
                   </td>
                 </tr>
                 <tr>
-                  <td><b>Ваш свободный баланс</b></td>
+                  <td><b><%= t 'profile.free' %></b></td>
                   <td><b><%= current_user.transfers.sum(:summa) %>
-                    <%= link_to 'Вывод свободного баланса', new_getmoney_path, style: 'margin-left: 7px;' %>
+                    <%= link_to I18n.t('profile.get_money'), new_getmoney_path, style: 'margin-left: 7px;' %>
                   </b></td>
                 </tr>
                 <tr>
-                  <td><b>Ваш рабочий баланс</b></td>
+                  <td><b><%= t 'profile.work' %></b></td>
                   <td><b>
                     <% if current_user.balance.nil? %>
                        0 
                     <% else %>
                      <%= current_user.balance %>  
                     <% end %>
-                    <%= link_to 'Вывод рабочего баланса', new_getbalance_path,  style: 'margin-left: 10px;' %>
+                    <%= link_to I18n.t('profile.get_money'), new_getbalance_path,  style: 'margin-left: 10px;' %>
                   </b></td>
                 </tr>
                 <tr>
-                  <td>Электронная почта</td>
+                  <td><%= t 'profile.email' %></td>
                   <td><%= current_user.email %></td>
                 </tr>
                 <tr>
-                  <td>Вы пришли от</td>
+                  <td><%= t 'profile.come' %></td>
                   <td>
                   <% if current_user.reffered.nil? %>
                    ---
@@ -84,7 +84,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>Ваша реферальная ссылка</td>
+                  <td><%= t 'profile.reff' %></td>
                   <td><input type="text" id="copyTarget" class="form-control" value="<%= new_user_registration_url(referred_by: current_user.id)  %>"></td>
                 </tr>
                 </tbody>
@@ -103,7 +103,7 @@
           <% end %>
           <%= form_for :counts, url: buynumb_path(current_user.id), method: :post do |f| %>
                       <%= f.number_field :size_to_buy, style: 'margin-left: 371px' %>
-                      <%= f.submit 'Купить', class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; ' %>
+                      <%= f.submit I18n.t('profile.buy'), class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; ' %>
                  <% if current_user.level == 1 %>
                    <div style="margin-left: 391px;"> Свободных провиантов <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></div>
                 <% else %>
@@ -258,9 +258,9 @@
 
 <div class="start_price_block">
                <div class="start_price_extensions">
-                  <strong>Дополнения</strong>
+                  <strong><%= t 'profile.dops' %></strong>
                   <div class="start_price_extensions_item radio">
-                     <div class="icon">Радист</div>
+                     <div class="icon"><%= t 'profile.radist' %></div>
                      <div class="start_price_extensions_item_price">
                         50 руб
                      </div>
@@ -269,13 +269,13 @@
                         <% if user_signed_in? %>
                              <% unless current_user.radist == true %>
                                  <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
-                                    <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 50₽? ' } %>
+                                    <%= f.submit I18n.t('profile.buy'), class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 50₽? ' } %>
                                  <% end %>
                               <% else %>
                                  У вас уже есть это улучшение
                               <% end %>
                         <% else %>
-                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                           <%= link_to I18n.t('profile.buy'), new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
                         </a>
                         <i class="start_price_extensions_item_help">
@@ -287,7 +287,7 @@
                      </div>
                   </div>
                   <div class="start_price_extensions_item guide">
-                     <div class="icon">Проводник</div>
+                     <div class="icon"><%= t 'profile.conductor' %></div>
                      <div class="start_price_extensions_item_price">
                         500 руб.
                      </div>
@@ -295,13 +295,13 @@
                         <% if user_signed_in? %>
                          <% unless current_user.conductor == true %>
                            <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
-                              <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 500₽? ' } %>
+                              <%= f.submit I18n.t('profile.buy'), :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 500₽? ' } %>
                            <% end %>
                          <% else %>
                            <a>У вас уже есть это улучшение</a>
                          <% end %>
                         <% else %>
-                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                           <%= link_to I18n.t('profile.buy'), new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
@@ -312,7 +312,7 @@
                      </div>
                   </div>
                   <div class="start_price_extensions_item porter">
-                     <div class="icon">Носильщик</div>
+                     <div class="icon"><%= t 'profile.carrier' %></div>
                      <div class="start_price_extensions_item_price">
                         200 руб.
                      </div>
@@ -320,13 +320,13 @@
                         <% if user_signed_in? %>
                          <% unless current_user.carrier == true %>
                            <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
-                                 <%= f.submit "Купить", :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                                 <%= f.submit I18n.t('profile.buy'), :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
                            <% end %>
                          <% else %>
                            <a>У вас уже есть это улучшение</a>
                          <% end %>   
                         <% else %>
-                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                           <%= link_to I18n.t('profile.buy'), new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
@@ -337,7 +337,7 @@
                      </div>
                   </div>
                   <div class="start_price_extensions_item helicopter">
-                     <div class="icon">Эвакуационный вертолёт</div>
+                     <div class="icon"><%= t 'profile.vert' %></div>
                      <div class="start_price_extensions_item_price">
                         2000 руб.
                      </div>
@@ -346,7 +346,7 @@
                         <% if user_signed_in? %>
                          <% unless current_user.aerodrome == true %>
                            <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
-                              <%= f.submit "Купить", class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                              <%= f.submit I18n.t('profile.buy'), class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
                            <% end %>
                          <% else %>
                            У вас уже есть это улучшение
@@ -364,7 +364,7 @@
                      </div>
                   </div>
                    <div class="start_price_extensions_item all">
-                     <div class="icon">Купить все улучшения</div>
+                     <div class="icon"><%= t 'profile.buyall' %></div>
                      <div class="start_price_extensions_item_price">
                         500 руб.
                      </div>
@@ -373,13 +373,13 @@
                         <% if user_signed_in? %>
                          <% unless current_user.radist == true || current_user.carrier == true || current_user.conductor == true || current_user.aerodrome == true %>
                            <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
-                              <%= f.submit 'Купить', class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
+                              <%= f.submit I18n.t('profile.buy'), class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
                            <% end %>
                          <% else %>
                            У вас уже есть это улучшение
                          <% end %>
                         <% else %>
-                           <%= link_to 'Купить', new_user_registration_path, class: 'start_price_btn' %>
+                           <%= link_to I18n.t('profile.buy'), new_user_registration_path, class: 'start_price_btn' %>
                         <% end %>
                         </a>
                         <i class="start_price_extensions_item_help">
@@ -394,10 +394,10 @@
             </div>
             <div class="start_price_quantity">
                <div class="left_side">
-                  <h3>Купить провианта</h3>
-                  <em>Провиант помогает быстрее добраться к вершине!</em>
+                  <h3><%= t 'profile.buytoprov' %></h3>
+                  <em><%= t 'profile.provinfo' %></em>
                   <p></p>
-                     <em>Свободных провиантов <b>
+                     <em><%= t 'profile.freeprov' %> <b>
                      <% if current_user.level == 1 %>
                       <%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b>
                      <% else %>
@@ -421,7 +421,7 @@
             <% calc_summ = calc * balanceinfo %>
             <div class="start_price_total">
                <div class="left_side">
-                  <h4>Сумма за всех свободных провиантов:</h4>
+                  <h4><%= t 'profile.summprov' %>:</h4>
                </div>
                <div class="right_side">
                   <b class="start_price_total_price" id="sum" style="margin-top: -40px;">
@@ -431,13 +431,13 @@
             </div>
             <center>
    <div class="progress_block">
-    <div class="progress_block_title" style="background: #49d793;">Прогресс</div>
+    <div class="progress_block_title" style="background: #49d793;"><%= t 'profile.progress' %></div>
     <div class="progress_block_content">
-      <div class="progress_block_subtitle">Баланс <%= current_user.balance %> руб.</div>
+      <div class="progress_block_subtitle"><%= t 'profile.balanceinfo' %> <%= current_user.balance %> руб.</div>
       <div class="progress_block_content_items">
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">7 Уровень "Царь Горы"</div>
+            <div class="progress_block_content_item_text">7 <%= t 'profile.levelinfo' %></div>
             <% if current_user.level == 7 %>
              <span class="progress_block_content_item_level">
              <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
@@ -455,7 +455,7 @@
         </div>
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">6 Уровень "Царь Горы"</div>
+            <div class="progress_block_content_item_text">6 <%= t 'profile.levelinfo' %></div>
             <% if current_user.level == 6 %>
              <span class="progress_block_content_item_level"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
                 <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
@@ -472,7 +472,7 @@
         </div>
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">5 Уровень "Царь Горы"</div>
+            <div class="progress_block_content_item_text">5 <%= t 'profile.levelinfo' %></div>
             <% if current_user.level == 5 %>
              <span class="progress_block_content_item_level">
              <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
@@ -490,7 +490,7 @@
         </div>
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">4 Уровень "Царь Горы"</div>
+            <div class="progress_block_content_item_text">4 <%= t 'profile.levelinfo' %></div>
             <% if current_user.level == 4 %>
              <span class="progress_block_content_item_level"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
                 <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
@@ -507,7 +507,7 @@
         </div>
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">3 Уровень "Царь Горы"</div>
+            <div class="progress_block_content_item_text">3 <%= t 'profile.levelinfo' %></div>
             <% if current_user.level == 3 %>
              <span class="progress_block_content_item_level">
                <%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
@@ -525,7 +525,7 @@
         </div>
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">2 Уровень "Царь Горы"</div>
+            <div class="progress_block_content_item_text">2 <%= t 'profile.levelinfo' %></div>
             <% if current_user.level == 2 %>
                 <span class="progress_block_content_item_level">
                 <%= current_user.refferences.where(level: 1).count - 10 %>/10</span>
@@ -543,7 +543,7 @@
         </div>
         <div class="progress_block_content_item">
           <div class="progress_block_content_item_inner">
-            <div class="progress_block_content_item_text">1 Уровень "Царь Горы"</div>
+            <div class="progress_block_content_item_text">1 <%= t 'profile.levelinfo' %></div>
             <% if current_user.level == 1 %>
              <span class="progress_block_content_item_level">
                 <%= current_user.refferences.where(level: 1).count %>
@@ -565,13 +565,13 @@
   </div>
   <div class="container">
     <div class="activity_block">
-      <div class="activity_block_title"><span>Партнерская активность</span></div>
+      <div class="activity_block_title"><span><%= t 'profile.reffactive' %></span></div>
       <table>
         <thead>
           <tr>
-            <th>Рефералы</th>
-            <th>Уровень</th>
-            <th>Доход</th>
+            <th><%= t 'profile.reff' %></th>
+            <th><%= t 'profile.level' %></th>
+            <th><%= t 'profile.doxod' %></th>
           </tr>
           <% current_user.refferences.each do |ref| %>
             <tr>

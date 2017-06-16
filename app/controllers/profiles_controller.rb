@@ -9,9 +9,9 @@ class ProfilesController < ApplicationController
       end
     
        if current_user.level == 0 || current_user.level.nil?
-         @button = 'Начать игру'
+         @button = I18n.t('profile.start')
        else
-        @button = 'Перейти на следущий уровень'
+        @button = I18n.t('profile.next')
        end
     else
      redirect_to new_user_session_path 

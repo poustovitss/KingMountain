@@ -27,53 +27,46 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
       <body>
-<div class="header">
+    <div class="header">
       <div class="container">
          <div class="logo">
-            <a href="<%= root_path %>"><img src="<%= image_url('logo.png')%>" height="47" width="213" alt="Царь горы"></a>
+            <a href="<%= root_path %>"><img src="<%= image_url('logoen.png')%>" height="47" width="213" alt="Царь горы"></a>
          </div>
          <div class="header_menu_wrap">
          <nav class="header_menu">
             <ul>
-               <li><a href="<%= root_path %>">Главная</a></li>
-               <li><a href="<%= service_path %>">о сервисе</a></li>
-               <li><a href="<%= contact_path %>">Контакты</a></li>
+               <li><a href="<%= root_path %>"><%= t 'navbar.h' %></a></li>
+               <li><a href="<%= service_path %>"><%= t 'navbar.s' %></a></li>
+               <li><a href="<%= contact_path %>"><%= t 'navbar.c' %></a></li>
                <% if user_signed_in? && current_user.admin? %>
-                <li><a href="<%= admin_root_path %>">Админ панель</a></li>
+                <li><a href="<%= admin_root_path %>"><%= t 'navbar.admin' %></a></li>
                <% end %>
                <% if user_signed_in? %>
-                <li><a href="<%= profiles_path %>">Профиль</a></li>
-                <li><a href="<%= new_order_path %>" class="sign_in">Пополнить</a></li>
+                <li><a href="<%= profiles_path %>"><%= t 'navbar.profile' %></a></li>
+                <li><a href="<%= new_order_path %>" class="sign_in"><%= t 'navbar.money' %></a></li>
                 <!-- <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li> -->
               <% end %>
             </ul>
          </nav>
          <% unless user_signed_in? %>
-         <div class="header_sign">
-            <a href="<%= new_user_registration_path %>" class="sign_up">Регистрация</a>
-            <a href="<%= new_user_session_path %>" class="sign_in">Вход</a>
-          <% end %>
-         </div>
+           <div class="header_sign">
+              <a href="<%= new_user_registration_path %>" class="sign_up" style="margin-top: 0;"><%= t 'navbar.register' %></a>
+              <a href="<%= new_user_session_path %>" class="sign_in"><%= t 'navbar.sign' %></a>
+           </div>
+         <% end %>
+         <%= link_to_unless_current image_tag("en.png"), locale: "en" %>
+          |
+         <%= link_to_unless_current image_tag("rus.png"), locale: "ru" %>
          </div>
          <div class="mobile_btn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+            <span></span>
+            <span></span>
+            <span></span>
+         </div>
+         <div style="clear: both;"></div>
       </div>
    </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <hr>
-      <li><%= link_to 'Вывод рабочего баланса', new_getbalance_path, class: 'btn btn-default' %></li>
-      <p></p>
-      <li><%= link_to 'Вывод свободного баланса', new_getmoney_path, class: 'btn btn-default' %></li>
-      <hr>
-    </div>
-  </div>
-</div>
 
 <!-- BEGIN JIVOSITE CODE -->
 <script type='text/javascript'>

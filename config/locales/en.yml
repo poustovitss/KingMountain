@@ -20,4 +20,64 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  homepage:
+    play: 'Online - Game'
+    king: 'King Mountain'
+    desc: 'Become the King of the Mountain and win 88 million rubles, paying only 25 rubles for the entry fee'
+    getinfo: 'The game is not for luckers. Your winnings depend only on your efforts. Play and get money for it'
+    button: 'Learn More'
+    info: 'The best way to spend 25 rub'
+    infodesc: 'Buy the entry into the game King of the Mountains and get
+The opportunity to win up to 88 million rub!'
+    vibor: 'MAKE THE RIGHT CHOICE'
+    image: ("#{I18n.locale}/logoen.png
+
+  navbar:
+    h: 'Home'
+    s: 'Service'
+    c: "Contact"
+    admin: "Admin Panel"
+    profile: "Profile"
+    money: "Payment"
+    register: 'Sign up'
+    sign: 'Sign in'
+  sign:
+    name: 'Name'
+    email: 'Email'
+    pass: 'Password'
+    pass_c: "Confirm password"
+  profile: 
+    level: 'Level'
+    invited: 'invited'
+    image: 'Update to image'
+    status: 'Status'
+    free: 'Your free balance'
+    get_money: "Withdraw funds"
+    work: 'Your working balance'
+    email: 'Email'
+    come: 'You came from'
+    reff: 'Your referral link'
+    sign_out: 'Sign out'
+    buy: 'buy'
+    freeprov: 'free proviants'
+    dops: 'Additions'
+    radist: 'Radist'
+    conductor: 'Conductor'
+    carrier: 'Carrier'
+    vert: 'Evacuation helicopter'
+    buyall: 'Buy all'
+    buytoprov: "Buy proviant"
+    provinfo: 'Provision helps you get to the top faster!'
+    summprov: "Amount for all free proviants"
+    progress: "Progress"
+    levelinfo: 'Level "King Mountain"'
+    balanceinfo: "Balance"
+    reffactive: "Referral active"
+    reffs: "Referrals"
+    levels: "Level"
+    doxod: "Earnings"
+    start: "Start the game"
+    next: "Next level"
+    or: 'or'
+    sale: 'Cost of start'
+    ruble: 'rub'

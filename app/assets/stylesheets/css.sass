@@ -145,13 +145,48 @@ body
 	+xs
 		margin-bottom: 30px
 		text-align: center
+	&_content
+		font-style: 17px
+		line-height: 21px
+		color: #343434
+		span
+			display: block
+			padding-top: 20px
+			padding-bottom: 30px
+			color: #2878e4
+		&_wrap
+			width: 35%
+			padding: 30px
+			text-align: center
+			background: rgba(255, 255, 255, 0)
+	&_play_btn, &_more_btn
+		display: inline-block
+		padding: 6px 12px
+		margin: 0 5px
+		font-size: 14px
+		font-weight: 400
+		line-height: 1.42857
+		color: #333
+		text-decoration: none
+		text-align: center
+		white-space: nowrap
+		vertical-align: middle
+		cursor: pointer
+		background-image: none
+		background-color: #fff
+		border: 1px solid #ccc
+		border-radius: 4px
+	&_play_btn
+		background: #2878e4
+		border: none
+		color: #fff
 	&_title
 		max-width: 560px
-		padding: 150px 0
-		font-size: 80px
-		line-height: 84px
-		color: #fff
-		font-weight: 900
+		padding-bottom: 30px
+		font-size: 50px
+		line-height: 54px
+		color: #2878e4
+		font-weight: 700
 		+sm
 			padding: 80px 0
 			font-size: 50px
@@ -162,7 +197,36 @@ body
 			line-height: 40px
 		span
 			display: block
+			font-size: 35px
+			line-height: 39px
 			font-weight: 400
+.promo_block
+	padding-bottom: 60px
+	text-align: center
+	h2
+		padding-bottom: 40px
+		font-size: 30px
+		line-height: 34px
+		color: #2878e4
+	p
+		font-size: 16px
+		line-height: 20px
+		color: #343434
+	img
+		margin: 30px 0
+.gist_block
+	padding-bottom: 60px
+	h2
+		padding-bottom: 20px
+		font-size: 40px
+		line-height: 44px
+		color: #2878e4
+		text-align: center
+	p
+		padding-bottom: 15px
+		font-size: 16px
+		line-height: 20px
+		color: #343434
 .start_block
 	padding: 10px 100px 40px
 	margin-bottom: 100px
@@ -541,6 +605,95 @@ body
 			display: none
 			&:checked+label span
 				background: url(../images/checkbox.png) 0 0 no-repeat
+.compare_block
+	padding: 60px 0
+	+clear
+	a
+		display: inline-block
+		padding: 6px 12px
+		margin-left: 25px
+		font-size: 14px
+		font-weight: 400
+		line-height: 1.42857
+		color: #333
+		text-decoration: none
+		text-align: center
+		white-space: nowrap
+		vertical-align: middle
+		cursor: pointer
+		background-image: none
+		background-color: #fff
+		border: 1px solid #ccc
+		border-radius: 4px
+	.compare_block_col_title
+		font-size: 26px
+		line-height: 30px
+		padding: 13px 0 30px 60px
+	.col
+		width: 48%
+		ul
+			padding-bottom: 20px
+			list-style-type: none
+		&.compare_block_no, &.compare_block_yes
+			li
+				padding: 10px 0 10px 25px
+				font-size: 16px
+				line-height: 20px
+				color: #343434
+		&.compare_block_no
+			float: left
+			.compare_block_col_title
+				background: url(../images/cross.png) 0 10px no-repeat
+				-webkit-background-size: auto 40px
+				-moz-background-size: auto 40px
+				background-size: auto 40px
+			li
+				background: url(../images/cross.png) 0 10px no-repeat
+				-webkit-background-size: auto 20px
+				-moz-background-size: auto 20px
+				background-size: auto 20px
+		&.compare_block_yes
+			float: right
+			a
+				color: #fff
+				background: #2878e4
+				border: none
+			.compare_block_col_title
+				background: url(../images/done.png) 0 10px no-repeat
+				-webkit-background-size: auto 40px
+				-moz-background-size: auto 40px
+				background-size: auto 40px
+			li
+				background: url(../images/done.png) 0 10px no-repeat
+				-webkit-background-size: auto 20px
+				-moz-background-size: auto 20px
+				background-size: auto 20px
+.game_advantages
+	text-align: center
+	h2
+		padding-bottom: 30px
+		font-size: 46px
+		line-height: 50px
+		text-align: center
+		color: #458ee9
+	&_item
+		display: inline-block
+		width: 15%
+		margin: 0 40px
+		vertical-align: top
+		&_title
+			font-size: 22px
+			line-height: 26px
+			color: #458ee9
+			&:before
+				content: ''
+				display: block
+				width: 35px
+				height: 35px
+				margin: 0 auto 5px
+				border: 3px solid #000
+				+bdrs(5px)
+
 .partner_block_wrap
 	padding: 50px 0
 	overflow: hidden
@@ -802,6 +955,19 @@ body
 		&_item.#{$item}
 			.stats_block_quantity
 				background: url(../images/ic-#{$item}.png) 50% 0 no-repeat
+.doubt_block
+	padding-bottom: 80px
+	h2
+		padding-bottom: 40px
+		font-size: 50px
+		line-height: 54px
+		color: #2a78e4
+		text-align: center
+	p
+		padding-bottom: 15px
+		font-size: 16px
+		line-height: 20px
+		color: #343434
 .contact_block
 	padding-bottom: 150px
 	+xs
@@ -948,3 +1114,4 @@ body
 		font-size: 14px
 		color: #5b5b5b
 @import 'login'
+@import 'lk'

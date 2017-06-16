@@ -108,4 +108,23 @@ $(document).ready(function() {
 	$('.arrow_up').click(function() {
 		$('html, body').animate({scrollTop: 0})
 	});
+
+	$('.promo_block a').click(function() {
+		e.preventDefault();
+		
+		$('html, body').animate({scrollTop: 1650})
+	});
+
+
+	$('.main_banner_more_btn').click(function(e) {
+		e.preventDefault();
+		$('html, body').animate({scrollTop: 1650})
+	});
+	$('.main_banner_play_btn').click(function() {
+		e.preventDefault();
+
+		$('html, body').animate({scrollTop: 2300})
+	});
+
+
 });

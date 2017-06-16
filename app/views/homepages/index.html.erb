@@ -14,60 +14,69 @@
 </script>
  
 
-<link rel="stylesheet" href="fonts/gothamPro/stylesheet.css">
+<link rel="stylesheet" href="/fonts/gothamPro/stylesheet.css">
+
    <div class="main_banner">
-      <div class="main_banner_content_wrap">
-         <h1 class="main_banner_title">
-            <span>Онлайн-игра</span>
-            Царь горы
-         </h1>
-         <div class="main_banner_content">
-            Стань Царем Горы и выиграй 88 млн рублей, заплатив всего 25 рублей за вступительный взнос
-            <span>
-               Игра не на удачу или везение. Твой выигрыш зависит только от твоих усилий. Играй и получай за это деньги
-            </span>
+      <div class="box-width">
+         <div class="main_banner_content_wrap">
+            <h1 class="main_banner_title">
+               <span><%= t 'homepage.play' %></span>
+               <%= t 'homepage.king' %>
+            </h1>
+            <div class="main_banner_content">
+               <%= t 'homepage.desc' %>
+               <span>
+                  <%= t 'homepage.getinfo' %>
+               </span>
+            </div>
+            <!-- <a href="#" class="main_banner_play_btn">Играть</a> -->
+            <a href="#" class="main_banner_more_btn" style="color: white; background-color: rgba(255, 255, 255, 0.03);"><%= t 'homepage.button' %></a>
          </div>
-         <a href="<%= profiles_path %>" class="main_banner_play_btn">Играть</a>
-         <a href="<%= service_path %>" class="main_banner_more_btn">Подробнее</a>
+         <div class="main_banner_arr_down"></div>
       </div>
-      <div class="main_banner_arr_down"></div>
    </div>
-   <div class="gist_block">
+   <div class="promo_block">
+      <div class="container">
+         <h2 style="margin-left: 208px;"><%= t 'homepage.info' %></h2>
+         <p><%= t 'homepage.infodesc' %></p>
+         <span style="display: block; margin: 50px auto 37px auto; width: 490px; border-radius: 100%; height: 490px; background: url('/images/main_banner_crop.jpg') no-repeat center; background-size: cover; "></span>
+         <br>
+         <span><%= t 'homepage.vibor' %></span>
+         <a href="#next-block"><img src="/images/Layer-1.png" alt=""></a>
+      </div>
+   </div>
+   <div class="gist_block" id="next-block">
       <div class="container">
          <h2>Суть игры</h2>
-         <p>Царь горы - новая перспективная игра, выиграть в которой может любой желающий. Для вступления в игру достаточно сделать шаг! Купив вступление за 25рублей, вы становитесь полноценным её участником, которому открываются все дополнения. После этого вы можете начать играть и зарабатывать.</p>
-         <p>Продвижение к вершине осуществляется заполнением уровней. Система автоматически подбирает вам участников, заполняя ваш уровень. Вы поднимаетесь все выше и все ближе к цели.</p>
-         <p>Логика игры построенна так, что вы всегда можете обогнать своих соперников, как бы далеко впереди они не находились. Таким образом, каждый участник имеет абсолютно равные шансы на победу.</p>
-         <p>Система не требует от вас совершения дополнительных покупок или приглашения рефералов. Вы можете играть, как вам угодно.</p>
-         <p>Вы можете увеличить шансы на победу, докупить провиант или сформировать свою команду для восхождения, которая состоит из медика, проводника, радиста, запасного аэродрома.</p>
-         <p>Победителем игры становится тот, кто первый достигнет вершины и станет Царем горы. Ему достается весь банк игры в размере 88.000.000 рублей</p>
+         <p style="padding-bottom: 25px;">Царь горы – новая перспективная игра, выиграть в которой может любой желающий. Для вступления в игру достаточно сделать один шаг! Купив вступление за 25 рублей, вы становитесь полноценным её учасником, которому открываются все дополнения. После этого вы можете начать играть и зарабатывать </p>
+         
+         <p style="letter-spacing: 0.4px; padding-bottom: 26px;">Продвижение к вершине осуществляется заполнением уровней. Система автоматически подбирает вам участников, заполняя ваш уровень. Вы поднимаетесь все выши и все ближе к цели. </p>
+
+         <p style="padding-bottom: 23px; letter-spacing: 0.5px;">Логика игры построена так, что вы всегда можете обогнать своих соперников, как бы далеко впереди они не находились. Таким образом, каждый участник имеет абсолютно равные шансы на победу.
+         Система не требует от вас совершения дополнительных покупок или приглашения рефералов. Вы можете играть, как вам угодно.</p>
+
+         <p style="letter-spacing: 0.5px; padding-bottom: 26px;">Вы можете увеличить шансы на победу, докупить провиант или сформировать свою команду для восхождения, которая состоит из медика, проводника, радиста, инструктора.
+         В игре существует реферальная система, благодяря которой достижения новых уровней будет осуществляться ещё быстрее и без каких-либо вложений с каждой траты вашего реферала вы будете получать 5% средств на свой счет.</p>
+
+         <p style="letter-spacing: 0.4px; padding-bottom: 27px;">Победителем игры становится тот, кто первый достигнет вершины и станет Царем горы. Ему достается весь банк игры в размере 88 000 000 рублей.</p>
       </div>
    </div>
    <div class="container">
       <div class="start_price">
-         <form action="<%= profiles_path %>">
-                     <div class="start_price_block">
+         <form action="#">
+            <h2 class="start_price_title"> 
+               <%= t 'profile.sale' %> <span>25 <%= t 'profile.ruble' %></span> 
+            </h2>
+            <div class="start_price_block">
                <div class="start_price_extensions">
-                  <strong>Дополнения</strong>
+                  <strong><%= t 'profile.dops' %></strong>
                   <div class="start_price_extensions_item radio">
-                     <div class="icon">Радист</div>
+                     <div class="icon"><%= t 'profile.radist' %></div>
                      <div class="start_price_extensions_item_price">
-                        50 руб
+                        50 <%= t 'profile.ruble' %>
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <a>
-                        <% if user_signed_in? %>
-                             <% unless current_user.radist == true %>
-                                 <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
-                                    <%= f.submit "Купить", class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-                                 <% end %>
-                              <% else %>
-                                 У вас уже есть это улучшение
-                              <% end %>
-                        <% else %>
-                            
-                        <% end %>
-                        </a>
+                        <input type="checkbox" name="" id="radist"><label for="radist"><span></span></label>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -77,22 +86,12 @@
                      </div>
                   </div>
                   <div class="start_price_extensions_item guide">
-                     <div class="icon">Проводник</div>
+                     <div class="icon"><%= t 'profile.conductor' %></div>
                      <div class="start_price_extensions_item_price">
-                        150 руб.
+                        150 <%= t 'profile.ruble' %>.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <% if user_signed_in? %>
-                         <% unless current_user.conductor == true %>
-                           <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
-                              <%= f.submit 'Купить', :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 150₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           <a>У вас уже есть это улучшение</a>
-                         <% end %>
-                        <% else %>
-                            
-                        <% end %>
+                        <input type="checkbox" name="" id="provodnic"><label for="provodnic"><span></span></label>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -102,22 +101,12 @@
                      </div>
                   </div>
                   <div class="start_price_extensions_item porter">
-                     <div class="icon">Носильщик</div>
+                     <div class="icon"><%= t 'profile.carrier' %></div>
                      <div class="start_price_extensions_item_price">
-                        100 руб.
+                        100 <%= t 'profile.ruble' %>.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <% if user_signed_in? %>
-                         <% unless current_user.carrier == true %>
-                           <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
-                                 <%= f.submit "Купить", :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           <a>У вас уже есть это улучшение</a>
-                         <% end %>   
-                        <% else %>
-                            
-                        <% end %>
+                        <input type="checkbox" name="" id="nosilchik"><label for="nosilchik"><span></span></label>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -127,24 +116,12 @@
                      </div>
                   </div>
                   <div class="start_price_extensions_item helicopter">
-                     <div class="icon">Эвакуационный вертолёт</div>
+                     <div class="icon"><%= t 'profile.vert' %></div>
                      <div class="start_price_extensions_item_price">
-                        200 руб.
+                        200 <%= t 'profile.ruble' %>.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <a >
-                        <% if user_signed_in? %>
-                         <% unless current_user.aerodrome == true %>
-                           <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
-                              <%= f.submit "Купить", class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           У вас уже есть это улучшение
-                         <% end %>
-                        <% else %>
-                            
-                        <% end %>
-                        </a>
+                        <input type="checkbox" name="" id="vertolet"><label for="vertolet"><span></span></label>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -155,11 +132,12 @@
                   </div>
                </div>
             </div>
+            
             <div class="start_block_submit">
-               <a href="#" class="start_block_submit_btn">Старт</a>
+               <a href="<%= profiles_path %>" class="start_block_submit_btn"><%= t 'profile.start' %></a>
                <span>
-                  или <br>
-                  <a href="#">Зарегестрируйтесь</a>
+                  <%= t 'profile.or' %> <br>
+                  <a href="<%= new_user_registration_path %>"><%= t 'navbar.register' %></a>
                </span>
             </div>
          </form>
@@ -167,10 +145,8 @@
    </div>
    <div class="compare_block">
       <div class="container">
-         <h3>Перспективная игра</h3>
-         <p>Сравним с другими</p>
-    <div class="compare_block">
-      <div class="container">
+         <h3>Царь игры - самая перспектианя игра <br>по заработку 2017</h3>
+         <p>Звучит самонадеянно? Давайте сравним игру со всеми известной онлайн-рулеткой:</p>
          <div class="col compare_block_no">
             <div class="compare_block_col_title">Рулетка</div>
             <ul>
@@ -178,105 +154,51 @@
                <li>Вы можете опираться только на удачу и интуицию</li>
                <li>Азартная игра</li>
                <li>Высокая вероятность остаться ни с чем</li>
-               <li>Казино всегда в <<плюсе>> и заинтересовано в том, чтобы вы проигрывали</li>
-               <li>Качество игры</li>
-               <li>Большие коммиссии</li>
+               <li>Казино всегда "в плюсе" и заинтересовано в том, чтобы вы проигрывали<li>
             </ul>
-            <a href="<%= new_user_session_path %>">Упустить возможность</a>
+            <a href="#">Упустить возможность</a>
          </div>
          <div class="col compare_block_yes">
             <div class="compare_block_col_title">Царь горы</div>
             <ul>
                <li>Вы сами контролируете игру</li>
                <li>Вы можете пользоваться провиантом, дополнениями и реферальной системой, увеличивая свой шанс на выигрыш</li>
-               <li>Игра, зароботок в которой зависит только от вас</li>
-               <li>Максимум, что вы можете потерять - 50 рублей, но и это только в случае, если покинете игру</li>
-               <li>Сайт зарабатывает исключительно на комиссиях при оплате вступления и покупке дополнения, поэтому мы заинтересованы, чтобы вы выигрывали</li>
+               <li>Игра, заработок в которой зависит только от вас</li>
+               <li>Максимум, что вы можете потерять - 25 рублей, но и это в случае, если покинете игру</li>
+               <li>Сайт зарабатывает исключительно на комиссиях при оплате при оплате вступления и покупки дополнений, по этому мы заинтересованы, чтобы вы играли и выигрывали</li>
             </ul>
-            <a href="<%= new_user_session_path %>">Сделать правильный выбор</a>
+            <a href="<%= new_user_registration_path %>">Сделать правильный выбор</a>
          </div>
       </div>
-   </div>
-   <hr>
    </div>
    <div class="game_advantages">
       <div class="container">
-         <h2>Преимущества игры</h2>
-         <div class="game_advantages_item">
-            <div class="game_advantages_item_title">Автоматическая сис. заработка.</div>
-            <span>Можно зарабатывать, даже не играя</span>
-         </div>
-         <div class="game_advantages_item">
-            <div class="game_advantages_item_title">Дешевое участие</div>
-            <span>Потратив 25 рублей можно выиграть 88.000.000 рублей.</span>
-         </div>
-         <div class="game_advantages_item">
-            <div class="game_advantages_item_title">Реферальная система</div>
-            <span>Приглашая друзей, вы получаете 5% от всех их покупок и увеличиваете шанс на выигрыш главного приза</span>
-         </div>   
-      </div>
-   </div>
-   <div class="partner_block_wrap"> 
-      <div class="partner_block">
-         <div class="rotate_left">
-            <div class="partner_block_inner">
-               <div class="partner_discount">
-                  5%
-                  <span>
-                     с каждой покупки <br>
-                     реферала
-                  </span>
-               </div>
-            </div>
-         </div>
-         <div class="rotate_right">
-            <div class="partner_block_inner">
-               <h5>Как партнёр</h5>
-               <p>Зарегестрируйтесь сегодня и получите 25 баллов в подарок!</p>
-               <p>Всё что нужно сделать - зарегестрироваться на сайте через социальные сети или с помощью рабочего email адреса  и подтвердить его, пройдя по ссылке в письме.</p>
-               <p>Бонусные баллы после выполнения первых 50 заданий.</p>
-            </div>
-         </div>
+         <h2 class="top_block_title" style="color: #2fcaf1;">Преимущества игры</h2>
       </div>
    </div>
    <div class="container">
       <div class="pluses_block">
          <div class="pluses_block_item">
             <span>1</span>
-            <img src="images/free.png" height="156" width="155" alt="Free">
-            <h5>Бесплатно</h5>
+            <img src="/images/free.png" alt="Free">
+            <h5>Автоматическая <br> система заработка</h5>
+            <p>Можно зарабатывать,<br> даже не играя</p>
          </div>
          <div class="pluses_block_item">
             <span>2</span>
-            <img src="images/fast.png" height="157" width="155" alt="Fast">
-            <h5>Быстро</h5>
+            <img src="/images/fast.png" alt="Fast">
+            <h5>Дешевое участие</h5>
+            <p>Потратив 25 рублей можно <br> выиграть 88 000 000 рублей</p>
          </div>
          <div class="pluses_block_item">
             <span>3</span>
-            <img src="images/reliably.png" height="156" width="155" alt="Reliably">
-            <h5>Качественно</h5>
+            <img src="/images/reliably.png" alt="Reliably">
+            <h5>Реферальная система</h5>
+            <p>Приглашая друзей, вы получаете <br> 5% от всех их покупок и увеличиваете <br> шанс на выигрыш</p>
          </div>
       </div>
    </div>
-   <div class="partner_block_wrap"> 
-      <div class="partner_block">
-         <div class="rotate_left">
-            <div class="partner_block_inner">
-               <div class="partner_discount">
-                  <img src="images/friends.png" height="283" width="248" alt="Friends">
-               </div>
-            </div>
-         </div>
-         <div class="rotate_right">
-            <div class="partner_block_inner">
-               <h5>Активность</h5>
-               <p>Вам совершенно ничего не надо делать, игра подберёт для вас людей в уровень и вы получаете свой заработок!</p>
-               <p>Но чем вы активней, тем больше ваш шанс получить главный приз</p>
-            </div>
-         </div>
-      </div>
-   </div>
-   <div class="top_block">
+     <div class="top_block">
       <div class="container">
          <h2 class="top_block_title">Топ-10 партнеров</h2>
          <div class="top_block_items">
@@ -285,7 +207,7 @@
                   <% user_first = User.order("balance DESC")[0] %>
                   <% ava = user_first.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;'%>
                <% end %>
@@ -300,7 +222,7 @@
                <% user_second = User.order("balance DESC")[1] %>
                   <% ava = user_second.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;' %>
                <% end %>
@@ -315,7 +237,7 @@
                <% user_third = User.order("balance DESC")[2] %>
                   <% ava = user_third.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;' %>
                <% end %>
@@ -330,7 +252,7 @@
                <% user_fourth = User.order("balance DESC")[3] %>
                   <% ava = user_fourth.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62" , style: 'border-radius: 34px;'%>
                <% end %>
@@ -345,7 +267,7 @@
                <% user_fifth = User.order("balance DESC")[4] %>
                   <% ava = user_fifth.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;' %>
                <% end %>
@@ -357,7 +279,7 @@
             </div>
             <div class="top_block_item">
                <b>6</b>
-               <img src="images/top-photo.png" height="62" width="62" alt="">
+               <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% user_sixth = User.order("balance DESC")[5] %>
                <span>
                   <%= user_sixth.name %> <br>
@@ -370,7 +292,7 @@
                <% user_seventh = User.order("balance DESC")[6] %>
                   <% ava = user_seventh.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;' %>
                <% end %>
@@ -385,7 +307,7 @@
                <% user_eighth = User.order("balance DESC")[7] %>
                   <% ava = user_eighth.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;' %>
                <% end %>
@@ -400,7 +322,7 @@
                <% user_nine = User.order("balance DESC")[8] %>
                   <% ava = user_nine.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;' %>
                <% end %>
@@ -415,7 +337,7 @@
                <% user_ten = User.order("balance DESC")[9] %>
                   <% ava = user_ten.avatars.last %>
                <% if ava.nil? %>
-                <img src="images/top-photo.png" height="62" width="62" alt="">
+                <img src="/images/top-photo.png" height="62" width="62" alt="">
                <% else %>
                 <%= image_tag ava.image.url(:medium), height: "62", width: "62", style: 'border-radius: 34px;' %>
                <% end %>
@@ -428,7 +350,7 @@
          </div>
       </div>
    </div>
-   <div class="stats_block">
+      <div class="stats_block">
       <div class="container">
          <div class="stats_block_item users">
             <div class="stats_block_quantity">
@@ -464,30 +386,29 @@
    </div>
    <div class="doubt_block">
       <div class="container">
-        <center>
-         <h2>Все еще сомневаешся?</h2>
-         <p>Скорей решайся и не теряй возможности заработать миллионы.</p>
-         <p>Старт игры начался относительно недавно, а это значит, что у тебя есть высокий шанс выигрыша.</p>
-         <p>Поспеши, пока не подтянулись конкуренты</p>
-         <p>Эта игра скоро будет в каждом компьютере!</p>
-        </center>
+         <h2 class="top_block_title" style="color: #2fcaf1;">Всё ещё сомневаешься?</h2>
+         <p>Скорей решайся и не теряй возможность заработать миллионы.</p>
+         <p>Старт игры начался относительно недавно, а это значит, что у тебя есть очень высокий шанс выиграша.</p>
+         <p>Поспеши, пока не подтянулись конкуренты.</p>
+         <p>Эта игра скоро будет в каждом компьютере!
+         </p>
       </div>
    </div>
-
+  
    <%= render '/feedbacks/form' %>
 
    <div class="footer">
       <div class="container">
-      <span class="arrow_up">⌃</span>
+        <span class="arrow_up">⌃</span>
          <div class="footer_title">Нравится наш сервис? Поделитесь в социальных сетях:</div>
          <div class="footer_social">
-            <a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=https://king-mountain.pro/&st.comments=ЦарьГоры" target="_blank" class="footer_social_item"><img src="images/ic-ok.png" height="39" width="39" alt="OK"></a>
-            <a href="https://www.facebook.com/sharer.php?u=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="images/ic-fb.png" height="26" width="12" alt="Facebook"></a>
-            <a href="https://vk.com/share.php?url=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="images/ic-vk.png" height="18" width="30" alt="VK"></a>
-            <a href="https://twitter.com/share?url=https://king-mountain.pro/&text=Царь Горы" target="_blank" class="footer_social_item"><img src="images/ic-tw.png" height="20" width="24" alt="Twitter"></a>
+            <a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=https://king-mountain.pro/&st.comments=ЦарьГоры" target="_blank" class="footer_social_item"><img src="/images/ic-ok.png" height="39" width="39" alt="OK"></a>
+            <a href="https://www.facebook.com/sharer.php?u=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="/images/ic-fb.png" height="26" width="12" alt="Facebook"></a>
+            <a href="https://vk.com/share.php?url=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="/images/ic-vk.png" height="18" width="30" alt="VK"></a>
+            <a href="https://twitter.com/share?url=https://king-mountain.pro/&text=Царь Горы" target="_blank" class="footer_social_item"><img src="/images/ic-tw.png" height="20" width="24" alt="Twitter"></a>
          </div>
          <div class="footer_logo">
-            <img src="images/footer_logo.png" height="45" width="109" alt="Царь горы">
+            <img src="/images/footer_logo.png" height="45" width="109" alt="Царь горы">
          </div>
          <div class="footer_copyright">
             ООО Игра - “Царь горы” 2017 Все права защищены.
