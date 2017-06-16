@@ -20,16 +20,16 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     provides_callback_for provider
   end
 
-  def vkontakte
-    @user = User.find_for_vkontakte_oauth request.env["omniauth.auth"]
-    if @user.persisted?
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Vkontakte"
-      sign_in_and_redirect @user, :event => :authentication
-    else
-      flash[:notice] = "authentication error"
-      redirect_to root_path
-    end
-  end
+  # def vkontakte
+  #   @user = User.find_for_vkontakte_oauth request.env["omniauth.auth"]
+  #   if @user.persisted?
+  #     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Vkontakte"
+  #     sign_in_and_redirect @user, :event => :authentication
+  #   else
+  #     flash[:notice] = "authentication error"
+  #     redirect_to root_path
+  #   end
+  # end
 
   def after_sign_in_path_for(resource)
     if resource.email_verified?
