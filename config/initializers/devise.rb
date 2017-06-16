@@ -254,6 +254,12 @@ Devise.setup do |config|
   config.omniauth :facebook, "117053875552952", "c7286a15f67797126a8a392c0ec1755a"
   config.omniauth :twitter, "S3uIwDNrSLvtTQ2q34pPZNxCo", "MNjHVYnwqLXBPGIxaloxTWIsOhWDeWjnw1ePk6jDwbBF8Z41MZ"
   config.omniauth :vkontakte, ENV['VK_ID'], ENV['VK_SECRET']
+    {      
+      :scope => 'friends,audio,photos,email',      
+      :display => 'popup',      
+      :lang => 'en',      
+      :image_size => 'original'    
+    }
   # config.omniauth :linked_in, "KEY", "SECRET"
 
   # ==> Warden configuration
