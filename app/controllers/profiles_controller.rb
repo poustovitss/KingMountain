@@ -45,9 +45,7 @@ class ProfilesController < ApplicationController
     ref_balance = Transfer.find_by_user_id(current_user.id)
     
     if current_user.level <= 0 
-      if ref_balance.nil?
-        flash[:balance] = 'У вас не достаточно баланса'
-      elsif ref_balance.summa >= 50 
+      if ref_balance.summa >= 50 && ref_balance.summa.nil == false
         ref_balance.summa = ref_balance.summa - 50
         ref_balance.save
 

@@ -49,6 +49,7 @@ The opportunity to win up to 88 million rub!'
   profile: 
     level: 'Level'
     invited: 'invited'
+    imagechose: 'Choose image'
     image: 'Update to image'
     status: 'Status'
     free: 'Your free balance'

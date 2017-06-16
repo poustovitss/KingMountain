@@ -26,6 +26,7 @@ ru:
     pass_c: "Подвердите пароль"
   profile: 
     level: 'Уровень'
+    imagechose: 'Выбрать картинку'
     invited: 'Приглашено'
     image: 'Обновить аватарку'
     status: 'Статус'

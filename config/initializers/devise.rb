@@ -255,7 +255,7 @@ Devise.setup do |config|
   config.omniauth :twitter, "S3uIwDNrSLvtTQ2q34pPZNxCo", "MNjHVYnwqLXBPGIxaloxTWIsOhWDeWjnw1ePk6jDwbBF8Z41MZ"
   config.omniauth :vkontakte, ENV['VK_ID'], ENV['VK_SECRET']
     {      
-      :scope => 'friends,audio,photos,email',      
+      :scope => 'friends,audio,photos,email,name',      
       :display => 'popup',      
       :lang => 'en',      
       :image_size => 'original'    
