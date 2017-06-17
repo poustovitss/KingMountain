@@ -17,12 +17,13 @@ Rails.application.routes.draw do
     get 'service' => 'homepages#service', as: 'service'
     get 'contact' => 'homepages#contact', as: 'contact'
 
-    match '/success' => 'orders#success', via: :get
-    match '/fail' => 'orders#fail', via: :get
 
     root 'homepages#index'
   end
 
+    match '/success' => 'orders#success', via: :get
+    match '/fail' => 'orders#fail', via: :get
+  
   devise_for :users, 
   # controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
