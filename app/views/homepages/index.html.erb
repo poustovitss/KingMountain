@@ -16,6 +16,7 @@
 
 <link rel="stylesheet" href="/fonts/gothamPro/stylesheet.css">
 
+
    <div class="main_banner">
       <div class="box-width">
          <div class="main_banner_content_wrap">
@@ -62,21 +63,27 @@
       </div>
    </div>
    <div class="container">
-      <div class="start_price">
-         <form action="#">
-            <h2 class="start_price_title"> 
-               <%= t 'profile.sale' %> <span>25 <%= t 'profile.ruble' %></span> 
-            </h2>
-            <div class="start_price_block">
+      <div class="start_price_block">
                <div class="start_price_extensions">
+               <p></p>
                   <strong><%= t 'profile.dops' %></strong>
                   <div class="start_price_extensions_item radio">
                      <div class="icon"><%= t 'profile.radist' %></div>
                      <div class="start_price_extensions_item_price">
-                        50 <%= t 'profile.ruble' %>
+                        50 руб
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <input type="checkbox" name="" id="radist"><label for="radist"><span></span></label>
+                        <a>
+                        <% if user_signed_in? %>
+                             <% unless current_user.radist == true %>
+                                 <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
+                                    <%= f.submit I18n.t('profile.buy'), class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 50₽? ' } %>
+                                 <% end %>
+                              <% else %>
+                                 <%= t 'profile.have' %>
+                              <% end %>
+                        <% end %>
+                        </a>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -88,10 +95,18 @@
                   <div class="start_price_extensions_item guide">
                      <div class="icon"><%= t 'profile.conductor' %></div>
                      <div class="start_price_extensions_item_price">
-                        150 <%= t 'profile.ruble' %>.
+                        500 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <input type="checkbox" name="" id="provodnic"><label for="provodnic"><span></span></label>
+                        <% if user_signed_in? %>
+                         <% unless current_user.conductor == true %>
+                           <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
+                              <%= f.submit I18n.t('profile.buy'), :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 500₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           <a>У вас уже есть это улучшение</a>
+                         <% end %>
+                        <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -103,10 +118,18 @@
                   <div class="start_price_extensions_item porter">
                      <div class="icon"><%= t 'profile.carrier' %></div>
                      <div class="start_price_extensions_item_price">
-                        100 <%= t 'profile.ruble' %>.
+                        200 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <input type="checkbox" name="" id="nosilchik"><label for="nosilchik"><span></span></label>
+                        <% if user_signed_in? %>
+                         <% unless current_user.carrier == true %>
+                           <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
+                                 <%= f.submit I18n.t('profile.buy'), :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           <a>У вас уже есть это улучшение</a>
+                         <% end %>   
+                        <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -118,10 +141,45 @@
                   <div class="start_price_extensions_item helicopter">
                      <div class="icon"><%= t 'profile.vert' %></div>
                      <div class="start_price_extensions_item_price">
-                        200 <%= t 'profile.ruble' %>.
+                        2000 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <input type="checkbox" name="" id="vertolet"><label for="vertolet"><span></span></label>
+                        <a >
+                        <% if user_signed_in? %>
+                         <% unless current_user.aerodrome == true %>
+                           <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
+                              <%= f.submit I18n.t('profile.buy'), class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           У вас уже есть это улучшение
+                         <% end %>
+                        <% end %>
+                        </a>
+                        <i class="start_price_extensions_item_help">
+                           ?
+                           <span class="tooltip">
+                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                           </span>
+                        </i>
+                     </div>
+                  </div>
+                   <div class="start_price_extensions_item all">
+                     <div class="icon"><%= t 'profile.buyall' %></div>
+                     <div class="start_price_extensions_item_price">
+                        500 руб.
+                     </div>
+                     <div class="start_price_extensions_item_check">
+                        <a >
+                        <% if user_signed_in? %>
+                         <% unless current_user.radist == true || current_user.carrier == true || current_user.conductor == true || current_user.aerodrome == true %>
+                           <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
+                              <%= f.submit I18n.t('profile.buy'), class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
+                           <% end %>
+                         <% else %>
+                           У вас уже есть это улучшение
+                         <% end %>
+                        <% end %>
+                        </a>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -132,17 +190,8 @@
                   </div>
                </div>
             </div>
-            
-            <div class="start_block_submit">
-               <a href="<%= profiles_path %>" class="start_block_submit_btn"><%= t 'profile.start' %></a>
-               <span>
-                  <%= t 'profile.or' %> <br>
-                  <a href="<%= new_user_registration_path %>"><%= t 'navbar.register' %></a>
-               </span>
-            </div>
-         </form>
+         </div>
       </div>
-   </div>
    <div class="compare_block">
       <div class="container">
          <h3>Царь игры - самая перспектианя игра <br>по заработку 2017</h3>
@@ -180,19 +229,19 @@
       <div class="pluses_block">
          <div class="pluses_block_item">
             <span>1</span>
-            <img src="/images/free.png" alt="Free">
+            <img src="/images/free1.png" alt="Free">
             <h5>Автоматическая <br> система заработка</h5>
             <p>Можно зарабатывать,<br> даже не играя</p>
          </div>
-         <div class="pluses_block_item">
+         <div class="pluses_block_item" style="margin-top: 0px;">
             <span>2</span>
-            <img src="/images/fast.png" alt="Fast">
+            <img src="/images/fast1.png" alt="Fast">
             <h5>Дешевое участие</h5>
             <p>Потратив 25 рублей можно <br> выиграть 88 000 000 рублей</p>
          </div>
          <div class="pluses_block_item">
             <span>3</span>
-            <img src="/images/reliably.png" alt="Reliably">
+            <img src="/images/reliably1.png" alt="Reliably">
             <h5>Реферальная система</h5>
             <p>Приглашая друзей, вы получаете <br> 5% от всех их покупок и увеличиваете <br> шанс на выигрыш</p>
          </div>

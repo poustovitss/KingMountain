@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>King of Mointain</title>
+    <title>King of Mountain</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -44,6 +44,7 @@
                <% if user_signed_in? %>
                 <li><a href="<%= profiles_path %>"><%= t 'navbar.profile' %></a></li>
                 <li><a href="<%= new_order_path %>" class="sign_in"><%= t 'navbar.money' %></a></li>
+                <li><a><%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'font-size: 10px;' %></a></li>
                 <!-- <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li> -->
               <% end %>
             </ul>
@@ -54,9 +55,10 @@
               <a href="<%= new_user_session_path %>" class="sign_in"><%= t 'navbar.sign' %></a>
            </div>
          <% end %>
-         <%= link_to_unless_current image_tag("engl.png"), locale: "en" %>
-          |
-         <%= link_to_unless_current image_tag("russia.png"), locale: "ru" %>
+         <div>
+           <%= link_to_unless_current image_tag("engl.png"), locale: "en" %>
+           <%= link_to_unless_current image_tag("russia.png"), locale: "ru" %>
+         </div>
          </div>
          <div class="mobile_btn">
             <span></span>

@@ -34,9 +34,9 @@ The opportunity to win up to 88 million rub!'
 
   navbar:
     h: 'Home'
-    s: 'Service'
+    s: 'Our Service'
     c: "Contact"
-    admin: "Admin Panel"
+    admin: "Administration Panel"
     profile: "Profile"
     money: "Payment"
     register: 'Sign up'
@@ -60,6 +60,8 @@ The opportunity to win up to 88 million rub!'
     reff: 'Your referral link'
     sign_out: 'Sign out'
     buy: 'buy'
+    have: 'Sie haben bereits diese Verbesserung'
+    buyproviant: 'Buy proviants'
     freeprov: 'free proviants'
     dops: 'Additions'
     radist: 'Radist'

@@ -286,10 +286,10 @@ body { font-family: "PT Sans", sans-serif; }
 .main_banner_play_btn, .main_banner_more_btn { display: inline-flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 400; line-height: 1.42857; font-size: 22px; color: #333; text-decoration: none; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none; margin-right: 42px; text-transform: uppercase; border-radius: 50px; width: 207px; height: 64px; }
 .main_banner_play_btn {margin-left: -13px; margin-top: 7px; background: #fff; border: none; color: #343434; }
 .main_banner_more_btn { border: 1px solid #ffffff; }
-.main_banner_title { max-width: 560px; padding-bottom: 30px; font-size: 60px; line-height: 54px; color: #fff; font-weight: 700; }
+.main_banner_title { max-width: 560px; padding-bottom: 30px; font-size: 51px; line-height: 54px; color: #fff; font-weight: 700; }
 @media screen and (max-width: 992px) { .main_banner_title { padding: 80px 0; font-size: 50px; line-height: 54px; } }
 @media screen and (max-width: 768px) { .main_banner_title { padding: 50px 0; font-size: 35px; line-height: 40px; } }
-.main_banner_title span { display: block; font-size: 60px; padding-bottom: 20px; line-height: 39px; font-weight: 100;}
+.main_banner_title span { display: block; padding-bottom: 20px; line-height: 39px; font-weight: 100;}
 .box-width {max-width: 1140px; margin: 0 auto;}
 .promo_block { padding-bottom: 86px; text-align: center; }
 .promo_block h2 { padding-bottom: 40px;letter-spacing: 2px; font-weight: bold; margin-left: 15px; font-size: 48px; line-height: 34px; color: #353535; text-align: left; }
@@ -380,7 +380,7 @@ body { font-family: "PT Sans", sans-serif; }
 @media screen and (max-width: 768px) { .start_price_total b { font-size: 22px; line-height: 26px; } }
 .start_price_autoplay_check label, .start_price_extensions_item_check label { font-size: 14px; line-height: 18px; font-weight: 900; cursor: pointer; }
 .start_price_autoplay_check label span, .start_price_extensions_item_check label span { display: inline-block; width: 21px; height: 21px; margin: 0 5px 0 10px; vertical-align: middle; background: url(../images/checkbox.png) 0 -79px no-repeat; }
-.start_price_autoplay_check input, .start_price_extensions_item_check input { display: none; }
+.start_price_autoplay_check input, .start_price_extensions_item_check input { display: block; }
 .start_price_autoplay_check input:checked + label span, .start_price_extensions_item_check input:checked + label span{ background: url(../images/checkbox.png) 0 0 no-repeat; }
 
 .compare_block { padding: 60px 0 86px; background-color: #e4f9ef; }
