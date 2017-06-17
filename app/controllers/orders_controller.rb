@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def success
-    @order = Order.find(params[:ik_pm_no])
+    @order = Order.find(params["ik_pm_no"])
 
     ref_balance = Transfer.find_by_user_id(@order.user.id)
 
