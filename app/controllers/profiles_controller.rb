@@ -121,7 +121,7 @@ class ProfilesController < ApplicationController
       end
     end
     redirect_to :back
-    FirstJobJob.set(wait: 24.hours).perform_later(current_user)
+    FirstJobJob.set(wait: 2.minutes).perform_later(current_user)
 
     if current_user.level == 7
       current_user.balance = 10000

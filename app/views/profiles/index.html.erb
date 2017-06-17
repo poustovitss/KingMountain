@@ -54,7 +54,7 @@
                 <tr>
                   <td><b><%= t 'profile.free' %></b></td>
                   <td><b><%= current_user.transfers.sum(:summa) %>
-                    <%= link_to I18n.t('profile.get_money'), new_getmoney_path, style: 'margin-left: 7px;' %>
+                    <a id="pay_out" href="#"><%= t 'profile.get_money' %></a>
                   </b></td>
                 </tr>
                 <tr>

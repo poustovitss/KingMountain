@@ -117,14 +117,21 @@ $(document).ready(function() {
 
 
 	$('.main_banner_more_btn').click(function(e) {
-		e.preventDefault();
 		$('html, body').animate({scrollTop: 1650})
 	});
 	$('.main_banner_play_btn').click(function() {
-		e.preventDefault();
-
 		$('html, body').animate({scrollTop: 2300})
 	});
 
+	$('#pay_out').on('click', function(){
+		$('.withdraw').css('display', 'flex');
+	});
 
+	$('#pay_in').on('click', function(){
+		$('.deposit').css('display', 'flex');
+	});
+
+	$('.close-popup').on('click', function(){
+		$('.popup').css('display', 'none');
+	});
 });
