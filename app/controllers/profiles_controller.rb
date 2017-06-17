@@ -54,6 +54,16 @@ class ProfilesController < ApplicationController
 
           current_user.level += 1
           current_user.save
+
+          @system = Systemfinance.last
+          if user.reffered.nil?
+            @system.summa += pay * 0.25
+            @system.save
+          else 
+            @system.summa += pay * 0.20
+            @system.save
+          end
+          
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
           flash[:balance] = 'У вас не достаточно баланса'
