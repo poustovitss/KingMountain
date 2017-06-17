@@ -16,13 +16,9 @@ class OrdersController < ApplicationController
   end
 
   def success
-    @order = Order.find(params["ik_pm_no"])
+    @order = Order.find(params[:ik_pm_no])
 
     ref_balance = Transfer.find_by_user_id(@order.user.id)
-
-    Rails.logger.info params[:ik_pm_no]
-    Rails.logger.info @order
-    Rails.logger.info ref_balance
 
     if (params["ik_inv_st"] =="success") #and (params["ik_ps_price"]||0)==(@order$
 
