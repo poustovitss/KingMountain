@@ -6,7 +6,7 @@ permit_params :desc, :status, :total, :wallet, :walletfirm, :user_id
 
 form do |f|
 	  f.inputs do 
-	  	f.input :user
+	  	f.input :user_id
 	  	f.input :walletfirm
 	  	f.input :wallet
 	  	f.input :status, :label => 'Member', :as => :select, :collection => ['Оплачен', 'Обрабатывается', 'Ошибка']
