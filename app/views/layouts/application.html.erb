@@ -27,49 +27,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
       <body>
-        <div class="popup withdraw">
-    <form action="">
-      <p class="title-popup">Вывод свободного баланса</p>
-      <img class="close-popup" src="/images/close.png" alt="">
-      <p class="your-balance">Ваш свободный баланс:<span class="green">1540.0</span></p>
-      <span class="des-pay">Кошелек</span>
-      <select name="paymant" id="paymant_id">
-        <option value="PayPal">PayPal</option>
-        <option value="Qiwi">Qiwi</option>
-        <option value="WebMoney">WebMoney</option>
-      </select>
-      <span class="des-pay">Номер кошелька</span>
-      <input type="text" name="number-pay" placeholder="R87832154995" />
-      <span class="des-pay">Описание</span>
-      <input type="text" name="others" placeholder="R87832154995" />
-      <span class="des-pay">Cумма</span>
-      <input type="text" name="sum" placeholder="850.00 руб." />
-      <span class="last">За вывод денег вы получаете штраф 50%</span>
-      <span class="last">Если у вас есть улучшение "Запасной аэродром" то штраф 30%</span>
-      <input type="submit" value="Оплатить" />
-    </form>
-  </div>
-  <div class="popup deposit">
-    <form action="">
-      <p class="title-popup">Пополнение баланса</p>
-      <img class="close-popup" src="images/close.png" alt="">
-      <p class="your-balance">Ваш свободный баланс:<span class="green">1540.0</span></p>
-      <span class="des-pay">Кошелек</span>
-      <select name="paymant" id="paymant_id">
-        <option value="PayPal">PayPal</option>
-        <option value="Qiwi">Qiwi</option>
-        <option value="WebMoney">WebMoney</option>
-      </select>
-      <span class="des-pay">Номер кошелька</span>
-      <input type="text" name="number-pay" placeholder="R87832154995" />
-      <span class="des-pay">Описание</span>
-      <input type="text" name="others" placeholder="R87832154995" />
-      <span class="des-pay">Cумма</span>
-      <input type="text" name="sum" placeholder="850.00 руб." />
-      <input type="submit" value="Пополнить" />
-    </form>
-  </div>
-
+      <% if user_signed_in? %>
+        <%= render '/getmoneys/form' %>
+        <%= render '/getbalances/form' %>
+      <% end %>
 
     <div class="header">
       <div class="container">
@@ -88,7 +49,7 @@
                <% if user_signed_in? %>
                 <li><a href="<%= profiles_path %>"><%= t 'navbar.profile' %></a></li>
                 <li><a href="<%= new_order_path %>" class="sign_in"><%= t 'navbar.money' %></a></li>
-                <li><a><%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'font-size: 10px;' %></a></li>
+                <li><%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete %></li>
                 <!-- <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li> -->
               <% end %>
             </ul>
@@ -100,8 +61,6 @@
            </div>
          <% end %>
          <div>
-           <%= link_to_unless_current image_tag("engl.png"), locale: "en" %>
-           <%= link_to_unless_current image_tag("russia.png"), locale: "ru" %>
          </div>
          </div>
          <div class="mobile_btn">
@@ -112,6 +71,12 @@
          <div style="clear: both;"></div>
       </div>
    </div>
+    <div style="background-color: rgba(48, 204, 244, 0.68);">
+    <center>
+     <%= link_to_unless_current image_tag("engl.png"), locale: "en" %>
+     <%= link_to_unless_current image_tag("russia.png"), locale: "ru" %>
+    </center>
+    </div>
 
 <!-- BEGIN JIVOSITE CODE -->
 <script type='text/javascript'>

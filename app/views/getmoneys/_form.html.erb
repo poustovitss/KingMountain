@@ -1,0 +1,18 @@
+<div class="popup withdraw">
+   <%= form_for Getmoney.new do |f| %>
+    <p class="title-popup">Вывод свободного баланса</p>
+    <img class="close-popup" src="/images/close.png" alt="">
+    <p class="your-balance">Ваш свободный баланс:<span class="green"> <%= current_user.transfers.sum(:summa) %></span></p>
+    <span class="des-pay">Кошелек</span>
+    <center><%= f.collection_select :walletfirm, ['Webmoney', 'Qiwi', 'VISA'], :to_s, :to_s, include_blank: false %></center>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :status, :value => 'Не оплачен' %>
+    <span class="des-pay">Номер кошелька</span>
+    <%= f.number_field :wallet %>
+    <span class="des-pay">Описание</span>
+    <%= f.text_field :desc %>
+    <span class="des-pay">Cумма</span>
+    <%= f.number_field :total %>
+    <%= f.submit "Вывести" %>
+  <% end %>
+</div>

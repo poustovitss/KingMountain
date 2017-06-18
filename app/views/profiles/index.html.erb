@@ -65,7 +65,7 @@
                     <% else %>
                      <%= current_user.balance %>  
                     <% end %>
-                    <%= link_to I18n.t('profile.get_money'), new_getbalance_path,  style: 'margin-left: 10px;' %>
+                    <a id="pay_in" href="#"><%= t 'profile.get_money' %></a>
                   </b></td>
                 </tr>
                 <tr>
@@ -467,7 +467,8 @@
             <th><%= t 'profile.level' %></th>
             <th><%= t 'profile.doxod' %></th>
           </tr>
-          <% current_user.refferences.each do |ref| %>
+          <% us = User.where(reffered_by: current_user.id, proviant: false) %>
+          <% us.each do |ref| %>
             <tr>
               <td><%= ref.name %></td>
               <td><%= ref.level %></td>
