@@ -69,7 +69,7 @@
               <div class="referal-u">
                 <span class="left"><%= t 'profile.come' %></span>
                 <span class="right green">
-                  <% if current_user.reffered.nil? %>
+                  <% if current_user.reffered.nil? || current_user.proviant == true %>
                      ---
                   <% else %>
                     <%= current_user.reffered.name %>
