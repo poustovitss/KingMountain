@@ -48,18 +48,16 @@
    </div>
    <div class="gist_block" id="next-block">
       <div class="container">
-         <h2>Суть игры</h2>
-         <p style="padding-bottom: 25px;">Царь горы – новая перспективная игра, выиграть в которой может любой желающий. Для вступления в игру достаточно сделать один шаг! Купив вступление за 25 рублей, вы становитесь полноценным её учасником, которому открываются все дополнения. После этого вы можете начать играть и зарабатывать </p>
+         <h2><%= t 'homepage.sutigry' %></h2>
+         <p style="padding-bottom: 25px;"><%= t 'homepage.sutigry1' %> </p>
          
-         <p style="letter-spacing: 0.4px; padding-bottom: 26px;">Продвижение к вершине осуществляется заполнением уровней. Система автоматически подбирает вам участников, заполняя ваш уровень. Вы поднимаетесь все выши и все ближе к цели. </p>
+         <p style="letter-spacing: 0.4px; padding-bottom: 26px;"><%= t 'homepage.sutigry2' %> </p>
 
-         <p style="padding-bottom: 23px; letter-spacing: 0.5px;">Логика игры построена так, что вы всегда можете обогнать своих соперников, как бы далеко впереди они не находились. Таким образом, каждый участник имеет абсолютно равные шансы на победу.
-         Система не требует от вас совершения дополнительных покупок или приглашения рефералов. Вы можете играть, как вам угодно.</p>
+         <p style="padding-bottom: 23px; letter-spacing: 0.5px;"><%= t 'homepage.sutigry3' %></p>
 
-         <p style="letter-spacing: 0.5px; padding-bottom: 26px;">Вы можете увеличить шансы на победу, докупить провиант или сформировать свою команду для восхождения, которая состоит из медика, проводника, радиста, инструктора.
-         В игре существует реферальная система, благодяря которой достижения новых уровней будет осуществляться ещё быстрее и без каких-либо вложений с каждой траты вашего реферала вы будете получать 5% средств на свой счет.</p>
+         <p style="letter-spacing: 0.5px; padding-bottom: 26px;"><%= t 'homepage.sutigry4' %></p>
 
-         <p style="letter-spacing: 0.4px; padding-bottom: 27px;">Победителем игры становится тот, кто первый достигнет вершины и станет Царем горы. Ему достается весь банк игры в размере 88 000 000 рублей.</p>
+         <p style="letter-spacing: 0.4px; padding-bottom: 27px;"><%= t 'homepage.sutigry5' %></p>
       </div>
    </div>
    <div class="container">
@@ -162,67 +160,41 @@
                            </span>
                         </i>
                      </div>
-                  </div>
-                   <div class="start_price_extensions_item all">
-                     <div class="icon"><%= t 'profile.buyall' %></div>
-                     <div class="start_price_extensions_item_price">
-                        500 руб.
-                     </div>
-                     <div class="start_price_extensions_item_check">
-                        <a >
-                        <% if user_signed_in? %>
-                         <% unless current_user.radist == true || current_user.carrier == true || current_user.conductor == true || current_user.aerodrome == true %>
-                           <%= form_for current_user, :url => buyall_path(current_user), method: :post  do |f| %>
-                              <%= f.submit I18n.t('profile.buy'), class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 250₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           У вас уже есть это улучшение
-                         <% end %>
-                        <% end %>
-                        </a>
-                        <i class="start_price_extensions_item_help">
-                           ?
-                           <span class="tooltip">
-                              Здесь текст о том что быпояснить зарегестрированному лицу как это работает
-                           </span>
-                        </i>
-                     </div>
-                  </div>
                </div>
             </div>
          </div>
       </div>
    <div class="compare_block">
       <div class="container">
-         <h3>Царь игры - самая перспектианя игра <br>по заработку 2017</h3>
-         <p>Звучит самонадеянно? Давайте сравним игру со всеми известной онлайн-рулеткой:</p>
+         <h3><%= t 'homepage.text1' %> <br><%= t 'homepage.text2' %></h3>
+         <p><%= t 'homepage.text3' %></p>
          <div class="col compare_block_no">
-            <div class="compare_block_col_title">Рулетка</div>
+            <div class="compare_block_col_title"><%= t 'homepage.text4' %></div>
             <ul>
-               <li>Выигрыш зависит только от случая</li>
-               <li>Вы можете опираться только на удачу и интуицию</li>
-               <li>Азартная игра</li>
-               <li>Высокая вероятность остаться ни с чем</li>
-               <li>Казино всегда "в плюсе" и заинтересовано в том, чтобы вы проигрывали<li>
+               <li><%= t 'homepage.roulette' %></li>
+               <li><%= t 'homepage.roulette1' %></li>
+               <li><%= t 'homepage.roulette2' %></li>
+               <li><%= t 'homepage.roulette3' %></li>
+               <li><%= t 'homepage.roulette4' %><li>
             </ul>
-            <a href="#">Упустить возможность</a>
+            <a href="#"><%= t 'homepage.text5' %></a>
          </div>
          <div class="col compare_block_yes">
-            <div class="compare_block_col_title">Царь горы</div>
+            <div class="compare_block_col_title"><%= t 'homepage.king' %></div>
             <ul>
-               <li>Вы сами контролируете игру</li>
-               <li>Вы можете пользоваться провиантом, дополнениями и реферальной системой, увеличивая свой шанс на выигрыш</li>
-               <li>Игра, заработок в которой зависит только от вас</li>
-               <li>Максимум, что вы можете потерять - 25 рублей, но и это в случае, если покинете игру</li>
-               <li>Сайт зарабатывает исключительно на комиссиях при оплате при оплате вступления и покупки дополнений, по этому мы заинтересованы, чтобы вы играли и выигрывали</li>
+               <li><%= t 'homepage.king' %></li>
+               <li><%= t 'homepage.king1' %></li>
+               <li><%= t 'homepage.king2' %></li>
+               <li><%= t 'homepage.king3' %></li>
+               <li><%= t 'homepage.king4' %></li>
             </ul>
-            <a href="<%= new_user_registration_path %>">Сделать правильный выбор</a>
+            <a href="<%= new_user_registration_path %>"><%= t 'homepage.king5' %></a>
          </div>
       </div>
    </div>
    <div class="game_advantages">
       <div class="container">
-         <h2 class="top_block_title" style="color: #2fcaf1;">Преимущества игры</h2>
+         <h2 class="top_block_title" style="color: #2fcaf1;"><%= t 'homepage.priem' %></h2>
       </div>
    </div>
    <div class="container">
@@ -230,26 +202,26 @@
          <div class="pluses_block_item">
             <span>1</span>
             <img src="/images/free1.png" alt="Free">
-            <h5>Автоматическая <br> система заработка</h5>
-            <p>Можно зарабатывать,<br> даже не играя</p>
+            <h5><%= t 'homepage.priem1' %></h5>
+            <p><%= t 'homepage.priem2' %></p>
          </div>
          <div class="pluses_block_item" style="margin-top: 0px;">
             <span>2</span>
             <img src="/images/fast1.png" alt="Fast">
-            <h5>Дешевое участие</h5>
-            <p>Потратив 25 рублей можно <br> выиграть 88 000 000 рублей</p>
+            <h5><%= t 'homepage.priem3' %></h5>
+            <p><%= t 'homepage.priem4' %></p>
          </div>
          <div class="pluses_block_item">
             <span>3</span>
             <img src="/images/reliably1.png" alt="Reliably">
-            <h5>Реферальная система</h5>
-            <p>Приглашая друзей, вы получаете <br> 5% от всех их покупок и увеличиваете <br> шанс на выигрыш</p>
+            <h5><%= t 'homepage.priem5' %></h5>
+            <p><%= t 'homepage.priem6' %></p>
          </div>
       </div>
    </div>
      <div class="top_block">
       <div class="container">
-         <h2 class="top_block_title">Топ-10 партнеров</h2>
+         <h2 class="top_block_title"><%= t 'homepage.top10' %></h2>
          <div class="top_block_items">
             <div class="top_block_item">
                <b>1</b>

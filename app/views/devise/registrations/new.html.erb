@@ -1,4 +1,3 @@
-
 <% bank = Bank.last %>
 <% if bank.active == false %>
   <center>
@@ -10,7 +9,7 @@
     <center><%= devise_error_messages! %></center>
 
   <div class="register_form">
-    <h1 class="register_form_title">Регистрация</h1>
+    <h1 class="register_form_title"><%= t 'navbar.register' %></h1>
         <% flash.each do |key, value| %>
           <div class="alert alert-default" role="alert">
             <center><div ><%= value %></div></center>
@@ -18,12 +17,12 @@
         <% end %>
      <form action="">
       <div class="register_form_field">
-        <label for="name">Ваше имя</label>
+        <label for="name"><%= t 'sign.name' %></label>
         <%= f.text_field :name %>
       </div>
 
       <div class="register_form_field">
-        <label for="password">Пароль</label>
+        <label for="password"><%= t 'sign.password' %></label>
         <% if @minimum_password_length %>
       <em>(минимум <%= @minimum_password_length %> символов)</em>
       <% end %><br />
@@ -31,16 +30,16 @@
       </div>
 
       <div class="register_form_field">
-        <label for="password">Подвердите пароль</label>
+        <label for="password"><%= t 'sign.pass_c' %></label>
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
 
       <div class="register_form_field">
-        <label for="email">Электронная почта</label>
+        <label for="email"><%= t 'sign.email' %></label>
         <%= f.email_field :email %>
       </div>
       <div class="register_form_submit">
-        <%= f.submit "Регистрация" %>
+        <%= f.submit I18n.t('navbar.register') %>
         <!-- <input type="submit" value="Регистрация"> -->
       </div>
       <% if session[:referred_by] %>

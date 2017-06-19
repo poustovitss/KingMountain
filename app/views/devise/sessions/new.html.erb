@@ -7,7 +7,7 @@
 <% else %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="register_form">
-      <h1 class="register_form_title">Вход</h1>
+      <h1 class="register_form_title"><%= t 'navbar.sign' %></h1>
         <% flash.each do |key, value| %>
           <div class="alert alert-default" role="alert">
             <center><div ><%= value %></div></center>
@@ -15,11 +15,11 @@
         <% end %>
       <form action="">
         <div class="register_form_field">
-          <label for="name">Ваша почта</label>
+          <label for="name"><%= t 'sign.email' %></label>
           <%= f.email_field :email, autofocus: true, class: "well" %>
         </div>
         <div class="register_form_field">
-          <label for="password">Пароль</label>
+          <label for="password"><%= t 'sign.password' %></label>
           <%= f.password_field :password, autocomplete: "off" %>
         </div>
         <center>
@@ -31,7 +31,7 @@
           <% end -%>
         </center>
         <div class="register_form_submit">
-          <input type="submit" value="Войти">
+          <input type="submit" value="<%= t 'navbar.sign' %>">
         </div>
       </form>
       <center><div class="register_form_social_title">Войти через соц. сети</div></center>
