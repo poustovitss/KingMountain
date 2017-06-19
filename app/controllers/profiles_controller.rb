@@ -49,8 +49,13 @@ class ProfilesController < ApplicationController
         flash[:balance] = 'У вас не достаточно баланса'
       else
         if ref_balance.summa >= 50
-          ref_balance.summa = ref_balance.summa - 50
-          ref_balance.save
+          if current_user.conductor == true
+            ref_balance.summa = ref_balance.summa - (50 - (50 * 0.05))
+            ref_balance.save
+          else
+            ref_balance.summa = ref_balance.summa - 50
+            ref_balance.save
+          end
 
           current_user.level += 1
           current_user.save
@@ -73,11 +78,20 @@ class ProfilesController < ApplicationController
 
           @system = Systemfinance.last
           if user.reffered.nil?
-            @system.summa += pay * 0.25
-            @system.save
+            if current_user.conductor == true
+              @system.summa += pay * 0.20
+              @system.save
+            else
+              @system.summa += pay * 0.25
+            end
           else 
-            @system.summa += pay * 0.20
-            @system.save
+            if current_user.conductor == true
+              @system.summa += pay * 0.15
+              @system.save
+            else
+              @system.summa += pay * 0.20
+              @system.save
+            end
           end
           
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
@@ -105,21 +119,40 @@ class ProfilesController < ApplicationController
           end
 
           if current_user.level <= 0
-            ref_balance = Transfer.find_by_user_id(current_user.id)
-            ref_balance.summa = ref_balance.summa - pay
-            ref_balance.save
+            if current_user.conductor == true
+              ref_balance = Transfer.find_by_user_id(current_user.id)
+              ref_balance.summa = ref_balance.summa - (pay - (pay * 0.05)) 
+              ref_balance.save
+            else
+              ref_balance = Transfer.find_by_user_id(current_user.id)
+              ref_balance.summa = ref_balance.summa - pay
+              ref_balance.save
+            end
           else
-            user.balance = current_user.balance - pay
+            if current_user.conductor == true
+              user.balance = current_user.balance - (pay - (pay * 0.05))
+            else
+              user.balance = current_user.balance - pay
+            end
           end
             user.level += 1 
 
           @system = Systemfinance.last
           if user.reffered.nil?
-            @system.summa += pay * 0.25
-            @system.save
+            if current_user.conductor == true
+              @system.summa += pay * 0.20
+              @system.save
+            else
+              @system.summa += pay * 0.25
+            end
           else 
-            @system.summa += pay * 0.20
-            @system.save
+            if current_user.conductor == true
+              @system.summa += pay * 0.15
+              @system.save
+            else
+              @system.summa += pay * 0.20
+              @system.save
+            end
           end
 
           unless current_user.reffered.nil?
