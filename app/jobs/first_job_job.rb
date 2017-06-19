@@ -12,7 +12,11 @@ class FirstJobJob < ApplicationJob
 	  user.save
 	elsif user.reffered_by == 0 && user.level == 1
 		system_user = User.where(level: user.level)
+
+		system_user.count
+
 		if system_user.first.nil?
+			user = user.first
 			user.reffered_by = 0
 		else
 			system_user = system_user.first

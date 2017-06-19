@@ -1,343 +1,343 @@
-<link rel="stylesheet" href="/fonts/gothamPro/stylesheet.css">
-<% if flash[:balance] %>
-  <div class="alert alert-danger" role="alert">
-    <center><%= flash[:balance] %></center>
-  </div>
-<% end %>
-  <div class="container">
-    <div class="personal-block">
-      <div class="left-photo-block">
-        <% ava = current_user.avatars.last %>
-        <% if ava.nil? %>
-          <img alt="User Pic" src="images/andrew.png" class="img-circle img-responsive"  style="max-width: 80%; margin-bottom: 10px;">
-        <% else %>
-          <%= image_tag ava.image.url(:thumb), class: "img-circle img-responsive", style: "max-width: 80%; margin-bottom: 10px;" %>
-        <% end %>
-        <%= form_for Avatar.new do |f| %>
-          <input type="file" name="personal-photo" id="avatar">
-          <%= f.label :image %>
-          <%= f.file_field :image %>
-          <%= f.hidden_field :user_id, :value => current_user.id %>
-          <!-- <input type="file" name="personal-photo" id="avatar"> -->
-          <!-- <label for="image">загрузить аватар</label> -->
-          <button><%= t 'profile.image' %></button>
-        <% end %>
-      </div>
-      <div class="right-presonal-block">
-        <p class="name-gamer">
-          <%= current_user.name %>
-        </p>
-        <div class="two-column-person">
-          <div class="left-column">
-            <div class="levels-gamer">
-              <span class="left"><%= t 'profile.level' %></span>
-              <span class="right green"><h3><%= current_user.level %></h3></span>
-            </div>
-            <div class="flow-level">
-              <span class="left"><%= t 'profile.status' %></span>
-              <span class="right green"><%= t 'profile.invited' %> <h3>
-                <% if current_user.level == 1 %>
-                      <%= current_user.refferences.where(level: 1).count %>
-                 <% elsif current_user.level == 2 %>
-                   <%= current_user.refferences.where(level: 1).count - 10 %>
-                 <% else %>
-                  <%= current_user.refferences.where(level: current_user.level - 1).count %>
-                 <% end %>
-              </h3><h4>/10</h4></span>
-            </div>
-            <div class="free-balance">
-              <span class="left blue"><%= t 'profile.free' %>:</span>
-              <span class="right"><%= current_user.transfers.sum(:summa) %></span>
-            </div>
-          </div>
-          <div class="right-column">
-            <div class="working-balance">
-              <span class="left blue"><%= t 'profile.work' %></span>
-              <span class="right">
-                <% if current_user.balance.nil? %>
-                 0 
-                <% else %>
-                 <%= current_user.balance %>  
-                <% end %>
-              </span>
-            </div>
-            <div class="e-mail">
-              <span class="left"><strong><%= t 'profile.email' %></strong></span>
-              <span class="right"><%= current_user.email %></span>
-            </div>
-            <div class="referal-u">
-              <span class="left"><%= t 'profile.come' %></span>
-              <span class="right green">
-                <% if current_user.reffered.nil? %>
-                   ---
-                <% else %>
-                  <%= current_user.reffered.name %>
-                <% end %>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="btn-personal-block">
-          <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(referred_by: current_user.id)  %>" style="width: 640px;" />
-          <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 15px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
-          <center>
-            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-              <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; margin-right: 117px;', data: { confirm: 'Вы уверены? ' } %>
-            <% end %>
-          </center>
-        </div>
-      </div>
+<% if current_user.confirmed? %>
+  <link rel="stylesheet" href="/fonts/gothamPro/stylesheet.css">
+  <% if flash[:balance] %>
+    <div class="alert alert-danger" role="alert">
+      <center><%= flash[:balance] %></center>
     </div>
-  </div>
-
-  <div class="container">
-    <div class="progress_block">
-      <div class="levels-item">
-        <span><strong><%= t 'profile.level' %> 7</strong></span>
-        <span class="level-price">8 312,50 руб.</span>
-       <% if current_user.level == 7 %>
-        <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-          <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-          <button style="position: static;">Купить уровень</button>
-          <% end %>
-        <% end %>
-        <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-       <% elsif current_user.level > 7 %>
-         <span class="align-right">10/10</span>
-       <% else %>
-        <span class="align-right">0/10</span> 
-       <% end %>
-      </div>
-      <div class="levels-item">
-        <span><strong><%= t 'profile.level' %> 6</strong></span>
-        <span class="level-price">8 312,50 руб.</span>
-        <% if current_user.level == 6 %>
-          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-            <button style="position: static;">Купить уровень</button>
-            <% end %>
-          <% end %>
-          <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-        <% elsif current_user.level > 6 %>
-         <span class="align-right">10/10</span>
-        <% else %>
-          <span class="align-right">0/10</span>
-        <% end %>
-      </div>
-      <div class="levels-item">
-        <span><strong><%= t 'profile.level' %> 5</strong></span>
-        <span class="level-price">8 312,50 руб.</span>
-        <% if current_user.level == 5 %>
-          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-            <button style="position: static;">Купить уровень</button>
-            <% end %>
-          <% end %>
-          <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-        <% elsif current_user.level > 5 %>
-         <span class="align-right">10/10</span>
-        <% else %>
-          <span class="align-right">0/10</span>
-        <% end %>
-      </div>
-      <div class="levels-item">
-        <span><strong><%= t 'profile.level' %> 4</strong></span>
-        <span class="level-price">8 312,50 руб.</span>
-        <% if current_user.level == 4 %>
-          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-            <button style="position: static;">Купить уровень</button>
-            <% end %>
-          <% end %>
-          <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-        <% elsif current_user.level > 4 %>
-         <span class="align-right">10/10</span>
-        <% else %>
-          <span class="align-right">0/10</span>
-        <% end %>
-      </div>
-      <div class="levels-item">
-        <span><strong><%= t 'profile.level' %> 3</strong></span>
-        <span class="level-price">1 312,50 руб.</span>
-        <% if current_user.level == 3 %>
-          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-            <button style="position: static;">Купить уровень</button>
-            <% end %>
-          <% end %>
-         <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
-        <% elsif current_user.level > 3 %>
-         <span class="align-right">10/10</span>
-        <% else %>
-         <span class="align-right">0/10</span>
-        <% end %>
-      </div>
-      <div class="levels-item">
-        <span><strong><%= t 'profile.level' %> 2</strong></span>
-        <span class="level-price">187,50 руб.</span>
-        <% if current_user.level == 2 %>
-          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>  
-            <button style="position: static;">Купить уровень</button>
-           <% end %>
-          <% end %>
-        <span class="align-right"><%= current_user.refferences.where(level: 1).count - 10 %>/10</span>
-        <% elsif current_user.level > 2 %>
-         <span class="align-right">10/10</span>
-        <% else %>
-          <span class="align-right">0/10</span>
-        <% end %>
-
-      </div>
-      <div class="levels-item active-level">
-        <span><strong><%= t 'profile.level' %> 1</strong></span>
-        <span class="level-price">25 руб.</span>
-        <% if current_user.level == 1 %>
-          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
-            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-              <button style="position: static;">Купить уровень</button>
-            <% end %>
-          <% end %>
-          <span class="align-right"><%= current_user.refferences.where(level: 1).count %>/10</span>
-        <% elsif current_user.level > 1 %>
-         <span class="align-right">10/10</span>
-        <% else %>
-         <span class="align-right">0/10</span>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="start_price full_width">
-        <div class="start_price_block">
-          <div class="start_price_extensions">
-            <strong><%= t 'profile.dops' %></strong>
-            <div class="start_price_extensions_item radio">
-              <div class="icon"><%= t 'profile.radist' %></div>
-              <div class="start_price_extensions_item_price">
-                50 <%= t 'profile.ruble' %>
-              </div>
-              <div class="start_price_extensions_item_check">
-                <input type="checkbox" name="" id="radist"><label for="radist"><span></span></label>
-                <i class="start_price_extensions_item_help">
-                  ?
-                  <span class="tooltip">
-                    Здесь текст о том что быпояснить зарегестрированному лицу как это работает
-                  </span>
-                </i>
-              </div>
-            </div>
-            <div class="start_price_extensions_item guide">
-              <div class="icon"><%= t 'profile.conductor' %></div>
-              <div class="start_price_extensions_item_price">
-                150 <%= t 'profile.ruble' %>
-              </div>
-              <div class="start_price_extensions_item_check">
-                <input type="checkbox" name="" id="provodnic"><label for="provodnic"><span></span></label>
-                <i class="start_price_extensions_item_help">
-                  ?
-                  <span class="tooltip">
-                    Здесь текст о том что быпояснить зарегестрированному лицу как это работает
-                  </span>
-                </i>
-              </div>
-            </div>
-            <div class="start_price_extensions_item porter">
-              <div class="icon"><%= t 'profile.carrier' %></div>
-              <div class="start_price_extensions_item_price">
-                100 <%= t 'profile.ruble' %>
-              </div>
-              <div class="start_price_extensions_item_check">
-                <input type="checkbox" name="" id="nosilchik"><label for="nosilchik"><span></span></label>
-                <i class="start_price_extensions_item_help">
-                  ?
-                  <span class="tooltip">
-                    Здесь текст о том что быпояснить зарегестрированному лицу как это работает
-                  </span>
-                </i>
-              </div>
-            </div>
-            <div class="start_price_extensions_item helicopter">
-              <div class="icon"><%= t 'profile.vert' %></div>
-              <div class="start_price_extensions_item_price">
-                200 <%= t 'profile.ruble' %>
-              </div>
-              <div class="start_price_extensions_item_check">
-                <input type="checkbox" name="" id="vertolet"><label for="vertolet"><span></span></label>
-                <i class="start_price_extensions_item_help">
-                  ?
-                  <span class="tooltip">
-                    Здесь текст о том что быпояснить зарегестрированному лицу как это работает
-                  </span>
-                </i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr style="border-top: 1px solid #49d793;">
-        <div class="price-prev">
-          <p><%= t 'profile.prices' %> <span class="green">
-          <% if current_user.level == 1 %>
-            <%= current_user.level %>
-          <% else %>             
-            <%= current_user.level - 1 %>
-          <% end %>
-          </span></p>
-          <span><strong>50 <%= t 'profile.ruble' %>.</strong></span>
-          <p class="flr"><span class="green">-5% <%= t 'profile.dops' %></span>47.5 <%= t 'profile.dops' %>.</p>
-        </div>
-        <div class="start_price_total">
-          <div class="left_side">
-          <%= form_for :counts, url: buynumb_path(current_user.id), method: :post do |f| %>
-            <p><%= t 'profile.enterp' %></p>
-            <%= f.number_field :size_to_buy, class: 'form-control', id: 'exampleInputPassword1', style: 'font-size: 21px;' %>
-          </div>
-          <div class="right_side">
-            <b class="start_price_total_price">
-            <% if current_user.level == 1 %>
-               <div style="margin-left: 391px;"> <%= t 'profile.freeprov' %> <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></div>
-            <% else %>
-              <div style="margin-left: 391px;"> <%= t 'profile.freeprov' %> <b><%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b></div>
-            <% end %>
-            </b>
-          </div>
-        </div>
-        <button><%= t 'profile.buy' %></button>
-        <% end %>
-        <!--- Конец формы -->
-    </div>
-  </div>
-
-  <div class="referal-block">
+  <% end %>
     <div class="container">
-      <h2><%= t 'profile.activeonl' %></h2>
-      <table>
-        <thead>
-          <tr>
-            <th><%= t 'profile.reffs' %></th>
-            <th><%= t 'profile.level' %></th>
-            <th><%= t 'profile.doxod' %></th>
-          </tr>
-        </thead>
-        <tbody>
-       <% us = User.where(reffered_by: current_user.id, proviant: false) %>
-         <% us.each do |ref| %>
-          <tr>
-            <td><%= ref.name %></td>
-            <td><%= ref.level %></td>
-            <td><%= ref.balance %></td>
-          </tr>
-         <% end %>
-        </tbody>
-      </table>
-      <button>Показать всех</button>
-    </div>
-  </div>
+      <div class="personal-block">
+        <div class="left-photo-block">
+          <% ava = current_user.avatars.last %>
+          <% if ava.nil? %>
+            <img alt="User Pic" src="images/andrew.png" class="img-circle img-responsive"  style="max-width: 80%; margin-bottom: 10px;">
+          <% else %>
+            <%= image_tag ava.image.url(:thumb), class: "img-circle img-responsive", style: "max-width: 80%; margin-bottom: 10px;" %>
+          <% end %>
+          <%= form_for Avatar.new do |f| %>
+            <input type="file" name="personal-photo" id="avatar">
+            <%= f.label :image %>
+            <%= f.file_field :image %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <!-- <input type="file" name="personal-photo" id="avatar"> -->
+            <!-- <label for="image">загрузить аватар</label> -->
+            <button><%= t 'profile.image' %></button>
+          <% end %>
+        </div>
+        <div class="right-presonal-block">
+          <p class="name-gamer">
+            <%= current_user.name %>
+          </p>
+          <div class="two-column-person">
+            <div class="left-column">
+              <div class="levels-gamer">
+                <span class="left"><%= t 'profile.level' %></span>
+                <span class="right green"><h3><%= current_user.level %></h3></span>
+              </div>
+              <div class="flow-level">
+                <span class="left"><%= t 'profile.status' %></span>
+                <span class="right green"><%= t 'profile.invited' %> <h3>
+                  <% if current_user.level == 1 %>
+                        <%= current_user.refferences.where(level: 1).count %>
+                   <% elsif current_user.level == 2 %>
+                     <%= current_user.refferences.where(level: 1).count - 10 %>
+                   <% else %>
+                    <%= current_user.refferences.where(level: current_user.level - 1).count %>
+                   <% end %>
+                </h3><h4>/10</h4></span>
+              </div>
+              <div class="free-balance">
+                <span class="left blue"><%= t 'profile.free' %>:</span>
+                <span class="right"><%= current_user.transfers.sum(:summa) %></span>
+              </div>
+            </div>
+            <div class="right-column">
+              <div class="working-balance">
+                <span class="left blue"><%= t 'profile.work' %></span>
+                <span class="right">
+                  <% if current_user.balance.nil? %>
+                   0 
+                  <% else %>
+                   <%= current_user.balance %>  
+                  <% end %>
+                </span>
+              </div>
+              <div class="e-mail">
+                <span class="left"><strong><%= t 'profile.email' %></strong></span>
+                <span class="right"><%= current_user.email %></span>
+              </div>
+              <div class="referal-u">
+                <span class="left"><%= t 'profile.come' %></span>
+                <span class="right green">
+                  <% if current_user.reffered.nil? %>
+                     ---
+                  <% else %>
+                    <%= current_user.reffered.name %>
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          </div>
 
+          <div class="btn-personal-block">
+            <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(referred_by: current_user.id)  %>" style="width: 640px;" />
+            <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 15px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
+            <center>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; margin-right: 117px;', data: { confirm: 'Вы уверены? ' } %>
+              <% end %>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="progress_block">
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 7</strong></span>
+          <span class="level-price">8 312,50 руб.</span>
+         <% if current_user.level == 7 %>
+          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+            <button style="position: static;">Купить уровень</button>
+            <% end %>
+          <% end %>
+          <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+         <% elsif current_user.level > 7 %>
+           <span class="align-right">10/10</span>
+         <% else %>
+          <span class="align-right">0/10</span> 
+         <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 6</strong></span>
+          <span class="level-price">8 312,50 руб.</span>
+          <% if current_user.level == 6 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 6 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 5</strong></span>
+          <span class="level-price">8 312,50 руб.</span>
+          <% if current_user.level == 5 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 5 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 4</strong></span>
+          <span class="level-price">8 312,50 руб.</span>
+          <% if current_user.level == 4 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 4 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 3</strong></span>
+          <span class="level-price">1 312,50 руб.</span>
+          <% if current_user.level == 3 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+           <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 3 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+           <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 2</strong></span>
+          <span class="level-price">187,50 руб.</span>
+          <% if current_user.level == 2 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>  
+              <button style="position: static;">Купить уровень</button>
+             <% end %>
+            <% end %>
+          <span class="align-right"><%= current_user.refferences.where(level: 1).count - 10 %>/10</span>
+          <% elsif current_user.level > 2 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
+
+        </div>
+        <div class="levels-item active-level">
+          <span><strong><%= t 'profile.level' %> 1</strong></span>
+          <span class="level-price">25 руб.</span>
+          <% if current_user.level == 1 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: 1).count %>/10</span>
+          <% elsif current_user.level > 1 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+           <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="start_price full_width">
+          <div class="start_price_block">
+            <div class="start_price_extensions">
+              <strong><%= t 'profile.dops' %></strong>
+              <div class="start_price_extensions_item radio">
+                <div class="icon"><%= t 'profile.radist' %></div>
+                <div class="start_price_extensions_item_price">
+                  50 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <input type="checkbox" name="" id="radist"><label for="radist"><span></span></label>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                    </span>
+                  </i>
+                </div>
+              </div>
+              <div class="start_price_extensions_item guide">
+                <div class="icon"><%= t 'profile.conductor' %></div>
+                <div class="start_price_extensions_item_price">
+                  150 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <input type="checkbox" name="" id="provodnic"><label for="provodnic"><span></span></label>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                    </span>
+                  </i>
+                </div>
+              </div>
+              <div class="start_price_extensions_item porter">
+                <div class="icon"><%= t 'profile.carrier' %></div>
+                <div class="start_price_extensions_item_price">
+                  100 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <input type="checkbox" name="" id="nosilchik"><label for="nosilchik"><span></span></label>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                    </span>
+                  </i>
+                </div>
+              </div>
+              <div class="start_price_extensions_item helicopter">
+                <div class="icon"><%= t 'profile.vert' %></div>
+                <div class="start_price_extensions_item_price">
+                  200 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <input type="checkbox" name="" id="vertolet"><label for="vertolet"><span></span></label>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                    </span>
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr style="border-top: 1px solid #49d793;">
+          <div class="price-prev">
+            <p><%= t 'profile.prices' %> <span class="green">
+            <% if current_user.level == 1 %>
+              <%= current_user.level %>
+            <% else %>             
+              <%= current_user.level - 1 %>
+            <% end %>
+            </span></p>
+            <span><strong>50 <%= t 'profile.ruble' %>.</strong></span>
+            <p class="flr"><span class="green">-5% <%= t 'profile.dops' %></span>47.5 <%= t 'profile.dops' %>.</p>
+          </div>
+          <div class="start_price_total">
+            <div class="left_side">
+            <%= form_for :counts, url: buynumb_path(current_user.id), method: :post do |f| %>
+              <p><%= t 'profile.enterp' %></p>
+              <%= f.number_field :size_to_buy, class: 'form-control', id: 'exampleInputPassword1', style: 'font-size: 21px;' %>
+            </div>
+            <div class="right_side">
+              <b class="start_price_total_price">
+              <% if current_user.level == 1 %>
+                 <div style="margin-left: 391px;"> <%= t 'profile.freeprov' %> <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></div>
+              <% else %>
+                <div style="margin-left: 391px;"> <%= t 'profile.freeprov' %> <b><%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b></div>
+              <% end %>
+              </b>
+            </div>
+          </div>
+          <button><%= t 'profile.buy' %></button>
+          <% end %>
+          <!--- Конец формы -->
+      </div>
+    </div>
+
+    <div class="referal-block">
+      <div class="container">
+        <h2><%= t 'profile.activeonl' %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= t 'profile.reffs' %></th>
+              <th><%= t 'profile.level' %></th>
+              <th><%= t 'profile.doxod' %></th>
+            </tr>
+          </thead>
+          <tbody>
+         <% us = User.where(reffered_by: current_user.id, proviant: false) %>
+           <% us.each do |ref| %>
+            <tr>
+              <td><%= ref.name %></td>
+              <td><%= ref.level %></td>
+              <td><%= ref.balance %></td>
+            </tr>
+           <% end %>
+          </tbody>
+        </table>
+        <button>Показать всех</button>
+      </div>
+    </div>
   <%= render '/feedbacks/form' %>
   
-  <div class="footer">
+    <div class="footer">
       <div class="container">
         <span class="arrow_up">⌃</span>
          <div class="footer_title">Нравится наш сервис? Поделитесь в социальных сетях:</div>
@@ -354,4 +354,41 @@
             ООО Игра - “Царь горы” 2017 Все права защищены.
          </div>
       </div>
-   </div>
+    </div>
+
+<% else %>
+
+<div class="container">
+    <div class="col-lg-12 col-sm-8">
+      <div class="card hovercard">
+        <div class="card-background">
+          <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
+        </div>
+        <div class="useravatar">
+        <img alt="" src="/img/ava.png">
+        </div>
+        <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
+        </div>
+        </div>
+        <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+        <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
+        <div class="hidden-xs">
+        <h4>На ваш email отправлено письмо подтвердите, что-бы вступить в игру.</h4>
+        </div>
+      </div>
+    </div>
+        <div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
+        </div>
+  <center>
+      <% if flash[:balance] %>
+        <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
+      <% end %>
+      
+    <div class="well">
+        <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>     
+
+        <%= link_to "Отправить письмо повторно", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
+     </div>
+    </center>
+<% end %>
