@@ -218,7 +218,7 @@ body {
 .start_price_extensions_item_price {
   float: left;
   width: 390px;
-  padding: 20px 0;
+  padding: 40px 0 38px 60px;
   font-weight: 900;
   font-size: 22px;
   line-height: 26px;
@@ -340,7 +340,7 @@ body { font-family: "PT Sans", sans-serif; }
 .start_price_extensions_item.helicopter .icon { background: url(../images/helicopter.png) 0 50% no-repeat; }
 .start_price_extensions_item_price { float: left; width: 350px; font-weight: 900; font-size: 24px; line-height: 61px; color: #373737; }
 @media screen and (max-width: 768px) { .start_price_extensions_item_price { float: none; width: 100%; text-align: center; } }
-.start_price_extensions_item_check { position: absolute; top: 0; right: 0; padding: 35px 0; }
+.start_price_extensions_item_check { position: absolute; top: 0; right: 0; padding: 40px 0 38px 60px; }
 @media screen and (max-width: 768px) { .start_price_extensions_item_check { position: static; width: 100%; text-align: center; } }
 .start_price_btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857; color: #333; text-decoration: none; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; -webkit-transition: 0.2s; -moz-transition: 0.2s; -ms-transition: 0.2s; -o-transition: 0.2s; transition: 0.2s; }
 .start_price_btn:hover { background-color: #d4d4d4; border-color: #8c8c8c; }

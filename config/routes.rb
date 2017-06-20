@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     put 'buyallproviant/:id' => 'profiles#buyallproviant', as: 'buyallproviant'
 
     post 'buynumb/:id' => 'profiles#buynumb', as: 'buynumb'
+    post 'imroveses/:id' => 'improves#imroveses', as: 'imroveses'
 
 
     put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'

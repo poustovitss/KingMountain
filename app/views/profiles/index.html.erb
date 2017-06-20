@@ -38,7 +38,10 @@
                 <span class="left"><%= t 'profile.status' %></span>
                 <span class="right green"><%= t 'profile.invited' %> <h3>
                   <% if current_user.level == 1 %>
-                        <%= current_user.refferences.where(level: 1).count %>
+                      <% proviants = current_user.refferences.where(level: 1).count %>
+                      <% reffers = current_user.inviteds.where(level: 1).count %>
+                      <% refs = proviants + reffers %>
+                      <%= refs %>
                    <% elsif current_user.level == 2 %>
                      <%= current_user.refferences.where(level: 1).count - 10 %>
                    <% else %>
@@ -69,10 +72,10 @@
               <div class="referal-u">
                 <span class="left"><%= t 'profile.come' %></span>
                 <span class="right green">
-                  <% if current_user.reffered.nil? || current_user.proviant == true %>
+                  <% if current_user.invited.nil? || current_user.proviant == true %>
                      ---
                   <% else %>
-                    <%= current_user.reffered.name %>
+                    <%= current_user.invited.name %>
                   <% end %>
                 </span>
               </div>
@@ -80,7 +83,7 @@
           </div>
 
           <div class="btn-personal-block">
-            <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(referred_by: current_user.id)  %>" style="width: 640px;" />
+            <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(invited_by: current_user.id)  %>" style="width: 640px;" />
             <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 15px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
             <center>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
@@ -211,6 +214,8 @@
     </div>
     <div class="container">
       <div class="start_price full_width">
+
+      <%= form_for :improveses, url: imroveses_path(current_user.id), method: :post do |f| %>
           <div class="start_price_block">
             <div class="start_price_extensions">
               <strong><%= t 'profile.dops' %></strong>
@@ -220,11 +225,15 @@
                   50 <%= t 'profile.ruble' %>
                 </div>
                 <div class="start_price_extensions_item_check">
-                  <input type="checkbox" name="" id="radist"><label for="radist"><span></span></label>
+                  <% if current_user.radist == true %>
+                    <a>У вас уже есть это улучшение</a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 -3px;'><%= f.check_box :radistbuy, id: "radist" %> </label>
+                  <% end %>
                   <i class="start_price_extensions_item_help">
                     ?
                     <span class="tooltip">
-                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                      Система уведомлений. Активирует систему оповещения о различных действиях на сайте и профиле пользователя
                     </span>
                   </i>
                 </div>
@@ -235,11 +244,15 @@
                   150 <%= t 'profile.ruble' %>
                 </div>
                 <div class="start_price_extensions_item_check">
-                  <input type="checkbox" name="" id="provodnic"><label for="provodnic"><span></span></label>
+                  <% if current_user.conductor == true %>
+                    <a>У вас уже есть это улучшение</a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 0px;'><%= f.check_box :conductorbuy %></label>
+                  <% end %>
                   <i class="start_price_extensions_item_help">
                     ?
                     <span class="tooltip">
-                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                      Снижает цену уровня на 5%
                     </span>
                   </i>
                 </div>
@@ -250,11 +263,15 @@
                   100 <%= t 'profile.ruble' %>
                 </div>
                 <div class="start_price_extensions_item_check">
-                  <input type="checkbox" name="" id="nosilchik"><label for="nosilchik"><span></span></label>
+                  <% if current_user.carrier == true %>
+                    <a>У вас уже есть это улучшение</a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 -1px;'><%= f.check_box :carrierbuy %></label>
+                  <% end %>
                   <i class="start_price_extensions_item_help">
                     ?
                     <span class="tooltip">
-                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                      Снижает цену провианта на 15%
                     </span>
                   </i>
                 </div>
@@ -265,17 +282,24 @@
                   200 <%= t 'profile.ruble' %>
                 </div>
                 <div class="start_price_extensions_item_check">
-                  <input type="checkbox" name="" id="vertolet"><label for="vertolet"><span></span></label>
+                  <% if current_user.aerodrome == true %>
+                    <a>У вас уже есть это улучшение</a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 0px;'><%= f.check_box :aerodrombuy %></label>
+                  <% end %>
                   <i class="start_price_extensions_item_help">
                     ?
                     <span class="tooltip">
-                      Здесь текст о том что быпояснить зарегестрированному лицу как это работает
+                      Уменьшает штраф на вывод рабочего баланса с 50% на 30%
                     </span>
                   </i>
                 </div>
               </div>
             </div>
           </div>
+          <center><%= f.submit 'Купить улучшения', class: 'btn btn-default', style: 'width: 266px; height: 52px; background-color: #49d793; color: #fff; border-radius: 40px; font-weight: bold; font-size: 23px;' %></center>
+      <% end %>
+
           <hr style="border-top: 1px solid #49d793;">
           <div class="price-prev">
             <p><%= t 'profile.prices' %> <span class="green">
@@ -322,8 +346,7 @@
             </tr>
           </thead>
           <tbody>
-         <% us = User.where(reffered_by: current_user.id, proviant: false) %>
-           <% us.each do |ref| %>
+           <% current_user.inviteds.each do |ref| %>
             <tr>
               <td><%= ref.name %></td>
               <td><%= ref.level %></td>

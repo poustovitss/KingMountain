@@ -60,14 +60,12 @@ class ProfilesController < ApplicationController
           current_user.level += 1
           current_user.save
 
-          unless current_user.reffered.nil?
-            unless current_user.proviant == true
-              transfer = Transfer.new
-              transfer.user_id = current_user.reffered.id
-              transfer.bank_id = Bank.last.id
-              transfer.summa = pay*0.05
-              transfer.save
-            end
+          unless current_user.invited.nil?
+            transfer = Transfer.new
+            transfer.user_id = current_user.invited.id
+            transfer.bank_id = Bank.last.id
+            transfer.summa = pay*0.05
+            transfer.save
           end
 
           unless current_user.reffered.nil?
@@ -287,6 +285,9 @@ class ProfilesController < ApplicationController
               reffered.balance += pay*0.75
               reffered.save
             end
+
+            current_user.balance += pay*0.75
+            current_user.save
           end
            redirect_to :back
         else
@@ -367,6 +368,9 @@ class ProfilesController < ApplicationController
 
               ref_balance.summa = ref_balance.summa - pay
               ref_balance.save
+
+              current_user.balance += pay*0.75
+              current_user.save
             end
 
             # user_onl = current_user
@@ -433,8 +437,6 @@ class ProfilesController < ApplicationController
           (current_user.level - 1).times do
             pay = start_pay + start_coefficient
             start_pay = pay
-
-            puts start_pay
           end
         end
 
@@ -442,21 +444,29 @@ class ProfilesController < ApplicationController
       summa_for_prov = params[:counts][:size_to_buy]  
 
         total_proviant = summa_for_prov.to_i * pay
-        if ref_balance.nil?  
+        if ref_balance.nil?
+          flash[:balance] = 'У вас не достаточно баланса'
+          redirect_to profiles_path
+        elsif ref_balance.summa < pay
           flash[:balance] = 'У вас не достаточно баланса'
           redirect_to profiles_path
         elsif ref_balance.summa >= total_proviant && ref_balance.summa > 0
 
           check_the_nil = params[:counts][:size_to_buy]
-          
-          check_the_prov = check_the_nil.to_i + current_user.refferences.count
+          if current_user.level == 1
+            kolvo = current_user.refferences.where(level: current_user).count + current_user.inviteds.where(level: 1).count
+          else 
+            kolvo = current_user.where(level: current_user - 1) + current_user.inviteds.where(level: current_user.level - 1).count
+          end
+
+          check_the_prov = check_the_nil.to_i + kolvo
           check_the_provs = current_user.level * 10
 
           if check_the_nil.to_i <= 0 || check_the_nil.nil? 
-            flash[:balance] = 'Не верный набор'
+            flash[:balance] = 'Введите правильное количество провиантов'
             redirect_to :back
           elsif check_the_prov > check_the_provs
-            flash[:balance] = 'Не верный набор'
+            flash[:balance] = 'Вы не можете купить больше 10 провиантов'
             redirect_to :back
           else
             array_proviants = []
@@ -509,6 +519,9 @@ class ProfilesController < ApplicationController
 
                 ref_balance.summa = ref_balance.summa - pay
                 ref_balance.save
+
+                current_user.balance += pay*0.75
+                current_user.save
               end
 
               # user_onl = current_user
@@ -544,9 +557,6 @@ class ProfilesController < ApplicationController
             end
              redirect_to profiles_path
           end
-        else
-          flash[:balance] = 'У вас не достаточно баланса'
-          redirect_to profiles_path
         end
       end
     end

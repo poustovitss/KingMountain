@@ -27,6 +27,7 @@ permit_params :name, :email, :password, :reffered_by, :reffered, :confirmed, :ba
 	  	f.input :conductor
 	  	f.input :aerodrome
 	  	f.input :reffered_by
+	  	f.input :invited_by
 	  	f.input :balance
 	  end
 	  f.actions
@@ -40,8 +41,8 @@ permit_params :name, :email, :password, :reffered_by, :reffered, :confirmed, :ba
 		column :email
 		column :reffered_by
 		column :reffered
+		column :invited
 		column :level
-		column :admin
 		column :balance
 		# column :encrypted_password => Токен
 	 	 actions

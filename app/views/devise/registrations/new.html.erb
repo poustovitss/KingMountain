@@ -42,10 +42,12 @@
         <%= f.submit I18n.t('navbar.register') %>
         <!-- <input type="submit" value="Регистрация"> -->
       </div>
-      <% if session[:referred_by] %>
-        <%=f.hidden_field :reffered_by, :value => session[:referred_by] %>
+      <% if session[:invited_by] %>
+        <%= f.hidden_field :invited_by, :value => session[:invited_by] %>
+        <%= f.hidden_field :reffered_by, :value => session[:invited_by] %>
         <%= f.hidden_field :proviant, :value => false %>
       <% else %>
+        <%= f.hidden_field :invited_by, :value => 0 %>
         <%= f.hidden_field :reffered_by, :value => 0 %>
         <%= f.hidden_field :proviant, :value => true %>
       <% end %>
