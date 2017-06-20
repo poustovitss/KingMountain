@@ -22,13 +22,12 @@
 en:
   homepage:
     play: 'Online - Game'
-    king: 'King Mountain'
+    king11: 'King Mountain'
     desc: 'Become the King of the Mountain and win 88 million rubles, paying only 25 rubles for the entry fee'
     getinfo: 'The game is not for luckers. Your winnings depend only on your efforts. Play and get money for it'
     button: 'Learn More'
     info: 'The best way to spend 25 rub'
-    infodesc: 'Buy the entry into the game King of the Mountains and get
-The opportunity to win up to 88 million rub!'
+    infodesc: 'Buy the entry into the game King of the Mountain and get a passive income opportunity!'
     vibor: 'MAKE THE RIGHT CHOICE'
     image: ("#{I18n.locale}/logoen.png
     sutigry: 'The essence of the game'
