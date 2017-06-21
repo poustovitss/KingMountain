@@ -41,22 +41,27 @@
                       <% proviants = current_user.refferences.where(level: 1).count %>
                       <% reffers = current_user.inviteds.where(level: 1).count %>
                       <% refs = proviants + reffers %>
-                      <%= refs %>
                    <% elsif current_user.level == 2 %>
-                     <%= current_user.refferences.where(level: 1).count - 10 %>
+                      <% proviants = current_user.refferences.where(level: 1).count %>
+                      <% reffers = current_user.inviteds.where(level: 1).count %>
+                      <% refs = (proviants + reffers) - 10 %>
                    <% else %>
-                    <%= current_user.refferences.where(level: current_user.level - 1).count %>
+                    <% proviants = current_user.refferences.where(level: current_user - 1).count %>
+                      <% reffers = current_user.inviteds.where(level: current_user - 1).count %>
+                      <% refs = proviants + reffers %>
                    <% end %>
-                </h3><h4>/10</h4></span>
+                </h3><h4><%= refs %>/10</h4></span>
               </div>
               <div class="free-balance">
                 <span class="left blue"><%= t 'profile.free' %>:</span>
+                <a id="pay_out" href="#"><%= t 'profile.get_money' %></a>
                 <span class="right"><%= current_user.transfers.sum(:summa) %></span>
               </div>
             </div>
             <div class="right-column">
               <div class="working-balance">
                 <span class="left blue"><%= t 'profile.work' %></span>
+                <a id="pay_in" href="#"><%= t 'profile.get_money' %></a>
                 <span class="right">
                   <% if current_user.balance.nil? %>
                    0 
@@ -309,8 +314,10 @@
               <%= current_user.level - 1 %>
             <% end %>
             </span></p>
-            <span><strong>50 <%= t 'profile.ruble' %>.</strong></span>
-            <p class="flr"><span class="green">-5% <%= t 'profile.dops' %></span>47.5 <%= t 'profile.dops' %>.</p>
+            <span><strong> <%= summproviant %> <%= t 'profile.ruble' %>.</strong></span>
+            <% summs = summproviant.to_i %>
+            <% procent = summs - (summs * 0.05) %>
+            <p class="flr"><span class="green">-5%  <%= t 'profile.dops' %></span><%= procent %> <%= t 'profile.ruble' %>.</p>
           </div>
           <div class="start_price_total">
             <div class="left_side">

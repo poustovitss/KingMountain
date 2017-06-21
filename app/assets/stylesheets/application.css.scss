@@ -338,7 +338,7 @@ body { font-family: "PT Sans", sans-serif; }
 .start_price_extensions_item.guide .icon { background: url(../images/guide.png) 0 50% no-repeat; }
 .start_price_extensions_item.porter .icon { background: url(../images/porter.png) 0 50% no-repeat; }
 .start_price_extensions_item.helicopter .icon { background: url(../images/helicopter.png) 0 50% no-repeat; }
-.start_price_extensions_item_price { float: left; width: 350px; font-weight: 900; font-size: 24px; line-height: 61px; color: #373737; }
+.start_price_extensions_item_price { float: left; width: 350px; font-weight: 900; font-size: 24px; color: #373737; }
 @media screen and (max-width: 768px) { .start_price_extensions_item_price { float: none; width: 100%; text-align: center; } }
 .start_price_extensions_item_check { position: absolute; top: 0; right: 0; padding: 40px 0 38px 60px; }
 @media screen and (max-width: 768px) { .start_price_extensions_item_check { position: static; width: 100%; text-align: center; } }

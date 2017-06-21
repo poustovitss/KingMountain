@@ -71,17 +71,6 @@
                         50 руб
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <a>
-                        <% if user_signed_in? %>
-                             <% unless current_user.radist == true %>
-                                 <%= form_for current_user, :url => buyradist_path(current_user), method: :put  do |f| %>
-                                    <%= f.submit I18n.t('profile.buy'), class: 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 50₽? ' } %>
-                                 <% end %>
-                              <% else %>
-                                 <%= t 'profile.have' %>
-                              <% end %>
-                        <% end %>
-                        </a>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -96,15 +85,6 @@
                         500 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <% if user_signed_in? %>
-                         <% unless current_user.conductor == true %>
-                           <%= form_for current_user, :url => improves_path(current_user), method: :post  do |f| %>
-                              <%= f.submit I18n.t('profile.buy'), :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 500₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           <a>У вас уже есть это улучшение</a>
-                         <% end %>
-                        <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -119,15 +99,6 @@
                         200 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <% if user_signed_in? %>
-                         <% unless current_user.carrier == true %>
-                           <%= form_for current_user, :url => improfe_path(current_user), method: :put  do |f| %>
-                                 <%= f.submit I18n.t('profile.buy'), :class => 'start_price_btn', data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           <a>У вас уже есть это улучшение</a>
-                         <% end %>   
-                        <% end %>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -142,17 +113,6 @@
                         2000 руб.
                      </div>
                      <div class="start_price_extensions_item_check">
-                        <a >
-                        <% if user_signed_in? %>
-                         <% unless current_user.aerodrome == true %>
-                           <%= form_for current_user, :url => buyaerodrome_path(current_user), method: :put  do |f| %>
-                              <%= f.submit I18n.t('profile.buy'), class: "start_price_btn", data: { confirm: 'Вы уверены cтоимость 100₽? ' } %>
-                           <% end %>
-                         <% else %>
-                           У вас уже есть это улучшение
-                         <% end %>
-                        <% end %>
-                        </a>
                         <i class="start_price_extensions_item_help">
                            ?
                            <span class="tooltip">
@@ -177,7 +137,7 @@
                <li><%= t 'homepage.roulette3' %></li>
                <li><%= t 'homepage.roulette4' %><li>
             </ul>
-            <a href="#"><%= t 'homepage.text5' %></a>
+            <%= link_to I18n.t('homepage.text5'), service_path, data: { confirm: 'Вы уверены?' } %>
          </div>
          <div class="col compare_block_yes">
             <div class="compare_block_col_title"><%= t 'homepage.king' %></div>

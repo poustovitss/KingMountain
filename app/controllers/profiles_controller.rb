@@ -38,10 +38,14 @@ class ProfilesController < ApplicationController
     end
 
     if current_user.level == 1 
-      check = current_user.refferences.where(level: 1).count
+      check = current_user.refferences.where(level: 1).count + current_user.inviteds.where(level: 1).count
     else
-      check = current_user.refferences.where(level: current_user.level - 1).count
+      check = current_user.refferences.where(level: current_user.level - 1).count + current_user.inviteds.where(level: current_user.level - 1).count
     end
+
+    puts check
+    puts '================'
+
     ref_balance = Transfer.find_by_user_id(current_user.id)
     
     if current_user.level <= 0 
@@ -192,6 +196,21 @@ class ProfilesController < ApplicationController
     '10'
   end
 
+  def summproviant
+    start_pay = 50
+    start_coefficient = 100
+    pay = 0
+
+    if current_user.level == 0
+      pay = start_pay
+    elsif current_user.level == 1
+      pay = 50
+    else
+      @summs = (50 + ((current_user.level - 1) * 100))
+    end
+  end
+  
+  helper_method :summproviant
   helper_method :levelinfo
 
   def update 
@@ -434,10 +453,7 @@ class ProfilesController < ApplicationController
         elsif current_user.level == 1
           pay = 50
         else
-          (current_user.level - 1).times do
-            pay = start_pay + start_coefficient
-            start_pay = pay
-          end
+          pay = (50 + ((current_user.level - 1) * 100))
         end
 
       ref_balance = Transfer.find_by_user_id(current_user.id)
