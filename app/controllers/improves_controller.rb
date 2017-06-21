@@ -4,7 +4,6 @@ class ImprovesController < ApplicationController
   end
 
   def imroveses
-    p params
     improveses = params[:improveses]
 
     if improveses[:radistbuy] == "1"

@@ -43,9 +43,6 @@ class ProfilesController < ApplicationController
       check = current_user.refferences.where(level: current_user.level - 1).count + current_user.inviteds.where(level: current_user.level - 1).count
     end
 
-    puts check
-    puts '================'
-
     ref_balance = Transfer.find_by_user_id(current_user.id)
     
     if current_user.level <= 0 
