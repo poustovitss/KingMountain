@@ -49,8 +49,8 @@
                <% end %>
                <% if user_signed_in? %>
                 <li><a href="<%= profiles_path %>"><%= t 'navbar.profile' %></a></li>
-                <li><a href="<%= new_order_path %>" class="sign_in"><%= t 'navbar.money' %></a></li>
                 <li><%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete %></li>
+                <li><button style="background-color: rgba(255, 255, 255, 0); border-radius: 20px; border-color: #fff;"><a href="<%= new_order_path %>" class="sign_in"><%= t 'navbar.money' %></a></button></li>
                 <li><%= link_to_unless_current image_tag("engl.png"), locale: "en" %>
                 <%= link_to_unless_current image_tag("russia.png"), locale: "ru" %></li>
                 <!-- <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li> -->

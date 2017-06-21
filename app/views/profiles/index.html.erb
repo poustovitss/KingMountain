@@ -104,7 +104,7 @@
       <div class="progress_block">
         <div class="levels-item">
           <span><strong><%= t 'profile.level' %> 7</strong></span>
-          <span class="level-price">8 312,50 руб.</span>
+          <span class="level-price">2 533 781,25 руб.</span>
          <% if current_user.level == 7 %>
           <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
             <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
@@ -120,7 +120,7 @@
         </div>
         <div class="levels-item">
           <span><strong><%= t 'profile.level' %> 6</strong></span>
-          <span class="level-price">8 312,50 руб.</span>
+          <span class="level-price">563 062,50 руб.</span>
           <% if current_user.level == 6 %>
             <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
@@ -136,7 +136,7 @@
         </div>
         <div class="levels-item">
           <span><strong><%= t 'profile.level' %> 5</strong></span>
-          <span class="level-price">8 312,50 руб.</span>
+          <span class="level-price">102 375,00 руб.</span>
           <% if current_user.level == 5 %>
             <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
@@ -152,7 +152,7 @@
         </div>
         <div class="levels-item">
           <span><strong><%= t 'profile.level' %> 4</strong></span>
-          <span class="level-price">8 312,50 руб.</span>
+          <span class="level-price">17 062,50 руб.</span>
           <% if current_user.level == 4 %>
             <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
@@ -168,7 +168,7 @@
         </div>
         <div class="levels-item">
           <span><strong><%= t 'profile.level' %> 3</strong></span>
-          <span class="level-price">1 312,50 руб.</span>
+          <span class="level-price">2 625 руб.</span>
           <% if current_user.level == 3 %>
             <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
@@ -184,14 +184,14 @@
         </div>
         <div class="levels-item">
           <span><strong><%= t 'profile.level' %> 2</strong></span>
-          <span class="level-price">187,50 руб.</span>
+          <span class="level-price">375 руб.</span>
           <% if current_user.level == 2 %>
             <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>  
               <button style="position: static;">Купить уровень</button>
              <% end %>
             <% end %>
-          <span class="align-right"><%= current_user.refferences.where(level: 1).count - 10 %>/10</span>
+          <span class="align-right"><%= current_user.refferences.where(level: 1).count - 10 + current_user.inviteds.where(level: current_user.level - 1).count %>/10</span>
           <% elsif current_user.level > 2 %>
            <span class="align-right">10/10</span>
           <% else %>
@@ -201,7 +201,7 @@
         </div>
         <div class="levels-item active-level">
           <span><strong><%= t 'profile.level' %> 1</strong></span>
-          <span class="level-price">25 руб.</span>
+          <span class="level-price">50 руб.</span>
           <% if current_user.level == 1 %>
             <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
