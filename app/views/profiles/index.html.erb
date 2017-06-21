@@ -38,17 +38,17 @@
                 <span class="left"><%= t 'profile.status' %></span>
                 <span class="right green"><%= t 'profile.invited' %> <h3>
                   <% if current_user.level == 1 %>
-                      <% proviants = current_user.refferences.where(level: 1).count %>
-                      <% reffers = current_user.inviteds.where(level: 1).count %>
-                      <% refs = proviants + reffers %>
+                    <% proviants = current_user.refferences.where(level: 1).count %>
+                    <% reffers = current_user.inviteds.where(level: 1).count %>
+                    <% refs = proviants + reffers %>
                    <% elsif current_user.level == 2 %>
-                      <% proviants = current_user.refferences.where(level: 1).count %>
-                      <% reffers = current_user.inviteds.where(level: 1).count %>
-                      <% refs = (proviants + reffers) - 10 %>
+                    <% proviants = current_user.refferences.where(level: 1).count %>
+                    <% reffers = current_user.inviteds.where(level: 1).count %>
+                    <% refs = (proviants + reffers) - 10 %>
                    <% else %>
-                    <% proviants = current_user.refferences.where(level: current_user - 1).count %>
-                      <% reffers = current_user.inviteds.where(level: current_user - 1).count %>
-                      <% refs = proviants + reffers %>
+                    <% proviants = current_user.refferences.where(level: current_user.level - 1).count %>
+                    <% reffers = current_user.inviteds.where(level: current_user.level - 1).count %>
+                    <% refs = proviants + reffers %>
                    <% end %>
                 </h3><h4><%= refs %>/10</h4></span>
               </div>
