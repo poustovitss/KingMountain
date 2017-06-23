@@ -14,11 +14,6 @@ class FirstJobJob < ApplicationJob
 	elsif user.reffered_by == 0 && user.level <= 1
 		system_user = User.where(level: 1)
 
-		puts '================'
-		puts system_user.count
-		puts '================'
-
-
 		if system_user.first.nil?
 			user = user.first
 			user.reffered_by = 0
