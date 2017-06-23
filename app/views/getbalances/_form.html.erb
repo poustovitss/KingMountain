@@ -1,7 +1,7 @@
 <div class="popup deposit">
   <%= form_for Getbalance.new do |f| %>
     <p class="title-popup">Вывод с рабочего баланса</p>
-    <img class="close-popup" src="images/close.png" alt="">
+    <img class="close-popup" src="/images/close.png" alt="">
     <p class="your-balance">Ваш рабочий баланс:<span class="green"><%= current_user.balance %></span></p>
     <span class="des-pay">Кошелек</span>
     <center><%= f.collection_select :walletfirm, ['Webmoney', 'Qiwi', 'VISA'], :to_s, :to_s, include_blank: false %></center>
