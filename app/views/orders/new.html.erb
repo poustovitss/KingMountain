@@ -1,31 +1,24 @@
 <center>
  <%= form_for @order do |f| %>
-      <hr></hr>
-	<div class="field">
-	<%= f.hidden_field :ik_co_id, :value => ENV['IK_CO_ID'] %>
-	<%= f.hidden_field :user_id, :value => current_user.id %>
-	</div>
-	<div class="field">
-		<%= f.label :Валюта %><br />
-		<%= f.collection_select :currency, ['RUB'], :to_s, :to_s, include_blank: false %><br />
-	</div>
-	<hr>
 
-	<div class="field">
-		<%= f.label :Описание %></br>
-		<%= f.text_area :description %>
-	</div>
-	
-	<div class="field">   
-		<%= f.label :Сумма %></br>
-		<%= f.number_field :total %>
-	</div>
-	<p></p>
-	<div class="actions">
-        <%= f.submit "Оплатить", class: 'btn btn-default' %>
+ 	<div class="register_form">
+      <h1 class="register_form_title">Пополнение</h1>
+		<%= f.hidden_field :ik_co_id, :value => ENV['IK_CO_ID'] %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+        <div class="register_form_field">
+          <label for="name">Описание</label>
+          <%= f.text_field :description %>
+          <p></p>
+          <label for="name">Валюта</label>
+          <%= f.collection_select :currency, ['RUB'], :to_s, :to_s, include_blank: false %><br />
+        </div>
+        <div class="register_form_field">
+          <label for="password">Сумма</label>
+          <%= f.number_field :total %>
+        </div>
+        <div class="register_form_submit">
+          <input type="submit" value="Оплатить">
     </div>
-	<hr></hr>
-
-    --->  <%= link_to 'Отменить', root_path %>
- <% end %>
+<% end %>
 </center>
+
