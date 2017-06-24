@@ -206,7 +206,7 @@ class ProfilesController < ApplicationController
       @summs = (50 + ((current_user.level - 1) * 100))
     end
   end
-  
+
   helper_method :summproviant
   helper_method :levelinfo
 

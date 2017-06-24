@@ -92,7 +92,7 @@
             <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 15px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
             <center>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
-                <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; margin-right: 117px;', data: { confirm: 'Вы уверены? ' } %>
+                <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; margin-right: 117px;', data: { confirm: "Стоимость 50P?" } %>
               <% end %>
             </center>
           </div>

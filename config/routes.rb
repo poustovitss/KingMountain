@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :homepages, :profiles, :avatars, :improves, :orders, :getmoneys, :getbalances, :feedbacks
 
-  scope ":locale", locale: /en|ru/ do
+  #scope ":locale", locale: /en|ru/ do
     post 'buyall/:id' => 'improves#buyall', as: 'buyall'
 
     put 'buyallproviant/:id' => 'profiles#buyallproviant', as: 'buyallproviant'
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
 
     root 'homepages#index'
-  end
+  #end
 
     match '/success' => 'orders#success', via: :get
     match '/fail' => 'orders#fail', via: :get
@@ -31,9 +31,9 @@ Rails.application.routes.draw do
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
-  match "*path", to: redirect("/#{I18n.default_locale}/%{path}"), via: :all 
-  match "", to: redirect("/#{I18n.default_locale}/"), via: :all
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '*path', to: redirect("/#{I18n.default_locale}")
 
-  # get 'profiles/:id/adduser' => 'profiles#adduser', :as => 'adduser'
+  get '*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  get '', to: redirect("/#{I18n.default_locale}")
+  
 end
