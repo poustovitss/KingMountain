@@ -162,6 +162,9 @@ class ProfilesController < ApplicationController
             end
           end
           user.save
+
+          FirstJobJob.set(wait: 24.hours).perform_later(current_user)
+
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
           flash[:balance] = "у вас мало провиантов!"
@@ -171,7 +174,6 @@ class ProfilesController < ApplicationController
       end
     end
     redirect_to :back
-    FirstJobJob.set(wait: 24.hours).perform_later(current_user)
 
     if current_user.level == 7
       current_user.balance = 10000
