@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
-  resources :homepages, :profiles, :avatars, :improves, :orders, :getmoneys, :getbalances, :feedbacks
+  resources :homepages, :profiles, :avatars, :improves, :orders, :getmoneys, :getbalances, :feedbacks, :payeers
 
   #scope ":locale", locale: /en|ru/ do
     post 'buyall/:id' => 'improves#buyall', as: 'buyall'

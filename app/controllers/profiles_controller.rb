@@ -176,13 +176,17 @@ class ProfilesController < ApplicationController
     redirect_to :back
 
     if current_user.level == 7
-      current_user.balance = 10000
       current_user.level = 0
       current_user.save
-
+      
       current_user.refferences.each do |winner|
         winner.reffered_by = 0
         winner.save
+      end
+
+      current_user.inviteds.each do |inv|
+        inv.invited_by = 0
+        inv.save
       end
     end
     users = User.where(radist: true)
