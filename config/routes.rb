@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
     match '/success' => 'orders#success', via: :get
     match '/fail' => 'orders#fail', via: :get
+    match 'payeer/success' => 'payeers#success', via: :get
+    match 'payeer/fail' => 'payeers#fail', via: :get
   
   devise_for :users, 
   # controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
