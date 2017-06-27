@@ -161,9 +161,10 @@ class ProfilesController < ApplicationController
               end
             end
           end
+          
+          FirstJobJob.set(wait: 24.hours).perform_later(current_user)
           user.save
 
-          FirstJobJob.set(wait: 24.hours).perform_later(current_user)
 
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
@@ -473,9 +474,9 @@ class ProfilesController < ApplicationController
 
           check_the_nil = params[:counts][:size_to_buy]
           if current_user.level == 1
-            kolvo = current_user.refferences.where(level: current_user).count + current_user.inviteds.where(level: 1).count
+            kolvo = current_user.refferences.where(level: current_user.level).count + current_user.inviteds.where(level: 1).count
           else 
-            kolvo = current_user.where(level: current_user - 1) + current_user.inviteds.where(level: current_user.level - 1).count
+            kolvo = current_user.refferences.where(level: current_user.level - 1).count + current_user.inviteds.where(level: current_user.level - 1).count
           end
 
           check_the_prov = check_the_nil.to_i + kolvo

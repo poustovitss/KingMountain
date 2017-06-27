@@ -302,10 +302,12 @@
               </div>
             </div>
           </div>
-          <center><%= f.submit 'Купить улучшения', class: 'btn btn-default', style: 'width: 266px; height: 52px; background-color: #49d793; color: #fff; border-radius: 40px; font-weight: bold; font-size: 23px;' %></center>
+          <center>
+              <%= f.submit 'Купить улучшения', class: 'btn btn-default', style: 'width: 266px; height: 52px; background-color: #49d793; color: #fff; border-radius: 40px; font-weight: bold; font-size: 23px;' %>
+          </center>
+<hr>
       <% end %>
-
-          <hr style="border-top: 1px solid #49d793;">
+          
           <div class="price-prev">
             <p><%= t 'profile.prices' %> <span class="green">
             <% if current_user.level == 1 %>

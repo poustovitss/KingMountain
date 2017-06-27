@@ -89,21 +89,7 @@ $(document).ready(function() {
 		}
 	});
 
-	jQuery('.price_count_left').click(function() {
-	    var fieldToWork = jQuery(this).parent().find('#food_counter');
-	    var newValue = parseInt(fieldToWork.val()) - 1;
-	    if (newValue > 0) {
-	        fieldToWork.val(newValue).trigger('change');
-	    }
-	    return false;
-	});
-	jQuery('#food_counter').attr('readonly', 'readonly');
-	jQuery('.price_count_right').on('click', function() {
-	    var fieldToWork = jQuery(this).parent().find('#food_counter');
-	    var newValue = parseInt(fieldToWork.val()) + 1;
-	    fieldToWork.val(newValue).trigger('change');
-	    return false;
-	});
+
 
 	$('.arrow_up').click(function() {
 		$('html, body').animate({scrollTop: 0})
