@@ -36,7 +36,7 @@
               </div>
               <div class="flow-level">
                 <span class="left"><%= t 'profile.status' %></span>
-                <span class="right green"><%= t 'profile.invited' %> <h3>
+                <span class="right green"> <h3>
                   <% if current_user.level == 1 %>
                     <% proviants = current_user.refferences.where(level: 1).count %>
                     <% reffers = current_user.inviteds.where(level: 1).count %>

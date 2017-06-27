@@ -572,12 +572,6 @@ class ProfilesController < ApplicationController
                 end
               end
             
-              unless current_user.reffered.nil?
-                reffered = current_user.reffered
-                reffered.balance += pay*0.75
-                reffered.save
-                
-              end
               flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
             end
              redirect_to profiles_path
