@@ -496,7 +496,9 @@ class ProfilesController < ApplicationController
               b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at).limit(limiter)
               
               b.each do |proviant|
-                array_proviants << proviant
+                if proviant.level != 0
+                  array_proviants << proviant
+                end
               end
             else
 
