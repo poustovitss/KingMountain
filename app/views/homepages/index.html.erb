@@ -1,18 +1,4 @@
-<script type="text/javascript">
-   function sum100() {
-      // var a = document.getElementById("sum").value;
-      var b = document.getElementById("food_counter").value 
-      document.getElementById("sum").innerHTML = 100
-      document.getElementById("sum").innerHTML = 100 + (b * 100);
-   }
 
-   function sum200() {
-      var a = document.getElementById("food_counter").value
-      var d = document.getElementById("sum").innerHTML;
-      document.getElementById("sum").innerHTML = d - 100;
-   }
-</script>
- 
 
 <link rel="stylesheet" href="/fonts/gothamPro/stylesheet.css">
 
@@ -31,8 +17,8 @@
                </span>
             </div>
             <!-- <a href="#" class="main_banner_play_btn">Играть</a> -->
+            <a href="<%= new_user_registration_path %>" class="main_banner_more_btn" style="color: #30ccf4; background-color: white; padding: 6px 17px; text-decoration: none;"><%= t 'homepage.playgame' %></a>
             <a href="#" class="main_banner_more_btn" style="color: white; background-color: rgba(255, 255, 255, 0.03); text-decoration: none;"><%= t 'homepage.button' %></a>
-             <a href="<%= new_user_registration_path %>" class="main_banner_more_btn" style="color: #30ccf4; background-color: white; padding: 6px 17px; text-decoration: none;"><%= t 'homepage.playgame' %></a>
          </div>
          <div class="main_banner_arr_down"></div>
       </div>
@@ -138,7 +124,7 @@
                <li><%= t 'homepage.roulette3' %></li>
                <li><%= t 'homepage.roulette4' %><li>
             </ul>
-            <%= link_to I18n.t('homepage.text5'), service_path, data: { confirm: 'Вы уверены?' } %>
+            <%= link_to I18n.t('homepage.text5'), service_path, data: { confirm: 'Вы уверены?' }, style: 'margin-top: 159px;' %>
          </div>
          <div class="col compare_block_yes">
             <div class="compare_block_col_title"><%= t 'homepage.king' %></div>
@@ -337,10 +323,10 @@
          <div class="stats_block_item users">
             <div class="stats_block_quantity">
                <%= User.all.count %>
-               <span>Пользователей</span>
+               <span><%= t 'profile.users' %></span>
             </div>
             <b class="stats_block_today">
-               +<%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %> сегодня
+               +<%= User.where("created_at >= ?", Time.zone.now.beginning_of_day).size %> <%= t 'profile.today' %>
             </b>
          </div>
          <div class="stats_block_item online">
@@ -349,31 +335,30 @@
                <% getmoney = Getmoney.sum("total") %>
                <% obsh = getbalance + getmoney %>
                <%= obsh %>
-               <span>Вывели денег</span>
+               <span><%= t 'profile.getmoneys' %></span>
             </div>
          </div>
          <div class="stats_block_item tasks">
             <div class="stats_block_quantity">
                <%= User.where(level: 9).count %>
-               <span>пользователей близки к победе</span>
+               <span><%= t 'profile.maybewin' %></span>
             </div>
          </div>
          <div class="stats_block_item compl">
             <div class="stats_block_quantity">
                50.000 руб
-               <span>Общий банк</span>
+               <span><%= t 'profile.bank' %></span>
             </div>
          </div>
       </div>
    </div>
    <div class="doubt_block">
       <div class="container">
-         <h2 class="top_block_title" style="color: #2fcaf1;">Всё ещё сомневаешься?</h2>
-         <p>Скорей решайся и не теряй возможность заработать миллионы.</p>
-         <p>Старт игры начался относительно недавно, а это значит, что у тебя есть очень высокий шанс выиграша.</p>
-         <p>Поспеши, пока не подтянулись конкуренты.</p>
-         <p>Эта игра скоро будет в каждом компьютере!
-         </p>
+         <h2 class="top_block_title" style="color: #2fcaf1;"><%= t 'profile.somn' %></h2>
+         <p><%= t 'profile.somn1' %></p>
+         <p><%= t 'profile.somn2' %></p>
+         <p><%= t 'profile.somn3' %></p>
+         <p><%= t 'profile.somn4' %></p>
       </div>
    </div>
   
@@ -382,7 +367,7 @@
    <div class="footer">
       <div class="container">
         <span class="arrow_up">⌃</span>
-         <div class="footer_title">Нравится наш сервис? Поделитесь в социальных сетях:</div>
+         <div class="footer_title"><%= t 'profile.me' %></div>
          <div class="footer_social">
             <a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=https://king-mountain.pro/&st.comments=ЦарьГоры" target="_blank" class="footer_social_item"><img src="/images/ic-ok.png" height="39" width="39" alt="OK"></a>
             <a href="https://www.facebook.com/sharer.php?u=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="/images/ic-fb.png" height="26" width="12" alt="Facebook"></a>
