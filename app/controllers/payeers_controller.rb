@@ -5,6 +5,47 @@ class PayeersController < ApplicationController
 
   def create
     @payeer = Payeer.new(payeer_params)
+
+    require 'digest'
+    require 'openssl'
+    require 'json'
+    require 'base64'
+    require 'open-uri'
+
+    m_shop    = ENV['ID_MERCHANT']
+    m_orderid = @payeer.id
+    m_amount  = @payeer.total
+    m_cur     = @payeer.currency
+    m_desc    = @payeer.description
+
+    arr_hash = [m_shop, m_orderid, m_amount, m_cur, m_desc]
+
+    arr_params = {
+      success_url: 'https://king-mountain.pro/payeer/success',
+      fail_url:    'https://king-mountain.pro/payeer/fail',
+      status_url:  'https://king-mountain.pro/payeer/success'
+    }
+
+    # Твой ключ для шифрования дополнительных параметров.
+    key_encrypt_parametres = '1321213weqeweqwqew321dzcSDASdq3ewqeQEQWeqd'
+
+    key = Digest::MD5.hexdigest("#{key_encrypt_parametres}#{m_orderid}")
+
+    cipher = OpenSSL::Cipher.new('AES-256-CBC')
+    cipher.encrypt
+    cipher.key = key
+    # Шифруем доп. параметры
+    encrypted = URI::encode(Base64.encode64((cipher.update(arr_hash.to_json) + cipher.final)))
+
+    # Добавляем параметры в массив для формирования подписи
+    arr_hash << encrypted
+    # Добавляем в массив для формирования подписи секретный ключ
+    arr_hash << key
+    # Формируем подпись
+    @sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
+
+    puts @sign
+    
     @payeer.save
   end
 
