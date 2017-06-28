@@ -41,6 +41,7 @@ permit_params :name, :email, :password, :reffered_by, :reffered, :confirmed, :ba
 		column :email
 		column :reffered_by
 		column :reffered
+		column :confirmed_at
 		column :invited
 		column :level
 		column :balance
