@@ -3,9 +3,7 @@ class PayeersController < ApplicationController
     @payeer = Payeer.new
   end
 
-  def create
-    @payeer = Payeer.new(payeer_params)
-
+   def signcode
     require 'digest'
     require 'openssl'
     require 'json'
@@ -43,9 +41,12 @@ class PayeersController < ApplicationController
     arr_hash << key
     # Формируем подпись
     @sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
+  end
 
-    puts @sign
-    
+  def create
+    @payeer = Payeer.new(payeer_params)
+    signcode
+
     @payeer.save
   end
 
