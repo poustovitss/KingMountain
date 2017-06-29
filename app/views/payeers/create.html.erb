@@ -2,9 +2,9 @@
 <form method="post" action="https://payeer.com/merchant/">
 	<input type="hidden" name="m_shop" value="<%= ENV['ID_MERCHANT'] %>">
 	<input type="hidden" name="m_orderid" value="<%= @payeer.id %>">
-	<input type="hidden" name="m_amount" value="100.00">
+	<input type="hidden" name="m_amount" value="<%= @payeer.total %>">
 	<input type="hidden" name="m_curr" value="RUB">
-	<input type="hidden" name="m_desc" value="Text">
+	<input type="hidden" name="m_desc" value="<%= @payeer.description %>">
 	<input type="hidden" name="m_sign" value="<%= @sign %>">
 
 	<input type="hidden" name="form[ps]" value="<%= ENV['FORPS'] %>">

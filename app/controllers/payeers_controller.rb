@@ -9,12 +9,13 @@ class PayeersController < ApplicationController
     require 'json'
     require 'base64'
     require 'open-uri'
+    @payeer = Payeer.new
 
     m_shop    = ENV['ID_MERCHANT']
-    m_orderid = '@payeer.id'
-    m_amount  = '100.00'
+    m_orderid = @payeer.id
+    m_amount  = @payeer.description
     m_cur     = 'RUB'
-    m_desc    = 'Text'
+    m_desc    = @payeer.description
 
     arr_hash = [m_shop, m_orderid, m_amount, m_cur, m_desc]
 
