@@ -9,12 +9,12 @@ class PayeersController < ApplicationController
     require 'json'
     require 'base64'
     require 'open-uri'
-
+    @payeer = Payeer.new
 
     m_shop = ENV['ID_MERCHANT']
     m_orderid = @payeer.id
     m_amount = "100.00"
-    m_curr = "USD"
+    m_curr = "RUB"
     m_desc = Base64.encode64('Text')
     m_key = "1321213weqeweqwqew321dzcSDASdq3ewqeQEQWeqd"
 
@@ -25,7 +25,7 @@ m_key]
 
     # sign_hash = Digest::SHA256.digest result_string
 
-    @sign = Digest::SHA256.hexdigest(result_string).upcase!
+    return @sign = Digest::SHA256.hexdigest(result_string).upcase!
 
   end
     
