@@ -25,7 +25,7 @@ class PayeersController < ApplicationController
     }
 
     # Твой ключ для шифрования дополнительных параметров.
-    key_encrypt_parametres = 'qwerty'
+    key_encrypt_parametres = '1321213weqeweqwqew321dzcSDASdq3ewqeQEQWeqd'
 
     key = Digest::MD5.hexdigest("#{key_encrypt_parametres}#{m_orderid}")
 
