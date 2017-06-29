@@ -10,11 +10,11 @@ class PayeersController < ApplicationController
     require 'base64'
     require 'open-uri'
 
-    m_shop    = 1
-    m_orderid = 12345
-    m_amount  = 100
+    m_shop    = ENV['ID_MERCHANT']
+    m_orderid = '@payeer.id'
+    m_amount  = '100.00'
     m_cur     = 'RUB'
-    m_desc    = 'some_desc'
+    m_desc    = 'Text'
 
     arr_hash = [m_shop, m_orderid, m_amount, m_cur, m_desc]
 
