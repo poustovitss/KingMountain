@@ -198,7 +198,7 @@ class ProfilesController < ApplicationController
   end
 
   def levelinfo
-    '10'
+    '10 '
   end
 
   def summproviant
