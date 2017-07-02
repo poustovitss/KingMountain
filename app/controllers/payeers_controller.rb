@@ -14,7 +14,7 @@ class PayeersController < ApplicationController
     m_shop = '371275495'
     m_orderid = '2'
     m_amount = "100.00"
-    m_curr = "RUB"
+    m_cur = "RUB"
     m_desc = Base64.encode64('Text')
     m_key = "vksruu0m5qf49bqs"
 
@@ -42,7 +42,7 @@ class PayeersController < ApplicationController
     # Добавляем в массив для формирования подписи секретный ключ
     arr_hash << key
     # Формируем подпись
-    @sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
+    include @sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
   end
     
 
