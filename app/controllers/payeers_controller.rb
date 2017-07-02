@@ -13,7 +13,7 @@ class PayeersController < ApplicationController
 
     m_shop    = ENV['ID_MERCHANT']
     m_orderid = @payeer.id
-    m_amount  = @payeer.description
+    m_amount  = @payeer.total.to_f
     m_cur     = 'RUB'
     m_desc    = @payeer.description
 
