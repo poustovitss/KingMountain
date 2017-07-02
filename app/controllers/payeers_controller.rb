@@ -16,7 +16,6 @@ class PayeersController < ApplicationController
     m_amount  = @payeer.total.to_f
     m_cur     = 'RUB'
     m_desc    = @payeer.description
-    m_
 
     arr_hash = [m_shop, m_orderid, m_amount, m_cur, m_desc]
 
