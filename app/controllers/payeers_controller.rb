@@ -50,8 +50,8 @@ class PayeersController < ApplicationController
     require 'open-uri'
     @payeer = Payeer.new
 
-    m_shop = "371275495"
-    m_orderid = rand(0..999999).to_s
+    m_shop = "367697911"
+    m_orderid = '12345'
     m_amount = "100.00"
     m_curr = "RUB"
     m_desc = Base64.encode64('Text')
@@ -68,6 +68,12 @@ class PayeersController < ApplicationController
     
 
   def create
+    @m_shop = "367697911"
+    @m_orderid = '12345'
+    @m_amount = "100.00"
+    @m_curr = "RUB"
+    @m_desc = Base64.encode64('Text')
+    @m_key = "vksruu0m5qf49bqs"
     @payeer = Payeer.new(payeer_params)
     
     signcode

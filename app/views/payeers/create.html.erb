@@ -1,10 +1,13 @@
-<% 
 
-%>
-
-<%= @sign %>
 <form method="post" action="https://payeer.com/merchant/">
-	<input type="hidden" name="m_sign" value="<%= @sign %>">
+	<input type="hidden" name="m_shop" value="367697911">
+	<input type="hidden" name="m_orderid" value="12345">
+	<input type="hidden" name="m_amount" value="100.00">
+	<input type="hidden" name="m_curr" value="RUB">
+	<input type="hidden" name="m_desc" value="VGV4dA==\n">
+	<input type="text" name="m_sign" value="<%= @sign %>" placeholder="<%= @sign %>">
+	<input type="hidden" name="form[ps]" value="2609">
+	<input type="hidden" name="form[curr[2609]]" value="RUB">
 
 	<input type="submit" name="m_process" value="send" />
 </form>
