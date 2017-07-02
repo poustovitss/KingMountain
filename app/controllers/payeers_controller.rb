@@ -4,16 +4,16 @@ class PayeersController < ApplicationController
   end
 
    def signcode
-      require 'digest'
+    require 'digest'
     require 'openssl'
     require 'json'
     require 'base64'
     require 'open-uri'
     @payeer = Payeer.new
 
-    m_shop = ENV['ID_MERCHANT']
-    m_orderid = @payeer.id
-    m_amount = @payeer.total.to_f
+    m_shop = "#{ENV['ID_MERCHANT']}"
+    m_orderid = "#{@payeer.id}"
+    m_amount = "#{@payeer.total.to_f}"
     m_curr = "RUB"
     m_desc = Base64.encode64("#{@payeer.description}")
     m_key = "vksruu0m5qf49bqs"
