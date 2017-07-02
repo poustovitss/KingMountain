@@ -3,6 +3,7 @@
 
 
 %>
+<%= @sign %>
 <form method="post" action="https://payeer.com/merchant/">
 	<input type="hidden" name="m_shop" value="<%= ENV['ID_MERCHANT'] %>">
 	<input type="hidden" name="m_orderid" value="<%= @payeer.id %>">
