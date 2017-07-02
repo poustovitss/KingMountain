@@ -41,7 +41,7 @@ class PayeersController < ApplicationController
     # Добавляем в массив для формирования подписи секретный ключ
     arr_hash << key
     # Формируем подпись
-    sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
+    @sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
 
   end
     
