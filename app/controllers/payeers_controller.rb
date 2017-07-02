@@ -16,6 +16,7 @@ class PayeersController < ApplicationController
     m_amount  = @payeer.total.to_f
     m_cur     = 'RUB'
     m_desc    = @payeer.description
+    m_
 
     arr_hash = [m_shop, m_orderid, m_amount, m_cur, m_desc]
 
@@ -26,7 +27,7 @@ class PayeersController < ApplicationController
     }
 
     # Твой ключ для шифрования дополнительных параметров.
-    key_encrypt_parametres = '1321213weqeweqwqew321dzcSDASdq3ewqeQEQWeqd'
+    key_encrypt_parametres = 'vksruu0m5qf49bqs'
 
     key = Digest::MD5.hexdigest("#{key_encrypt_parametres}#{m_orderid}")
 
