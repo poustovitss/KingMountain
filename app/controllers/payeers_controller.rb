@@ -3,7 +3,7 @@ class PayeersController < ApplicationController
     @payeer = Payeer.new
   end
 
-   def signcode
+  def signcode
     require 'digest'
     require 'openssl'
     require 'json'
@@ -11,11 +11,11 @@ class PayeersController < ApplicationController
     require 'open-uri'
     @payeer = Payeer.new
 
-    m_shop = "#{ENV['ID_MERCHANT']}"
-    m_orderid = "#{@payeer.id}"
-    m_amount = "#{@payeer.total.to_f}"
+    m_shop = '371275495'
+    m_orderid = '2'
+    m_amount = "100.00"
     m_curr = "RUB"
-    m_desc = Base64.encode64("#{@payeer.description}")
+    m_desc = Base64.encode64('Text')
     m_key = "vksruu0m5qf49bqs"
 
     list_of_value_for_sign = [m_shop, m_orderid, m_amount, m_curr, m_desc, m_key]
@@ -25,7 +25,6 @@ class PayeersController < ApplicationController
     # sign_hash = Digest::SHA256.digest result_string
 
     return @sign = Digest::SHA256.hexdigest(result_string).upcase!
-
   end
     
 
