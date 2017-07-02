@@ -4,6 +4,45 @@ class PayeersController < ApplicationController
   end
 
   def signcode
+    # require 'digest'
+    # require 'openssl'
+    # require 'json'
+    # require 'base64'
+    # require 'open-uri'
+    # @payeer = Payeer.new
+
+    # m_shop = '371275495'
+    # m_orderid = '2'
+    # m_amount = "100.00"
+    # m_cur = "RUB"
+    # m_desc = 'Texxt'.force_encoding("UTF-8")
+    # m_key = "vksruu0m5qf49bqs"
+
+    # arr_hash = [m_shop, m_orderid, m_amount, m_cur, m_desc, m_key]
+
+    # arr_params = {
+    #   success_url: 'https://king-mountain.pro/payeer/success',
+    #   fail_url:    'https://king-mountain.pro/payeer/fail',
+    #   status_url:  'https://king-mountain.pro/payeer/success'
+    # }
+
+    # # Твой ключ для шифрования дополнительных параметров.
+    # key_encrypt_parametres = 'vksruu0m5qf49bqs'
+
+    # key = Digest::MD5.hexdigest("#{key_encrypt_parametres}#{m_orderid}")
+
+    # cipher = OpenSSL::Cipher.new('AES-256-CBC')
+    # cipher.encrypt
+    # cipher.key = key
+    # # Шифруем доп. параметры
+    # encrypted = URI::encode(Base64.encode64((cipher.update(arr_hash.to_json) + cipher.final)))
+
+    # # Добавляем параметры в массив для формирования подписи
+    # arr_hash << encrypted
+    # # Добавляем в массив для формирования подписи секретный ключ
+    # arr_hash << key
+    # # Формируем подпись
+    # return @sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
     require 'digest'
     require 'openssl'
     require 'json'
@@ -11,38 +50,20 @@ class PayeersController < ApplicationController
     require 'open-uri'
     @payeer = Payeer.new
 
-    m_shop = '371275495'
-    m_orderid = '2'
+    m_shop = "371275495"
+    m_orderid = rand(0..999999).to_s
     m_amount = "100.00"
-    m_cur = "RUB"
+    m_curr = "RUB"
     m_desc = Base64.encode64('Text')
     m_key = "vksruu0m5qf49bqs"
 
-    arr_hash = [m_shop, m_orderid, m_amount, m_cur, m_desc, m_key]
+    list_of_value_for_sign = [m_shop, m_orderid, m_amount, m_curr, m_desc, m_key]
 
-    arr_params = {
-      success_url: 'https://king-mountain.pro/payeer/success',
-      fail_url:    'https://king-mountain.pro/payeer/fail',
-      status_url:  'https://king-mountain.pro/payeer/success'
-    }
+    result_string = list_of_value_for_sign.join(":")
 
-    # Твой ключ для шифрования дополнительных параметров.
-    key_encrypt_parametres = 'vksruu0m5qf49bqs'
+    # sign_hash = Digest::SHA256.digest result_string
 
-    key = Digest::MD5.hexdigest("#{key_encrypt_parametres}#{m_orderid}")
-
-    cipher = OpenSSL::Cipher.new('AES-256-CBC')
-    cipher.encrypt
-    cipher.key = key
-    # Шифруем доп. параметры
-    encrypted = URI::encode(Base64.encode64((cipher.update(arr_hash.to_json) + cipher.final)))
-
-    # Добавляем параметры в массив для формирования подписи
-    arr_hash << encrypted
-    # Добавляем в массив для формирования подписи секретный ключ
-    arr_hash << key
-    # Формируем подпись
-    return @sign = Digest::SHA256.digest(arr_hash.join(':')).upcase!
+    return @sign = Digest::SHA256.hexdigest(result_string).upcase!
   end
     
 
