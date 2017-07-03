@@ -17,12 +17,13 @@ class FirstJobJob < ApplicationJob
 		if system_user.first.nil?
 			user = user.first
 			user.reffered_by = 0
+			user.save
 		else
 			system_user = system_user.first
 
 			user.reffered_by = system_user.id
-		end
 			user.save
+		end
 	end
   end
 end
