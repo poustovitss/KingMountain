@@ -231,7 +231,7 @@
                 </div>
                 <div class="start_price_extensions_item_check">
                   <% if current_user.radist == true %>
-                    <a>У вас уже есть это улучшение</a>
+                    <a><%= t 'profile.have' %></a>
                   <% else %>
                     <label for="radist" style='margin: 4px 0 -3px;'><%= f.check_box :radistbuy, id: "radist" %> </label>
                   <% end %>
@@ -250,7 +250,7 @@
                 </div>
                 <div class="start_price_extensions_item_check">
                   <% if current_user.conductor == true %>
-                    <a>У вас уже есть это улучшение</a>
+                    <a><%= t 'profile.have' %></a>
                   <% else %>
                     <label for="radist" style='margin: 4px 0 0px;'><%= f.check_box :conductorbuy %></label>
                   <% end %>
@@ -269,7 +269,7 @@
                 </div>
                 <div class="start_price_extensions_item_check">
                   <% if current_user.carrier == true %>
-                    <a>У вас уже есть это улучшение</a>
+                    <a><%= t 'profile.have' %></a>
                   <% else %>
                     <label for="radist" style='margin: 4px 0 -1px;'><%= f.check_box :carrierbuy %></label>
                   <% end %>
@@ -288,7 +288,7 @@
                 </div>
                 <div class="start_price_extensions_item_check">
                   <% if current_user.aerodrome == true %>
-                    <a>У вас уже есть это улучшение</a>
+                    <a><%= t 'profile.have' %></a>
                   <% else %>
                     <label for="radist" style='margin: 4px 0 0px;'><%= f.check_box :aerodrombuy %></label>
                   <% end %>

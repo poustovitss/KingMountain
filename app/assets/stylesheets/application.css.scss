@@ -218,7 +218,7 @@ body {
 .start_price_extensions_item_price {
   float: left;
   width: 390px;
-  padding: 40px 0 38px 60px;
+  padding: 15px 0 15px 60px;
   font-weight: 900;
   font-size: 22px;
   line-height: 26px;
@@ -282,8 +282,8 @@ body { font-family: "PT Sans", sans-serif; }
 @media screen and (max-width: 768px) { .main_banner { margin-bottom: 30px; text-align: center; } }
 .main_banner_content { color: #fff; font-size: 22px; letter-spacing: -1.2px; line-height: 28px;}
 .main_banner_content span { display: block; padding-top: 10px; padding-bottom: 30px; line-height: 24px; font-size: 16px; color: #343434; }
-.main_banner_content_wrap { padding: 84px 0 93px 0; max-width: 560px;}
-.main_banner_play_btn, .main_banner_more_btn { display: inline-flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 400; line-height: 1.42857; font-size: 22px; color: #333; text-decoration: none; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none; margin-right: 42px; text-transform: uppercase; border-radius: 50px; height: 64px; }
+.main_banner_content_wrap { padding: 84px 0 93px 0}
+.main_banner_play_btn, .main_banner_more_btn { display: inline-flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 400; line-height: 1.42857; font-size: 22px; color: #333; text-decoration: none; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none; margin-right: 0; text-transform: uppercase; border-radius: 50px; height: 64px; }
 .main_banner_play_btn {margin-left: -13px; margin-top: 7px; background: #fff; border: none; color: #343434; }
 .main_banner_more_btn { border: 1px solid #ffffff; }
 .main_banner_title { max-width: 560px; padding-bottom: 30px; font-size: 51px; line-height: 54px; color: #fff; font-weight: 700; }
@@ -326,13 +326,13 @@ body { font-family: "PT Sans", sans-serif; }
 @media screen and (max-width: 992px) { .start_price_title { padding-bottom: 20px; font-size: 23px; line-height: 27px; } }
 @media screen and (max-width: 768px) { .start_price_title { font-size: 18px; line-height: 22px; } }
 .start_price_title span { color: #49d793; font-weight: 900; }
-.start_price_extensions { padding-bottom: 20px; }
+.start_price_extensions { padding-bottom: 20px; width: 860px; margin: 0 auto; }
 .start_price_extensions_item { position: relative; }
 .start_price_extensions strong { display: block; padding-bottom: 5px; margin-bottom: 25px; font-size: 23px; color: #373737; border-bottom: 1px solid #ededed; font-weight: 300; }
 @media screen and (max-width: 768px) { .start_price_extensions strong { font-size: 15px; text-align: center; } }
 .start_price_extensions_item:after { content: ""; display: block; clear: both; }
 @media screen and (max-width: 768px) { .start_price_extensions_item { padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #d2cdcd; } }
-.start_price_extensions_item .icon { float: left; width: 400px; font-size: 22px; padding: 40px 0 38px 60px; font-size: 18px; line-height: 22px; color: #373737; font-weight: 300; }
+.start_price_extensions_item .icon { float: left; width: 400px; font-size: 22px; padding: 15px 0 15px 60px; font-size: 18px; line-height: 22px; color: #373737; font-weight: 300; }
 @media screen and (max-width: 768px) { .start_price_extensions_item .icon { float: none; width: 100%; } }
 .start_price_extensions_item.radio .icon { background: url(../images/radio.png) 0 50% no-repeat; }
 .start_price_extensions_item.guide .icon { background: url(../images/guide.png) 0 50% no-repeat; }
@@ -340,7 +340,7 @@ body { font-family: "PT Sans", sans-serif; }
 .start_price_extensions_item.helicopter .icon { background: url(../images/helicopter.png) 0 50% no-repeat; }
 .start_price_extensions_item_price { float: left; width: 350px; font-weight: 900; font-size: 24px; color: #373737; }
 @media screen and (max-width: 768px) { .start_price_extensions_item_price { float: none; width: 100%; text-align: center; } }
-.start_price_extensions_item_check { position: absolute; top: 0; right: 0; padding: 40px 0 38px 60px; }
+.start_price_extensions_item_check { position: absolute; top: 0; right: 0; padding: 15px 0 15px 60px; }
 @media screen and (max-width: 768px) { .start_price_extensions_item_check { position: static; width: 100%; text-align: center; } }
 .start_price_btn { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857; color: #333; text-decoration: none; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; -webkit-transition: 0.2s; -moz-transition: 0.2s; -ms-transition: 0.2s; -o-transition: 0.2s; transition: 0.2s; }
 .start_price_btn:hover { background-color: #d4d4d4; border-color: #8c8c8c; }
