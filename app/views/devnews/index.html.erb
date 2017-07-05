@@ -1,0 +1,18 @@
+<center>
+	<div class="about_project">
+		<h3 class="abs-about">Новости сайта</h3>
+		<p></p>
+		<p></p>
+		<% Devnew.all.each do |dev| %>
+			<div class="alert alert-info">
+			<p>
+			 <h4>
+			 	<b>дата</b>: <%= dev.created_at.strftime("%d %b. %Y %H:%M") %> <br />
+				<b>новость</b>: <%= dev.name %> <br />
+				<b>описание</b>: <%= dev.text %> <br />
+			 </h4>
+			</p>
+			</div>
+		<% end %>
+	</div>
+</center>

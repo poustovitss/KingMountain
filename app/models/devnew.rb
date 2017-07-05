@@ -1,0 +1,2 @@
+class Devnew < ApplicationRecord
+end
