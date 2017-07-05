@@ -39,8 +39,7 @@
                 <span class="right green"> <h3>
                   <% if current_user.level == 1 %>
                     <% proviants = current_user.refferences.where(level: 1).count %>
-                    <% reffers = current_user.inviteds.where(level: 1).count %>
-                    <% refs = proviants + reffers %>
+                    <% refs = proviants %>
                    <% elsif current_user.level == 2 %>
                     <% proviants = current_user.refferences.where(level: 1).count %>
                     <% reffers = current_user.inviteds.where(level: 1).count %>
@@ -316,10 +315,12 @@
               <%= current_user.level - 1 %>
             <% end %>
             </span></p>
-            <span><strong> <%= summproviant %> <%= t 'profile.ruble' %>.</strong></span>
-            <% summs = summproviant.to_i %>
-            <% procent = summs - (summs * 0.05) %>
-            <p class="flr"><span class="green">-5%  <%= t 'profile.dops' %></span><%= procent %> <%= t 'profile.ruble' %>.</p>
+            <% if current_user.carrier == true %>            
+              <span><strong> <%= summproviant %> <%= t 'profile.ruble' %>.</strong></span>
+              <% summs = summproviant.to_i %>
+              <% procent = summs - (summs * 0.15) %>
+              <p class="flr"><span class="green">-15%  <%= t 'profile.dops' %></span><%= procent %> <%= t 'profile.ruble' %>.</p>
+            <% end %>
           </div>
           <div class="start_price_total">
             <div class="left_side">

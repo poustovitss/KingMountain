@@ -13,8 +13,10 @@
     <%= f.text_field :desc %>
     <span class="des-pay">Cумма</span>
     <%= f.number_field :total %></br>
-    <span class="last">За вывод денег вы получаете штраф 50%</span>
-    <span class="last">Если у вас есть улучшение "Запасной аэродром" то штраф 30%</span>
+      <span class="last">За вывод денег вы получаете штраф 50%</span>
+    <% if current_user.aerodrome == true %>
+      <span class="last">Если у вас есть улучшение "Эвакуационный вертолёт" то штраф 30%</span>
+    <% end %>
     <input type="submit" value="Вывести" />
   <% end %>
 </div>
