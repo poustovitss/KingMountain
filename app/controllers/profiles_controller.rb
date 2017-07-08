@@ -62,11 +62,18 @@ class ProfilesController < ApplicationController
           current_user.save
 
           unless current_user.invited.nil?
-            transfer = Transfer.new
-            transfer.user_id = current_user.invited.id
-            transfer.bank_id = Bank.last.id
-            transfer.summa = pay*0.05
-            transfer.save
+            if current_user.invited.transfers.last.nil?
+              transfer = Transfer.new
+              transfer.user_id = current_user.invited.id
+              transfer.bank_id = Bank.last.id
+              transfer.summa = 0
+              transfer.summa += pay*0.05
+              transfer.save
+            else
+              transfer = current_user.invited.transfers.last
+              transfer.summa += pay*0.05
+              transfer.save
+            end
           end
 
           unless current_user.reffered.nil?
@@ -108,12 +115,17 @@ class ProfilesController < ApplicationController
               reffered.save
           end
 
-          unless current_user.reffered.nil?
-            unless current_user.proviant == true
+          unless current_user.invited.nil?
+             if current_user.invited.transfers.last.nil?
               transfer = Transfer.new
-              transfer.user_id = current_user.reffered.id
+              transfer.user_id = current_user.invited.id
               transfer.bank_id = Bank.last.id
-              transfer.summa = pay*0.05
+              transfer.summa = 0
+              transfer.summa += pay*0.05
+              transfer.save
+            else
+              transfer = current_user.invited.transfers.last
+              transfer.summa += pay*0.05
               transfer.save
             end
           end
