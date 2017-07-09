@@ -87,8 +87,8 @@
           </div>
 
           <div class="btn-personal-block">
-            <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(invited_by: current_user.id)  %>" style="width: 640px;" />
-            <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 15px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
+            <b>Ваша реф. ссылка </b> <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(invited_by: current_user.id)  %>" style="width: 640px;" />
+            <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 9px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
             <center>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
                 <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; margin-right: 117px;', data: { confirm: "Стоимость 50P?" } %>
@@ -110,11 +110,11 @@
             <button style="position: static;">Купить уровень</button>
             <% end %>
           <% end %>
-          <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/1</span>
          <% elsif current_user.level > 7 %>
            <span class="align-right">10/10</span>
          <% else %>
-          <span class="align-right">0/10</span> 
+          <span class="align-right">0/1</span> 
          <% end %>
         </div>
         <div class="levels-item">
@@ -304,14 +304,14 @@
           <center>
               <%= f.submit 'Купить улучшения', class: 'btn btn-default', style: 'width: 266px; height: 52px; background-color: #49d793; color: #fff; border-radius: 40px; font-weight: bold; font-size: 23px;' %>
           </center>
-<hr>
+        <hr>
       <% end %>
           
           <div class="price-prev">
             <p><%= t 'profile.prices' %> <span class="green">
             <% if current_user.level == 1 %>
               <%= current_user.level %>
-            <% else %>             
+            <% else %>
               <%= current_user.level - 1 %>
             <% end %>
             </span></p>
@@ -320,6 +320,10 @@
               <% summs = summproviant.to_i %>
               <% procent = summs - (summs * 0.15) %>
               <p class="flr"><span class="green">-15%  <%= t 'profile.dops' %></span><%= procent %> <%= t 'profile.ruble' %>.</p>
+            <% else %>
+              <span><strong> <%= summproviant %> <%= t 'profile.ruble' %>.</strong></span>
+              <% summs = summproviant.to_i %>
+              <p class="flr"><span class="green">Стоимость без улучшения</span><%= summs %> <%= t 'profile.ruble' %>.</p>
             <% end %>
           </div>
           <div class="start_price_total">
