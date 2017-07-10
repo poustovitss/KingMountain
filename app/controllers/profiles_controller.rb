@@ -474,6 +474,11 @@ class ProfilesController < ApplicationController
         end
 
       ref_balance = Transfer.find_by_user_id(current_user.id)
+
+      if current_user.carrier == true
+        ref_balance = ref_balance - (ref_balance * 0.15)
+      end
+
       summa_for_prov = params[:counts][:size_to_buy]  
 
         total_proviant = summa_for_prov.to_i * pay
