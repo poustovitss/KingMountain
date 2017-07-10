@@ -597,10 +597,6 @@ class ProfilesController < ApplicationController
                   end
                 end
 
-                puts '=================='
-                puts percentproviant
-                puts '=================='
-
                 current_user.balance += pay1*percentproviant
                 current_user.save
               end
