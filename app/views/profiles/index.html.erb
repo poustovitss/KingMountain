@@ -38,7 +38,11 @@
             <div class="profile clearfix">
               <div class="profile_pic">
                 <% ava = current_user.avatars.last %>
-                <img src="<%= image_path ava.image.url(:thumb) %>" alt="..." class="img-circle profile_img">
+                  <% if ava.nil? %>
+                    <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                  <% else %>
+                    <img src="<%= image_path ava.image.url(:thumb) %>" alt="..." class="img-circle profile_img">
+                  <% end %>
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -183,7 +187,12 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<%= image_path ava.image.url(:thumb) %>" alt=""><%= current_user.name %>
+                  <% if ava.nil? %>
+                    <img src="images/img.jpg" alt="">
+                  <% else %>
+                   <img src="<%= image_path ava.image.url(:thumb) %>" alt="">
+                  <% end %>
+                    <%= current_user.name %>
                     <!-- <span class=" fa fa-angle-down"></span> -->
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
