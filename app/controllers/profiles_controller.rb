@@ -100,7 +100,7 @@ class ProfilesController < ApplicationController
             end
           end
           
-          FirstJobJob.set(wait: 1440.minutes).perform_later(current_user)
+          FirstJobJob.set(wait: 1.seconds).perform_later(current_user)
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
           flash[:balance] = 'У вас не достаточно баланса'
@@ -363,8 +363,6 @@ class ProfilesController < ApplicationController
           (current_user.level - 1).times do
             pay = start_pay + start_coefficient
             start_pay = pay
-
-            puts start_pay
           end
         end
 
