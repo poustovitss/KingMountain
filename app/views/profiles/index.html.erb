@@ -87,7 +87,7 @@
           </div>
 
           <div class="btn-personal-block">
-            <b>Ваша реф. ссылка </b> <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(invited_by: current_user.id)  %>" style="width: 640px;" />
+            <b><%= t 'profile.reffq' %> </b> <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(invited_by: current_user.id)  %>" style="width: 640px;" />
             <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 9px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
             <center>
               <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
