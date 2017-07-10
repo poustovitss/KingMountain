@@ -473,10 +473,12 @@ class ProfilesController < ApplicationController
           pay = (50 + ((current_user.level - 1) * 100))
         end
 
-      ref_balance = Transfer.find_by_user_id(current_user.id)
 
       if current_user.carrier == true
+        ref_balance = Transfer.find_by_user_id(current_user.id)
         ref_balance.summa = ref_balance.summa - (ref_balance.summa * 0.15)
+      else 
+        ref_balance = Transfer.find_by_user_id(current_user.id)
       end
 
       summa_for_prov = params[:counts][:size_to_buy]  
