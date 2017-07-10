@@ -335,85 +335,6 @@
 
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="dashboard_graph">
-
-                <div class="row x_title">
-                  <div class="col-md-6">
-                    <h3>Network Activities <small>Graph title sub-title</small></h3>
-                  </div>
-                  
-                </div>
-
-                <div class="col-md-9 col-sm-9 col-xs-12">
-                  <div class="demo-placeholder">
-                    <center>
-                      <div class="left-photo-block">
-                      <% ava = current_user.avatars.last %>
-                      <% if ava.nil? %>
-                        <img alt="User Pic" src="images/andrew.png" class="img-circle img-responsive"  style="max-width: 80%; margin-bottom: 0px;">
-                      <% else %>
-                        <%= image_tag ava.image.url(:thumb), class: "img-circle img-responsive" %>
-                      <% end %>
-                      <%= form_for Avatar.new do |f| %>
-                        <input type="file" name="personal-photo" id="avatar">
-                        <%= f.label :image %>
-                        <%= f.file_field :image %>
-                        <%= f.hidden_field :user_id, :value => current_user.id %>
-                        <!-- <input type="file" name="personal-photo" id="avatar"> -->
-                        <!-- <label for="image">загрузить аватар</label> -->
-                        <button><%= t 'profile.image' %></button>
-                      <% end %>
-                    </div>
-                    </center>
-                  </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                  <div class="x_title">
-                    <h2>Top Campaign Performance</h2>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                    <div>
-                      <p>Facebook Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Twitter Campaign</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 col-sm-12 col-xs-6">
-                    <div>
-                      <p>Conventional Media</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <p>Bill boards</p>
-                      <div class="">
-                        <div class="progress progress_sm" style="width: 76%;">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="clearfix"></div>
-              </div>
             </div>
 
           </div>
@@ -615,7 +536,7 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
-                  <h2>Quick Settings</h2>
+                  <h2>Управление</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -636,7 +557,7 @@
                 <div class="x_content">
                   <div class="dashboard-widget-content">
                     <ul class="quick-list">
-                      <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
+                      <li><i class="fa fa-calendar-o"></i><a href="#">Редактировать</a>
                       </li>
                       <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
                       </li>
@@ -646,7 +567,7 @@
                       <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
                       <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
                       </li>
-                      <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
+                      <li><i class="fa fa-area-chart"></i><%= link_to 'Выйти', destroy_user_session_path, method: :delete %>
                       </li>
                     </ul>
 
@@ -896,7 +817,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Daily active users <small>Sessions</small></h2>
+                      <h2>Top Profiles</h2>
                       <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -914,90 +835,66 @@
                       </ul>
                       <div class="clearfix"></div>
                     </div>
-                    <div class="x_content">
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="temperature"><b>Monday</b>, 07:30 AM
-                            <span>F</span>
-                            <span><b>C</b></span>
-                          </div>
+                    <ul class="list-unstyled top_profiles scroll-view">
+                      <li class="media event">
+                        <a class="pull-left border-aero profile_thumb">
+                          <i class="fa fa-user aero"></i>
+                        </a>
+                        <div class="media-body">
+                          <a class="title" href="#">Ms. Mary Jane</a>
+                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                          <p> <small>12 Sales Today</small>
+                          </p>
                         </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-4">
-                          <div class="weather-icon">
-                            <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
-                          </div>
+                      </li>
+                      <li class="media event">
+                        <a class="pull-left border-green profile_thumb">
+                          <i class="fa fa-user green"></i>
+                        </a>
+                        <div class="media-body">
+                          <a class="title" href="#">Ms. Mary Jane</a>
+                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                          <p> <small>12 Sales Today</small>
+                          </p>
                         </div>
-                        <div class="col-sm-8">
-                          <div class="weather-text">
-                            <h2>Texas <br><i>Partly Cloudy Day</i></h2>
-                          </div>
+                      </li>
+                      <li class="media event">
+                        <a class="pull-left border-blue profile_thumb">
+                          <i class="fa fa-user blue"></i>
+                        </a>
+                        <div class="media-body">
+                          <a class="title" href="#">Ms. Mary Jane</a>
+                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                          <p> <small>12 Sales Today</small>
+                          </p>
                         </div>
-                      </div>
-                      <div class="col-sm-12">
-                        <div class="weather-text pull-right">
-                          <h3 class="degrees">23</h3>
+                      </li>
+                      <li class="media event">
+                        <a class="pull-left border-aero profile_thumb">
+                          <i class="fa fa-user aero"></i>
+                        </a>
+                        <div class="media-body">
+                          <a class="title" href="#">Ms. Mary Jane</a>
+                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                          <p> <small>12 Sales Today</small>
+                          </p>
                         </div>
-                      </div>
-
-                      <div class="clearfix"></div>
-
-                      <div class="row weather-days">
-                        <div class="col-sm-2">
-                          <div class="daily-weather">
-                            <h2 class="day">Mon</h2>
-                            <h3 class="degrees">25</h3>
-                            <canvas id="clear-day" width="32" height="32"></canvas>
-                            <h5>15 <i>km/h</i></h5>
-                          </div>
+                      </li>
+                      <li class="media event">
+                        <a class="pull-left border-green profile_thumb">
+                          <i class="fa fa-user green"></i>
+                        </a>
+                        <div class="media-body">
+                          <a class="title" href="#">Ms. Mary Jane</a>
+                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                          <p> <small>12 Sales Today</small>
+                          </p>
                         </div>
-                        <div class="col-sm-2">
-                          <div class="daily-weather">
-                            <h2 class="day">Tue</h2>
-                            <h3 class="degrees">25</h3>
-                            <canvas height="32" width="32" id="rain"></canvas>
-                            <h5>12 <i>km/h</i></h5>
-                          </div>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="daily-weather">
-                            <h2 class="day">Wed</h2>
-                            <h3 class="degrees">27</h3>
-                            <canvas height="32" width="32" id="snow"></canvas>
-                            <h5>14 <i>km/h</i></h5>
-                          </div>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="daily-weather">
-                            <h2 class="day">Thu</h2>
-                            <h3 class="degrees">28</h3>
-                            <canvas height="32" width="32" id="sleet"></canvas>
-                            <h5>15 <i>km/h</i></h5>
-                          </div>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="daily-weather">
-                            <h2 class="day">Fri</h2>
-                            <h3 class="degrees">28</h3>
-                            <canvas height="32" width="32" id="wind"></canvas>
-                            <h5>11 <i>km/h</i></h5>
-                          </div>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="daily-weather">
-                            <h2 class="day">Sat</h2>
-                            <h3 class="degrees">26</h3>
-                            <canvas height="32" width="32" id="cloudy"></canvas>
-                            <h5>10 <i>km/h</i></h5>
-                          </div>
-                        </div>
-                        <div class="clearfix"></div>
-                      </div>
-                    </div>
+                      </li>
+                    </ul>
                   </div>
-
                 </div>
+
                 <!-- end of weather widget -->
               </div>
             </div>
