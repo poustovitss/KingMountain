@@ -447,6 +447,24 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def percentproviant
+    if current_user.level == 1
+      percentfor = 0.75
+    elsif current_user.level == 2
+      percentfor = 0.70
+    elsif current_user.level == 3
+      percentfor = 0.65
+    elsif current_user.level == 4
+      percentfor = 0.60
+    elsif current_user.level == 5
+      percentfor = 0.55
+    elsif current_user.level == 6
+      percentfor = 0.50
+    end
+
+    return percentfor
+  end
+
   def buynumb
     if current_user.level == 1
       check_proviant = current_user.refferences.where(level: 1).count
@@ -473,15 +491,14 @@ class ProfilesController < ApplicationController
           pay = (50 + ((current_user.level - 1) * 100))
         end
 
-
+      ref_balance = Transfer.find_by_user_id(current_user.id)
       if current_user.carrier == true
-        ref_balance = Transfer.find_by_user_id(current_user.id)
-        ref_balance.summa = ref_balance.summa - (ref_balance.summa * 0.15)
-      else 
-        ref_balance = Transfer.find_by_user_id(current_user.id)
+        pay = pay - (pay * 0.15)
       end
 
       summa_for_prov = params[:counts][:size_to_buy]  
+
+
 
         total_proviant = summa_for_prov.to_i * pay
         if ref_balance.nil?
@@ -565,7 +582,26 @@ class ProfilesController < ApplicationController
                   ref_balance.save
                 end
 
-                current_user.balance += pay*0.75
+                start_pay1 = 50
+                start_coefficient1 = 7.5
+
+                pay1 = 0
+
+                if current_user.level == 0
+                  pay1 = start_pay1
+                else
+                  (current_user.level - 1).times do 
+                    pay1 = start_pay1 * start_coefficient1
+                    start_pay1 = pay1
+                    start_coefficient1 -= 0.5
+                  end
+                end
+
+                puts '=================='
+                puts percentproviant
+                puts '=================='
+
+                current_user.balance += pay1*percentproviant
                 current_user.save
               end
 
