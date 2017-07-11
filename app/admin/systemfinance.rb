@@ -5,9 +5,9 @@ ActiveAdmin.register Systemfinance do
 
 permit_params :name, :summa
 index do
-		column :name
-		column :summa
-	end
+	column :name
+	column :summa
+end
 #
 # or
 #

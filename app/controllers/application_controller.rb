@@ -37,7 +37,8 @@ class ApplicationController < ActionController::Base
   end
   
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :reffered_by, :proviant, :invited_by])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :surname, :skype, :phone, :country, :reffered_by, :proviant, :invited_by])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :surname, :skype, :phone, :country])
   end
 
   def after_sign_in_path_for(resource)
