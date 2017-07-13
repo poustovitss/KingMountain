@@ -1,5 +1,30 @@
 class ProfilesController < ApplicationController
 	
+  def getbonus
+    unless current_user.skype.nil? && current_user.surname.nil? && current_user.phone.nil? && current_user.country.nil?
+     unless current_user.skype == "" && current_user.surname == "" && current_user.phone == "" && current_user.country = ""
+      if current_user.bonus == false
+        if current_user.ball.nil? 
+          current_user.ball = 0
+          current_user.ball += 100
+          current_user.save
+        else
+          current_user.ball += 100
+          current_user.save
+        end
+        current_user.update_attribute(:bonus, true)
+      else
+        flash[:balance] = "Вы уже активировали бонус"
+      end
+     else 
+      flash[:balance] = "Вы не заполнили поля" 
+     end
+    else 
+      flash[:balance] = "Вы не заполнили поля"  
+    end
+    redirect_to :back
+  end
+
   def index
     if user_signed_in?
       if current_user.level == 1 

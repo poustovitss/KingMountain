@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     put 'buyaerodrome/:id' => 'improves#buyaerodrome', as: 'buyaerodrome'
     put 'buyradist/:id' => 'improves#buyradist', as: 'buyradist'
+    put 'getbonus/:id' => 'profiles#getbonus', as: 'getbonus'
 
     get 'service' => 'homepages#service', as: 'service'
     get 'contact' => 'homepages#contact', as: 'contact'

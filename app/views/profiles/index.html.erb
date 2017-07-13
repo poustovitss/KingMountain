@@ -1,3 +1,9 @@
+    <% if flash[:balance] %>
+      <div class="alert alert-danger" role="alert">
+        <center><%= flash[:balance] %></center>
+      </div>
+    <% end %>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -128,24 +134,19 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <% if ava.nil? %>
-                    <img src="images/img.jpg" alt="">
-                  <% else %>
-                   <img src="<%= image_path ava.image.url(:thumb) %>" alt="">
-                  <% end %>
-                    <%= current_user.name %>
-                    <!-- <span class=" fa fa-angle-down"></span> -->
+                    <img src="images/img.jpg" alt="">John Doe
+                    <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
                     <li>
-                      <a href="javascript:;">
+                      <a href="<%= edit_user_registration_path %>">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><i class="fa fa-sign-out pull-right"></i> <%= link_to 'Выйти', destroy_user_session_path, method: :delete %></li>
                   </ul>
                 </li>
 
@@ -268,7 +269,7 @@
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Ваши баллы</span>
-              <div class="count">7,325</div>
+              <div class="count"><%= current_user.ball %></div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+100 </i> Сегодня</span>
             </div>
           </div>
@@ -301,18 +302,18 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
-                  <h2>Заполненость уровня</h2>
+                  <h2>Заполненость данных</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
+                      <!-- <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Settings 1</a>
                         </li>
                         <li><a href="#">Settings 2</a>
                         </li>
-                      </ul>
+                      </ul> -->
                     </li>
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
@@ -320,14 +321,16 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <h4>При заполнения профиля вы получаете баллы</h4>
+                  <h4>При заполнения профиля вы получаете баллы (
+                    <%= link_to 'Получить баллы', getbonus_path(current_user.id), method: :put %>
+                  )</h4>
                   <div class="widget_summary">
                     <div class="w_left w_25">
                       <span>ФИО</span>
                     </div>
                     <div class="w_center w_55">
                       <div class="progress">
-                        <% if current_user.surname == "" %>
+                        <% if current_user.surname == "" || current_user.surname.nil? %>
                           <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
                         <% else %>
                           <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
@@ -378,7 +381,7 @@
                       </div>
                     </div>
                     <div class="w_right w_20">
-                      <span>-</span>
+                      <span>+</span>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -398,7 +401,7 @@
                       </div>
                     </div>
                     <div class="w_right w_20">
-                      <span>-</span>
+                      <span>+</span>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -418,7 +421,7 @@
                       </div>
                     </div>
                     <div class="w_right w_20">
-                      <span>-</span>
+                      <span>+</span>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -431,18 +434,18 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
-                  <h2>Управление</h2>
+                  <h2>Заполненость ТП</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
+                      <!-- <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Settings 1</a>
                         </li>
                         <li><a href="#">Settings 2</a>
                         </li>
-                      </ul>
+                      </ul> -->
                     </li>
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
@@ -450,38 +453,65 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <div class="dashboard-widget-content">
-                    <ul class="quick-list">
-                      <li><i class="fa fa-gears"></i><a href="<%= edit_user_registration_path %>">Редактировать</a>
-                      </li>
-                      <li><i class="fa fa-comments-o"></i><a href="#">Открытые чаты</a>
-                      </li>
-                      <li><i class="fa fa-fighter-jet"></i><a href="#">Бонусы</a> </li>
-                      <li><i class="fa fa-user"></i><a href="#">Ваши данные</a>
-                      </li>
-                      <li><i class="fa fa-rocket"></i><a href="#">F.A.Q</a> </li>
-                      <!-- <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                      </li> -->
-                      <li><i class="fa fa-close"></i><%= link_to 'Выйти', destroy_user_session_path, method: :delete %>
-                      </li>
-                    </ul>
-
-                    <div class="sidebar-widget">
-                        <h4>Profile Completion</h4>
-                        <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;"></canvas>
-                        <div class="goal-wrapper">
-                          <span id="gauge-text" class="gauge-value pull-left">0</span>
-                          <span class="gauge-value pull-left">%</span>
-                          <span id="goal-text" class="goal-value pull-right">100%</span>
+                  <h4>На данный момент в разработке</h4>
+                  <hr>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>Комната-1</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <% stlevel = current_user.level * 10 %>
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= stlevel %>%;">
+                          <span class="sr-only">60% Complete</span>
                         </div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>Комната-2</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>Комната-3</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>Комната-4</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="clearfix"></div>
+                  </div>
+
                 </div>
               </div>
             </div>
-
-          </div>
-
 
           <div class="row">
             <div class="col-md-4 col-sm-4 col-xs-12">
@@ -493,12 +523,12 @@
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
+                      <!-- <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Settings 1</a>
                         </li>
                         <li><a href="#">Settings 2</a>
                         </li>
-                      </ul>
+                      </ul> -->
                     </li>
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
@@ -545,18 +575,18 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>To Do List <small>Sample tasks</small></h2>
+                      <h2>Дополнения <small>ваши улучшения</small></h2>
                       <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <ul class="dropdown-menu" role="menu">
+                          <!-- <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Settings 1</a>
                             </li>
                             <li><a href="#">Settings 2</a>
                             </li>
-                          </ul>
+                          </ul> -->
                         </li>
                         <li><a class="close-link"><i class="fa fa-close"></i></a>
                         </li>
@@ -614,18 +644,18 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Top Profiles</h2>
+                      <h2>Лидеры Царя-Горы</h2>
                       <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <ul class="dropdown-menu" role="menu">
+                          <!-- <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Settings 1</a>
                             </li>
                             <li><a href="#">Settings 2</a>
                             </li>
-                          </ul>
+                          </ul> -->
                         </li>
                         <li><a class="close-link"><i class="fa fa-close"></i></a>
                         </li>
@@ -633,61 +663,19 @@
                       <div class="clearfix"></div>
                     </div>
                     <ul class="list-unstyled top_profiles scroll-view">
+                      <% User.order("level DESC").limit(5).each do |user| %>
                       <li class="media event">
                         <a class="pull-left border-aero profile_thumb">
                           <i class="fa fa-user aero"></i>
                         </a>
                         <div class="media-body">
-                          <a class="title" href="#">Ms. Mary Jane</a>
-                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                          <p> <small>12 Sales Today</small>
+                          <a class="title" href="#"><%= user.name %></a>
+                          <p><strong><%= user.balance %>. </strong> Work balance </p>
+                          <p> <small><%= user.level %></small>
                           </p>
                         </div>
                       </li>
-                      <li class="media event">
-                        <a class="pull-left border-green profile_thumb">
-                          <i class="fa fa-user green"></i>
-                        </a>
-                        <div class="media-body">
-                          <a class="title" href="#">Ms. Mary Jane</a>
-                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                          <p> <small>12 Sales Today</small>
-                          </p>
-                        </div>
-                      </li>
-                      <li class="media event">
-                        <a class="pull-left border-blue profile_thumb">
-                          <i class="fa fa-user blue"></i>
-                        </a>
-                        <div class="media-body">
-                          <a class="title" href="#">Ms. Mary Jane</a>
-                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                          <p> <small>12 Sales Today</small>
-                          </p>
-                        </div>
-                      </li>
-                      <li class="media event">
-                        <a class="pull-left border-aero profile_thumb">
-                          <i class="fa fa-user aero"></i>
-                        </a>
-                        <div class="media-body">
-                          <a class="title" href="#">Ms. Mary Jane</a>
-                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                          <p> <small>12 Sales Today</small>
-                          </p>
-                        </div>
-                      </li>
-                      <li class="media event">
-                        <a class="pull-left border-green profile_thumb">
-                          <i class="fa fa-user green"></i>
-                        </a>
-                        <div class="media-body">
-                          <a class="title" href="#">Ms. Mary Jane</a>
-                          <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                          <p> <small>12 Sales Today</small>
-                          </p>
-                        </div>
-                      </li>
+                      <% end %>
                     </ul>
                   </div>
                 </div>
