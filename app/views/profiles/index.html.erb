@@ -269,7 +269,13 @@
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Ваши баллы</span>
-              <div class="count"><%= current_user.ball %></div>
+              <div class="count">
+               <% if current_user.ball.nil? %>
+                0
+               <% else %>
+                <%= current_user.ball %>
+               <% end %>
+              </div>
               <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+100 </i> Сегодня</span>
             </div>
           </div>
