@@ -43,6 +43,10 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def mobline
+    
+  end
+
   def create 
     user = current_user
     refferences_count = current_user.refferences.count 
