@@ -601,18 +601,16 @@ class ProfilesController < ApplicationController
                 b.reffered_by=current_user.id
                 b.save
 
-                if current_user.carrier == true 
-                  ref_balance.summa = ref_balance.summa - (pay - (pay * 0.15))
-                  ref_balance.save
-                else
+                # if current_user.carrier == true 
+                #   ref_balance.summa = ref_balance.summa - (pay - (pay * 0.15))
+                #   ref_balance.save
+                # else
                   ref_balance.summa = ref_balance.summa - pay
                   ref_balance.save
-                end
+                # end
 
                 start_pay1 = 50
                 start_coefficient1 = 7.5
-
-                pay1 = 0
 
                 if current_user.level == 0
                   pay1 = start_pay1
@@ -624,7 +622,7 @@ class ProfilesController < ApplicationController
                   end
                 end
 
-                current_user.balance += pay1*percentproviant
+                current_user.balance += start_pay1*percentproviant
                 current_user.save
               end
 

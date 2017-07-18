@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @chat_room.title %>
+</p>
+
+<%= link_to 'Edit', edit_chat_room_path(@chat_room) %> |
+<%= link_to 'Back', chat_rooms_path %>

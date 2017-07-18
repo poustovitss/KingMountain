@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :messages
+  resources :chat_rooms
   ActiveAdmin.routes(self)
   resources :devnews, :homepages, :profiles, :avatars, :improves, :orders, :getmoneys, :getbalances, :feedbacks, :payeers
 
