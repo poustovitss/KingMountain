@@ -1,5 +1,23 @@
 class ProfilesController < ApplicationController
 	
+  def percentproviant
+    if current_user.level == 1
+      percentfor = 0.75
+    elsif current_user.level == 2
+      percentfor = 0.70
+    elsif current_user.level == 3
+      percentfor = 0.65
+    elsif current_user.level == 4
+      percentfor = 0.60
+    elsif current_user.level == 5
+      percentfor = 0.55
+    elsif current_user.level == 6
+      percentfor = 0.50
+    end
+
+    return percentfor
+  end
+
   def getbonus
     unless current_user.skype.nil? && current_user.surname.nil? && current_user.phone.nil? && current_user.country.nil?
      unless current_user.skype == "" && current_user.surname == "" && current_user.phone == "" && current_user.country = ""
@@ -106,9 +124,9 @@ class ProfilesController < ApplicationController
           end
 
           unless current_user.reffered.nil?
-              reffered = current_user.reffered
-              reffered.balance += pay*0.75
-              reffered.save
+            reffered = current_user.reffered
+            reffered.balance += pay*0.75
+            reffered.save
           end
 
           @system = Systemfinance.last
@@ -138,12 +156,6 @@ class ProfilesController < ApplicationController
     else
       if current_user.balance >= pay
         if check >= user.level * 10 
-          unless current_user.reffered.nil?
-              reffered = current_user.reffered
-              reffered.balance += pay*0.75
-              reffered.save
-          end
-
           unless current_user.invited.nil?
              if current_user.invited.transfers.last.nil?
               transfer = Transfer.new
@@ -203,9 +215,21 @@ class ProfilesController < ApplicationController
               end
             end
           end
+
+          unless current_user.reffered.nil?
+            if current_user.level >= current_user.reffered.level
+              current_user.reffered_by = 0
+            end
+          end
           
+          unless current_user.reffered.nil? || current_user.reffered_by == 0
+            reffered = current_user.reffered
+            reffered.balance += pay*percentproviant
+            reffered.save
+          end
+
           user.save
-  
+          
           FirstJobJob.set(wait: 1000.minutes).perform_later(current_user)
 
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
@@ -472,24 +496,6 @@ class ProfilesController < ApplicationController
         end
       end
     end
-  end
-
-  def percentproviant
-    if current_user.level == 1
-      percentfor = 0.75
-    elsif current_user.level == 2
-      percentfor = 0.70
-    elsif current_user.level == 3
-      percentfor = 0.65
-    elsif current_user.level == 4
-      percentfor = 0.60
-    elsif current_user.level == 5
-      percentfor = 0.55
-    elsif current_user.level == 6
-      percentfor = 0.50
-    end
-
-    return percentfor
   end
 
   def buynumb
