@@ -1,746 +1,431 @@
-    <% if flash[:balance] %>
-      <div class="alert alert-danger" role="alert">
-        <center><%= flash[:balance] %></center>
-      </div>
-    <% end %>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  
-    <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="<%= profiles_path %>" class="site_title"><i class="fa fa-paw"></i> <span><%= current_user.name %></span></a>
+<% if current_user.confirmed? %>
+  <link rel="stylesheet" href="/fonts/gothamPro/stylesheet.css">
+  <% if flash[:balance] %>
+    <div class="alert alert-danger" role="alert">
+      <center><%= flash[:balance] %></center>
+    </div>
+  <% end %>
+    <div class="container">
+      <div class="personal-block">
+        <div class="left-photo-block">
+          <% ava = current_user.avatars.last %>
+          <% if ava.nil? %>
+            <img alt="User Pic" src="images/andrew.png" class="img-circle img-responsive"  style="max-width: 80%; margin-bottom: 10px;">
+          <% else %>
+            <%= image_tag ava.image.url(:thumb), class: "img-circle img-responsive", style: "max-width: 80%; margin-bottom: 10px;" %>
+          <% end %>
+          <%= form_for Avatar.new do |f| %>
+            <input type="file" name="personal-photo" id="avatar">
+            <%= f.label :image %>
+            <%= f.file_field :image %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <!-- <input type="file" name="personal-photo" id="avatar"> -->
+            <!-- <label for="image">загрузить аватар</label> -->
+            <button><%= t 'profile.image' %></button>
+          <% end %>
+        </div>
+        <div class="right-presonal-block">
+          <p class="name-gamer">
+            <%= current_user.name %>
+          </p>
+          <div class="two-column-person">
+            <div class="left-column">
+              <div class="levels-gamer">
+                <span class="left"><%= t 'profile.level' %></span>
+                <span class="right green"><h3><%= current_user.level %></h3></span>
+              </div>
+              <div class="flow-level">
+                <span class="left"><%= t 'profile.status' %></span>
+                <span class="right green"> <h3>
+                  <% if current_user.level == 1 %>
+                    <% proviants = current_user.refferences.where(level: 1).count %>
+                    <% refs = proviants %>
+                   <% elsif current_user.level == 2 %>
+                    <% proviants = current_user.refferences.where(level: 1).count %>
+                    <% reffers = current_user.inviteds.where(level: 1).count %>
+                    <% refs = (proviants + reffers) - 10 %>
+                   <% else %>
+                    <% proviants = current_user.refferences.where(level: current_user.level - 1).count %>
+                    <% reffers = current_user.inviteds.where(level: current_user.level - 1).count %>
+                    <% refs = proviants + reffers %>
+                   <% end %>
+                </h3><h4><%= refs %>/10</h4></span>
+              </div>
+              <div class="free-balance">
+                <span class="left blue" style="color: black; text-decoration: none;"><%= t 'profile.free' %>:</span>
+                <a id="pay_out" href="#" style="color: #30ccf3;"><%= t 'profile.get_money' %></a>
+                <span class="right"><%= current_user.transfers.sum(:summa) %></span>
+              </div>
             </div>
-
-            <div class="clearfix"></div>
-
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <% ava = current_user.avatars.last %>
-                  <% if ava.nil? %>
-                    <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+            <div class="right-column">
+              <div class="working-balance">
+                <span class="left blue" style="text-decoration: none; color: black;"><%= t 'profile.work' %></span>
+                <a id="pay_in" href="#" style="color: #30ccf3;"><%= t 'profile.get_money' %></a>
+                <span class="right">
+                  <% if current_user.balance.nil? %>
+                   0 
                   <% else %>
-                    <img src="<%= image_path ava.image.url(:thumb) %>" alt="..." class="img-circle profile_img">
+                   <%= current_user.balance %>  
                   <% end %>
+                </span>
               </div>
-              <div class="profile_info">
-                <span></span>
-                <p>Ваш id: <b style="color: white;"><%= current_user.id %></b></p> 
+              <div class="e-mail">
+                <span class="left"><strong><%= t 'profile.email' %></strong></span>
+                <span class="right"><%= current_user.email %></span>
               </div>
-            </div>
-            <!-- /menu profile quick info -->
-
-            <br />
-
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>Панель управления</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Главная <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Пополнить</a></li>
-                      <li><a href="index2.html">Почта</a></li>
-                      <li><a href="index3.html">Рефералы</a></li>
-                      <li><a href="index3.html">Контакты</a></li>
-                      <li><a href="index3.html">Поддержка</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Партнеры <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> Частые вопросы <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                    </ul>
-                  </li>
-                  
-                </ul>
-              </div>
-              <!-- <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>          
-                </ul>
-              </div> -->
-
-            </div>
-            <!-- /sidebar menu -->
-
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="<%= edit_user_registration_path %>">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><i class="fa fa-sign-out pull-right"></i> <%= link_to 'Выйти', destroy_user_session_path, method: :delete %></li>
-                  </ul>
-                </li>
-
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Ваш уровень</span>
-              <div class="count"><%= current_user.level %></div>
-              <span class="count_bottom"><i class="green">+1 </i> Сегодня</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Ваш раб.баланс</span>
-              <div class="count" style="font-size: 25px;"><%= current_user.balance %></div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+100</i> сегодня</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Ваш своб.баланс</span>
-              <div class="count green" style="font-size: 12px;"><%= current_user.transfers.sum(:summa) %></div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+50</i> сегодня</span>
-            </div>
-            <% if current_user.level == 1 %>
-              <% proviants = current_user.refferences.where(level: 1).count %>
-              <% refs = proviants %>
-            <% elsif current_user.level == 2 %>
-              <% proviants = current_user.refferences.where(level: 1).count %>
-              <% reffers = current_user.inviteds.where(level: 1).count %>
-              <% refs = (proviants + reffers) - 10 %>
-            <% else %>
-              <% proviants = current_user.refferences.where(level: current_user.level - 1).count %>
-              <% reffers = current_user.inviteds.where(level: current_user.level - 1).count %>
-            <% refs = proviants + reffers %>
-            <% end %>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Под вами</span>
-              <div class="count"><%= refs %>/10</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>+1 </i> Сегодня</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Вы пришли от</span>
-              <div class="count">
-                <% if current_user.invited.nil?  %>
+              <div class="referal-u">
+                <span class="left"><%= t 'profile.come' %></span>
+                <span class="right green">
+                  <% if current_user.invited.nil?  %>
                      ---
-                <% else %>
-                  <%= current_user.invited.name %>
-                <% end %>
+                  <% else %>
+                    <%= current_user.invited.name %>
+                  <% end %>
+                </span>
               </div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> </i> Тут показано от кого вы пришли</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Ваши баллы</span>
-              <div class="count">
-               <% if current_user.ball.nil? %>
-                0
-               <% else %>
-                <%= current_user.ball %>
-               <% end %>
-              </div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+100 </i> Сегодня</span>
             </div>
           </div>
-          <!-- /top tiles -->
 
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-            </div>
-
-          </div>
-          <br />
-
-          <div class="row">
-
-
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>Online Chat</h2>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <center><h1>Чат</h1></center>
-                  
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>Заполненость данных</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <!-- <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul> -->
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <h4>При заполнения профиля вы получаете баллы (
-                    <%= link_to 'Получить баллы', getbonus_path(current_user.id), method: :put %>
-                  )</h4>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>ФИО</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <% if current_user.surname == "" || current_user.surname.nil? %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
-                        <% else %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                        <% end %>
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span>+</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Email</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <% if current_user.email == "" || current_user.email.nil? %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                        <% else %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                        <% end %>
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span>+</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Skype</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <% if current_user.skype == "" || current_user.skype.nil? %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                        <% else %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                        <% end %>
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span>+</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Phone</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <% if current_user.phone == "" || current_user.phone.nil? %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                        <% else %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                        <% end %>
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span>+</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Country</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <% if current_user.country == "" || current_user.country.nil? %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                        <% else %>
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                        <% end %>
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span>+</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel tile fixed_height_320">
-                <div class="x_title">
-                  <h2>Заполненость ТП</h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <!-- <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul> -->
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <h4>На данный момент в разработке</h4>
-                  <hr>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span><%= link_to 'Комната-1', mobline_path %></span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <% stlevel = current_user.level * 10 %>
-                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= stlevel %>%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Комната-2</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Комната-3</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span>Комната-4</span>
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                          <span class="sr-only">60% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-          <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Новости сайта <small>Admin</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <!-- <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul> -->
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="dashboard-widget-content">
-
-                    <ul class="list-unstyled timeline widget">
-                      <% Devnew.all.each do |dev| %>
-                        <li>
-                          <div class="block">
-                            <div class="block_content">
-                              <h2 class="title">
-                                                <a><%= dev.name %></a>
-                                            </h2>
-                              <div class="byline">
-                                <span><%= dev.created_at.strftime("%d %b. %Y") %></span> by <a>Admin</a>
-                              </div>
-                              <p class="excerpt"><%= dev.text %>
-                              </p>
-                            </div>
-                          </div>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col-md-8 col-sm-8 col-xs-12">
-
-
-
-              <div class="row">
-
-              <div class="row">
-
-
-                <!-- Start to do list -->
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Дополнения <small>ваши улучшения</small></h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <!-- <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Settings 1</a>
-                            </li>
-                            <li><a href="#">Settings 2</a>
-                            </li>
-                          </ul> -->
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-
-                      <div class="">
-                        <ul class="to_do">
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Schedule meeting with new client </p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Create email address for new intern</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Copy backups to offsite location</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Create email address for new intern</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Copy backups to offsite location</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End to do list -->
-                
-                <!-- start of weather widget -->
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Лидеры Царя-Горы</h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <!-- <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Settings 1</a>
-                            </li>
-                            <li><a href="#">Settings 2</a>
-                            </li>
-                          </ul> -->
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                    <ul class="list-unstyled top_profiles scroll-view">
-                      <% User.order("level DESC").limit(5).each do |user| %>
-                      <li class="media event">
-                        <a class="pull-left border-aero profile_thumb">
-                          <i class="fa fa-user aero"></i>
-                        </a>
-                        <div class="media-body">
-                          <a class="title" href="#"><%= user.name %></a>
-                          <p><strong><%= user.balance %>. </strong> Work balance </p>
-                          <p> <small><%= user.level %></small>
-                          </p>
-                        </div>
-                      </li>
-                      <% end %>
-                    </ul>
-                  </div>
-                </div>
-
-                <!-- end of weather widget -->
-              </div>
-            </div>
+          <div class="btn-personal-block">
+            <b><%= t 'profile.reffq' %> </b> <input class="ref-link" type="text" name="referal-link" value="<%= new_user_registration_url(invited_by: current_user.id)  %>" style="width: 640px;" />
+            <%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete, class: 'btn btn-danger', style: 'margin-left: 9px; border-radius: 23px; font-size: 20px; margin-bottom: 8px;' %>
+            <center>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                <%= f.submit @button, class: "btn btn-primary", style: 'border-radius: 0px;background-color: #49d793; border-color: #49d793; border-radius: 13px; border-color: #49d793; margin-right: 117px;', data: { confirm: "Стоимость 50P?" } %>
+              <% end %>
+            </center>
           </div>
         </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
       </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="../vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="../vendors/Flot/jquery.flot.js"></script>
-    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="../vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <div class="container">
+      <div class="progress_block">
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 7</strong></span>
+          <span class="level-price">2 533 781,25 руб.</span>
+         <% if current_user.level == 7 %>
+          <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+            <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+            <button style="position: static;">Купить уровень</button>
+            <% end %>
+          <% end %>
+          <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/1</span>
+         <% elsif current_user.level > 7 %>
+           <span class="align-right">10/10</span>
+         <% else %>
+          <span class="align-right">0/1</span> 
+         <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 6</strong></span>
+          <span class="level-price">563 062,50 руб.</span>
+          <% if current_user.level == 6 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 6 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 5</strong></span>
+          <span class="level-price">102 375,00 руб.</span>
+          <% if current_user.level == 5 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 5 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 4</strong></span>
+          <span class="level-price">17 062,50 руб.</span>
+          <% if current_user.level == 4 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 4 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 3</strong></span>
+          <span class="level-price">2 625 руб.</span>
+          <% if current_user.level == 3 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+              <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+           <span class="align-right"><%= current_user.refferences.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 3 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+           <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+        <div class="levels-item">
+          <span><strong><%= t 'profile.level' %> 2</strong></span>
+          <span class="level-price">375 руб.</span>
+          <% if current_user.level == 2 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>  
+              <button style="position: static;">Купить уровень</button>
+             <% end %>
+            <% end %>
+          <span class="align-right"><%= current_user.refferences.where(level: 1).count - 10 + current_user.inviteds.where(level: current_user.level - 1).count %>/10</span>
+          <% elsif current_user.level > 2 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+            <span class="align-right">0/10</span>
+          <% end %>
 
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+        </div>
+        <div class="levels-item active-level">
+          <span><strong><%= t 'profile.level' %> 1</strong></span>
+          <span class="level-price">50 руб.</span>
+          <% if current_user.level == 1 %>
+            <% if @check_button >= current_user.level * 10 || current_user.level == 0 %>
+              <%= form_for current_user, :url => profiles_path(current_user), method: :post  do |f| %>
+                <button style="position: static;">Купить уровень</button>
+              <% end %>
+            <% end %>
+            <span class="align-right"><%= current_user.refferences.where(level: 1).count %>/10</span>
+          <% elsif current_user.level > 1 %>
+           <span class="align-right">10/10</span>
+          <% else %>
+           <span class="align-right">0/10</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="start_price full_width">
+
+      <%= form_for :improveses, url: imroveses_path(current_user.id), method: :post do |f| %>
+          <div class="start_price_block">
+            <div class="start_price_extensions">
+              <strong><%= t 'profile.dops' %></strong>
+              <div class="start_price_extensions_item radio">
+                <div class="icon"><%= t 'profile.radist' %></div>
+                <div class="start_price_extensions_item_price">
+                  50 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <% if current_user.radist == true %>
+                    <a><%= t 'profile.have' %></a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 -3px;'><%= f.check_box :radistbuy, id: "radist" %> </label>
+                  <% end %>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Система уведомлений. Активирует систему оповещения о различных действиях на сайте и профиле пользователя
+                    </span>
+                  </i>
+                </div>
+              </div>
+              <div class="start_price_extensions_item guide">
+                <div class="icon"><%= t 'profile.conductor' %></div>
+                <div class="start_price_extensions_item_price">
+                  500 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <% if current_user.conductor == true %>
+                    <a><%= t 'profile.have' %></a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 0px;'><%= f.check_box :conductorbuy %></label>
+                  <% end %>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Снижает цену уровня на 5%
+                    </span>
+                  </i>
+                </div>
+              </div>
+              <div class="start_price_extensions_item porter">
+                <div class="icon"><%= t 'profile.carrier' %></div>
+                <div class="start_price_extensions_item_price">
+                  200 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <% if current_user.carrier == true %>
+                    <a><%= t 'profile.have' %></a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 -1px;'><%= f.check_box :carrierbuy %></label>
+                  <% end %>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Снижает цену провианта на 15%
+                    </span>
+                  </i>
+                </div>
+              </div>
+              <div class="start_price_extensions_item helicopter">
+                <div class="icon"><%= t 'profile.vert' %></div>
+                <div class="start_price_extensions_item_price">
+                  2000 <%= t 'profile.ruble' %>
+                </div>
+                <div class="start_price_extensions_item_check">
+                  <% if current_user.aerodrome == true %>
+                    <a><%= t 'profile.have' %></a>
+                  <% else %>
+                    <label for="radist" style='margin: 4px 0 0px;'><%= f.check_box :aerodrombuy %></label>
+                  <% end %>
+                  <i class="start_price_extensions_item_help">
+                    ?
+                    <span class="tooltip">
+                      Уменьшает штраф на вывод рабочего баланса с 50% на 30%
+                    </span>
+                  </i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <center>
+              <%= f.submit 'Купить улучшения', class: 'btn btn-default', style: 'width: 266px; height: 52px; background-color: #49d793; color: #fff; border-radius: 40px; font-weight: bold; font-size: 23px;' %>
+          </center>
+        <hr>
+      <% end %>
+          
+          <div class="price-prev">
+            <p><%= t 'profile.prices' %> <span class="green">
+            <% if current_user.level == 1 %>
+              <%= current_user.level %>
+            <% else %>
+              <%= current_user.level - 1 %>
+            <% end %>
+            </span></p>
+            <% if current_user.carrier == true %>            
+              <span><strong> <%= summproviant %> <%= t 'profile.ruble' %>.</strong></span>
+              <% summs = summproviant.to_i %>
+              <% procent = summs - (summs * 0.15) %>
+              <p class="flr"><span class="green">-15%  <%= t 'profile.dops' %></span><%= procent %> <%= t 'profile.ruble' %>.</p>
+            <% else %>
+              <span><strong> <%= summproviant %> <%= t 'profile.ruble' %>.</strong></span>
+              <% summs = summproviant.to_i %>
+              <p class="flr"><span class="green">Стоимость без улучшения</span><%= summs %> <%= t 'profile.ruble' %>.</p>
+            <% end %>
+          </div>
+          <div class="start_price_total">
+            <div class="left_side">
+            <%= form_for :counts, url: buynumb_path(current_user.id), method: :post do |f| %>
+              <p><%= t 'profile.enterp' %></p>
+              <%= f.number_field :size_to_buy, class: 'form-control', id: 'exampleInputPassword1', style: 'font-size: 21px;' %>
+            </div>
+            <div class="right_side">
+              <b class="start_price_total_price">
+              <% if current_user.level == 1 %>
+                 <div style="margin-left: 391px;"> <%= t 'profile.freeprov' %> <b><%= User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count %></b></div>
+              <% else %>
+                <div style="margin-left: 391px;"> <%= t 'profile.freeprov' %> <b><%= User.where(reffered_by: 0, level: current_user.level - 1).count %></b></div>
+              <% end %>
+              </b>
+            </div>
+          </div>
+          <button><%= t 'profile.buy' %></button>
+          <% end %>
+          <!--- Конец формы -->
+      </div>
+    </div>
+
+    <div class="referal-block">
+      <div class="container">
+        <h2><%= t 'profile.activeonl' %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th><%= t 'profile.reffs' %></th>
+              <th><%= t 'profile.level' %></th>
+              <th><%= t 'profile.doxod' %></th>
+            </tr>
+          </thead>
+          <tbody>
+           <% current_user.inviteds.each do |ref| %>
+            <tr>
+              <td><%= ref.name %></td>
+              <td><%= ref.level %></td>
+              <td><%= ref.balance %></td>
+            </tr>
+           <% end %>
+          </tbody>
+        </table>
+        <button>Показать всех</button>
+      </div>
+    </div>
+  <%= render '/feedbacks/form' %>
+  
+    <div class="footer">
+      <div class="container">
+        <span class="arrow_up">⌃</span>
+         <div class="footer_title">Нравится наш сервис? Поделитесь в социальных сетях:</div>
+         <div class="footer_social">
+            <a href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=https://king-mountain.pro/&st.comments=ЦарьГоры" target="_blank" class="footer_social_item"><img src="/images/ic-ok.png" height="39" width="39" alt="OK"></a>
+            <a href="https://www.facebook.com/sharer.php?u=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="/images/ic-fb.png" height="26" width="12" alt="Facebook"></a>
+            <a href="https://vk.com/share.php?url=https://king-mountain.pro/" target="_blank" class="footer_social_item"><img src="/images/ic-vk.png" height="18" width="30" alt="VK"></a>
+            <a href="https://twitter.com/share?url=https://king-mountain.pro/&text=Царь Горы" target="_blank" class="footer_social_item"><img src="/images/ic-tw.png" height="20" width="24" alt="Twitter"></a>
+         </div>
+         <div class="footer_logo">
+            <img src="/images/footer_logo.png" height="45" width="109" alt="Царь горы">
+         </div>
+         <div class="footer_copyright">
+            ООО Игра - “Царь горы” 2017 Все права защищены.
+         </div>
+      </div>
+    </div>
+
+<% else %>
+
+<div class="container">
+    <div class="col-lg-12 col-sm-8">
+      <div class="card hovercard">
+        <div class="card-background">
+          <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
+        </div>
+        <div class="useravatar">
+        <img alt="" src="/img/ava.png">
+        </div>
+        <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
+        </div>
+        </div>
+        <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+        <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
+        <div class="hidden-xs">
+        <h4>На ваш email отправлено письмо подтвердите, что-бы вступить в игру.</h4>
+        </div>
+      </div>
+    </div>
+        <div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
+        </div>
+  <center>
+      <% if flash[:balance] %>
+        <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
+      <% end %>
+      
+    <div class="well">
+        <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>     
+
+        <%= link_to "Отправить письмо повторно", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
+     </div>
+    </center>
+<% end %>
