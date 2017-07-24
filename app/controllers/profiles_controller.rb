@@ -1,5 +1,4 @@
-class ProfilesController < ApplicationController
-	
+class ProfilesController < ApplicationController	
   def percentproviant
     if current_user.level == 1
       percentfor = 0.75
@@ -14,7 +13,6 @@ class ProfilesController < ApplicationController
     elsif current_user.level == 6
       percentfor = 0.50
     end
-
     return percentfor
   end
 
@@ -147,7 +145,7 @@ class ProfilesController < ApplicationController
             end
           end
           
-          FirstJobJob.set(wait: 1300.minutes).perform_later(current_user)
+          FirstJobJob.set(wait: 1000.minutes).perform_later(current_user)
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
           flash[:balance] = 'У вас не достаточно баланса'
@@ -283,221 +281,6 @@ class ProfilesController < ApplicationController
   helper_method :summproviant
   helper_method :levelinfo
 
-  def update 
-    if current_user.level <= 0
-      flash[:balance] = 'Что-бы купить провиантов начните игру'
-      redirect_to profiles_path
-    else
-      if current_user.level == 1
-        check_proviant = current_user.refferences.where(level: 1).count
-      else 
-        check_proviant = current_user.refferences.where(level: current_user.level - 1).count
-      end
-
-      if check_proviant >= current_user.level * 10
-        flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
-        redirect_to :back
-      else
-          start_pay = 25
-          start_coefficient = 7.5
-          pay = 0
-        if current_user.level == 0
-          pay = start_pay
-        elsif current_user.level == 1
-          pay = 187.50
-        else
-          (current_user.level - 1).times do
-            pay = start_pay * start_coefficient
-            start_pay = pay
-            start_coefficient -= 0.5
-          end
-        end
-
-      ref_balance = Transfer.find_by_user_id(current_user.id)
-      
-        if ref_balance.summa >= pay && ref_balance.summa > 0  
-
-          array_proviants = []
-          if current_user.level == 1
-            b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at)
-            b.each do |proviant|
-              if proviant.level == 1
-                array_proviants << proviant
-              end
-            end
-          else
-            b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
-
-            b.each do |proviant|
-              if proviant.level != 0
-                array_proviants << proviant
-              end
-            end
-          end
-
-
-          if array_proviants.first.nil?
-            flash[:balance] = 'Нет свободных провиантов'
-          else
-            b = array_proviants.first
-            b.reffered_by=current_user.id
-            b.save
-
-            ref_balance.summa = ref_balance.summa - pay
-            ref_balance.save
-
-            # user_onl = current_user
-            # user_onl.balance = current_user.balance - pay
-            # user_onl.save
-
-            @system = Systemfinance.last
-            if current_user.reffered.nil?
-              @system.summa += pay * 0.25
-              @system.save
-            else 
-              @system.summa += pay * 0.20
-              @system.save
-            end
-
-            unless current_user.reffered.nil?
-              unless current_user.proviant == true
-                transfer = Transfer.new
-                transfer.user_id = current_user.reffered.id
-                transfer.bank_id = Bank.last.id
-                transfer.summa = pay*0.05
-                transfer.save
-              end
-            end
-          
-            unless current_user.reffered.nil?
-              reffered = current_user.reffered
-              reffered.balance += pay*0.75
-              reffered.save
-            end
-
-            current_user.balance += pay*0.75
-            current_user.save
-          end
-           redirect_to :back
-        else
-          flash[:balance] = 'У вас не достаточно баланса'
-          redirect_to :back
-        end
-      end
-    end
-  end
-
-
-
-
-  def buyallproviant
-    if current_user.level == 1
-      check_proviant = current_user.refferences.where(level: 1).count
-    else 
-      check_proviant = current_user.refferences.where(level: current_user.level - 1).count
-    end
-
-    if current_user.level <= 0
-      flash[:balance] = 'Что-бы купить провиантов начните игру'
-      redirect_to profiles_path
-    else
-      if check_proviant >= current_user.level * 10
-        flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
-        redirect_to profiles_path
-      else
-          start_pay = 50
-          start_coefficient = 100
-          pay = 0
-        if current_user.level == 0
-          pay = start_pay
-        elsif current_user.level == 1
-          pay = 50
-        else
-          (current_user.level - 1).times do
-            pay = start_pay + start_coefficient
-            start_pay = pay
-          end
-        end
-
-      ref_balance = Transfer.find_by_user_id(current_user.id)
-      total_proviant = User.where("level = 1 AND reffered_by = 0 AND created_at > ?", current_user.created_at).count
-
-        total_proviant = total_proviant * pay
-        if ref_balance.nil?  
-          flash[:balance] = 'У вас не достаточно баланса'
-          redirect_to profiles_path
-        elsif ref_balance.summa >= total_proviant && ref_balance.summa > 0
-          array_proviants = []
-          if current_user.level == 1
-            b = User.where("reffered_by = 0 AND created_at > ?", current_user.created_at)
-            b.each do |proviant|
-              if proviant.level == 1
-                array_proviants << proviant
-              end
-            end
-          else
-            b = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
-
-            b.each do |proviant|
-              if proviant.level != 0
-                array_proviants << proviant
-              end
-            end
-          end
-
-          circle = array_proviants.count 
-          if array_proviants.first.nil?
-            flash[:balance] = 'Нет свободных провиантов'
-          else
-            array_proviants.each do |b|
-              b.reffered_by=current_user.id
-              b.save
-
-              ref_balance.summa = ref_balance.summa - pay
-              ref_balance.save
-
-              current_user.balance += pay*0.75
-              current_user.save
-            end
-
-            # user_onl = current_user
-            # user_onl.balance = current_user.balance - pay
-            # user_onl.save
-
-            @system = Systemfinance.last
-            if current_user.reffered.nil?
-              @system.summa += pay * 0.25
-              @system.save
-            else 
-              @system.summa += pay * 0.20
-              @system.save
-            end
-
-            unless current_user.reffered.nil?
-              unless current_user.proviant == true
-                transfer = Transfer.new
-                transfer.user_id = current_user.reffered.id
-                transfer.bank_id = Bank.last.id
-                transfer.summa = pay*0.05
-                transfer.save
-              end
-            end
-          
-            unless current_user.reffered.nil?
-              reffered = current_user.reffered
-              reffered.balance += pay*0.75
-              reffered.save
-            end
-          end
-           redirect_to profiles_path
-        else
-          flash[:balance] = 'У вас не достаточно баланса'
-          redirect_to profiles_path
-        end
-      end
-    end
-  end
-
   def buynumb
     if current_user.level == 1
       check_proviant = current_user.refferences.where(level: 1).count
@@ -607,13 +390,8 @@ class ProfilesController < ApplicationController
                 b.reffered_by=current_user.id
                 b.save
 
-                # if current_user.carrier == true 
-                #   ref_balance.summa = ref_balance.summa - (pay - (pay * 0.15))
-                #   ref_balance.save
-                # else
-                  ref_balance.summa = ref_balance.summa - pay
-                  ref_balance.save
-                # end
+                ref_balance.summa = ref_balance.summa - pay
+                ref_balance.save
 
                 start_pay1 = 50
                 start_coefficient1 = 7.5
@@ -631,10 +409,6 @@ class ProfilesController < ApplicationController
                 current_user.balance += start_pay1*percentproviant
                 current_user.save
               end
-
-              # user_onl = current_user
-              # user_onl.balance = current_user.balance - pay
-              # user_onl.save
 
               @system = Systemfinance.last
               if current_user.reffered.nil?
