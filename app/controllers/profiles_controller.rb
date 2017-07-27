@@ -1,19 +1,12 @@
 class ProfilesController < ApplicationController	
   def percentproviant
-    if current_user.level == 1
-      percentfor = 0.75
-    elsif current_user.level == 2
-      percentfor = 0.70
-    elsif current_user.level == 3
-      percentfor = 0.65
-    elsif current_user.level == 4
-      percentfor = 0.60
-    elsif current_user.level == 5
-      percentfor = 0.55
-    elsif current_user.level == 6
-      percentfor = 0.50
-    end
-    return percentfor
+    quantity = 0.75
+    @percentfor = 0
+      current_user.level.times do 
+        @percentfor = quantity
+        quantity = quantity - 0.05
+      end
+    return @percentfor
   end
 
   def getbonus
