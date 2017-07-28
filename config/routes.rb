@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'freekassa/index'
+
   resources :messages
   resources :chat_rooms
   ActiveAdmin.routes(self)

@@ -370,6 +370,9 @@
         hours = hours.toString().replace(/^-+/i, '');
         minutes = minutes.toString().replace(/^-+/i, '');
         seconds = seconds.toString().replace(/^-+/i, '');
+        if(seconds.length == 1){
+            seconds = '0' + seconds;
+        }
 
         document.getElementById('countdown').innerHTML = days + '*';
         document.getElementById('countdown').innerHTML += hours + '*';
@@ -407,6 +410,7 @@
          <div class="footer_copyright">
             ООО Игра - “Царь горы” 2017 Все права защищены.
          </div>
+        <a href="//www.free-kassa.ru/"><img src="//www.free-kassa.ru/img/fk_btn/17.png"></a>
       </div>
    </div>
 
