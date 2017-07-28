@@ -5,6 +5,6 @@
   <input type='hidden' name='oa' value='<%= @order_amount.to_s %>'>
   <input type='hidden' name='o' value='<%= @order_id %>'>
   <input type='hidden' name='s' value='<%= @sign %>'>
-
+  <input type='hidden' name='us_user_uid' value='<%= current_user.id %>'>
   <input type='submit' name='pay' value='Продолжить платеж' class="btn btn-info">
 </form>
