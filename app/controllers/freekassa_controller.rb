@@ -1,6 +1,6 @@
 class FreekassaController < ApplicationController
   protect_from_forgery except: [:result]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:result]
 
   def new
     @order = Payeer.new
