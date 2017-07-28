@@ -330,14 +330,14 @@
                <% getbalance = Getbalance.sum("total") %>
                <% getmoney = Getmoney.sum("total") %>
                <% obsh = getbalance + getmoney %>
-               <%= obsh %>
+               <%= obsh %> руб.
                <span><%= t 'profile.getmoneys' %></span>
             </div>
          </div>
          <div class="stats_block_item tasks">
             <div class="stats_block_quantity">
-               <%= User.where(level: 9).count %>
-               <span><%= t 'profile.maybewin' %></span>
+               <%= $redis_onlines.keys.count %>
+               <span><%= t 'profile.online_users' %></span>
             </div>
          </div>
          <div class="stats_block_item compl">

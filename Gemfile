@@ -4,7 +4,8 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+gem 'redis'
+gem 'hiredis'
 gem 'devise_lastseenable'
 gem 'dotenv-rails', groups: [:development, :test, :production]
 # gem 'interkassa-rails', github: 'alexkravets/interkassa-rails'

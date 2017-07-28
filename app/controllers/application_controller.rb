@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 	before_filter :capture_referal, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
+  after_filter :set_online
   
   def ensure_signup_complete
     # Убеждаемся, что цикл не бесконечный
@@ -15,7 +16,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def all_who_are_in_touch
+    $redis_onlines.keys.count
+  end
+
   private
+
+  def set_online
+    if !!current_user
+      $redis_onlines.set( current_user.id, nil, ex: 10*60 )
+    end
+  end
 
   def set_locale
     I18n.locale = params[:locale] if params[:locale].present?

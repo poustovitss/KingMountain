@@ -12,7 +12,13 @@ TEMP_EMAIL_PREFIX = 'change@me'
   validates :name, presence: true, length: {maximum: 50}
   # validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
-   after_create :send_admin_mail
+  after_create :send_admin_mail
+
+
+  def online?
+    $redis_onlines.exists( self.id )
+  end
+
   def send_admin_mail
 
     self.send_confirmation_instructions
