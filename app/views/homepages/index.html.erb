@@ -336,18 +336,49 @@
          </div>
          <div class="stats_block_item tasks">
             <div class="stats_block_quantity">
-               <%= $redis_onlines.keys.count %>
+               <%= all_who_are_in_touch %>
                <span><%= t 'profile.online_users' %></span>
             </div>
          </div>
          <div class="stats_block_item compl">
             <div class="stats_block_quantity">
-               2 533 781,25 руб
-               <span><%= t 'profile.bank' %></span>
+              <span>игра идет уже:</span>
+              <div id="countdown"></div>
+              <span>дней часов минут секунд</span>
+
             </div>
          </div>
       </div>
    </div>
+<script>
+    var start = new Date('06/28/2017 10:1 AM');
+
+    var _second = 1000;
+    var _minute = _second * 60;
+    var _hour = _minute * 60;
+    var _day = _hour * 24;
+    var timer;
+
+    function showRemaining() {
+        var now = new Date();
+        var distance = start - now;
+        var days = Math.floor(distance / _day);
+        var hours = Math.floor((distance % _day) / _hour);
+        var minutes = Math.floor((distance % _hour) / _minute);
+        var seconds = Math.floor((distance % _minute) / _second);
+        days = days.toString().replace(/^-+/i, '');
+        hours = hours.toString().replace(/^-+/i, '');
+        minutes = minutes.toString().replace(/^-+/i, '');
+        seconds = seconds.toString().replace(/^-+/i, '');
+
+        document.getElementById('countdown').innerHTML = days + '*';
+        document.getElementById('countdown').innerHTML += hours + '*';
+        document.getElementById('countdown').innerHTML += minutes + '*';
+        document.getElementById('countdown').innerHTML += seconds;
+    }
+
+    timer = setInterval(showRemaining, 1000);
+</script>
    <div class="doubt_block">
       <div class="container">
          <h2 class="top_block_title" style="color: #2fcaf1;"><%= t 'profile.somn' %></h2>
@@ -378,3 +409,4 @@
          </div>
       </div>
    </div>
+
