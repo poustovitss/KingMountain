@@ -1,4 +1,5 @@
 <center>
+
  <%= form_for @order do |f| %>
 
  	<div class="register_form">
@@ -20,5 +21,7 @@
           <input type="submit" value="Оплатить">
     </div>
 <% end %>
+  Оплатить через <br>
+  <%= link_to image_tag('fk-small-form-logo.png'), freekassa_new_path %>
 </center>
 
