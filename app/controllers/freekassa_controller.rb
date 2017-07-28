@@ -3,7 +3,6 @@ class FreekassaController < ApplicationController
   before_action :authenticate_user!, except: [:result]
 
   def index
-
   end
 
   def new
@@ -31,11 +30,6 @@ class FreekassaController < ApplicationController
   end
 
   def result
-    logger.debug params.inspect
-    logger.debug '-*-*-*-*-*-*-*-*-*-*-*-'
-    logger.debug params['SIGN']
-    logger.debug params['AMOUNT']
-
     @merchant_id = '50878'
     @secret_word2 = '9155h78l'
     @params = request.params
@@ -57,7 +51,6 @@ class FreekassaController < ApplicationController
         ref_balance.save
       end
       render :json => '{response: "YES"}'
-      # flash[:balance] = "Вы пополнили счет на сумму #{@order.total}"
     else
       redirect_to freekassa_fail_path
     end
