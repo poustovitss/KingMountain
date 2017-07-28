@@ -1,0 +1,16 @@
+<center>
+  <%= form_for :payeer, url: freekassa_create_path, method: :post do |f| %>
+
+      <div class="register_form">
+        <h1 class="register_form_title">Пополнение через free-kassa.ru</h1>
+
+        <div class="register_form_field">
+          <label for="password">Сумма</label>
+          <%= f.number_field :total %>
+        </div>
+        <div class="register_form_submit">
+          <input type="submit" value="Оплатить">
+        </div>
+  <% end %>
+</center>
+

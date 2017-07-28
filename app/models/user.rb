@@ -89,6 +89,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
   
 
   has_many :transfers, dependent: :destroy
+  has_many :payeers, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :avatars, dependent: :destroy
   #======================================================================

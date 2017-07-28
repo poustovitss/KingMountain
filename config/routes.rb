@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'freekassa/index'
+  get 'freekassa/new' => 'freekassa#new', as: :freekassa_new
+  post 'freekassa/create' => 'freekassa#create', as: :freekassa_create
+  get 'freekassa/confirm/:id' => 'freekassa#confirm', as: :freekassa_confirm
+  get 'freekassa/result' => 'freekassa#result', as: :freekassa_result
+  get 'freekassa/fail' => 'freekassa#fail', as: :freekassa_fail
 
   resources :messages
   resources :chat_rooms
