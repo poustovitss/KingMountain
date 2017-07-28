@@ -27,6 +27,11 @@ class FreekassaController < ApplicationController
   end
 
   def result
+    logger.debug params
+    logger.debug '-*-*-*-*-*-*-*-*-*-*-*-'
+    logger.debug params['SIGN']
+    logger.debug params['AMOUNT']
+
     @merchant_id = '50878'
     @secret_word2 = '9155h78l'
     @params = request.params
