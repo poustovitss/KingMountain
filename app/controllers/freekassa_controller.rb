@@ -27,7 +27,7 @@ class FreekassaController < ApplicationController
   end
 
   def result
-    logger.debug params
+    logger.debug params.inspect
     logger.debug '-*-*-*-*-*-*-*-*-*-*-*-'
     logger.debug params['SIGN']
     logger.debug params['AMOUNT']
