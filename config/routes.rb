@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'freekassa/confirm/:id' => 'freekassa#confirm', as: :freekassa_confirm
   post 'freekassa/result' => 'freekassa#result', as: :freekassa_result
   get 'freekassa/fail' => 'freekassa#fail', as: :freekassa_fail
+  get 'freekassa/index' => 'freekassa#index', as: :freekassa_index
 
   resources :messages
   resources :chat_rooms

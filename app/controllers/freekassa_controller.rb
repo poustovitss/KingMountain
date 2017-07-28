@@ -2,6 +2,10 @@ class FreekassaController < ApplicationController
   protect_from_forgery except: [:result]
   before_action :authenticate_user!, except: [:result]
 
+  def index
+
+  end
+
   def new
     @order = Payeer.new
   end
@@ -44,7 +48,7 @@ class FreekassaController < ApplicationController
     if @sign == @sample_sign
       if ref_balance.nil?
         transfer = Transfer.new
-        transfer.user_id = current_user.id
+        transfer.user_id = params['us_user_uid'].to_i
         transfer.bank_id = Bank.last.id
         transfer.summa = @order.total
         transfer.save
@@ -52,7 +56,8 @@ class FreekassaController < ApplicationController
         ref_balance.summa += @order.total
         ref_balance.save
       end
-      flash[:balance] = "Вы пополнили счет на сумму #{@order.total}"
+      render :json => '{response: "YES"}'
+      # flash[:balance] = "Вы пополнили счет на сумму #{@order.total}"
     else
       redirect_to freekassa_fail_path
     end
