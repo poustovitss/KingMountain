@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_filter :set_online
 
-  helper_method :all_who_are_in_touch
+  # helper_method :all_who_are_in_touch
   
   def ensure_signup_complete
     # Убеждаемся, что цикл не бесконечный
@@ -20,13 +20,13 @@ class ApplicationController < ActionController::Base
 
   # возвращает кол-во онлайн юзеров
   # если 'redis' отключен/не работает, возвращает 15. (с точкой, это типа намек)
-  def all_who_are_in_touch
-    begin
-      $redis_onlines.keys.count
-    rescue Redis::CannotConnectError
-      return '15.'
-    end
-  end
+  # def all_who_are_in_touch
+  #   begin
+  #     $redis_onlines.keys.count
+  #   rescue Redis::CannotConnectError
+  #     return '15.'
+  #   end
+  # end
 
   private
 
