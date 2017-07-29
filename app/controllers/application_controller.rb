@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 	before_filter :capture_referal, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_filter :set_online
+  # before_filter :set_online
 
   helper_method :all_who_are_in_touch
   
