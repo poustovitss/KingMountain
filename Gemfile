@@ -7,8 +7,8 @@ end
 gem 'redis'
 gem 'hiredis'
 gem 'devise_lastseenable'
-#gem 'dotenv-rails', groups: [:development, :test, :production]
-gem 'dotenv'
+gem 'dotenv-rails', groups: [:development, :test, :production]
+# gem 'dotenv'
 # gem 'interkassa-rails', github: 'alexkravets/interkassa-rails'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'paperclip', '~> 4.3'
