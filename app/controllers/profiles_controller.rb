@@ -34,6 +34,10 @@ class ProfilesController < ApplicationController
     redirect_to :back
   end
 
+  def activejob
+    FirstJobJob.set(wait: 1.minutes).perform_later(current_user)
+  end
+
   def index
     if user_signed_in?
       if current_user.level == 1 
@@ -96,6 +100,7 @@ class ProfilesController < ApplicationController
             ref_balance.save
           end
 
+          activejob
           current_user.level += 1
           current_user.save
 
@@ -138,7 +143,6 @@ class ProfilesController < ApplicationController
             end
           end
           
-          FirstJobJob.set(wait: 2.minutes).perform_later(current_user)
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
           flash[:balance] = 'У вас не достаточно баланса'
@@ -180,6 +184,7 @@ class ProfilesController < ApplicationController
             end
           end
             user.level += 1 
+            activejob
 
           @system = Systemfinance.last
           if user.reffered.nil?
@@ -220,8 +225,6 @@ class ProfilesController < ApplicationController
           end
 
           user.save
-          
-          FirstJobJob.set(wait: 2.minutes).perform_later(current_user)
 
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
