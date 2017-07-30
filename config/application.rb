@@ -5,8 +5,8 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-# require 'dotenv'
-# Dotenv.load('onlinepay.env')
+require 'dotenv'
+Dotenv.load('onlinepay.env')
 
 module Kingofmountain
   class Application < Rails::Application
