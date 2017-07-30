@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 require 'dotenv'
-Dotenv.load('/onlinepay.env')
+Dotenv.load('onlinepay.env')
 
 module Kingofmountain
   class Application < Rails::Application
