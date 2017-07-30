@@ -35,7 +35,7 @@ class ProfilesController < ApplicationController
   end
 
   def activejob
-    FirstJobJob.set(wait: 60.minutes).perform_later(current_user)
+    FirstJobJob.set(wait: 1440.minutes).perform_later(current_user)
   end
 
   def index
