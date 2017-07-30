@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+//= require bootstrap
 
 // $(document).ready(function() {
 // document.getElementById("copyButton").addEventListener("click", function() {
