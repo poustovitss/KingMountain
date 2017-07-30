@@ -88,9 +88,6 @@ GEM
       devise
       rails (>= 3.0.4)
     dotenv (2.2.1)
-    dotenv-rails (2.2.1)
-      dotenv (= 2.2.1)
-      railties (>= 3.2, < 5.2)
     erubis (2.7.0)
     execjs (2.7.0)
     faraday (0.11.0)
@@ -280,7 +277,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise_lastseenable
-  dotenv-rails
+  dotenv
   hiredis
   jbuilder (~> 2.5)
   jquery-rails

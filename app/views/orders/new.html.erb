@@ -1,0 +1,27 @@
+<center>
+
+ <%= form_for @order do |f| %>
+
+ 	<div class="register_form">
+      <h1 class="register_form_title">Пополнение</h1>
+		<%= f.hidden_field :ik_co_id, :value => ENV['IK_CO_ID'] %>
+		<%= f.hidden_field :user_id, :value => current_user.id %>
+        <div class="register_form_field">
+          <label for="name">Описание</label>
+          <%= f.text_field :description %>
+          <p></p>
+          <label for="name">Валюта</label>
+          <%= f.collection_select :currency, ['RUB'], :to_s, :to_s, include_blank: false %><br />
+        </div>
+        <div class="register_form_field">
+          <label for="password">Сумма</label>
+          <%= f.number_field :total %>
+        </div>
+        <div class="register_form_submit">
+          <input type="submit" value="Оплатить">
+    </div>
+<% end %>
+  Оплатить через <br>
+  <%= link_to image_tag('fk-small-form-logo.png'), freekassa_new_path %>
+</center>
+
