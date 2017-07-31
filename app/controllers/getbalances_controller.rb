@@ -4,9 +4,7 @@ class GetbalancesController < ApplicationController
   end
 
   def create
-    if current_user.level >= 3  
-      if current_user.balance > 150
-     
+    if current_user.level >= 7
         @getbalance = Getbalance.new(getbalance_params)
 
         user = current_user
@@ -35,14 +33,11 @@ class GetbalancesController < ApplicationController
         else
           flash[:balance] = "У вас не достаточно баланса"
         end
-
-      else
-        flash[:balance] = 'Что-бы вывести средства у вас должно быть не менее 150рублей'
       end
-     else
-      flash[:balance] = 'Вам требуется 3 уровень'
-     end 
-        redirect_to profiles_path
+    else
+      flash[:balance] = 'Вам требуется 7 уровень'
+    end 
+      redirect_to profiles_path
   end
 
   private 
