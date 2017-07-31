@@ -33,7 +33,6 @@ class GetbalancesController < ApplicationController
         else
           flash[:balance] = "У вас не достаточно баланса"
         end
-      end
     else
       flash[:balance] = 'Вам требуется 7 уровень'
     end 
