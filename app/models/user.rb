@@ -5,7 +5,7 @@ TEMP_EMAIL_PREFIX = 'change@me'
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
   devise :database_authenticatable, :registerable, :confirmable,
-    :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+    :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :lastseenable,
     omniauth_providers: [:facebook, :twitter, :vkontakte]
     # :lastseenable
 
@@ -14,10 +14,12 @@ TEMP_EMAIL_PREFIX = 'change@me'
 
   after_create :send_admin_mail
 
+  # онлайн пользователи - User.online.count
+  scope :online, lambda{ where("last_seen > ?", 15.minutes.ago) }
 
-  def online?
-    $redis_onlines.exists( self.id )
-  end
+  # def online?
+  #   $redis_onlines.exists( self.id )
+  # end
 
   def send_admin_mail
 
