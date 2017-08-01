@@ -60,6 +60,60 @@ class ProfilesController < ApplicationController
     
   end
 
+  def inviteds(current_user, pay)
+    unless current_user.invited.nil?
+      if current_user.invited.transfers.last.nil?
+        transfer = Transfer.new
+        transfer.user_id = current_user.invited.id
+        transfer.bank_id = Bank.last.id
+        transfer.summa = 0
+        transfer.summa += pay*0.05
+        transfer.save
+      else
+        transfer = current_user.invited.transfers.last
+        transfer.summa += pay*0.05
+        transfer.save
+      end
+    end
+  end
+
+  def winn(current_user)
+    if current_user.level == 7
+      current_user.level = 0
+      current_user.save
+      
+      current_user.refferences.each do |winner|
+        winner.reffered_by = 0
+        winner.save
+      end
+
+      current_user.inviteds.each do |inv|
+        inv.invited_by = 0
+        inv.save
+      end
+    end
+  end
+
+  def systemfinance(current_user, pay)
+    @system = Systemfinance.last
+      if current_user.reffered.nil?
+        if current_user.conductor == true
+          @system.summa += pay * 0.20
+          @system.save
+        else
+          @system.summa += pay * 0.25
+        end
+      else 
+        if current_user.conductor == true
+          @system.summa += pay * 0.15
+          @system.save
+        else
+          @system.summa += pay * 0.20
+          @system.save
+        end
+      end
+  end
+
   def create 
     user = current_user
     refferences_count = current_user.refferences.count 
@@ -104,44 +158,15 @@ class ProfilesController < ApplicationController
           current_user.level += 1
           current_user.save
 
-          unless current_user.invited.nil?
-            if current_user.invited.transfers.last.nil?
-              transfer = Transfer.new
-              transfer.user_id = current_user.invited.id
-              transfer.bank_id = Bank.last.id
-              transfer.summa = 0
-              transfer.summa += pay*0.05
-              transfer.save
-            else
-              transfer = current_user.invited.transfers.last
-              transfer.summa += pay*0.05
-              transfer.save
-            end
-          end
-
           unless current_user.reffered.nil?
             reffered = current_user.reffered
             reffered.balance += pay*0.75
             reffered.save
           end
+          
+          inviteds(current_user, pay)
 
-          @system = Systemfinance.last
-          if user.reffered.nil?
-            if current_user.conductor == true
-              @system.summa += pay * 0.20
-              @system.save
-            else
-              @system.summa += pay * 0.25
-            end
-          else 
-            if current_user.conductor == true
-              @system.summa += pay * 0.15
-              @system.save
-            else
-              @system.summa += pay * 0.20
-              @system.save
-            end
-          end
+          systemfinance(current_user, pay)
           
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
@@ -151,20 +176,8 @@ class ProfilesController < ApplicationController
     else
       if current_user.balance >= pay
         if check >= user.level * 10 
-          unless current_user.invited.nil?
-             if current_user.invited.transfers.last.nil?
-              transfer = Transfer.new
-              transfer.user_id = current_user.invited.id
-              transfer.bank_id = Bank.last.id
-              transfer.summa = 0
-              transfer.summa += pay*0.05
-              transfer.save
-            else
-              transfer = current_user.invited.transfers.last
-              transfer.summa += pay*0.05
-              transfer.save
-            end
-          end
+
+          inviteds(current_user, pay)
 
           if current_user.level <= 0
             if current_user.conductor == true
@@ -186,23 +199,7 @@ class ProfilesController < ApplicationController
             user.level += 1 
             activejob
 
-          @system = Systemfinance.last
-          if user.reffered.nil?
-            if current_user.conductor == true
-              @system.summa += pay * 0.20
-              @system.save
-            else
-              @system.summa += pay * 0.25
-            end
-          else 
-            if current_user.conductor == true
-              @system.summa += pay * 0.15
-              @system.save
-            else
-              @system.summa += pay * 0.20
-              @system.save
-            end
-          end
+          systemfinance(current_user, pay)
 
           unless current_user.reffered.nil?
             if user.reffered.level <= user.level && user.level > 1 && user.level > 0
@@ -236,20 +233,8 @@ class ProfilesController < ApplicationController
     end
     redirect_to :back
 
-    if current_user.level == 7
-      current_user.level = 0
-      current_user.save
-      
-      current_user.refferences.each do |winner|
-        winner.reffered_by = 0
-        winner.save
-      end
+    winn(current_user)
 
-      current_user.inviteds.each do |inv|
-        inv.invited_by = 0
-        inv.save
-      end
-    end
     users = User.where(radist: true)
     users.each do |u|
       RadistMailer.welcome_email(u).deliver_later
@@ -292,15 +277,17 @@ class ProfilesController < ApplicationController
         flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
         redirect_to profiles_path
       else
-          start_pay = 50
-          start_coefficient = 100
+          start_pay = 25
+          start_coefficient = 25
           pay = 0
         if current_user.level == 0
           pay = start_pay
         elsif current_user.level == 1
-          pay = 50
+          pay = 25
         else
-          pay = (50 + ((current_user.level - 1) * 100))
+          (current_user.level - 1).times do 
+            pay = start_pay += start_coefficient
+          end
         end
 
       ref_balance = Transfer.find_by_user_id(current_user.id)
@@ -366,15 +353,10 @@ class ProfilesController < ApplicationController
             else
               prov = User.where(reffered_by: 0, level: current_user.level - 1).all_except(current_user)
             end
-              # prov.each do |pr|
-              #   if pr.level != 0
-              #     size_for_pr << pr
-              #   end
-              # end
 
             size_for = params[:counts][:size_to_buy]
             size_for = size_for.to_i
-            # circle = array_proviants.count 
+
             if array_proviants.first.nil? 
               flash[:balance] = 'Нет свободных провиантов'
             elsif size_for > prov.count
@@ -389,16 +371,15 @@ class ProfilesController < ApplicationController
                 ref_balance.summa = ref_balance.summa - pay
                 ref_balance.save
 
-                start_pay1 = 50
-                start_coefficient1 = 7.5
+                start_pay1 = 25
+                start_coefficient1 = 25
 
                 if current_user.level == 0
                   pay1 = start_pay1
                 else
                   (current_user.level - 1).times do 
-                    pay1 = start_pay1 * start_coefficient1
+                    pay1 = start_pay1 += start_coefficient1
                     start_pay1 = pay1
-                    start_coefficient1 -= 0.5
                   end
                 end
 
@@ -406,14 +387,7 @@ class ProfilesController < ApplicationController
                 current_user.save
               end
 
-              @system = Systemfinance.last
-              if current_user.reffered.nil?
-                @system.summa += pay * 0.25
-                @system.save
-              else 
-                @system.summa += pay * 0.20
-                @system.save
-              end
+              systemfinance(current_user, pay)
 
               unless current_user.reffered.nil?
                 unless current_user.proviant == true
