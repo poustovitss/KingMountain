@@ -371,15 +371,16 @@ class ProfilesController < ApplicationController
                 ref_balance.summa = ref_balance.summa - pay
                 ref_balance.save
 
-                start_pay1 = 25
-                start_coefficient1 = 25
+                start_pay1 = 50
+                start_coefficient1 = 7.5
 
                 if current_user.level == 0
                   pay1 = start_pay1
                 else
                   (current_user.level - 1).times do 
-                    pay1 = start_pay1 += start_coefficient1
+                    pay1 = start_pay1 * start_coefficient1
                     start_pay1 = pay1
+                    start_coefficient1 -= 0.5
                   end
                 end
 
