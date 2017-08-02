@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 	before_filter :capture_referal, if: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_filter :set_online
+  before_filter :online_points
 
   # helper_method :all_who_are_in_touch
   
@@ -41,6 +41,33 @@ class ApplicationController < ActionController::Base
       # p e.message
     end
 
+  end
+
+  def online_points
+    if current_user
+      session['online_watcher'] ||= 0
+      session['last_time_points'] ||= current_user.current_sign_in_at.to_f
+      if current_user.last_seen.to_i < (Time.now - 5.minutes).to_i
+        current_user.last_seen = DateTime.now
+        current_user.save!
+      end
+      if (DateTime.now - 10.minutes).to_f <= session['last_time_points']
+        seconds = DateTime.now.to_f - session['last_time_points']
+        session['online_watcher'] += seconds/60
+        add_points
+      end
+      session['last_time_points'] = DateTime.now.to_f
+    end
+  end
+
+  def add_points
+    if current_user.ball.nil?
+      current_user.ball = session['online_watcher']/10
+    else
+      current_user.ball += session['online_watcher']/10
+    end
+    session['online_watcher'] = 0
+    current_user.save
   end
 
   def set_locale
