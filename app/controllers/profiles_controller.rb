@@ -9,6 +9,9 @@ class ProfilesController < ApplicationController
     return @percentfor
   end
 
+  def faq
+  end
+
   def getbonus
     unless current_user.skype.nil? && current_user.surname.nil? && current_user.phone.nil? && current_user.country.nil?
      unless current_user.skype == "" && current_user.surname == "" && current_user.phone == "" && current_user.country = ""

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
     get 'service' => 'homepages#service', as: 'service'
     get 'contact' => 'homepages#contact', as: 'contact'
+    get 'faq' => 'profiles#faq', as: 'faq'
+
 
     get 'mobline' => 'profiles#mobline', as: 'mobline'
 
