@@ -52,6 +52,20 @@ ActiveRecord::Schema.define(version: 20170803165513) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "common_chat_messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_common_chat_messages_on_user_id"
+  end
+
   create_table "devnews", force: :cascade do |t|
     t.string   "name"
     t.text     "text"

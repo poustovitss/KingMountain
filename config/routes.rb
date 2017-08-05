@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :chats
+  resources :common_chat_messages, only: [:create]
   get 'freekassa/new' => 'freekassa#new', as: :freekassa_new
   post 'freekassa/create' => 'freekassa#create', as: :freekassa_create
   get 'freekassa/confirm/:id' => 'freekassa#confirm', as: :freekassa_confirm

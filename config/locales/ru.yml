@@ -113,3 +113,206 @@ ru:
     contactas: 'Связаться с нами'
     me: 'Нравится наш сервис? Поделитесь в социальных сетях:'
     online_users: 'онлайн пользователей'
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Валидация грохнулась: %{errors}'
+  date:
+      abbr_day_names:
+      - Вск
+      - Пон
+      - Втр
+      - Срд
+      - Чтв
+      - Птн
+      - Суб
+      abbr_month_names:
+      -
+      - Янв
+      - Феб
+      - Мар
+      - Апр
+      - Май
+      - Июнь
+      - Июль
+      - Авг
+      - Сен
+      - Окт
+      - Ноя
+      - Дек
+      day_names:
+      - Воскресенье
+      - Понедельник
+      - Вторник
+      - Среда
+      - Четверг
+      - Суббота
+      - Saturday
+      formats:
+        default: "%d-%m-%Y"
+        long: "%d %B, %Y"
+        short: "%d %b"
+      month_names:
+      -
+      - Январь
+      - Февраль
+      - Март
+      - Апрель
+      - Май
+      - Июнь
+      - Июль
+      - Август
+      - Сентябрь
+      - Октябрь
+      - Ноябрь
+      - Декабрь
+      order:
+      - :day
+      - :month
+      - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: около 1-го часа
+        other: около %{count}-х часов
+      about_x_months:
+        one: около 1 месяца
+        other: около %{count}-х месяцев
+      about_x_years:
+        one: около 1 года
+        other: около %{count}-х лет
+      almost_x_years:
+        one: почти 1 год
+        other: почти %{count} лет
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: менее чем минута
+        other: менее чем %{count} минут
+      less_than_x_seconds:
+        one: менее чем 1 секунда
+        other: менее чем %{count} секунд
+      over_x_years:
+        one: более одного года
+        other: более %{count} лет
+      x_days:
+        one: 1 день
+        other: "%{count} дней"
+      x_minutes:
+        one: 1 минута
+        other: "%{count} минут"
+      x_months:
+        one: 1 месяц
+        other: "%{count} месяца"
+      x_years:
+        one: 1 год
+        other: "%{count} лет"
+      x_seconds:
+        one: 1 секунд
+        other: "%{count} секунды"
+    prompts:
+      day: День
+      hour: Час
+      minute: Минута
+      month: Месяц
+      second: Секунды
+      year: Год
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: должны быть приняты
+      blank: не может быть пустым
+      confirmation: Не соответствует %{attribute}
+      empty: Не может быть пустым
+      equal_to: Должно быть равно %{count}
+      even: Должен быть ровным
+      exclusion: Зарезервировано
+      greater_than: Должно быть больше, чем %{count}
+      greater_than_or_equal_to: Должно быть больше или равно %{count}
+      inclusion: Не входит в список
+      invalid: является недействительным
+      less_than: Должно быть меньше %{count}
+      less_than_or_equal_to: Должно быть меньше или равно %{count}
+      not_a_number: Не число
+      not_an_integer: Должен быть целым числом
+      odd: Должно быть нечетным
+      taken: уже был занято
+      too_long:
+        one: Слишком длинная (maximum is 1 character)
+        other: Слишком длинная (maximum is %{count} characters)
+      too_short:
+        one: слишком короткий (minimum is 1 character)
+        other: слишком короткий (minimum is %{count} characters)
+      wrong_length:
+        one: Неправильная длина (should be 1 character)
+        other: Неправильная длина (should be %{count} characters)
+    template:
+      body: 'Были проблемы со следующими полями:'
+      header:
+        one: 1 ошибка запретила сохранение этой {model}
+        other: "%{count} ошибок запретили сохранение этой {model}"
+  helpers:
+    select:
+      prompt: Пожалуйста выберите
+    submit:
+      create: Создать %{model}
+      submit: Сохранить %{model}
+      update: Обновить %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: ложь
+        strip_insignificant_zeros: ложь
+        unit: "$"
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: ложь
+      strip_insignificant_zeros: ложь
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Миллиард
+          million: Миллион
+          quadrillion: Квадрильон
+          thousand: Тысяча
+          trillion: Триллион
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: правда
+        strip_insignificant_zeros: правда
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Байт
+            other: Байтов
+          gb: Гб
+          kb: Кб
+          mb: Мб
+          tb: Тб
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", и "
+      two_words_connector: " и "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%d %B, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm

@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-
+// console.log(window.location.pathname)
 // $(document).ready(function() {
 // document.getElementById("copyButton").addEventListener("click", function() {
 //     copyToClipboard(document.getElementById("copyTarget"));

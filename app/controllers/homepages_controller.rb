@@ -1,4 +1,6 @@
 class HomepagesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :service, :contact]
+
   def index
   end
 
