@@ -36,7 +36,7 @@ class GetbalancesController < ApplicationController
     else
       flash[:balance] = 'Вам требуется 7 уровень'
     end 
-      redirect_to profiles_path
+      redirect_to :back
   end
 
   private 

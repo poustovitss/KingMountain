@@ -1,8 +1,8 @@
-class ProfilesController < ApplicationController	
+class ProfilesController < ApplicationController
   def percentproviant
     quantity = 0.75
     @percentfor = 0
-      current_user.level.times do 
+      current_user.level.times do
         @percentfor = quantity
         quantity = quantity - 0.05
       end
@@ -10,13 +10,16 @@ class ProfilesController < ApplicationController
   end
 
   def faq
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 
   def getbonus
     unless current_user.skype.nil? && current_user.surname.nil? && current_user.phone.nil? && current_user.country.nil?
      unless current_user.skype == "" && current_user.surname == "" && current_user.phone == "" && current_user.country = ""
       if current_user.bonus == false
-        if current_user.ball.nil? 
+        if current_user.ball.nil?
           current_user.ball = 0
           current_user.ball += 100
           current_user.save
@@ -28,11 +31,11 @@ class ProfilesController < ApplicationController
       else
         flash[:balance] = "Вы уже активировали бонус"
       end
-     else 
-      flash[:balance] = "Вы не заполнили поля" 
+     else
+      flash[:balance] = "Вы не заполнили поля"
      end
-    else 
-      flash[:balance] = "Вы не заполнили поля"  
+    else
+      flash[:balance] = "Вы не заполнили поля"
     end
     redirect_to :back
   end
@@ -43,24 +46,26 @@ class ProfilesController < ApplicationController
 
   def index
     if user_signed_in?
-      if current_user.level == 1 
+      if current_user.level == 1
         @check_button = current_user.refferences.where(level: 1).count
       else
         @check_button = current_user.refferences.where(level: current_user.level - 1).count
       end
-    
+
        if current_user.level == 0 || current_user.level.nil?
          @button = I18n.t('profile.start')
        else
         @button = I18n.t('profile.next')
        end
     else
-     redirect_to new_user_session_path 
+     redirect_to new_user_session_path
     end
   end
 
   def mobline
-    
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 
   def inviteds(current_user, pay)
@@ -84,7 +89,6 @@ class ProfilesController < ApplicationController
     if current_user.level == 7
       current_user.level = 0
       current_user.save
-      
       current_user.refferences.each do |winner|
         winner.reffered_by = 0
         winner.save
@@ -106,7 +110,7 @@ class ProfilesController < ApplicationController
         else
           @system.summa += pay * 0.25
         end
-      else 
+      else
         if current_user.conductor == true
           @system.summa += pay * 0.15
           @system.save
@@ -117,10 +121,9 @@ class ProfilesController < ApplicationController
       end
   end
 
-  def create 
+  def create
     user = current_user
-    refferences_count = current_user.refferences.count 
-    
+    refferences_count = current_user.refferences.count
     start_pay = 50
     start_coefficient = 7.5
 
@@ -129,22 +132,21 @@ class ProfilesController < ApplicationController
     if user.level == 0
       pay = start_pay
     else
-      current_user.level.times do 
+      current_user.level.times do
         pay = start_pay * start_coefficient
         start_pay = pay
         start_coefficient -= 0.5
       end
     end
 
-    if current_user.level == 1 
+    if current_user.level == 1
       check = current_user.refferences.where(level: 1).count + current_user.inviteds.where(level: 1).count
     else
       check = current_user.refferences.where(level: current_user.level - 1).count + current_user.inviteds.where(level: current_user.level - 1).count
     end
 
     ref_balance = Transfer.find_by_user_id(current_user.id)
-    
-    if current_user.level <= 0 
+    if current_user.level <= 0
       if ref_balance.nil?
         flash[:balance] = 'У вас не достаточно баланса'
       else
@@ -166,11 +168,10 @@ class ProfilesController < ApplicationController
             reffered.balance += pay*0.75
             reffered.save
           end
-          
+
           inviteds(current_user, pay)
 
           systemfinance(current_user, pay)
-          
           flash[:balance] = "Вы поднялись на #{current_user.level} уровень"
         else
           flash[:balance] = 'У вас не достаточно баланса'
@@ -274,11 +275,11 @@ class ProfilesController < ApplicationController
 
     if current_user.level <= 0
       flash[:balance] = 'Что-бы купить провиантов начните игру'
-      redirect_to profiles_path
+      redirect_to :back
     else
       if check_proviant >= current_user.level * 10
         flash[:balance] = 'У вас уже есть достаточно количество пригласивших'
-        redirect_to profiles_path
+        redirect_to :back
       else
           start_pay = 25
           start_coefficient = 25
@@ -305,10 +306,10 @@ class ProfilesController < ApplicationController
         total_proviant = summa_for_prov.to_i * pay
         if ref_balance.nil?
           flash[:balance] = 'У вас не достаточно баланса'
-          redirect_to profiles_path
+          redirect_to :back
         elsif ref_balance.summa < pay
           flash[:balance] = 'У вас не достаточно баланса'
-          redirect_to profiles_path
+          redirect_to :back
         elsif ref_balance.summa >= total_proviant && ref_balance.summa > 0
 
           check_the_nil = params[:counts][:size_to_buy]
@@ -405,7 +406,7 @@ class ProfilesController < ApplicationController
             
               flash[:balance] = "Вы купили #{size_for} провианта/провиантов" 
             end
-             redirect_to profiles_path
+             redirect_to :back
           end
         end
       end

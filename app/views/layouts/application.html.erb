@@ -37,50 +37,6 @@
         <%= render '/getbalances/form' %>
       <% end %>
 
-    <div class="header">
-      <div class="container" style="padding-right: 0px;">
-         <div class="logo">
-            <a href="<%= root_path %>"><img src="<%= image_url('logoen.png')%>" height="47" width="213" alt="Царь горы"></a>
-         </div>
-         <div class="header_menu_wrap">
-         <nav class="header_menu">
-            <ul>
-               <li><%= link_to '', devnews_index_url, class: 'glyphicon glyphicon-bell' %></li>
-               <li><a href="<%= root_path %>"><%= t 'navbar.h' %></a></li>
-               <li><a href="<%= service_path %>"><%= t 'navbar.s' %></a></li>
-               <li><a href="<%= contact_path %>"><%= t 'navbar.c' %></a></li>
-               <% if user_signed_in? && current_user.admin? %>
-                <li><a href="<%= admin_root_path %>"><%= t 'navbar.admin' %></a></li>
-               <% end %>
-               <% if user_signed_in? %>
-                <li><a href="<%= profiles_path %>"><%= t 'navbar.profile' %></a></li>
-                <li><%= link_to I18n.t('profile.sign_out'), destroy_user_session_path, method: :delete %></li>
-                <li><button style="background-color: rgba(255, 255, 255, 0); border-radius: 20px; border-color: #fff;"><a href="<%= new_order_path %>" class="sign_in"><%= t 'navbar.money' %></a></button></li>
-                <!-- <li><a data-toggle="modal" data-target=".bs-example-modal-sm">Вывести</a></li> -->
-              <% end %>
-                <li style='margin-left: 10px;'>
-                  <%= link_to_unless_current image_tag("engl.png"), locale: "en" %>
-                  <%= link_to_unless_current image_tag("russia.png"), locale: "ru" %> 
-                </li>
-            </ul>
-         </nav>
-         <% unless user_signed_in? %>
-           <div class="header_sign">
-              <a href="<%= new_user_registration_path %>" class="sign_up" style="margin-top: 0;"><%= t 'navbar.register' %></a>
-              <a href="<%= new_user_session_path %>" class="sign_in"><%= t 'navbar.sign' %></a>
-           </div>
-         <% end %>
-         <div>
-         </div>
-         </div>
-         <div class="mobile_btn">
-            <span></span>
-            <span></span>
-            <span></span>
-         </div>
-         <div style="clear: both;"></div>
-      </div>
-   </div>
 
 <!-- BEGIN JIVOSITE CODE {literal} -->
 <script type='text/javascript'>

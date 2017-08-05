@@ -25,7 +25,7 @@ class GetmoneysController < ApplicationController
     else
       flash[:balance] = 'У вас не достаточно средств'
     end
-    redirect_to profiles_path
+    redirect_to back
   end
 
   private 

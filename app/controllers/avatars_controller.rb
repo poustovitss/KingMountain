@@ -11,13 +11,14 @@ class AvatarsController < ApplicationController
     if user_signed_in?
       @avatar = Avatar.new(avatar_params)
       @avatar.save
-      redirect_to profiles_path
-    else 
+      flash[:balance] = "Вы изменили аватарку"
+      redirect_to :back
+    else
       redirect_to new_user_registration_path, notice: "Вы не вошли на сайт"
     end
   end
 
-  private 
+  private
    def avatar_params
     params.require(:avatar).permit(:image, :user_id)
    end

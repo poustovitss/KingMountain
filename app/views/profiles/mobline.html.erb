@@ -1,9 +1,11 @@
-<% if flash[:balance] %>
+<% if current_user.confirmed? %>
+    <% if flash[:balance] %>
       <div class="alert alert-danger" role="alert">
         <center><%= flash[:balance] %></center>
       </div>
     <% end %>
 
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -16,18 +18,11 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  
-    <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
 
   <body class="nav-md">
     <div class="container body">
@@ -35,7 +30,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<%= profiles_path %>" class="site_title"><i class="fa fa-paw"></i> <span><%= current_user.name %></span></a>
+              <a href="<%= profiles_path %>" class="site_title"><i class="fa fa-paw"></i> <span>King of mountain</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -43,16 +38,11 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <% ava = current_user.avatars.last %>
-                  <% if ava.nil? %>
-                    <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-                  <% else %>
-                    <img src="<%= image_path ava.image.url(:thumb) %>" alt="..." class="img-circle profile_img">
-                  <% end %>
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span></span>
-                <p>Ваш id: <b style="color: white;"><%= current_user.id %></b></p> 
+                <span>Welcome,</span>
+                <h2><%= current_user.name %></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -66,10 +56,8 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Главная <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Пополнить</a></li>
-                      <li><a href="index2.html">Почта</a></li>
-                      <li><a href="index3.html">Рефералы</a></li>
-                      <li><a href="index3.html">Контакты</a></li>
+                      <li><a href="<%= new_order_path %>">Пополнить</a></li>
+                      <li><a href="<%= mobline_path %>">Профиль</a></li>
                       <li><a href="index3.html">Поддержка</a></li>
                     </ul>
                   </li>
@@ -78,29 +66,13 @@
                       <li><a href="form.html">General Form</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Частые вопросы <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-desktop"></i> FAQ 'Царь Горы' <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
+                      <li><a href="<%= faq_path %>">Часто задаваемые вопросы</a></li>
                     </ul>
                   </li>
-                  
                 </ul>
               </div>
-              <!-- <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>          
-                </ul>
-              </div> -->
-
             </div>
             <!-- /sidebar menu -->
 
@@ -134,19 +106,19 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><%= current_user.name %>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="<%= mobline_path %>"> Profile</a></li>
                     <li>
-                      <a href="<%= edit_user_registration_path %>">
+                      <a href="<%= edit_user_registration_path(current_user) %>">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
                     </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><i class="fa fa-sign-out pull-right"></i> <%= link_to 'Выйти', destroy_user_session_path, method: :delete %></li>
+                    <li><a href="<%= faq_path %>">Help</a></li>
+                    <li><%= link_to 'Выйти', destroy_user_session_path, method: :delete %></li>
                   </ul>
                 </li>
 
@@ -222,85 +194,168 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Ваш уровень</span>
-              <div class="count"><%= current_user.level %></div>
-              <span class="count_bottom"><i class="green">+1 </i> Сегодня</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> Ваш раб.баланс</span>
-              <div class="count" style="font-size: 25px;"><%= current_user.balance %></div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+100</i> сегодня</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Ваш своб.баланс</span>
-              <div class="count green" style="font-size: 12px;"><%= current_user.transfers.sum(:summa) %></div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+50</i> сегодня</span>
-            </div>
-            <% if current_user.level == 1 %>
-              <% proviants = current_user.refferences.where(level: 1).count %>
-              <% refs = proviants %>
-            <% elsif current_user.level == 2 %>
-              <% proviants = current_user.refferences.where(level: 1).count %>
-              <% reffers = current_user.inviteds.where(level: 1).count %>
-              <% refs = (proviants + reffers) - 10 %>
-            <% else %>
-              <% proviants = current_user.refferences.where(level: current_user.level - 1).count %>
-              <% reffers = current_user.inviteds.where(level: current_user.level - 1).count %>
-            <% refs = proviants + reffers %>
-            <% end %>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Под вами</span>
-              <div class="count"><%= refs %>/10</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>+1 </i> Сегодня</span>
-            </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Вы пришли от</span>
-              <div class="count">
-                <% if current_user.invited.nil?  %>
-                     ---
-                <% else %>
-                  <%= current_user.invited.name %>
-                <% end %>
+          <div class="">
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Ваш профиль <small>Инофрмация</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                      <div class="profile_img">
+                        <div id="crop-avatar">
+                          <!-- Current avatar -->
+                          <% ava = current_user.avatars.last %>
+                            <% if ava.nil? %>
+                              <img alt="User Pic" src="images/andrew.png" class="img-circle img-responsive"  style="max-width: 80%; margin-bottom: 10px;">
+                            <% else %>
+                              <%= image_tag ava.image.url(:thumb), class: "img-circle img-responsive", style: "max-width: 80%; margin-bottom: 10px;" %>
+                            <% end %>
+                        </div>
+                      </div>
+                      <h3><%= current_user.name %></h3>
+
+                      <ul class="list-unstyled user_data">
+                        <li><i class="fa fa-money"></i>
+                        <a id="pay_out" href="#">Вывести свободный баланс</a>
+                        </li>
+
+                        <li>
+                          <i class="fa fa-money"></i>
+                          <a id="pay_in" href="#">Вывести рабочего баланса</a>
+                        </li>
+
+                        <li class="m-top-xs">
+                          <i class="fa fa-rocket"></i>
+                          <a href="http://www.kimlabs.com/profile/" target="_blank">Купить уровень</a>
+                        </li>
+                      </ul>
+                      <hr>
+                      <%= form_for Avatar.new do |f| %>
+                        <center><%= f.label :Изменить_картинку %></center>
+                        <%= f.file_field :image %>
+                        <%= f.hidden_field :user_id, :value => current_user.id %>
+                        <!-- <input type="file" name="personal-photo" id="avatar"> -->
+                        <!-- <label for="image">загрузить аватар</label> -->
+                        <p></p>
+                        <center><button class="btn btn-success"><i class="fa fa-refresh"></i> Изменить</button></center>
+                      <% end %>
+                      <br />
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <span>ЗАПОЛНИ СВОЙ ПРОФИЛЬ И ПОЛУЧИ БОНУС ==> <b><%= link_to 'Получить баллы', getbonus_path(current_user.id), method: :put %></b>
+                  </span>
+                      <a class="flr" href="<%= edit_user_registration_path(current_user) %>">Заполнить</a>
+                      <hr class="profile_hr">
+                      <div class="profile_det">
+                        <div>
+                          <p>Страна</p>
+                          <a><%= current_user.country %></a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Ваши провианты</p>
+                          <a>
+                            <% if current_user.level == 1 %>
+                              <% proviants = current_user.refferences.where(level: 1).count %>
+                              <% refs = proviants %>
+                            <% elsif current_user.level == 2 %>
+                              <% proviants = current_user.refferences.where(level: 1).count %>
+                              <% reffers = current_user.inviteds.where(level: 1).count %>
+                              <% refs = (proviants + reffers) - 10 %>
+                            <% else %>
+                              <% proviants = current_user.refferences.where(level: current_user.level - 1).count %>
+                              <% reffers = current_user.inviteds.where(level: current_user.level - 1).count %>
+                              <% refs = proviants + reffers %>
+                           <% end %>
+                           <%= refs %>/10
+                          </a>
+                        </div>                        <hr class="profile_hr">
+                        <div>
+                          <p><strong>Email</strong></p>
+                          <a><%= current_user.email %></a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Дата регистрации</p>
+                          <a><%= current_user.created_at.strftime("%d %b. %Y") %></a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Ваш свободный баланс</p>
+                          <a><%= current_user.transfers.sum(:summa) %></a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Ваш рабочий баланс</p>
+                          <a>
+                           <% if current_user.balance.nil? %>
+                              0
+                            <% else %>
+                              <%= current_user.balance %>
+                            <% end %>
+                          </a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Уровень</p>
+                          <a><%= current_user.level %></a>
+                        </div>
+                        <hr class="profile_hr">
+                      </div>
+
+                      <br><br>
+                      <span>КОНТАКТЫ</span>
+                      <hr class="profile_hr">
+                      <div class="profile_det">
+                        <div>
+                          <p>Моб. телефон</p>
+                          <a><%= current_user.phone %></a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Имя</p>
+                          <a><%= current_user.name %></a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Фамилия</p>
+                          <a><%= current_user.surname %></a>
+                        </div>
+                        <hr class="profile_hr">
+                        <div>
+                          <p>Skype</p>
+                          <a><%= current_user.skype %></a>
+                        </div>
+                        <hr class="profile_hr">
+                      </div>
+                  </div>
+                </div>
               </div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> </i> Тут показано от кого вы пришли</span>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Ваши баллы</span>
-              <div class="count">
-               <% if current_user.ball.nil? %>
-                0
-               <% else %>
-                <%= current_user.ball %>
-               <% end %>
-              </div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>+100 </i> Сегодня</span>
-            </div>
-          </div>
-          <!-- /top tiles -->
-
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-            </div>
-
-          </div>
-          <br />
-
-          <div class="row">
-            
-
-
-            <!-- <div class="col-md-4 col-sm-4 col-xs-12">
-              
-            </div> -->
-
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-4 col-sm-6 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Тарифный план Моблайн-50 <small>geo-presentation</small></h2>
+                      <h2>Купить провианта</h2>
                       <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -318,139 +373,85 @@
                       </ul>
                       <div class="clearfix"></div>
                     </div>
-                    <div class="x_content">
-                      <div class="dashboard-widget-content">
-                        <div class="col-md-4 hidden-small">
-                          <h2 class="line_30">125.7k Views from 60 countries</h2>
-
-                          <table class="countries_list">
-                            <tbody>
-                              <tr>
-                                <td>United States</td>
-                                <td class="fs15 fw700 text-right">33%</td>
-                              </tr>
-                              <tr>
-                                <td>France</td>
-                                <td class="fs15 fw700 text-right">27%</td>
-                              </tr>
-                              <tr>
-                                <td>Germany</td>
-                                <td class="fs15 fw700 text-right">16%</td>
-                              </tr>
-                              <tr>
-                                <td>Spain</td>
-                                <td class="fs15 fw700 text-right">11%</td>
-                              </tr>
-                              <tr>
-                                <td>Britain</td>
-                                <td class="fs15 fw700 text-right">10%</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                    <div class="x_content minh">
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                          <p>Поделитесь в соц.сетях</p>
+                          <div class="soc_link">
+                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-odnoklassniki" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                          </div>
+                          <div class="referal_link">
+                            <p>Купить провиантов</p>
+                            <%= form_for :counts, url: buynumb_path(current_user.id), method: :post do |f| %>
+                            <div>
+                              <%= f.number_field :size_to_buy, class: 'form-control', id: 'exampleInputPassword1', style: 'font-size: 21px;' %>
+                              <button class="btn-clipboard btn-success" data-clipboard-target="#copy_link">Купить</button>
+                            </div>
+                            <% end %>
+                          </div>
+                          <!-- <button class="btn-success btn_for_friend">Поделись с другом</button> -->
+                          <div class="referal_statistic">
+                            <p class="flr"></p>
+                            <div style="clear: both;"></div>
+                            <p class="fll"></p>
+                          </div>
                         </div>
-                        <div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>
                       </div>
                     </div>
+                    <div class="clearfix"></div>
                   </div>
                 </div>
-
-
-            <div class="col-md-8 col-sm-8 col-xs-12">
-
-
-
-              <div class="row">
-
-              <div class="row">
-
-
-                <!-- Start to do list -->
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Дополнения <small>ваши улучшения</small></h2>
-                      <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                          <!-- <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Settings 1</a>
-                            </li>
-                            <li><a href="#">Settings 2</a>
-                            </li>
-                          </ul> -->
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-
-                      <div class="">
-                        <ul class="to_do">
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Schedule meeting with new client </p>
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-bars"></i> FAQ <small>Узнавайте все новости сайта</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
                           </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Create email address for new intern</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Copy backups to offsite location</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Create email address for new intern</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                          </li>
-                          <li>
-                            <p>
-                              <input type="checkbox" class="flat"> Copy backups to offsite location</p>
+                          <li><a href="#">Settings 2</a>
                           </li>
                         </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                      <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <% Faq.all.each do |f| %>
+                          <li role="presentation" class=""><a href="#tab_content<%= f.id %>" role="tab" id="profile-tab<%= f.id %>" data-toggle="tab" aria-expanded="false"><%= f.name %></a>
+                          </li>
+                        <% end %>
+                      </ul>
+                      <div id="myTabContent" class="tab-content">
+                        <% Faq.all.each do |f| %>
+                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content<%= f.id %>" aria-labelledby="home-tab">
+                            <p><%= f.desc %></p>
+                          </div>
+                        <% end %>
                       </div>
                     </div>
+
                   </div>
                 </div>
-                <!-- End to do list -->
-                
-                <!-- start of weather widget -->
-                
-
-                <!-- end of weather widget -->
               </div>
-            </div>
+
           </div>
         </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
       </div>
     </div>
 
@@ -462,35 +463,54 @@
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- morris.js -->
+    <script src="../vendors/raphael/raphael.min.js"></script>
+    <script src="../vendors/morris.js/morris.min.js"></script>
     <!-- bootstrap-progressbar -->
     <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="../vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="../vendors/Flot/jquery.flot.js"></script>
-    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="../vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
+    
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+
+  </body>
+</html>
+
+<% else %>
+
+  <div class="container">
+    <div class="col-lg-12 col-sm-8">
+      <div class="card hovercard">
+        <div class="card-background">
+          <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
+        </div>
+        <div class="useravatar">
+        <img alt="" src="/img/ava.png">
+        </div>
+        <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
+        </div>
+        </div>
+        <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+        <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab">
+        <div class="hidden-xs">
+        <h4>На ваш email отправлено письмо подтвердите, что-бы вступить в игру.</h4>
+        </div>
+      </div>
+    </div>
+        <div class="panel panel-default" style="border-color: rgba(221, 221, 221, 0); background-color: rgba(255, 255, 255, 0.52);">
+        </div>
+  <center>
+      <% if flash[:balance] %>
+        <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
+      <% end %>
+      
+    <div class="well">
+        <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>     
+
+        <%= link_to "Отправить письмо повторно", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
+     </div>
+    </center>
+<% end %>
