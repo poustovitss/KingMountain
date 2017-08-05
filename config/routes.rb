@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
 
     get 'mobline' => 'profiles#mobline', as: 'mobline'
-
+    get 'partner' => 'profiles#partner', as: 'partner'
 
     root 'homepages#index'
   #end

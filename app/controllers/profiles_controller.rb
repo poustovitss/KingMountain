@@ -15,6 +15,12 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def partner
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+  end
+
   def getbonus
     unless current_user.skype.nil? && current_user.surname.nil? && current_user.phone.nil? && current_user.country.nil?
      unless current_user.skype == "" && current_user.surname == "" && current_user.phone == "" && current_user.country = ""

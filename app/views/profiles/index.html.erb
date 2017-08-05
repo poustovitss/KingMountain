@@ -48,9 +48,8 @@
                   <div class="profile_pic">
                     <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                   </div>
-                  <div class="profile_info">
-                    <span>Welcome,</span>
-                    <h2><%= current_user.name %></h2>
+                  <div class="profile_info" style="color: #fff">
+                    Ваш ID, <%= current_user.id %>
                   </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -64,6 +63,7 @@
                     <ul class="nav side-menu">
                       <li><a><i class="fa fa-home"></i> Главная <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
+                          <li><a href="<%= root_path %>">Главная</a></li>
                           <li><a href="<%= new_order_path %>">Пополнить</a></li>
                           <li><a href="<%= mobline_path %>">Профиль</a></li>
                           <li><a href="index3.html">Поддержка</a></li>
@@ -71,7 +71,7 @@
                       </li>
                       <li><a><i class="fa fa-edit"></i> Партнеры <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="form.html">General Form</a></li>
+                          <li><a href="<%= partner_path %>">Пользователи</a></li>
                         </ul>
                       </li>
                       <li><a><i class="fa fa-desktop"></i> FAQ 'Царь Горы' <span class="fa fa-chevron-down"></span></a>
@@ -389,8 +389,8 @@
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Счетчик активности</span>
-                        <div class="count">02:31</div>
-                        <span class="count_bottom"><i class="green"><i class="fa fa-sort-desc"></i>15 </i> Баллов</span>
+                        <div class="count">--</div>
+                        <span class="count_bottom"><i class="green"><i class="fa fa-sort-desc"></i> </i> В разработке</span>
                       </div>
                       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Баллы</span>
@@ -451,9 +451,9 @@
                               </div>
                               <button class="btn-success btn_for_friend">Поделись с другом</button>
                               <div class="referal_statistic">
-                                <p class="flr">10</p>
+                                <p class="flr"></p>
                                 <div style="clear: both;"></div>
-                                <p class="fll">Заработано баллов</p>
+                                <p class="fll"></p>
                               </div>
                             </div>
                           </div>
@@ -539,7 +539,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Top profiles</h2>
+                      <h2>Лидеры Царя-Горы</h2>
                       <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
