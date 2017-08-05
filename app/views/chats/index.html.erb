@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Общий чат</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+      <p>
+        <%= form_for CommonChatMessage.new, remote: true, :html => {class: 'form-horizontal'} do |f| %>
+          <div class="form-group">
+            <%= f.text_area :content, rows: '4', class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.submit 'Отправить сообщение', class: 'btn btn-info' %>
+          </div>
+
+      <% end %>
+      </p>
+
+
+
+    </div>
+    <div class="col-sm-7">
+
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">Сообщения общего чата</h3>
+        </div>
+        <ul class='list-group messages'>
+          <ul id="common_messages" class="list-unstyled msg_list">
+            <%= render @common_chat_messages %>
+          </ul>
+          <%= will_paginate @common_chat_messages %>
+
+        </ul>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+
+        if ($('.pagination').length) {
+
+            $(window).scroll(function() {
+                var url = $('.pagination .next_page').attr('href');
+                if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+                    $('.pagination').text("Загружается...");
+                    return $.getScript(url);
+                }
+            });
+            return $(window).scroll();
+
+        }
+    });
+</script>

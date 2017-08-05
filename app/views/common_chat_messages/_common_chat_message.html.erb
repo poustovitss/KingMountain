@@ -1,20 +1,17 @@
-
-
 <li class='list-group-item'>
   <p style="font-size: 10px">
-    <% ava = message.user.avatars.last %>
+    <% ava = common_chat_message.user.avatars.last %>
     <% if ava.nil? %>
         <span class="image"><img src="images/img.jpg" alt="Profile Image" width="40" /></span>
-
     <% else %>
         <span class="image">
           <img src="<%= image_path ava.image.url(:thumb) %>" width="40" alt="Profile Image">
         </span>
     <% end %>
-    <%= link_to message.user.name, '' %> <%= message.created_at.strftime('%d/%m/%Y %H:%M') %> :
+    <%= link_to common_chat_message.user.name, '' %> <%= common_chat_message.created_at.strftime('%d/%m/%Y %H:%M') %> :
   </p>
   <br>
   <strong>
-    <%= message.content %>
+    <%= common_chat_message.content %>
   </strong>
 </li>

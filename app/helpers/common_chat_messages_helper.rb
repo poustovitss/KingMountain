@@ -1,0 +1,2 @@
+module CommonChatMessagesHelper
+end

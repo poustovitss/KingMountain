@@ -1,0 +1,2 @@
+$('#common_messages').append('<%= escape_javascript render(@common_chat_messages) %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@common_chat_messages) %>');
