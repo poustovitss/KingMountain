@@ -2,21 +2,34 @@
 
 <h1>Chat Rooms</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
+      <th>переписка с пользователем:</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @chat_rooms.each do |chat_room| %>
+      <% other_user = '' %>
+      <% chat_room.users.each do |user| %>
+        <% other_user = user if user != current_user  %>
+      <% end %>
       <tr>
-        <td><%= chat_room.title %></td>
-        <td><%= link_to 'Show', chat_room %></td>
-        <td><%= link_to 'Edit', edit_chat_room_path(chat_room) %></td>
-        <td><%= link_to 'Destroy', chat_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+              <%= other_user.name  %>
+          </td>
+        <td>
+
+          <%= link_to 'Перейти в комнату чата',
+                      chat_rooms_path(:other_user => other_user.id),
+                      method: :post %>
+        </td>
+        <td><%= current_user.messages_to_read.where(chat_room_id: chat_room.id).count %></td>
+        <td><%= link_to 'Очистить чат', chat_room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

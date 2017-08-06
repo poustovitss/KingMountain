@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805090739) do
+ActiveRecord::Schema.define(version: 20170806050144) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -126,7 +126,9 @@ ActiveRecord::Schema.define(version: 20170805090739) do
     t.integer  "chat_room_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "user_id"
     t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -150,6 +152,15 @@ ActiveRecord::Schema.define(version: 20170805090739) do
     t.index ["user_id"], name: "index_payeers_on_user_id"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "chat_room_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["chat_room_id"], name: "index_subscriptions_on_chat_room_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "systemfinances", force: :cascade do |t|
     t.string   "name"
     t.float    "summa"
@@ -165,6 +176,15 @@ ActiveRecord::Schema.define(version: 20170805090739) do
     t.float    "summa"
     t.index ["bank_id"], name: "index_transfers_on_bank_id"
     t.index ["user_id"], name: "index_transfers_on_user_id"
+  end
+
+  create_table "unread_messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_unread_messages_on_message_id"
+    t.index ["user_id"], name: "index_unread_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,1 +1,25 @@
-<li class="foo"><%= message.body %></li>
+<li>
+  <a>
+    <p>
+      <% ava = message.user.avatars.last %>
+      <% if ava.nil? %>
+          <span class="image"><img src="images/img.jpg" alt="Profile Image" width="40" /></span>
+      <% else %>
+        <span class="image">
+          <img src="<%= image_path ava.image.url(:thumb) %>" width="40" alt="Profile Image">
+        </span>
+      <% end %>
+
+
+      <span>
+
+      <span><%= message.user.name %></span> <br>
+      <span class="time"><%= message.created_at.strftime('%d/%m/%Y %H:%M') %> </span>
+    </span>
+    </p>
+
+    <span class="message">
+      <%= message.body %>
+    </span>
+  </a>
+</li>

@@ -103,6 +103,12 @@ TEMP_EMAIL_PREFIX = 'change@me'
   #======================================================================
   has_many :identities, dependent: :destroy
 
+  has_many :messages
+  has_many :unread_messages
+  has_many :subscriptions
+  has_many :chat_rooms, through: :subscriptions
+  has_many :messages_to_read, class_name: 'Message', through: :unread_messages, source: 'message'
+
   scope :all_except, ->(user) { where.not(id: user) }
 
   protected

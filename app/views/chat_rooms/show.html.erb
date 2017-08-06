@@ -2,7 +2,7 @@
 
 <p>
   <strong>Title:</strong>
-  <%= @chat_room.title %>
+  Переписка с <%= @other_user.name %>
 </p>
 
 <div class="row">
@@ -30,10 +30,28 @@
 	</div>
 	<hr>
 	<div class="col-sm-7 messages">
-		<%= render @chat_room.messages %>		
-	</div>	
+		<%= render @messages %>
+	</div>
+
+  <%= will_paginate @messages %>
 </div>
 
-<%=  %>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+
+        if ($('.pagination').length) {
+
+            $(window).scroll(function() {
+                var url = $('.pagination .next_page').attr('href');
+                if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+                    $('.pagination').text("Загружается...");
+                    return $.getScript(url);
+                }
+            });
+            return $(window).scroll();
+
+        }
+    });
+</script>
 
 

@@ -8,7 +8,11 @@
           <img src="<%= image_path ava.image.url(:thumb) %>" width="40" alt="Profile Image">
         </span>
     <% end %>
-    <%= link_to common_chat_message.user.name, '' %> <%= common_chat_message.created_at.strftime('%d/%m/%Y %H:%M') %> :
+    <%= common_chat_message.user.name %>
+    <%= common_chat_message.created_at.strftime('%d/%m/%Y %H:%M') %> :
+    <%= link_to 'Написать напрямую',
+                chat_rooms_path(:other_user => common_chat_message.user.id),
+                method: :post %>
   </p>
   <br>
   <strong>

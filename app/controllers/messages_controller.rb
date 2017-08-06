@@ -25,15 +25,24 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-
+    @message.user = current_user
     respond_to do |format|
       if @message.save
-        ActionCable.server.broadcast "chat", { 
-          message: MessagesController.render(
-            partial: 'message', 
-            locals: { message: @message }
-          ).squish 
+        user = @message.chat_room.users.where.not(id: current_user.id).first
+        unread = @message.unread_messages.build
+        unread.user_id = user.id
+        unread.save
+        ActionCable.server.broadcast "chat_room_#{@message.chat_room_id}", {
+            message: MessagesController.render(
+                partial: 'messages/message',
+                locals: { message: @message }
+            ).squish
         }
+
+        @message.chat_room.users.each do |user|
+          ActionCable.server.broadcast "personal_messages_#{user.id}",
+                                       { message_id: @message.id }
+        end
         
         format.js
         format.html { redirect_to :back, notice: 'Message was successfully created.' }

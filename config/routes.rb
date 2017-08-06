@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :messages
   resources :chat_rooms
+  get 'prepend_personal_message' => 'chat_rooms#prepend_personal_message', as: :prepend_personal_message
   ActiveAdmin.routes(self)
   resources :devnews, :homepages, :profiles, :avatars, :improves, :orders, :getmoneys, :getbalances, :feedbacks, :payeers
 
