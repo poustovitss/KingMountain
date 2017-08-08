@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  layout 'application_profile'
+
   def percentproviant
     quantity = 0.75
     @percentfor = 0

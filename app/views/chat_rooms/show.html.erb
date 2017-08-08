@@ -1,40 +1,147 @@
-<p id="notice"><%= notice %></p>
+<div class="container body">
+  <div class="main_container">
+    <div class="col-md-3 left_col">
 
-<p>
-  <strong>Title:</strong>
-  Переписка с <%= @other_user.name %>
-</p>
+      <%= render 'shared/left_bar' %>
+    </div>
 
-<div class="row">
-	<div class="col-sm-5">
+    <!-- top navigation -->
+    <%= render 'shared/top_nav' %>
 
-		<%= form_for Message.new, remote: true do |f| %>
-	  
+    <!-- page content -->
+    <div class="right_col" role="main">
+      <div class="">
+        <div class="page-title">
+          <div class="title_left">
+            <h3>Личные сообщения</h3>
+          </div>
 
-		  <div class="field">
-		    <%= f.label :body %>
-		    <%= f.text_area :body %>
-		  </div>
+          <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 
-		  <div class="field">
-		    
-		    <%= f.hidden_field :chat_room_id, value: @chat_room.id %>
-		  </div>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+              </div>
 
-		  <div class="actions">
-		    <%= f.submit %>
-		  </div>
-		<% end %>
 
-		
-	</div>
-	<hr>
-	<div class="col-sm-7 messages">
-		<%= render @messages %>
-	</div>
 
-  <%= will_paginate @messages %>
+            </div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Переписка с <%= @other_user.name %></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <div class="col-md-4 col-sm-4 col-xs-1 left_dialogs">
+
+                  <div class="single_dialog">
+                    <div class="dialog_ico">
+
+                      <% ava = @other_user.avatars.last %>
+                      <% if ava.nil? %>
+                          <%= image_tag('img.jpg') %>
+
+                      <% else %>
+                          <img src="<%= image_path ava.image.url(:thumb) %>" alt="Profile Image">
+                      <% end %>
+
+                    </div>
+                    <div class="single_dialog_info">
+                      <p class="name_dialog"><%= @other_user.name %></p>
+                      <span class="last_message">Был на сайте в <%= @other_user.last_seen.strftime('%d/%m/%Y %H:%M') %></span>
+                    </div>
+                  </div>
+
+                  <div class="make_message">
+                    <!-- немного поправь стили в chat-style.css если будут перебиваться -->
+                    <hr style="height: 1px; position: absolute; bottom: 50px; left: 0; right: 0;">
+
+
+
+                    <%= form_for Message.new, remote: true do |f| %>
+                        <%= f.hidden_field :chat_room_id, value: @chat_room.id %>
+                        <%= f.text_area :body, rows: 6, placeholder: 'Написать сообщение' %>
+                        <%= f.button '', class: 'fa fa-paper-plane' %>
+
+
+                    <% end %>
+
+
+                    <style>
+                      .make_message {
+                        margin-left: 15px;
+                      }
+                      .make_message textarea{
+                        background-color: #e1edf7;
+                        border-radius: 10px 10px 10px 10px;
+                        border: none;
+                        outline: none;
+                        width: 85% !important;
+                      }
+                      .make_message button{
+                        position: absolute;
+                        right: 15px;
+                        bottom: 0;
+                        background-color: #fff;
+                        border: none;
+                        outline: none;
+                        font-size: 20px;
+                      }
+                    </style>
+                  </div>
+                </div>
+
+                <div id="messages" class="messages col-md-8 col-sm-8 col-xs-11 open_dialog">
+                  <%= render @messages %>
+                </div>
+                <%= will_paginate @messages %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
 </div>
+
+
 
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
@@ -53,5 +160,3 @@
         }
     });
 </script>
-
-

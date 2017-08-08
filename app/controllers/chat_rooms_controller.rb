@@ -1,4 +1,5 @@
 class ChatRoomsController < ApplicationController
+  layout 'application_profile'
   before_action :set_chat_room, only: [:show, :edit, :update, :destroy]
 
   # GET /chat_rooms

@@ -1,0 +1,65 @@
+<!-- top navigation -->
+<!-- top navigation -->
+<div class="top_nav">
+  <div class="nav_menu">
+    <nav>
+      <div class="nav toggle">
+        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+
+            <% ava = current_user.avatars.last %>
+            <% if ava.nil? %>
+                <%= image_tag('img.jpg') %>
+            <% else %>
+                <img src="<%= image_path ava.image.url(:thumb) %>" alt="Profile Image">
+            <% end %>
+            <%= current_user.name %>
+
+            <span class=" fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <li><a href="javascript:;"> Profile</a></li>
+            <li>
+              <a href="<%= edit_user_registration_path %>">
+                <span class="badge bg-red pull-right">50%</span>
+                <span>Settings</span>
+              </a>
+            </li>
+            <li><a href="javascript:;">Help</a></li>
+            <li><i class="fa fa-sign-out pull-right"></i> <%= link_to 'Выйти', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+
+        <li role="presentation" class="dropdown">
+          <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-envelope-o"></i>
+            <span class="badge bg-green" id="unread_messages_count">
+                    <%= current_user.unread_messages.count %>
+                  </span>
+          </a>
+          <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+            <% current_user.unread_messages.last(5).reverse.each do |unread| %>
+                <%= render 'messages/message_notify', message: unread.message %>
+            <% end %>
+
+            <li>
+              <div class="text-center">
+                <a href="<%= chat_rooms_path %>">
+                  <strong>See All Alerts</strong>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<!-- /top navigation -->

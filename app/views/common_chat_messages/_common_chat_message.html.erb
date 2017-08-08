@@ -1,21 +1,26 @@
-<li class='list-group-item'>
-  <p style="font-size: 10px">
+<div class="single_dialog">
+  <div class="dialog_ico">
+
     <% ava = common_chat_message.user.avatars.last %>
     <% if ava.nil? %>
-        <span class="image"><img src="images/img.jpg" alt="Profile Image" width="40" /></span>
+        <img src="images/img.jpg" alt="Profile Image" width="60" />
     <% else %>
-        <span class="image">
-          <img src="<%= image_path ava.image.url(:thumb) %>" width="40" alt="Profile Image">
-        </span>
+        <img src="<%= image_path ava.image.url(:thumb) %>" width="60" alt="Profile Image">
     <% end %>
-    <%= common_chat_message.user.name %>
-    <%= common_chat_message.created_at.strftime('%d/%m/%Y %H:%M') %> :
-    <%= link_to 'Написать напрямую',
+
+    <span class="name_dialog"><%= common_chat_message.user.name %></span> в
+    <span class="last_message"><%= common_chat_message.created_at.strftime('%d/%m/%Y %H:%M') %></span>
+    написал:
+  </div>
+  <div class="single_dialog_info">
+    <%= link_to 'личное сообщение',
                 chat_rooms_path(:other_user => common_chat_message.user.id),
-                method: :post %>
-  </p>
-  <br>
-  <strong>
-    <%= common_chat_message.content %>
-  </strong>
-</li>
+                method: :post,
+                class: 'btn btn-default btn-xs'
+    %>
+    <p class="last_message"><strong>
+      <%= common_chat_message.content %>
+    </strong></p>
+
+  </div>
+</div>

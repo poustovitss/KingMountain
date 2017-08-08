@@ -1,25 +1,22 @@
-<li>
-  <a>
-    <p>
-      <% ava = message.user.avatars.last %>
-      <% if ava.nil? %>
-          <span class="image"><img src="images/img.jpg" alt="Profile Image" width="40" /></span>
-      <% else %>
-        <span class="image">
-          <img src="<%= image_path ava.image.url(:thumb) %>" width="40" alt="Profile Image">
-        </span>
-      <% end %>
+<div class="single_dialog">
+  <div class="dialog_ico">
 
+    <% ava = message.user.avatars.last %>
+    <% if ava.nil? %>
+        <%= image_tag('img.jpg', width: 60) %>
+    <% else %>
+        <img src="<%= image_path ava.image.url(:thumb) %>" width="60" alt="Profile Image">
+    <% end %>
 
-      <span>
-
-      <span><%= message.user.name %></span> <br>
-      <span class="time"><%= message.created_at.strftime('%d/%m/%Y %H:%M') %> </span>
-    </span>
-    </p>
-
-    <span class="message">
+    <span class="name_dialog"><%= message.user.name %></span> в
+    <span class="last_message"><%= message.created_at.strftime('%d/%m/%Y %H:%M') %></span>
+    написал:
+  </div>
+  <div class="single_dialog_info">
+    <p class="last_message"><strong>
       <%= message.body %>
-    </span>
-  </a>
-</li>
+    </strong></p>
+
+  </div>
+</div>
+<hr>

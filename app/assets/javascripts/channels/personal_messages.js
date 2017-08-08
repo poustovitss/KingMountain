@@ -9,11 +9,10 @@ App.notifications = App.cable.subscriptions.create("PersonalMessagesChannel", {
 
     received: function(data) {
 
-        if (window.location.pathname == '/profiles'){
+
             $.ajax({
                 url: '/prepend_personal_message',
                 data: {id: data.message_id},
-                // success: console.log('You got it!'),
                 type: 'GET'
             });
 
@@ -26,7 +25,6 @@ App.notifications = App.cable.subscriptions.create("PersonalMessagesChannel", {
                 $("#menu1 li:last-child").prev().remove();
             }
 
-        }
 
 
     }
