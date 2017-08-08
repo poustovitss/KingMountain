@@ -5,25 +5,6 @@
       </div>
     <% end %>
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
-
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -454,29 +435,7 @@
         </div>
       </div>
     </div>
-
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- morris.js -->
-    <script src="../vendors/raphael/raphael.min.js"></script>
-    <script src="../vendors/morris.js/morris.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
-
   </body>
-</html>
 
 <% else %>
 
@@ -484,10 +443,8 @@
     <div class="col-lg-12 col-sm-8">
       <div class="card hovercard">
         <div class="card-background">
-          <img class="card-bkimg" alt="" src="/img/unnamed.png"> 
         </div>
         <div class="useravatar">
-        <img alt="" src="/img/ava.png">
         </div>
         <div class="card-info"> <span class="card-title"><b><%= current_user.name %></span>
         </div>
@@ -506,9 +463,9 @@
       <% if flash[:balance] %>
         <div class="alert alert-danger" role="alert"><center><%= flash[:balance] %></center></div>
       <% end %>
-      
+
     <div class="well">
-        <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>     
+        <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>
 
         <%= link_to "Отправить письмо повторно", new_confirmation_path(current_user), class: 'btn btn-default' %><br />
      </div>
