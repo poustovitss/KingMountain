@@ -1,3 +1,4 @@
+<% if current_user.admin? %>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -559,3 +560,23 @@
           </div>
           </div>
           </div>
+<% else %>
+  <body class="nav-md" style="background: #fff">
+    <div class="container body">
+      <div class="main_container">
+        <!-- page content -->
+        <div class="col-md-12">
+          <div class="col-middle">
+            <div class="text-center text-center">
+            <img src="images/footer_logo.png" height="45" width="109" alt="Царь горы">
+              <h1 class="error-number">Тех работы</h1>
+              <h2>Извините, на данный момент идут тех.работы</h2>
+              <p>Извините, на данный момент идут тех.работы <a href="https://king-mountain.pro/">Вернитесь назад</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+      </div>
+    </div>
+<% end %>

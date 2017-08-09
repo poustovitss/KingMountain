@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-developer = User.create!(name: 'Hard', email: 'v1rikman11@gmail.com', admin: true, balance: 0, level: 0, reffered_by: 0,  password: 'ulan2011')
 taras = User.create!(name: 'HuliichukAdmin', email: 'tarashuliichuk@gmail.com', admin: true, balance: 0, level: 1, reffered_by: 0,  password: 'eb848bf8c99d0b93d5a219b49ffe7d268577a6388a76bd7f7b9293600ec62c31')
 user = User.create!(name: 'Алексей', email: 'Test1@m.r', balance: 0, proviant: true, level: 1, reffered_by: 0,  password: 'eqwqewqweqweeqwqweadsdasdzxcxzcgbahaq12312')
 user = User.create!(name: 'Илола', email: 'Test2@m.r', balance: 0, proviant: true, level: 1, reffered_by: 0,  password: 'eqwqewqweqweeqwqweadsdasdzxcxzcgbahaq12312')
