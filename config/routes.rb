@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  mount ActionCable.server => "/cable"
   resources :chats
   resources :common_chat_messages, only: [:create]
   get 'freekassa/new' => 'freekassa#new', as: :freekassa_new

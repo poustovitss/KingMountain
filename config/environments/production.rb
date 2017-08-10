@@ -1,4 +1,5 @@
 Rails.application.configure do
+  # config.action_cable.allowed_request_origins = ["https://king-mountain.pro/"]
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
