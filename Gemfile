@@ -28,6 +28,9 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'slim-rails'
+gem 'ransack'
+gem 'pry'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -40,6 +43,15 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # code cleanup
+  gem 'rubocop',              require: false
+  gem 'traceroute',           require: false
+  gem 'bullet'
+  gem 'brakeman',             require: false
+  gem 'rubycritic',           require: false
+  gem 'rails_best_practices', require: false
+  gem 'simplecov'
 end
 
 group :production do
