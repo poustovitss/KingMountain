@@ -2,8 +2,6 @@ King Mountain
 ================
 [Try out production](https://king-mountain.pro/)
 
-###### Credentials for admin user on site: admin@admin.com, 'changemeadmin'
-
 Earn money by playing.
 
 ## Getting Started
