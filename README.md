@@ -18,7 +18,7 @@ A step by step series of examples that tell you have to get a development env ru
 
 Clone project:
 ```
-$ git clone https://github.com/HardNeal/KingMountain.git
+$ git clone https://github.com/poustovitss/KingMountain.git
 ```
 
 Rename database.yml.example to database.yml:
