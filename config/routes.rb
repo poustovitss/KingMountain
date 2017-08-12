@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  mount ActionCable.server => "/cable"
+  mount ActionCable.server, at: '/cable'
+
+  devise_for :users, controllers: { confirmations: 'users/confirmations',
+                                    omniauth_callbacks: 'omniauth_callbacks' }
+
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], as: :finish_signup
+
   resources :chats
   resources :common_chat_messages, only: [:create]
   get 'freekassa/new' => 'freekassa#new', as: :freekassa_new
@@ -43,13 +49,7 @@ Rails.application.routes.draw do
     match '/fail' => 'orders#fail', via: :get
     match 'payeer/success' => 'payeers#success', via: :get
     match 'payeer/fail' => 'payeers#fail', via: :get
-  
-  devise_for :users, 
-  # controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
-  controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
 
-  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-  
   get '*path', to: redirect("/#{I18n.default_locale}")
 
   get '*path', to: redirect("/#{I18n.default_locale}/%{path}")

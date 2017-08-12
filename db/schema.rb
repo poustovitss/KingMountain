@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170806050144) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
@@ -21,9 +24,9 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.integer  "author_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
 
   create_table "avatars", force: :cascade do |t|
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.index ["user_id"], name: "index_avatars_on_user_id"
+    t.index ["user_id"], name: "index_avatars_on_user_id", using: :btree
   end
 
   create_table "banks", force: :cascade do |t|
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_common_chat_messages_on_user_id"
+    t.index ["user_id"], name: "index_common_chat_messages_on_user_id", using: :btree
   end
 
   create_table "devnews", force: :cascade do |t|
@@ -97,7 +100,7 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_getbalances_on_user_id"
+    t.index ["user_id"], name: "index_getbalances_on_user_id", using: :btree
   end
 
   create_table "getmoneys", force: :cascade do |t|
@@ -109,7 +112,7 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.float    "wallet"
     t.string   "walletfirm"
     t.string   "status"
-    t.index ["user_id"], name: "index_getmoneys_on_user_id"
+    t.index ["user_id"], name: "index_getmoneys_on_user_id", using: :btree
   end
 
   create_table "identities", force: :cascade do |t|
@@ -118,7 +121,7 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.string   "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_identities_on_user_id"
+    t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -127,8 +130,8 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
-    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -139,7 +142,7 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.datetime "updated_at",  null: false
     t.text     "description"
     t.string   "which"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "payeers", force: :cascade do |t|
@@ -149,7 +152,7 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["user_id"], name: "index_payeers_on_user_id"
+    t.index ["user_id"], name: "index_payeers_on_user_id", using: :btree
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -157,8 +160,8 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["chat_room_id"], name: "index_subscriptions_on_chat_room_id"
-    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+    t.index ["chat_room_id"], name: "index_subscriptions_on_chat_room_id", using: :btree
+    t.index ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
   end
 
   create_table "systemfinances", force: :cascade do |t|
@@ -174,8 +177,8 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float    "summa"
-    t.index ["bank_id"], name: "index_transfers_on_bank_id"
-    t.index ["user_id"], name: "index_transfers_on_user_id"
+    t.index ["bank_id"], name: "index_transfers_on_bank_id", using: :btree
+    t.index ["user_id"], name: "index_transfers_on_user_id", using: :btree
   end
 
   create_table "unread_messages", force: :cascade do |t|
@@ -183,8 +186,8 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.integer  "message_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["message_id"], name: "index_unread_messages_on_message_id"
-    t.index ["user_id"], name: "index_unread_messages_on_user_id"
+    t.index ["message_id"], name: "index_unread_messages_on_message_id", using: :btree
+    t.index ["user_id"], name: "index_unread_messages_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -221,9 +224,24 @@ ActiveRecord::Schema.define(version: 20170806050144) do
     t.string   "country"
     t.boolean  "bonus",                  default: false
     t.float    "ball"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "avatars", "users"
+  add_foreign_key "common_chat_messages", "users"
+  add_foreign_key "getbalances", "users"
+  add_foreign_key "getmoneys", "users"
+  add_foreign_key "identities", "users"
+  add_foreign_key "messages", "chat_rooms"
+  add_foreign_key "messages", "users"
+  add_foreign_key "orders", "users"
+  add_foreign_key "payeers", "users"
+  add_foreign_key "subscriptions", "chat_rooms"
+  add_foreign_key "subscriptions", "users"
+  add_foreign_key "transfers", "banks"
+  add_foreign_key "transfers", "users"
+  add_foreign_key "unread_messages", "messages"
+  add_foreign_key "unread_messages", "users"
 end

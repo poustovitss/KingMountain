@@ -1,4 +1,8 @@
 ru:
+  flash:
+    users:
+      confirmation:
+        notice: 'Ваша почта подтверждена!'
   homepage:
     play: 'Онлайн-Игра'
     playgame: "Играть"

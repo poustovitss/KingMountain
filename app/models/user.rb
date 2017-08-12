@@ -1,13 +1,10 @@
 class User < ApplicationRecord
-TEMP_EMAIL_PREFIX = 'change@me'
+  TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
 
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable
   devise :database_authenticatable, :registerable, :confirmable,
     :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
     omniauth_providers: [:facebook, :twitter, :vkontakte]
-    # :lastseenable
 
   validates :name, presence: true, length: {maximum: 50}
   # validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
