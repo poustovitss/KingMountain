@@ -238,7 +238,7 @@
                           <div class="referal_link">
                             <p>Ваша реферальная ссылка</p>
                             <div>
-                              <input type="text" id="copy_link" readonly="readonly" value="referal_link" />
+                              <input type="text" id="copy_link" readonly="readonly" value="<%= new_user_registration_url(invited_by: current_user.id)  %>" />
                               <button class="btn-clipboard btn-success" data-clipboard-target="#copy_link">Копировать</button>
                             </div>
                           </div>
